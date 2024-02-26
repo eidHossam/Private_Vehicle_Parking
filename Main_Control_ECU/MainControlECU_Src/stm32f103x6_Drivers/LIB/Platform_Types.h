@@ -9,10 +9,10 @@
 
 /*--------Types------------*/
 typedef unsigned char       boolean;
-typedef signed char         sint8;
-typedef signed short        sint16;
-typedef signed long         sint32;
-typedef signed long long    sint64;
+typedef char         sint8;
+typedef short        sint16;
+typedef long         sint32;
+typedef long long    sint64;
 
 typedef unsigned char       uint8;
 typedef unsigned short      uint16;
@@ -32,4 +32,7 @@ typedef volatile uint16 vuint16_t;
 typedef volatile uint32 vuint32_t;
 typedef volatile uint64 vuint64_t;
 
+
+#define TRUE    (1U)
+#define FALSE   (0U)
 #endif
