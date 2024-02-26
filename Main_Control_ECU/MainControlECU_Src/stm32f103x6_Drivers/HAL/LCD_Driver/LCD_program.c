@@ -11,7 +11,7 @@
 #include "Bit_Math.h"
 
 /*
-===============================================
+*===============================================
 *  				Global variables
 *===============================================
 */
@@ -300,7 +300,7 @@ void LCD_Send_Char(uint8 data)
  *              :   if the entire LCD is full the LCD will be cleared first then print the character.
 ============================================================================================================
  */
-void LCD_Send_String(char* string)
+void LCD_Send_String(uint8* string)
 {
 	while(*string)
 	{
@@ -321,26 +321,30 @@ void LCD_Send_String(char* string)
  */
 void LCD_Cursor_XY(uint8 line, uint8 col)
 {
-	if((col >= LCD_WIDTH ) || (col < 0))
-		return;
-
-	switch (line)
+	/*Check if the arguments are in the allowed range*/
+	if(((col >= 0) && (col < LCD_WIDTH)) && ((line >= 0) && (line < LCD_HEIGHT)))
 	{
-	case LCD_FIRST_LINE:
-		LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW + col);
-		break;
-	case LCD_SECOND_LINE:
-		LCD_Send_Command(LCD_BEGIN_AT_SECOND_ROW + col);
-		break;
-	case LCD_THIRD_LINE:
-		LCD_Send_Command(LCD_BEGIN_AT_THIRD_ROW + col);
-		break;
-	case LCD_FOURTH_LINE:
-		LCD_Send_Command(LCD_BEGIN_AT_FOURTH_ROW + col);
-		break;
-	
-	default:
-		break;
+		switch (line)
+		{
+		case LCD_FIRST_LINE:
+			LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW + col);
+			break;
+		case LCD_SECOND_LINE:
+			LCD_Send_Command(LCD_BEGIN_AT_SECOND_ROW + col);
+			break;
+		case LCD_THIRD_LINE:
+			LCD_Send_Command(LCD_BEGIN_AT_THIRD_ROW + col);
+			break;
+		case LCD_FOURTH_LINE:
+			LCD_Send_Command(LCD_BEGIN_AT_FOURTH_ROW + col);
+			break;
+
+		default:
+			break;
+		}
+
+		lineCounter = line;
+		charCounter = col;
 	}
 }
 
