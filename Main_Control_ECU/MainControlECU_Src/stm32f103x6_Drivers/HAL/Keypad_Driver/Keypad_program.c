@@ -20,11 +20,6 @@
 *  				Global variables
 *===============================================
 */
-GPIO_Pin_Config_t config;
-static uint8 keypad_chars[] = KEYPAD_KEYS;
-
-static uint8 KeypadRowPins[] = {KEYPAD_ROW0, KEYPAD_ROW1, KEYPAD_ROW2, KEYPAD_ROW3};
-static uint8 KeypadColPins[] = {KEYPAD_COL0, KEYPAD_COL1, KEYPAD_COL2};
 
 /**************************************************************************************************************************
 ================================================
@@ -44,6 +39,8 @@ static uint8 KeypadColPins[] = {KEYPAD_COL0, KEYPAD_COL1, KEYPAD_COL2};
  */
 void Keypad_Init(void)
 {
+	GPIO_Pin_Config_t config;
+
 	/*Keypad row pins as input with pull-up resistance*/
 	config.pinNumber = KEYPAD_ROW0;
 	config.pinMode = GPIO_MODE_INPUT_PU;
@@ -86,9 +83,16 @@ void Keypad_Init(void)
  * Note			:   none.
 ============================================================================================================
  */
-char Keypad_Get_Char(void)
+uint8 Keypad_Get_Char(void)
 {
-	uint8 col, row;
+	uint8 keypad_chars[] = KEYPAD_KEYS;
+
+ 	uint8 KeypadRowPins[] = {KEYPAD_ROW0, KEYPAD_ROW1, KEYPAD_ROW2, KEYPAD_ROW3};
+ 	uint8 KeypadColPins[] = {KEYPAD_COL0, KEYPAD_COL1, KEYPAD_COL2};
+
+	uint8 col, row, pressedKey;
+
+	pressedKey = NULL_CHAR;
 	for(col = 0; col <  KEYPAD_COL_SIZE; col++)
 	{
 		/*High on all column pins */
@@ -105,10 +109,20 @@ char Keypad_Get_Char(void)
             see if any of them dropped to ground*/
 			if(MCAL_GPIO_ReadPin(KEYPAD_DATA_PORT, KeypadRowPins[row]) == GPIO_PIN_LOW)
 			{
-				while(MCAL_GPIO_ReadPin(KEYPAD_DATA_PORT, KeypadRowPins[row]) == GPIO_PIN_LOW);
-				return keypad_chars[(row * KEYPAD_COL_SIZE) + col];
+				while(MCAL_GPIO_ReadPin(KEYPAD_DATA_PORT, KeypadRowPins[row]) == GPIO_PIN_LOW)
+				{
+
+				}
+
+				pressedKey = keypad_chars[(row * KEYPAD_COL_SIZE) + col];
+				break;
 			}
 		}
+
+		if(pressedKey != NULL_CHAR)
+		{
+			break;
+		}
 	}
-	return NULL_CHAR;
+	return pressedKey;
 }

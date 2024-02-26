@@ -68,30 +68,29 @@ the keys on the keypad.*/
 *===============================================
 */
 
-/*
+/**
 ============================================================================================================
 * @Func_name	:   Keypad_Init
 * @brief		:   Initializes the keypad by making the keypad row pins as input and the column pins as output. 
 * @param [in]	:   none.      
 * @param [out]	:   none.
-* @return_value :   none.
+* @return       :   none.
 * Note			:   none.
 ============================================================================================================
 */
 void Keypad_Init(void);
 
-/*
+/**
 ============================================================================================================
 * @Func_name	:   Keypad_Get_Char
 * @brief		:   Get the input character from the keypad.
 * @param [in]	:   none.
 * @param [out]	:   none.
-* @return_value :   The pressed character on the keypad which will be a value of @ref KEYPAD CHARACTERS
+* @return       :   The pressed character on the keypad which will be a value of @ref KEYPAD CHARACTERS
                 :   Or NULL_CHAR if no key was pressed.
 * Note			:   none.
 ============================================================================================================
 */
-char Keypad_Get_Char(void);
-
+uint8 Keypad_Get_Char(void);
 
 #endif /* HAL_KEYPAD_DRIVER_KEYPAD_INTERFACE_H_ */
