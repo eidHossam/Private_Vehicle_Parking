@@ -36,7 +36,6 @@ typedef struct{
                              This parameter must be a value of @ref GPIO_MODE_define*/
 }GPIO_Pin_Config_t;
 
-void MCAL_GPIO_Init(volatile GPIO_t* GPIOx ,GPIO_Pin_Config_t* pinConfig);
 
 /****************************************************************/
 /*===============================================

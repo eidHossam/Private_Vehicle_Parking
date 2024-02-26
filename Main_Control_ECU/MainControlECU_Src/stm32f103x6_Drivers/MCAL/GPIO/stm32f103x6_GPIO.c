@@ -104,6 +104,7 @@ void MCAL_GPIO_DeInit(volatile GPIO_t* GPIOx)
     }else if(GPIOx == GPIOE)
     {
         APB2_PERI_RESET(APB2_IOPE);
+    }else{
     }
 }
 
@@ -137,7 +138,7 @@ uint8 MCAL_GPIO_ReadPin(volatile GPIO_t* GPIOx, uint16 pinNumber)
 uint16 MCAL_GPIO_ReadPort(volatile GPIO_t* GPIOx)
 {
     uint16 status;
-    status = (uint16)(GPIOx->IDR & 0xFFFF);
+    status = (uint16)(GPIOx->IDR & 0xFFFFU);
 
     return status;
 }
