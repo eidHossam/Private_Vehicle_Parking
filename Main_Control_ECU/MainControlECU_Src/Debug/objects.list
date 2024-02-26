@@ -2,6 +2,8 @@
 "Src/syscalls.o"
 "Src/sysmem.o"
 "Startup/startup_stm32f103c6tx.o"
+"stm32f103x6_Drivers/APP/APP.o"
+"stm32f103x6_Drivers/APP/Admin_Interface/Admin_Interface.o"
 "stm32f103x6_Drivers/HAL/Keypad_Driver/Keypad_program.o"
 "stm32f103x6_Drivers/HAL/LCD_Driver/LCD_program.o"
 "stm32f103x6_Drivers/MCAL/GPIO/stm32f103x6_GPIO.o"

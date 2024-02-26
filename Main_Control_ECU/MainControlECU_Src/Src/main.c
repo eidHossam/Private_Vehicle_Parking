@@ -16,45 +16,15 @@
  *
  ******************************************************************************
  */
-
-#include "Keypad_Driver/Keypad_interface.h"
-#include "LCD_Driver/LCD_interface.h"
-
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
-
-void clock_init();
+#include "APP.h"
 
 int main(void)
 {
-   uint8 pressedKey;
-   clock_init();
-   LCD_Init();
-   Keypad_Init();
-	
+
+	Dashboard_ECU_APP_SETUP();
   
-  while (1) 
+  	while (1) 
 	{
-		  pressedKey = Keypad_Get_Char();
-		  if(pressedKey != 'N')
-		  {
-		  	if(pressedKey == '#')
-		  	{
-		  		LCD_Clear_Screen();
-		  	}else{
-		  		LCD_Send_Char(pressedKey);
-		  	}
-		  }
-
-  }
-}
-
-void clock_init()
-{
-	/*Enable GPIO_A*/
-	APB2_PERI_CLOCK_EN(APB2_IOPA);
-
-	/*Enable GPIO_B*/
-	APB2_PERI_CLOCK_EN(APB2_IOPB);
+		Dashboard_ECU_APP_Loop();
+ 	}
 }

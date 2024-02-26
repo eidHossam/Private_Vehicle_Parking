@@ -6,5 +6,5 @@ LCD_program.c:204:6:LCD_Send_Command	16	static
 LCD_program.c:252:6:LCD_Send_Char	16	static
 LCD_program.c:303:6:LCD_Send_String	16	static
 LCD_program.c:322:6:LCD_Cursor_XY	16	static
-LCD_program.c:357:6:LCD_Busy_Wait	8	static
-LCD_program.c:479:6:LCD_Clear_Screen	8	static
+LCD_program.c:361:6:LCD_Busy_Wait	8	static
+LCD_program.c:483:6:LCD_Clear_Screen	8	static

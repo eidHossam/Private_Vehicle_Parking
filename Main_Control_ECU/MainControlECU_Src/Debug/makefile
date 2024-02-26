@@ -11,6 +11,8 @@ RM := rm -rf
 -include stm32f103x6_Drivers/MCAL/GPIO/subdir.mk
 -include stm32f103x6_Drivers/HAL/LCD_Driver/subdir.mk
 -include stm32f103x6_Drivers/HAL/Keypad_Driver/subdir.mk
+-include stm32f103x6_Drivers/APP/Admin_Interface/subdir.mk
+-include stm32f103x6_Drivers/APP/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
 -include subdir.mk
