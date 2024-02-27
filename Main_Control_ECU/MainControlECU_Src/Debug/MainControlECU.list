@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000130  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000c40  08000130  08000130  00010130  2**2
+  1 .text         00001168  08000130  08000130  00010130  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000098  08000d70  08000d70  00010d70  2**2
+  2 .rodata       00000154  08001298  08001298  00011298  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08000e08  08000e08  00020018  2**0
+  3 .ARM.extab    00000000  080013ec  080013ec  00020018  2**0
                   CONTENTS
-  4 .ARM          00000000  08000e08  08000e08  00020018  2**0
+  4 .ARM          00000000  080013ec  080013ec  00020018  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08000e08  08000e08  00020018  2**0
+  5 .preinit_array 00000000  080013ec  080013ec  00020018  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08000e08  08000e08  00010e08  2**2
+  6 .init_array   00000004  080013ec  080013ec  000113ec  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08000e0c  08000e0c  00010e0c  2**2
+  7 .fini_array   00000004  080013f0  080013f0  000113f0  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000018  20000000  08000e10  00020000  2**2
+  8 .data         00000018  20000000  080013f4  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000038  20000018  08000e28  00020018  2**2
+  9 .bss          00000058  20000018  0800140c  00020018  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000050  08000e28  00020050  2**0
+ 10 ._user_heap_stack 00000600  20000070  0800140c  00020070  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000296e  00000000  00000000  00020041  2**0
+ 12 .debug_info   00002b32  00000000  00000000  00020041  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000007ad  00000000  00000000  000229af  2**0
+ 13 .debug_abbrev 000007e1  00000000  00000000  00022b73  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00000998  00000000  00000000  0002315c  2**0
+ 14 .debug_loc    00000b94  00000000  00000000  00023354  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_aranges 000001e0  00000000  00000000  00023af8  2**3
+ 15 .debug_aranges 00000238  00000000  00000000  00023ee8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 00000178  00000000  00000000  00023cd8  2**3
+ 16 .debug_ranges 000001d0  00000000  00000000  00024120  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macro  0000233a  00000000  00000000  00023e50  2**0
+ 17 .debug_macro  00002352  00000000  00000000  000242f0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_line   00002264  00000000  00000000  0002618a  2**0
+ 18 .debug_line   000023ac  00000000  00000000  00026642  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_str    00009433  00000000  00000000  000283ee  2**0
+ 19 .debug_str    00009617  00000000  00000000  000289ee  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .comment      0000007b  00000000  00000000  00031821  2**0
+ 20 .comment      0000007b  00000000  00000000  00032005  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00000578  00000000  00000000  0003189c  2**2
+ 21 .debug_frame  000006d4  00000000  00000000  00032080  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  8000146:	bd10      	pop	{r4, pc}
  8000148:	20000018 	.word	0x20000018
  800014c:	00000000 	.word	0x00000000
- 8000150:	08000d58 	.word	0x08000d58
+ 8000150:	08001280 	.word	0x08001280
 
 08000154 <frame_dummy>:
  8000154:	b508      	push	{r3, lr}
@@ -76,7 +76,7 @@ Disassembly of section .text:
  8000162:	bd08      	pop	{r3, pc}
  8000164:	00000000 	.word	0x00000000
  8000168:	2000001c 	.word	0x2000001c
- 800016c:	08000d58 	.word	0x08000d58
+ 800016c:	08001280 	.word	0x08001280
 
 08000170 <strcmp>:
  8000170:	f810 2b01 	ldrb.w	r2, [r0], #1
@@ -182,7 +182,7 @@ LoopFillZerobss:
 
 /* Call static constructors */
   bl __libc_init_array
- 80001c2:	f000 fda5 	bl	8000d10 <__libc_init_array>
+ 80001c2:	f001 f831 	bl	8001228 <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
  80001c6:	f7ff ffdd 	bl	8000184 <main>
@@ -199,11 +199,11 @@ LoopForever:
   ldr r1, =_edata
  80001d4:	20000018 	.word	0x20000018
   ldr r2, =_sidata
- 80001d8:	08000e10 	.word	0x08000e10
+ 80001d8:	080013f4 	.word	0x080013f4
   ldr r2, =_sbss
  80001dc:	20000018 	.word	0x20000018
   ldr r4, =_ebss
- 80001e0:	20000050 	.word	0x20000050
+ 80001e0:	20000070 	.word	0x20000070
 
 080001e4 <ADC1_2_IRQHandler>:
  * @retval : None
@@ -224,7 +224,7 @@ void Dashboard_ECU_APP_SETUP(void)
  80001e6:	b580      	push	{r7, lr}
  80001e8:	af00      	add	r7, sp, #0
     st_Admin_DashboardInit();
- 80001ea:	f000 f821 	bl	8000230 <st_Admin_DashboardInit>
+ 80001ea:	f000 f9c1 	bl	8000570 <st_Admin_DashboardInit>
 }
  80001ee:	bf00      	nop
  80001f0:	bd80      	pop	{r7, pc}
@@ -247,13 +247,13 @@ void Dashboard_ECU_APP_Loop(void)
  80001fe:	bf00      	nop
  8000200:	bd80      	pop	{r7, pc}
  8000202:	bf00      	nop
- 8000204:	20000048 	.word	0x20000048
+ 8000204:	20000068 	.word	0x20000068
 
 08000208 <Peripheral_Clock_Init>:
-/** @defgroup Local Functions
-  * @{
-  */
-
+* @brief		  : Enable all the required peripherals clocks.
+* Note			  : none.
+======================================================================================================================
+*/
 void Peripheral_Clock_Init()
 {
  8000208:	b480      	push	{r7}
@@ -280,1896 +280,2750 @@ void Peripheral_Clock_Init()
  800022a:	4770      	bx	lr
  800022c:	40021000 	.word	0x40021000
 
-08000230 <st_Admin_DashboardInit>:
+08000230 <st_Admin_BacktoMainMenu>:
+* @brief		  : Function to route the user back to the admin interface main menu.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_BacktoMainMenu(void)
+{
+ 8000230:	b580      	push	{r7, lr}
+ 8000232:	af00      	add	r7, sp, #0
+   pressedKey = Keypad_Get_Char();
+ 8000234:	f000 fcb8 	bl	8000ba8 <Keypad_Get_Char>
+ 8000238:	4603      	mov	r3, r0
+ 800023a:	461a      	mov	r2, r3
+ 800023c:	4b05      	ldr	r3, [pc, #20]	; (8000254 <st_Admin_BacktoMainMenu+0x24>)
+ 800023e:	701a      	strb	r2, [r3, #0]
+
+   if(pressedKey == '*')
+ 8000240:	4b04      	ldr	r3, [pc, #16]	; (8000254 <st_Admin_BacktoMainMenu+0x24>)
+ 8000242:	781b      	ldrb	r3, [r3, #0]
+ 8000244:	2b2a      	cmp	r3, #42	; 0x2a
+ 8000246:	d102      	bne.n	800024e <st_Admin_BacktoMainMenu+0x1e>
+   {
+      Admin_Dashboard_State = st_Admin_ShowAdminOptions;
+ 8000248:	4b03      	ldr	r3, [pc, #12]	; (8000258 <st_Admin_BacktoMainMenu+0x28>)
+ 800024a:	4a04      	ldr	r2, [pc, #16]	; (800025c <st_Admin_BacktoMainMenu+0x2c>)
+ 800024c:	601a      	str	r2, [r3, #0]
+   }else{
+
+   }
+}
+ 800024e:	bf00      	nop
+ 8000250:	bd80      	pop	{r7, pc}
+ 8000252:	bf00      	nop
+ 8000254:	20000034 	.word	0x20000034
+ 8000258:	20000068 	.word	0x20000068
+ 800025c:	08000839 	.word	0x08000839
+
+08000260 <st_Admin_MoreOptions>:
+* @brief		  : An extension for the function that prints the admin options on the LCD.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_MoreOptions()
+{
+ 8000260:	b580      	push	{r7, lr}
+ 8000262:	af00      	add	r7, sp, #0
+    LCD_Clear_Screen();
+ 8000264:	f000 ff36 	bl	80010d4 <LCD_Clear_Screen>
+    LCD_Send_String(stringfy("5.Show IDs list"));
+ 8000268:	4807      	ldr	r0, [pc, #28]	; (8000288 <st_Admin_MoreOptions+0x28>)
+ 800026a:	f000 fed7 	bl	800101c <LCD_Send_String>
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 800026e:	2100      	movs	r1, #0
+ 8000270:	2003      	movs	r0, #3
+ 8000272:	f000 fee7 	bl	8001044 <LCD_Cursor_XY>
+    LCD_Send_String(stringfy("'*' To Logout"));
+ 8000276:	4805      	ldr	r0, [pc, #20]	; (800028c <st_Admin_MoreOptions+0x2c>)
+ 8000278:	f000 fed0 	bl	800101c <LCD_Send_String>
+
+  Admin_Dashboard_State = st_Admin_GetAdminOption;
+ 800027c:	4b04      	ldr	r3, [pc, #16]	; (8000290 <st_Admin_MoreOptions+0x30>)
+ 800027e:	4a05      	ldr	r2, [pc, #20]	; (8000294 <st_Admin_MoreOptions+0x34>)
+ 8000280:	601a      	str	r2, [r3, #0]
+}
+ 8000282:	bf00      	nop
+ 8000284:	bd80      	pop	{r7, pc}
+ 8000286:	bf00      	nop
+ 8000288:	08001298 	.word	0x08001298
+ 800028c:	080012a8 	.word	0x080012a8
+ 8000290:	20000068 	.word	0x20000068
+ 8000294:	08000895 	.word	0x08000895
+
+08000298 <st_Admin_DisplayAddNewIDMessage>:
+* @brief		  : A function to prompt the user to enter a new ID to be registered.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_DisplayAddNewIDMessage(void)
+{
+ 8000298:	b580      	push	{r7, lr}
+ 800029a:	af00      	add	r7, sp, #0
+  LCD_Clear_Screen();
+ 800029c:	f000 ff1a 	bl	80010d4 <LCD_Clear_Screen>
+
+  if(Glob_AuthIDsCount < AUTHORIZED_IDS_MAX_COUNT)
+ 80002a0:	4b0c      	ldr	r3, [pc, #48]	; (80002d4 <st_Admin_DisplayAddNewIDMessage+0x3c>)
+ 80002a2:	781b      	ldrb	r3, [r3, #0]
+ 80002a4:	2b04      	cmp	r3, #4
+ 80002a6:	d806      	bhi.n	80002b6 <st_Admin_DisplayAddNewIDMessage+0x1e>
+  {
+    LCD_Send_String(stringfy("Enter ID:"));
+ 80002a8:	480b      	ldr	r0, [pc, #44]	; (80002d8 <st_Admin_DisplayAddNewIDMessage+0x40>)
+ 80002aa:	f000 feb7 	bl	800101c <LCD_Send_String>
+
+    Admin_Dashboard_State = st_Admin_AddNewID;
+ 80002ae:	4b0b      	ldr	r3, [pc, #44]	; (80002dc <st_Admin_DisplayAddNewIDMessage+0x44>)
+ 80002b0:	4a0b      	ldr	r2, [pc, #44]	; (80002e0 <st_Admin_DisplayAddNewIDMessage+0x48>)
+ 80002b2:	601a      	str	r2, [r3, #0]
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("main menu => '*'"));
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+  }
+}
+ 80002b4:	e00c      	b.n	80002d0 <st_Admin_DisplayAddNewIDMessage+0x38>
+    LCD_Send_String(stringfy("IDs count exceeded"));
+ 80002b6:	480b      	ldr	r0, [pc, #44]	; (80002e4 <st_Admin_DisplayAddNewIDMessage+0x4c>)
+ 80002b8:	f000 feb0 	bl	800101c <LCD_Send_String>
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 80002bc:	2100      	movs	r1, #0
+ 80002be:	2003      	movs	r0, #3
+ 80002c0:	f000 fec0 	bl	8001044 <LCD_Cursor_XY>
+    LCD_Send_String(stringfy("main menu => '*'"));
+ 80002c4:	4808      	ldr	r0, [pc, #32]	; (80002e8 <st_Admin_DisplayAddNewIDMessage+0x50>)
+ 80002c6:	f000 fea9 	bl	800101c <LCD_Send_String>
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 80002ca:	4b04      	ldr	r3, [pc, #16]	; (80002dc <st_Admin_DisplayAddNewIDMessage+0x44>)
+ 80002cc:	4a07      	ldr	r2, [pc, #28]	; (80002ec <st_Admin_DisplayAddNewIDMessage+0x54>)
+ 80002ce:	601a      	str	r2, [r3, #0]
+}
+ 80002d0:	bf00      	nop
+ 80002d2:	bd80      	pop	{r7, pc}
+ 80002d4:	20000060 	.word	0x20000060
+ 80002d8:	080012b8 	.word	0x080012b8
+ 80002dc:	20000068 	.word	0x20000068
+ 80002e0:	0800094d 	.word	0x0800094d
+ 80002e4:	080012c4 	.word	0x080012c4
+ 80002e8:	080012d8 	.word	0x080012d8
+ 80002ec:	08000231 	.word	0x08000231
+
+080002f0 <st_Admin_AddedIDsuccessfully>:
+* @brief		  : Function to tell the user that the process of adding a new ID had been successfull.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_AddedIDsuccessfully(void)
+{
+ 80002f0:	b580      	push	{r7, lr}
+ 80002f2:	af00      	add	r7, sp, #0
+   /*Copy the ID into the main list*/
+   strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
+ 80002f4:	4b0f      	ldr	r3, [pc, #60]	; (8000334 <st_Admin_AddedIDsuccessfully+0x44>)
+ 80002f6:	781b      	ldrb	r3, [r3, #0]
+ 80002f8:	009b      	lsls	r3, r3, #2
+ 80002fa:	4a0f      	ldr	r2, [pc, #60]	; (8000338 <st_Admin_AddedIDsuccessfully+0x48>)
+ 80002fc:	4413      	add	r3, r2
+ 80002fe:	490f      	ldr	r1, [pc, #60]	; (800033c <st_Admin_AddedIDsuccessfully+0x4c>)
+ 8000300:	4618      	mov	r0, r3
+ 8000302:	f000 ffb5 	bl	8001270 <strcpy>
+
+   /*Increase the IDs count in the system*/
+   Glob_AuthIDsCount++;
+ 8000306:	4b0b      	ldr	r3, [pc, #44]	; (8000334 <st_Admin_AddedIDsuccessfully+0x44>)
+ 8000308:	781b      	ldrb	r3, [r3, #0]
+ 800030a:	3301      	adds	r3, #1
+ 800030c:	b2da      	uxtb	r2, r3
+ 800030e:	4b09      	ldr	r3, [pc, #36]	; (8000334 <st_Admin_AddedIDsuccessfully+0x44>)
+ 8000310:	701a      	strb	r2, [r3, #0]
+   
+   LCD_Clear_Screen();
+ 8000312:	f000 fedf 	bl	80010d4 <LCD_Clear_Screen>
+
+   LCD_Send_String(stringfy("ID Added successfully"));
+ 8000316:	480a      	ldr	r0, [pc, #40]	; (8000340 <st_Admin_AddedIDsuccessfully+0x50>)
+ 8000318:	f000 fe80 	bl	800101c <LCD_Send_String>
+   LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 800031c:	2100      	movs	r1, #0
+ 800031e:	2003      	movs	r0, #3
+ 8000320:	f000 fe90 	bl	8001044 <LCD_Cursor_XY>
+   LCD_Send_String(stringfy("main menu => '*'"));
+ 8000324:	4807      	ldr	r0, [pc, #28]	; (8000344 <st_Admin_AddedIDsuccessfully+0x54>)
+ 8000326:	f000 fe79 	bl	800101c <LCD_Send_String>
+
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 800032a:	4b07      	ldr	r3, [pc, #28]	; (8000348 <st_Admin_AddedIDsuccessfully+0x58>)
+ 800032c:	4a07      	ldr	r2, [pc, #28]	; (800034c <st_Admin_AddedIDsuccessfully+0x5c>)
+ 800032e:	601a      	str	r2, [r3, #0]
+}
+ 8000330:	bf00      	nop
+ 8000332:	bd80      	pop	{r7, pc}
+ 8000334:	20000060 	.word	0x20000060
+ 8000338:	2000004c 	.word	0x2000004c
+ 800033c:	20000048 	.word	0x20000048
+ 8000340:	080012ec 	.word	0x080012ec
+ 8000344:	080012d8 	.word	0x080012d8
+ 8000348:	20000068 	.word	0x20000068
+ 800034c:	08000231 	.word	0x08000231
+
+08000350 <st_Admin_IDalreadyExists>:
+* @brief		  : A function to warn the admin if he tries to register an already registered ID.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_IDalreadyExists(void)
+{
+ 8000350:	b580      	push	{r7, lr}
+ 8000352:	af00      	add	r7, sp, #0
+  LCD_Clear_Screen();
+ 8000354:	f000 febe 	bl	80010d4 <LCD_Clear_Screen>
+  LCD_Send_String(stringfy("ID already exist"));
+ 8000358:	4807      	ldr	r0, [pc, #28]	; (8000378 <st_Admin_IDalreadyExists+0x28>)
+ 800035a:	f000 fe5f 	bl	800101c <LCD_Send_String>
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 800035e:	2100      	movs	r1, #0
+ 8000360:	2003      	movs	r0, #3
+ 8000362:	f000 fe6f 	bl	8001044 <LCD_Cursor_XY>
+  LCD_Send_String(stringfy("main menu => '*'"));
+ 8000366:	4805      	ldr	r0, [pc, #20]	; (800037c <st_Admin_IDalreadyExists+0x2c>)
+ 8000368:	f000 fe58 	bl	800101c <LCD_Send_String>
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 800036c:	4b04      	ldr	r3, [pc, #16]	; (8000380 <st_Admin_IDalreadyExists+0x30>)
+ 800036e:	4a05      	ldr	r2, [pc, #20]	; (8000384 <st_Admin_IDalreadyExists+0x34>)
+ 8000370:	601a      	str	r2, [r3, #0]
+}
+ 8000372:	bf00      	nop
+ 8000374:	bd80      	pop	{r7, pc}
+ 8000376:	bf00      	nop
+ 8000378:	08001304 	.word	0x08001304
+ 800037c:	080012d8 	.word	0x080012d8
+ 8000380:	20000068 	.word	0x20000068
+ 8000384:	08000231 	.word	0x08000231
+
+08000388 <st_Admin_RemovedIDsuccessfully>:
+* @brief		  : A function to warn the admin if he tries to register an already registered ID.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_RemovedIDsuccessfully(void)
+{
+ 8000388:	b580      	push	{r7, lr}
+ 800038a:	af00      	add	r7, sp, #0
+  LCD_Clear_Screen();
+ 800038c:	f000 fea2 	bl	80010d4 <LCD_Clear_Screen>
+  LCD_Send_String(stringfy("ID Deleted!"));
+ 8000390:	4807      	ldr	r0, [pc, #28]	; (80003b0 <st_Admin_RemovedIDsuccessfully+0x28>)
+ 8000392:	f000 fe43 	bl	800101c <LCD_Send_String>
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 8000396:	2100      	movs	r1, #0
+ 8000398:	2003      	movs	r0, #3
+ 800039a:	f000 fe53 	bl	8001044 <LCD_Cursor_XY>
+  LCD_Send_String(stringfy("main menu => '*'"));
+ 800039e:	4805      	ldr	r0, [pc, #20]	; (80003b4 <st_Admin_RemovedIDsuccessfully+0x2c>)
+ 80003a0:	f000 fe3c 	bl	800101c <LCD_Send_String>
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 80003a4:	4b04      	ldr	r3, [pc, #16]	; (80003b8 <st_Admin_RemovedIDsuccessfully+0x30>)
+ 80003a6:	4a05      	ldr	r2, [pc, #20]	; (80003bc <st_Admin_RemovedIDsuccessfully+0x34>)
+ 80003a8:	601a      	str	r2, [r3, #0]
+}
+ 80003aa:	bf00      	nop
+ 80003ac:	bd80      	pop	{r7, pc}
+ 80003ae:	bf00      	nop
+ 80003b0:	08001318 	.word	0x08001318
+ 80003b4:	080012d8 	.word	0x080012d8
+ 80003b8:	20000068 	.word	0x20000068
+ 80003bc:	08000231 	.word	0x08000231
+
+080003c0 <st_Admin_IDnotFound>:
+* @brief		  : Function to inform the user that the required ID doesn't exist.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_IDnotFound(void)
+{
+ 80003c0:	b580      	push	{r7, lr}
+ 80003c2:	af00      	add	r7, sp, #0
+  LCD_Clear_Screen();
+ 80003c4:	f000 fe86 	bl	80010d4 <LCD_Clear_Screen>
+  LCD_Send_String(stringfy("ID Doesn't Exist"));
+ 80003c8:	4807      	ldr	r0, [pc, #28]	; (80003e8 <st_Admin_IDnotFound+0x28>)
+ 80003ca:	f000 fe27 	bl	800101c <LCD_Send_String>
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 80003ce:	2100      	movs	r1, #0
+ 80003d0:	2003      	movs	r0, #3
+ 80003d2:	f000 fe37 	bl	8001044 <LCD_Cursor_XY>
+  LCD_Send_String(stringfy("main menu => '*'"));
+ 80003d6:	4805      	ldr	r0, [pc, #20]	; (80003ec <st_Admin_IDnotFound+0x2c>)
+ 80003d8:	f000 fe20 	bl	800101c <LCD_Send_String>
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 80003dc:	4b04      	ldr	r3, [pc, #16]	; (80003f0 <st_Admin_IDnotFound+0x30>)
+ 80003de:	4a05      	ldr	r2, [pc, #20]	; (80003f4 <st_Admin_IDnotFound+0x34>)
+ 80003e0:	601a      	str	r2, [r3, #0]
+
+}
+ 80003e2:	bf00      	nop
+ 80003e4:	bd80      	pop	{r7, pc}
+ 80003e6:	bf00      	nop
+ 80003e8:	08001324 	.word	0x08001324
+ 80003ec:	080012d8 	.word	0x080012d8
+ 80003f0:	20000068 	.word	0x20000068
+ 80003f4:	08000231 	.word	0x08000231
+
+080003f8 <deleteID>:
+* @param [in]	: IDindex: index of the element to be removed.
+* Note			  : The order of the elements in the list does not matter.
+======================================================================================================================
+*/
+void deleteID(uint8 IDindex)
+{
+ 80003f8:	b580      	push	{r7, lr}
+ 80003fa:	b082      	sub	sp, #8
+ 80003fc:	af00      	add	r7, sp, #0
+ 80003fe:	4603      	mov	r3, r0
+ 8000400:	71fb      	strb	r3, [r7, #7]
+  /*If the ID to be deleted is in the end of the list just decrease the IDs count*/
+  if(IDindex < Glob_AuthIDsCount - 1)
+ 8000402:	79fa      	ldrb	r2, [r7, #7]
+ 8000404:	4b0d      	ldr	r3, [pc, #52]	; (800043c <deleteID+0x44>)
+ 8000406:	781b      	ldrb	r3, [r3, #0]
+ 8000408:	3b01      	subs	r3, #1
+ 800040a:	429a      	cmp	r2, r3
+ 800040c:	da0c      	bge.n	8000428 <deleteID+0x30>
+  {
+    /*Delete the required ID from the list*/
+    strcpy((sint8  *)Glob_DriversIDsList[IDindex], (const sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount - 1]);
+ 800040e:	79fb      	ldrb	r3, [r7, #7]
+ 8000410:	009b      	lsls	r3, r3, #2
+ 8000412:	4a0b      	ldr	r2, [pc, #44]	; (8000440 <deleteID+0x48>)
+ 8000414:	1898      	adds	r0, r3, r2
+ 8000416:	4b09      	ldr	r3, [pc, #36]	; (800043c <deleteID+0x44>)
+ 8000418:	781b      	ldrb	r3, [r3, #0]
+ 800041a:	3b01      	subs	r3, #1
+ 800041c:	009b      	lsls	r3, r3, #2
+ 800041e:	4a08      	ldr	r2, [pc, #32]	; (8000440 <deleteID+0x48>)
+ 8000420:	4413      	add	r3, r2
+ 8000422:	4619      	mov	r1, r3
+ 8000424:	f000 ff24 	bl	8001270 <strcpy>
+  }else{
+
+  }
+
+  Glob_AuthIDsCount--;
+ 8000428:	4b04      	ldr	r3, [pc, #16]	; (800043c <deleteID+0x44>)
+ 800042a:	781b      	ldrb	r3, [r3, #0]
+ 800042c:	3b01      	subs	r3, #1
+ 800042e:	b2da      	uxtb	r2, r3
+ 8000430:	4b02      	ldr	r3, [pc, #8]	; (800043c <deleteID+0x44>)
+ 8000432:	701a      	strb	r2, [r3, #0]
+}
+ 8000434:	bf00      	nop
+ 8000436:	3708      	adds	r7, #8
+ 8000438:	46bd      	mov	sp, r7
+ 800043a:	bd80      	pop	{r7, pc}
+ 800043c:	20000060 	.word	0x20000060
+ 8000440:	2000004c 	.word	0x2000004c
+
+08000444 <st_Admin_CheckRepeatedID>:
+* @brief		  : FUnction to check if the ID to be registered already exists in the system.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_CheckRepeatedID(void)
+{
+ 8000444:	b580      	push	{r7, lr}
+ 8000446:	b082      	sub	sp, #8
+ 8000448:	af00      	add	r7, sp, #0
+  static uint8 counter = 0;
+  boolean repeated = FALSE;
+ 800044a:	2300      	movs	r3, #0
+ 800044c:	71fb      	strb	r3, [r7, #7]
+
+  if(!strcmp((const sint8 *)Glob_tempDriverIDinput, (const sint8 *)Glob_DriversIDsList[counter]))
+ 800044e:	4b27      	ldr	r3, [pc, #156]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 8000450:	781b      	ldrb	r3, [r3, #0]
+ 8000452:	009b      	lsls	r3, r3, #2
+ 8000454:	4a26      	ldr	r2, [pc, #152]	; (80004f0 <st_Admin_CheckRepeatedID+0xac>)
+ 8000456:	4413      	add	r3, r2
+ 8000458:	4619      	mov	r1, r3
+ 800045a:	4826      	ldr	r0, [pc, #152]	; (80004f4 <st_Admin_CheckRepeatedID+0xb0>)
+ 800045c:	f7ff fe88 	bl	8000170 <strcmp>
+ 8000460:	4603      	mov	r3, r0
+ 8000462:	2b00      	cmp	r3, #0
+ 8000464:	d101      	bne.n	800046a <st_Admin_CheckRepeatedID+0x26>
+  {
+      repeated = TRUE;
+ 8000466:	2301      	movs	r3, #1
+ 8000468:	71fb      	strb	r3, [r7, #7]
+  }else{
+
+  }
+
+  if(repeated)
+ 800046a:	79fb      	ldrb	r3, [r7, #7]
+ 800046c:	2b00      	cmp	r3, #0
+ 800046e:	d017      	beq.n	80004a0 <st_Admin_CheckRepeatedID+0x5c>
+  {
+    if(currentOperation == ADMIN_ADD_ID)
+ 8000470:	4b21      	ldr	r3, [pc, #132]	; (80004f8 <st_Admin_CheckRepeatedID+0xb4>)
+ 8000472:	781b      	ldrb	r3, [r3, #0]
+ 8000474:	2b31      	cmp	r3, #49	; 0x31
+ 8000476:	d103      	bne.n	8000480 <st_Admin_CheckRepeatedID+0x3c>
+    {
+      Admin_Dashboard_State = st_Admin_IDalreadyExists;
+ 8000478:	4b20      	ldr	r3, [pc, #128]	; (80004fc <st_Admin_CheckRepeatedID+0xb8>)
+ 800047a:	4a21      	ldr	r2, [pc, #132]	; (8000500 <st_Admin_CheckRepeatedID+0xbc>)
+ 800047c:	601a      	str	r2, [r3, #0]
+ 800047e:	e00b      	b.n	8000498 <st_Admin_CheckRepeatedID+0x54>
+    }else if(currentOperation == ADMIN_REMOVE_ID)
+ 8000480:	4b1d      	ldr	r3, [pc, #116]	; (80004f8 <st_Admin_CheckRepeatedID+0xb4>)
+ 8000482:	781b      	ldrb	r3, [r3, #0]
+ 8000484:	2b32      	cmp	r3, #50	; 0x32
+ 8000486:	d107      	bne.n	8000498 <st_Admin_CheckRepeatedID+0x54>
+    {
+      deleteID(counter);
+ 8000488:	4b18      	ldr	r3, [pc, #96]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 800048a:	781b      	ldrb	r3, [r3, #0]
+ 800048c:	4618      	mov	r0, r3
+ 800048e:	f7ff ffb3 	bl	80003f8 <deleteID>
+      Admin_Dashboard_State = st_Admin_RemovedIDsuccessfully;
+ 8000492:	4b1a      	ldr	r3, [pc, #104]	; (80004fc <st_Admin_CheckRepeatedID+0xb8>)
+ 8000494:	4a1b      	ldr	r2, [pc, #108]	; (8000504 <st_Admin_CheckRepeatedID+0xc0>)
+ 8000496:	601a      	str	r2, [r3, #0]
+    }else{
+
+    }
+
+    counter = 0;    
+ 8000498:	4b14      	ldr	r3, [pc, #80]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 800049a:	2200      	movs	r2, #0
+ 800049c:	701a      	strb	r2, [r3, #0]
+      }else{
+
+      }
+    }
+  }
+}
+ 800049e:	e021      	b.n	80004e4 <st_Admin_CheckRepeatedID+0xa0>
+    counter++;
+ 80004a0:	4b12      	ldr	r3, [pc, #72]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 80004a2:	781b      	ldrb	r3, [r3, #0]
+ 80004a4:	3301      	adds	r3, #1
+ 80004a6:	b2da      	uxtb	r2, r3
+ 80004a8:	4b10      	ldr	r3, [pc, #64]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 80004aa:	701a      	strb	r2, [r3, #0]
+    if(counter < Glob_AuthIDsCount)
+ 80004ac:	4b0f      	ldr	r3, [pc, #60]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 80004ae:	781a      	ldrb	r2, [r3, #0]
+ 80004b0:	4b15      	ldr	r3, [pc, #84]	; (8000508 <st_Admin_CheckRepeatedID+0xc4>)
+ 80004b2:	781b      	ldrb	r3, [r3, #0]
+ 80004b4:	429a      	cmp	r2, r3
+ 80004b6:	d203      	bcs.n	80004c0 <st_Admin_CheckRepeatedID+0x7c>
+      Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+ 80004b8:	4b10      	ldr	r3, [pc, #64]	; (80004fc <st_Admin_CheckRepeatedID+0xb8>)
+ 80004ba:	4a14      	ldr	r2, [pc, #80]	; (800050c <st_Admin_CheckRepeatedID+0xc8>)
+ 80004bc:	601a      	str	r2, [r3, #0]
+}
+ 80004be:	e011      	b.n	80004e4 <st_Admin_CheckRepeatedID+0xa0>
+      counter = 0;
+ 80004c0:	4b0a      	ldr	r3, [pc, #40]	; (80004ec <st_Admin_CheckRepeatedID+0xa8>)
+ 80004c2:	2200      	movs	r2, #0
+ 80004c4:	701a      	strb	r2, [r3, #0]
+      if(currentOperation == ADMIN_ADD_ID)
+ 80004c6:	4b0c      	ldr	r3, [pc, #48]	; (80004f8 <st_Admin_CheckRepeatedID+0xb4>)
+ 80004c8:	781b      	ldrb	r3, [r3, #0]
+ 80004ca:	2b31      	cmp	r3, #49	; 0x31
+ 80004cc:	d103      	bne.n	80004d6 <st_Admin_CheckRepeatedID+0x92>
+        Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+ 80004ce:	4b0b      	ldr	r3, [pc, #44]	; (80004fc <st_Admin_CheckRepeatedID+0xb8>)
+ 80004d0:	4a0f      	ldr	r2, [pc, #60]	; (8000510 <st_Admin_CheckRepeatedID+0xcc>)
+ 80004d2:	601a      	str	r2, [r3, #0]
+}
+ 80004d4:	e006      	b.n	80004e4 <st_Admin_CheckRepeatedID+0xa0>
+      }else if(currentOperation == ADMIN_REMOVE_ID)
+ 80004d6:	4b08      	ldr	r3, [pc, #32]	; (80004f8 <st_Admin_CheckRepeatedID+0xb4>)
+ 80004d8:	781b      	ldrb	r3, [r3, #0]
+ 80004da:	2b32      	cmp	r3, #50	; 0x32
+ 80004dc:	d102      	bne.n	80004e4 <st_Admin_CheckRepeatedID+0xa0>
+        Admin_Dashboard_State = st_Admin_IDnotFound;
+ 80004de:	4b07      	ldr	r3, [pc, #28]	; (80004fc <st_Admin_CheckRepeatedID+0xb8>)
+ 80004e0:	4a0c      	ldr	r2, [pc, #48]	; (8000514 <st_Admin_CheckRepeatedID+0xd0>)
+ 80004e2:	601a      	str	r2, [r3, #0]
+}
+ 80004e4:	bf00      	nop
+ 80004e6:	3708      	adds	r7, #8
+ 80004e8:	46bd      	mov	sp, r7
+ 80004ea:	bd80      	pop	{r7, pc}
+ 80004ec:	20000061 	.word	0x20000061
+ 80004f0:	2000004c 	.word	0x2000004c
+ 80004f4:	20000048 	.word	0x20000048
+ 80004f8:	20000045 	.word	0x20000045
+ 80004fc:	20000068 	.word	0x20000068
+ 8000500:	08000351 	.word	0x08000351
+ 8000504:	08000389 	.word	0x08000389
+ 8000508:	20000060 	.word	0x20000060
+ 800050c:	08000445 	.word	0x08000445
+ 8000510:	080002f1 	.word	0x080002f1
+ 8000514:	080003c1 	.word	0x080003c1
+
+08000518 <st_Admin_DisplayRemoveIDMessage>:
+* @brief		  : A function to prompt the user to enter a an ID to be deleted from the system.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_DisplayRemoveIDMessage(void)
+{
+ 8000518:	b580      	push	{r7, lr}
+ 800051a:	af00      	add	r7, sp, #0
+  LCD_Clear_Screen();
+ 800051c:	f000 fdda 	bl	80010d4 <LCD_Clear_Screen>
+
+  if(Glob_AuthIDsCount > 0)
+ 8000520:	4b0c      	ldr	r3, [pc, #48]	; (8000554 <st_Admin_DisplayRemoveIDMessage+0x3c>)
+ 8000522:	781b      	ldrb	r3, [r3, #0]
+ 8000524:	2b00      	cmp	r3, #0
+ 8000526:	d006      	beq.n	8000536 <st_Admin_DisplayRemoveIDMessage+0x1e>
+  {
+    LCD_Send_String(stringfy("Enter ID:"));
+ 8000528:	480b      	ldr	r0, [pc, #44]	; (8000558 <st_Admin_DisplayRemoveIDMessage+0x40>)
+ 800052a:	f000 fd77 	bl	800101c <LCD_Send_String>
+
+    Admin_Dashboard_State = st_Admin_RemoveID;
+ 800052e:	4b0b      	ldr	r3, [pc, #44]	; (800055c <st_Admin_DisplayRemoveIDMessage+0x44>)
+ 8000530:	4a0b      	ldr	r2, [pc, #44]	; (8000560 <st_Admin_DisplayRemoveIDMessage+0x48>)
+ 8000532:	601a      	str	r2, [r3, #0]
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("main menu => '*'"));
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+  }
+}
+ 8000534:	e00c      	b.n	8000550 <st_Admin_DisplayRemoveIDMessage+0x38>
+    LCD_Send_String(stringfy("IDs List Empty"));
+ 8000536:	480b      	ldr	r0, [pc, #44]	; (8000564 <st_Admin_DisplayRemoveIDMessage+0x4c>)
+ 8000538:	f000 fd70 	bl	800101c <LCD_Send_String>
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 800053c:	2100      	movs	r1, #0
+ 800053e:	2003      	movs	r0, #3
+ 8000540:	f000 fd80 	bl	8001044 <LCD_Cursor_XY>
+    LCD_Send_String(stringfy("main menu => '*'"));
+ 8000544:	4808      	ldr	r0, [pc, #32]	; (8000568 <st_Admin_DisplayRemoveIDMessage+0x50>)
+ 8000546:	f000 fd69 	bl	800101c <LCD_Send_String>
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 800054a:	4b04      	ldr	r3, [pc, #16]	; (800055c <st_Admin_DisplayRemoveIDMessage+0x44>)
+ 800054c:	4a07      	ldr	r2, [pc, #28]	; (800056c <st_Admin_DisplayRemoveIDMessage+0x54>)
+ 800054e:	601a      	str	r2, [r3, #0]
+}
+ 8000550:	bf00      	nop
+ 8000552:	bd80      	pop	{r7, pc}
+ 8000554:	20000060 	.word	0x20000060
+ 8000558:	080012b8 	.word	0x080012b8
+ 800055c:	20000068 	.word	0x20000068
+ 8000560:	080009f5 	.word	0x080009f5
+ 8000564:	08001338 	.word	0x08001338
+ 8000568:	080012d8 	.word	0x080012d8
+ 800056c:	08000231 	.word	0x08000231
+
+08000570 <st_Admin_DashboardInit>:
 * @return       :   none.
 * Note			    :   none.
 ======================================================================================================================
 */
 void st_Admin_DashboardInit(void)
 {  
- 8000230:	b580      	push	{r7, lr}
- 8000232:	af00      	add	r7, sp, #0
+ 8000570:	b580      	push	{r7, lr}
+ 8000572:	af00      	add	r7, sp, #0
   /*Enable the required clocks*/
   Peripheral_Clock_Init();
- 8000234:	f7ff ffe8 	bl	8000208 <Peripheral_Clock_Init>
+ 8000574:	f7ff fe48 	bl	8000208 <Peripheral_Clock_Init>
  
   LCD_Init();
- 8000238:	f000 fb16 	bl	8000868 <LCD_Init>
+ 8000578:	f000 fc02 	bl	8000d80 <LCD_Init>
   Keypad_Init();
- 800023c:	f000 f9e0 	bl	8000600 <Keypad_Init>
+ 800057c:	f000 facc 	bl	8000b18 <Keypad_Init>
  
   /*Set the next state*/
   Admin_Dashboard_State = st_Admin_InitialMessage;
- 8000240:	4b02      	ldr	r3, [pc, #8]	; (800024c <st_Admin_DashboardInit+0x1c>)
- 8000242:	4a03      	ldr	r2, [pc, #12]	; (8000250 <st_Admin_DashboardInit+0x20>)
- 8000244:	601a      	str	r2, [r3, #0]
+ 8000580:	4b02      	ldr	r3, [pc, #8]	; (800058c <st_Admin_DashboardInit+0x1c>)
+ 8000582:	4a03      	ldr	r2, [pc, #12]	; (8000590 <st_Admin_DashboardInit+0x20>)
+ 8000584:	601a      	str	r2, [r3, #0]
 }
- 8000246:	bf00      	nop
- 8000248:	bd80      	pop	{r7, pc}
- 800024a:	bf00      	nop
- 800024c:	20000048 	.word	0x20000048
- 8000250:	08000255 	.word	0x08000255
+ 8000586:	bf00      	nop
+ 8000588:	bd80      	pop	{r7, pc}
+ 800058a:	bf00      	nop
+ 800058c:	20000068 	.word	0x20000068
+ 8000590:	08000595 	.word	0x08000595
 
-08000254 <st_Admin_InitialMessage>:
+08000594 <st_Admin_InitialMessage>:
 * @brief		  :   Function to display the initial welcome message to the user.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_InitialMessage(void)
 {
- 8000254:	b580      	push	{r7, lr}
- 8000256:	af00      	add	r7, sp, #0
+ 8000594:	b580      	push	{r7, lr}
+ 8000596:	af00      	add	r7, sp, #0
     /*Print the initial message*/
     LCD_Clear_Screen();
- 8000258:	f000 fcb0 	bl	8000bbc <LCD_Clear_Screen>
+ 8000598:	f000 fd9c 	bl	80010d4 <LCD_Clear_Screen>
     
     LCD_Cursor_XY(LCD_SECOND_LINE, 4);
- 800025c:	2104      	movs	r1, #4
- 800025e:	2001      	movs	r0, #1
- 8000260:	f000 fc64 	bl	8000b2c <LCD_Cursor_XY>
+ 800059c:	2104      	movs	r1, #4
+ 800059e:	2001      	movs	r0, #1
+ 80005a0:	f000 fd50 	bl	8001044 <LCD_Cursor_XY>
     LCD_Send_String(stringfy("Press '*'"));
- 8000264:	4807      	ldr	r0, [pc, #28]	; (8000284 <st_Admin_InitialMessage+0x30>)
- 8000266:	f000 fc4d 	bl	8000b04 <LCD_Send_String>
+ 80005a4:	4807      	ldr	r0, [pc, #28]	; (80005c4 <st_Admin_InitialMessage+0x30>)
+ 80005a6:	f000 fd39 	bl	800101c <LCD_Send_String>
 
     LCD_Cursor_XY(LCD_THIRD_LINE, 4);
- 800026a:	2104      	movs	r1, #4
- 800026c:	2002      	movs	r0, #2
- 800026e:	f000 fc5d 	bl	8000b2c <LCD_Cursor_XY>
+ 80005aa:	2104      	movs	r1, #4
+ 80005ac:	2002      	movs	r0, #2
+ 80005ae:	f000 fd49 	bl	8001044 <LCD_Cursor_XY>
     LCD_Send_String(stringfy("to Login"));
- 8000272:	4805      	ldr	r0, [pc, #20]	; (8000288 <st_Admin_InitialMessage+0x34>)
- 8000274:	f000 fc46 	bl	8000b04 <LCD_Send_String>
+ 80005b2:	4805      	ldr	r0, [pc, #20]	; (80005c8 <st_Admin_InitialMessage+0x34>)
+ 80005b4:	f000 fd32 	bl	800101c <LCD_Send_String>
 
     /*Set the next state*/
     Admin_Dashboard_State = st_Admin_GetUserInput;
- 8000278:	4b04      	ldr	r3, [pc, #16]	; (800028c <st_Admin_InitialMessage+0x38>)
- 800027a:	4a05      	ldr	r2, [pc, #20]	; (8000290 <st_Admin_InitialMessage+0x3c>)
- 800027c:	601a      	str	r2, [r3, #0]
+ 80005b8:	4b04      	ldr	r3, [pc, #16]	; (80005cc <st_Admin_InitialMessage+0x38>)
+ 80005ba:	4a05      	ldr	r2, [pc, #20]	; (80005d0 <st_Admin_InitialMessage+0x3c>)
+ 80005bc:	601a      	str	r2, [r3, #0]
 }
- 800027e:	bf00      	nop
- 8000280:	bd80      	pop	{r7, pc}
- 8000282:	bf00      	nop
- 8000284:	08000d70 	.word	0x08000d70
- 8000288:	08000d7c 	.word	0x08000d7c
- 800028c:	20000048 	.word	0x20000048
- 8000290:	08000295 	.word	0x08000295
+ 80005be:	bf00      	nop
+ 80005c0:	bd80      	pop	{r7, pc}
+ 80005c2:	bf00      	nop
+ 80005c4:	08001348 	.word	0x08001348
+ 80005c8:	08001354 	.word	0x08001354
+ 80005cc:	20000068 	.word	0x20000068
+ 80005d0:	080005d5 	.word	0x080005d5
 
-08000294 <st_Admin_GetUserInput>:
+080005d4 <st_Admin_GetUserInput>:
 * @brief		  :   Function to get the user action.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_GetUserInput(void)
 {   
- 8000294:	b580      	push	{r7, lr}
- 8000296:	af00      	add	r7, sp, #0
+ 80005d4:	b580      	push	{r7, lr}
+ 80005d6:	af00      	add	r7, sp, #0
     pressedKey = Keypad_Get_Char();
- 8000298:	f000 f9fa 	bl	8000690 <Keypad_Get_Char>
- 800029c:	4603      	mov	r3, r0
- 800029e:	461a      	mov	r2, r3
- 80002a0:	4b07      	ldr	r3, [pc, #28]	; (80002c0 <st_Admin_GetUserInput+0x2c>)
- 80002a2:	701a      	strb	r2, [r3, #0]
+ 80005d8:	f000 fae6 	bl	8000ba8 <Keypad_Get_Char>
+ 80005dc:	4603      	mov	r3, r0
+ 80005de:	461a      	mov	r2, r3
+ 80005e0:	4b07      	ldr	r3, [pc, #28]	; (8000600 <st_Admin_GetUserInput+0x2c>)
+ 80005e2:	701a      	strb	r2, [r3, #0]
 
     /*Set the next state*/
     if(pressedKey == '*')
- 80002a4:	4b06      	ldr	r3, [pc, #24]	; (80002c0 <st_Admin_GetUserInput+0x2c>)
- 80002a6:	781b      	ldrb	r3, [r3, #0]
- 80002a8:	2b2a      	cmp	r3, #42	; 0x2a
- 80002aa:	d103      	bne.n	80002b4 <st_Admin_GetUserInput+0x20>
+ 80005e4:	4b06      	ldr	r3, [pc, #24]	; (8000600 <st_Admin_GetUserInput+0x2c>)
+ 80005e6:	781b      	ldrb	r3, [r3, #0]
+ 80005e8:	2b2a      	cmp	r3, #42	; 0x2a
+ 80005ea:	d103      	bne.n	80005f4 <st_Admin_GetUserInput+0x20>
     {
         Admin_Dashboard_State = st_Admin_LoginMessage;
- 80002ac:	4b05      	ldr	r3, [pc, #20]	; (80002c4 <st_Admin_GetUserInput+0x30>)
- 80002ae:	4a06      	ldr	r2, [pc, #24]	; (80002c8 <st_Admin_GetUserInput+0x34>)
- 80002b0:	601a      	str	r2, [r3, #0]
+ 80005ec:	4b05      	ldr	r3, [pc, #20]	; (8000604 <st_Admin_GetUserInput+0x30>)
+ 80005ee:	4a06      	ldr	r2, [pc, #24]	; (8000608 <st_Admin_GetUserInput+0x34>)
+ 80005f0:	601a      	str	r2, [r3, #0]
     }else{
         Admin_Dashboard_State = st_Admin_GetUserInput;
     }
 }
- 80002b2:	e002      	b.n	80002ba <st_Admin_GetUserInput+0x26>
+ 80005f2:	e002      	b.n	80005fa <st_Admin_GetUserInput+0x26>
         Admin_Dashboard_State = st_Admin_GetUserInput;
- 80002b4:	4b03      	ldr	r3, [pc, #12]	; (80002c4 <st_Admin_GetUserInput+0x30>)
- 80002b6:	4a05      	ldr	r2, [pc, #20]	; (80002cc <st_Admin_GetUserInput+0x38>)
- 80002b8:	601a      	str	r2, [r3, #0]
+ 80005f4:	4b03      	ldr	r3, [pc, #12]	; (8000604 <st_Admin_GetUserInput+0x30>)
+ 80005f6:	4a05      	ldr	r2, [pc, #20]	; (800060c <st_Admin_GetUserInput+0x38>)
+ 80005f8:	601a      	str	r2, [r3, #0]
 }
- 80002ba:	bf00      	nop
- 80002bc:	bd80      	pop	{r7, pc}
- 80002be:	bf00      	nop
- 80002c0:	20000034 	.word	0x20000034
- 80002c4:	20000048 	.word	0x20000048
- 80002c8:	080002d1 	.word	0x080002d1
- 80002cc:	08000295 	.word	0x08000295
+ 80005fa:	bf00      	nop
+ 80005fc:	bd80      	pop	{r7, pc}
+ 80005fe:	bf00      	nop
+ 8000600:	20000034 	.word	0x20000034
+ 8000604:	20000068 	.word	0x20000068
+ 8000608:	08000611 	.word	0x08000611
+ 800060c:	080005d5 	.word	0x080005d5
 
-080002d0 <st_Admin_LoginMessage>:
+08000610 <st_Admin_LoginMessage>:
 * @brief		  :   Function to get the user action.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_LoginMessage(void)
 {
- 80002d0:	b580      	push	{r7, lr}
- 80002d2:	af00      	add	r7, sp, #0
+ 8000610:	b580      	push	{r7, lr}
+ 8000612:	af00      	add	r7, sp, #0
     /*Print the login message*/
     LCD_Clear_Screen();
- 80002d4:	f000 fc72 	bl	8000bbc <LCD_Clear_Screen>
+ 8000614:	f000 fd5e 	bl	80010d4 <LCD_Clear_Screen>
 
     LCD_Send_String(stringfy("UserID:"));
- 80002d8:	480c      	ldr	r0, [pc, #48]	; (800030c <st_Admin_LoginMessage+0x3c>)
- 80002da:	f000 fc13 	bl	8000b04 <LCD_Send_String>
+ 8000618:	480c      	ldr	r0, [pc, #48]	; (800064c <st_Admin_LoginMessage+0x3c>)
+ 800061a:	f000 fcff 	bl	800101c <LCD_Send_String>
     LCD_Cursor_XY(LCD_SECOND_LINE, 0);
- 80002de:	2100      	movs	r1, #0
- 80002e0:	2001      	movs	r0, #1
- 80002e2:	f000 fc23 	bl	8000b2c <LCD_Cursor_XY>
+ 800061e:	2100      	movs	r1, #0
+ 8000620:	2001      	movs	r0, #1
+ 8000622:	f000 fd0f 	bl	8001044 <LCD_Cursor_XY>
     LCD_Send_String(stringfy("Password:"));
- 80002e6:	480a      	ldr	r0, [pc, #40]	; (8000310 <st_Admin_LoginMessage+0x40>)
- 80002e8:	f000 fc0c 	bl	8000b04 <LCD_Send_String>
+ 8000626:	480a      	ldr	r0, [pc, #40]	; (8000650 <st_Admin_LoginMessage+0x40>)
+ 8000628:	f000 fcf8 	bl	800101c <LCD_Send_String>
 
     if(loginAttemptsCounter > 1)
- 80002ec:	4b09      	ldr	r3, [pc, #36]	; (8000314 <st_Admin_LoginMessage+0x44>)
- 80002ee:	781b      	ldrb	r3, [r3, #0]
- 80002f0:	2b01      	cmp	r3, #1
- 80002f2:	d906      	bls.n	8000302 <st_Admin_LoginMessage+0x32>
+ 800062c:	4b09      	ldr	r3, [pc, #36]	; (8000654 <st_Admin_LoginMessage+0x44>)
+ 800062e:	781b      	ldrb	r3, [r3, #0]
+ 8000630:	2b01      	cmp	r3, #1
+ 8000632:	d906      	bls.n	8000642 <st_Admin_LoginMessage+0x32>
     {
       LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
- 80002f4:	2100      	movs	r1, #0
- 80002f6:	2003      	movs	r0, #3
- 80002f8:	f000 fc18 	bl	8000b2c <LCD_Cursor_XY>
+ 8000634:	2100      	movs	r1, #0
+ 8000636:	2003      	movs	r0, #3
+ 8000638:	f000 fd04 	bl	8001044 <LCD_Cursor_XY>
       LCD_Send_String(stringfy("Wrong Login Info"));
- 80002fc:	4806      	ldr	r0, [pc, #24]	; (8000318 <st_Admin_LoginMessage+0x48>)
- 80002fe:	f000 fc01 	bl	8000b04 <LCD_Send_String>
+ 800063c:	4806      	ldr	r0, [pc, #24]	; (8000658 <st_Admin_LoginMessage+0x48>)
+ 800063e:	f000 fced 	bl	800101c <LCD_Send_String>
     }
     /*Set next state*/
     Admin_Dashboard_State = st_Admin_GetUserID;
- 8000302:	4b06      	ldr	r3, [pc, #24]	; (800031c <st_Admin_LoginMessage+0x4c>)
- 8000304:	4a06      	ldr	r2, [pc, #24]	; (8000320 <st_Admin_LoginMessage+0x50>)
- 8000306:	601a      	str	r2, [r3, #0]
+ 8000642:	4b06      	ldr	r3, [pc, #24]	; (800065c <st_Admin_LoginMessage+0x4c>)
+ 8000644:	4a06      	ldr	r2, [pc, #24]	; (8000660 <st_Admin_LoginMessage+0x50>)
+ 8000646:	601a      	str	r2, [r3, #0]
 }
- 8000308:	bf00      	nop
- 800030a:	bd80      	pop	{r7, pc}
- 800030c:	08000d88 	.word	0x08000d88
- 8000310:	08000d90 	.word	0x08000d90
- 8000314:	20000014 	.word	0x20000014
- 8000318:	08000d9c 	.word	0x08000d9c
- 800031c:	20000048 	.word	0x20000048
- 8000320:	08000325 	.word	0x08000325
+ 8000648:	bf00      	nop
+ 800064a:	bd80      	pop	{r7, pc}
+ 800064c:	08001360 	.word	0x08001360
+ 8000650:	08001368 	.word	0x08001368
+ 8000654:	20000014 	.word	0x20000014
+ 8000658:	08001374 	.word	0x08001374
+ 800065c:	20000068 	.word	0x20000068
+ 8000660:	08000665 	.word	0x08000665
 
-08000324 <st_Admin_GetUserID>:
+08000664 <st_Admin_GetUserID>:
 * @brief		  :   Function to get the user input for the userID.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_GetUserID(void)
 {
- 8000324:	b580      	push	{r7, lr}
- 8000326:	af00      	add	r7, sp, #0
+ 8000664:	b580      	push	{r7, lr}
+ 8000666:	af00      	add	r7, sp, #0
     LCD_Cursor_XY(LCD_FIRST_LINE, 7 + userInputCount);
- 8000328:	4b1b      	ldr	r3, [pc, #108]	; (8000398 <st_Admin_GetUserID+0x74>)
- 800032a:	781b      	ldrb	r3, [r3, #0]
- 800032c:	3307      	adds	r3, #7
- 800032e:	b2db      	uxtb	r3, r3
- 8000330:	4619      	mov	r1, r3
- 8000332:	2000      	movs	r0, #0
- 8000334:	f000 fbfa 	bl	8000b2c <LCD_Cursor_XY>
+ 8000668:	4b1b      	ldr	r3, [pc, #108]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 800066a:	781b      	ldrb	r3, [r3, #0]
+ 800066c:	3307      	adds	r3, #7
+ 800066e:	b2db      	uxtb	r3, r3
+ 8000670:	4619      	mov	r1, r3
+ 8000672:	2000      	movs	r0, #0
+ 8000674:	f000 fce6 	bl	8001044 <LCD_Cursor_XY>
 
     pressedKey = Keypad_Get_Char();
- 8000338:	f000 f9aa 	bl	8000690 <Keypad_Get_Char>
- 800033c:	4603      	mov	r3, r0
- 800033e:	461a      	mov	r2, r3
- 8000340:	4b16      	ldr	r3, [pc, #88]	; (800039c <st_Admin_GetUserID+0x78>)
- 8000342:	701a      	strb	r2, [r3, #0]
+ 8000678:	f000 fa96 	bl	8000ba8 <Keypad_Get_Char>
+ 800067c:	4603      	mov	r3, r0
+ 800067e:	461a      	mov	r2, r3
+ 8000680:	4b16      	ldr	r3, [pc, #88]	; (80006dc <st_Admin_GetUserID+0x78>)
+ 8000682:	701a      	strb	r2, [r3, #0]
 
     /*Set the next state*/
     if(pressedKey != NULL_CHAR)
- 8000344:	4b15      	ldr	r3, [pc, #84]	; (800039c <st_Admin_GetUserID+0x78>)
- 8000346:	781b      	ldrb	r3, [r3, #0]
- 8000348:	2b4e      	cmp	r3, #78	; 0x4e
- 800034a:	d00f      	beq.n	800036c <st_Admin_GetUserID+0x48>
+ 8000684:	4b15      	ldr	r3, [pc, #84]	; (80006dc <st_Admin_GetUserID+0x78>)
+ 8000686:	781b      	ldrb	r3, [r3, #0]
+ 8000688:	2b4e      	cmp	r3, #78	; 0x4e
+ 800068a:	d00f      	beq.n	80006ac <st_Admin_GetUserID+0x48>
     {
         LCD_Send_Char(pressedKey);
- 800034c:	4b13      	ldr	r3, [pc, #76]	; (800039c <st_Admin_GetUserID+0x78>)
- 800034e:	781b      	ldrb	r3, [r3, #0]
- 8000350:	4618      	mov	r0, r3
- 8000352:	f000 fb5f 	bl	8000a14 <LCD_Send_Char>
+ 800068c:	4b13      	ldr	r3, [pc, #76]	; (80006dc <st_Admin_GetUserID+0x78>)
+ 800068e:	781b      	ldrb	r3, [r3, #0]
+ 8000690:	4618      	mov	r0, r3
+ 8000692:	f000 fc4b 	bl	8000f2c <LCD_Send_Char>
         Glob_userIDinput[userInputCount++] = pressedKey;
- 8000356:	4b10      	ldr	r3, [pc, #64]	; (8000398 <st_Admin_GetUserID+0x74>)
- 8000358:	781b      	ldrb	r3, [r3, #0]
- 800035a:	1c5a      	adds	r2, r3, #1
- 800035c:	b2d1      	uxtb	r1, r2
- 800035e:	4a0e      	ldr	r2, [pc, #56]	; (8000398 <st_Admin_GetUserID+0x74>)
- 8000360:	7011      	strb	r1, [r2, #0]
- 8000362:	461a      	mov	r2, r3
- 8000364:	4b0d      	ldr	r3, [pc, #52]	; (800039c <st_Admin_GetUserID+0x78>)
- 8000366:	7819      	ldrb	r1, [r3, #0]
- 8000368:	4b0d      	ldr	r3, [pc, #52]	; (80003a0 <st_Admin_GetUserID+0x7c>)
- 800036a:	5499      	strb	r1, [r3, r2]
+ 8000696:	4b10      	ldr	r3, [pc, #64]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 8000698:	781b      	ldrb	r3, [r3, #0]
+ 800069a:	1c5a      	adds	r2, r3, #1
+ 800069c:	b2d1      	uxtb	r1, r2
+ 800069e:	4a0e      	ldr	r2, [pc, #56]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 80006a0:	7011      	strb	r1, [r2, #0]
+ 80006a2:	461a      	mov	r2, r3
+ 80006a4:	4b0d      	ldr	r3, [pc, #52]	; (80006dc <st_Admin_GetUserID+0x78>)
+ 80006a6:	7819      	ldrb	r1, [r3, #0]
+ 80006a8:	4b0d      	ldr	r3, [pc, #52]	; (80006e0 <st_Admin_GetUserID+0x7c>)
+ 80006aa:	5499      	strb	r1, [r3, r2]
     }else{
         
     }
 
     if(userInputCount >= ADMIN_USERID_SIZE)
- 800036c:	4b0a      	ldr	r3, [pc, #40]	; (8000398 <st_Admin_GetUserID+0x74>)
- 800036e:	781b      	ldrb	r3, [r3, #0]
- 8000370:	2b03      	cmp	r3, #3
- 8000372:	d90c      	bls.n	800038e <st_Admin_GetUserID+0x6a>
+ 80006ac:	4b0a      	ldr	r3, [pc, #40]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 80006ae:	781b      	ldrb	r3, [r3, #0]
+ 80006b0:	2b03      	cmp	r3, #3
+ 80006b2:	d90c      	bls.n	80006ce <st_Admin_GetUserID+0x6a>
     {
         Glob_userIDinput[userInputCount] = '\0';
- 8000374:	4b08      	ldr	r3, [pc, #32]	; (8000398 <st_Admin_GetUserID+0x74>)
- 8000376:	781b      	ldrb	r3, [r3, #0]
- 8000378:	461a      	mov	r2, r3
- 800037a:	4b09      	ldr	r3, [pc, #36]	; (80003a0 <st_Admin_GetUserID+0x7c>)
- 800037c:	2100      	movs	r1, #0
- 800037e:	5499      	strb	r1, [r3, r2]
+ 80006b4:	4b08      	ldr	r3, [pc, #32]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 80006b6:	781b      	ldrb	r3, [r3, #0]
+ 80006b8:	461a      	mov	r2, r3
+ 80006ba:	4b09      	ldr	r3, [pc, #36]	; (80006e0 <st_Admin_GetUserID+0x7c>)
+ 80006bc:	2100      	movs	r1, #0
+ 80006be:	5499      	strb	r1, [r3, r2]
         userInputCount = 0;
- 8000380:	4b05      	ldr	r3, [pc, #20]	; (8000398 <st_Admin_GetUserID+0x74>)
- 8000382:	2200      	movs	r2, #0
- 8000384:	701a      	strb	r2, [r3, #0]
+ 80006c0:	4b05      	ldr	r3, [pc, #20]	; (80006d8 <st_Admin_GetUserID+0x74>)
+ 80006c2:	2200      	movs	r2, #0
+ 80006c4:	701a      	strb	r2, [r3, #0]
 
         /*Set next state*/
         Admin_Dashboard_State = st_Admin_GetUserPassword;
- 8000386:	4b07      	ldr	r3, [pc, #28]	; (80003a4 <st_Admin_GetUserID+0x80>)
- 8000388:	4a07      	ldr	r2, [pc, #28]	; (80003a8 <st_Admin_GetUserID+0x84>)
- 800038a:	601a      	str	r2, [r3, #0]
+ 80006c6:	4b07      	ldr	r3, [pc, #28]	; (80006e4 <st_Admin_GetUserID+0x80>)
+ 80006c8:	4a07      	ldr	r2, [pc, #28]	; (80006e8 <st_Admin_GetUserID+0x84>)
+ 80006ca:	601a      	str	r2, [r3, #0]
     }else{
         /*Stay in the same state*/
         Admin_Dashboard_State = st_Admin_GetUserID;
     }
 }
- 800038c:	e002      	b.n	8000394 <st_Admin_GetUserID+0x70>
+ 80006cc:	e002      	b.n	80006d4 <st_Admin_GetUserID+0x70>
         Admin_Dashboard_State = st_Admin_GetUserID;
- 800038e:	4b05      	ldr	r3, [pc, #20]	; (80003a4 <st_Admin_GetUserID+0x80>)
- 8000390:	4a06      	ldr	r2, [pc, #24]	; (80003ac <st_Admin_GetUserID+0x88>)
- 8000392:	601a      	str	r2, [r3, #0]
+ 80006ce:	4b05      	ldr	r3, [pc, #20]	; (80006e4 <st_Admin_GetUserID+0x80>)
+ 80006d0:	4a06      	ldr	r2, [pc, #24]	; (80006ec <st_Admin_GetUserID+0x88>)
+ 80006d2:	601a      	str	r2, [r3, #0]
 }
- 8000394:	bf00      	nop
- 8000396:	bd80      	pop	{r7, pc}
- 8000398:	20000035 	.word	0x20000035
- 800039c:	20000034 	.word	0x20000034
- 80003a0:	20000038 	.word	0x20000038
- 80003a4:	20000048 	.word	0x20000048
- 80003a8:	080003b1 	.word	0x080003b1
- 80003ac:	08000325 	.word	0x08000325
+ 80006d4:	bf00      	nop
+ 80006d6:	bd80      	pop	{r7, pc}
+ 80006d8:	20000035 	.word	0x20000035
+ 80006dc:	20000034 	.word	0x20000034
+ 80006e0:	20000038 	.word	0x20000038
+ 80006e4:	20000068 	.word	0x20000068
+ 80006e8:	080006f1 	.word	0x080006f1
+ 80006ec:	08000665 	.word	0x08000665
 
-080003b0 <st_Admin_GetUserPassword>:
+080006f0 <st_Admin_GetUserPassword>:
 * @brief		  :   Function to get the user input for the password.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_GetUserPassword(void)
 {
- 80003b0:	b580      	push	{r7, lr}
- 80003b2:	af00      	add	r7, sp, #0
+ 80006f0:	b580      	push	{r7, lr}
+ 80006f2:	af00      	add	r7, sp, #0
     LCD_Cursor_XY(LCD_SECOND_LINE, 9 + userInputCount);
- 80003b4:	4b1a      	ldr	r3, [pc, #104]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 80003b6:	781b      	ldrb	r3, [r3, #0]
- 80003b8:	3309      	adds	r3, #9
- 80003ba:	b2db      	uxtb	r3, r3
- 80003bc:	4619      	mov	r1, r3
- 80003be:	2001      	movs	r0, #1
- 80003c0:	f000 fbb4 	bl	8000b2c <LCD_Cursor_XY>
+ 80006f4:	4b1a      	ldr	r3, [pc, #104]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 80006f6:	781b      	ldrb	r3, [r3, #0]
+ 80006f8:	3309      	adds	r3, #9
+ 80006fa:	b2db      	uxtb	r3, r3
+ 80006fc:	4619      	mov	r1, r3
+ 80006fe:	2001      	movs	r0, #1
+ 8000700:	f000 fca0 	bl	8001044 <LCD_Cursor_XY>
     
     pressedKey = Keypad_Get_Char();
- 80003c4:	f000 f964 	bl	8000690 <Keypad_Get_Char>
- 80003c8:	4603      	mov	r3, r0
- 80003ca:	461a      	mov	r2, r3
- 80003cc:	4b15      	ldr	r3, [pc, #84]	; (8000424 <st_Admin_GetUserPassword+0x74>)
- 80003ce:	701a      	strb	r2, [r3, #0]
+ 8000704:	f000 fa50 	bl	8000ba8 <Keypad_Get_Char>
+ 8000708:	4603      	mov	r3, r0
+ 800070a:	461a      	mov	r2, r3
+ 800070c:	4b15      	ldr	r3, [pc, #84]	; (8000764 <st_Admin_GetUserPassword+0x74>)
+ 800070e:	701a      	strb	r2, [r3, #0]
 
     /*Set the next state*/
     if(pressedKey != NULL_CHAR)
- 80003d0:	4b14      	ldr	r3, [pc, #80]	; (8000424 <st_Admin_GetUserPassword+0x74>)
- 80003d2:	781b      	ldrb	r3, [r3, #0]
- 80003d4:	2b4e      	cmp	r3, #78	; 0x4e
- 80003d6:	d00d      	beq.n	80003f4 <st_Admin_GetUserPassword+0x44>
+ 8000710:	4b14      	ldr	r3, [pc, #80]	; (8000764 <st_Admin_GetUserPassword+0x74>)
+ 8000712:	781b      	ldrb	r3, [r3, #0]
+ 8000714:	2b4e      	cmp	r3, #78	; 0x4e
+ 8000716:	d00d      	beq.n	8000734 <st_Admin_GetUserPassword+0x44>
     {   
         LCD_Send_Char('*');
- 80003d8:	202a      	movs	r0, #42	; 0x2a
- 80003da:	f000 fb1b 	bl	8000a14 <LCD_Send_Char>
+ 8000718:	202a      	movs	r0, #42	; 0x2a
+ 800071a:	f000 fc07 	bl	8000f2c <LCD_Send_Char>
         Glob_passwordinput[userInputCount++] = pressedKey;
- 80003de:	4b10      	ldr	r3, [pc, #64]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 80003e0:	781b      	ldrb	r3, [r3, #0]
- 80003e2:	1c5a      	adds	r2, r3, #1
- 80003e4:	b2d1      	uxtb	r1, r2
- 80003e6:	4a0e      	ldr	r2, [pc, #56]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 80003e8:	7011      	strb	r1, [r2, #0]
- 80003ea:	461a      	mov	r2, r3
- 80003ec:	4b0d      	ldr	r3, [pc, #52]	; (8000424 <st_Admin_GetUserPassword+0x74>)
- 80003ee:	7819      	ldrb	r1, [r3, #0]
- 80003f0:	4b0d      	ldr	r3, [pc, #52]	; (8000428 <st_Admin_GetUserPassword+0x78>)
- 80003f2:	5499      	strb	r1, [r3, r2]
+ 800071e:	4b10      	ldr	r3, [pc, #64]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 8000720:	781b      	ldrb	r3, [r3, #0]
+ 8000722:	1c5a      	adds	r2, r3, #1
+ 8000724:	b2d1      	uxtb	r1, r2
+ 8000726:	4a0e      	ldr	r2, [pc, #56]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 8000728:	7011      	strb	r1, [r2, #0]
+ 800072a:	461a      	mov	r2, r3
+ 800072c:	4b0d      	ldr	r3, [pc, #52]	; (8000764 <st_Admin_GetUserPassword+0x74>)
+ 800072e:	7819      	ldrb	r1, [r3, #0]
+ 8000730:	4b0d      	ldr	r3, [pc, #52]	; (8000768 <st_Admin_GetUserPassword+0x78>)
+ 8000732:	5499      	strb	r1, [r3, r2]
     }else{
         
     }
 
     if(userInputCount >= ADMIN_PASSWORD_SIZE)
- 80003f4:	4b0a      	ldr	r3, [pc, #40]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 80003f6:	781b      	ldrb	r3, [r3, #0]
- 80003f8:	2b03      	cmp	r3, #3
- 80003fa:	d90c      	bls.n	8000416 <st_Admin_GetUserPassword+0x66>
+ 8000734:	4b0a      	ldr	r3, [pc, #40]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 8000736:	781b      	ldrb	r3, [r3, #0]
+ 8000738:	2b03      	cmp	r3, #3
+ 800073a:	d90c      	bls.n	8000756 <st_Admin_GetUserPassword+0x66>
     {
         Glob_passwordinput[userInputCount] = '\0';
- 80003fc:	4b08      	ldr	r3, [pc, #32]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 80003fe:	781b      	ldrb	r3, [r3, #0]
- 8000400:	461a      	mov	r2, r3
- 8000402:	4b09      	ldr	r3, [pc, #36]	; (8000428 <st_Admin_GetUserPassword+0x78>)
- 8000404:	2100      	movs	r1, #0
- 8000406:	5499      	strb	r1, [r3, r2]
+ 800073c:	4b08      	ldr	r3, [pc, #32]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 800073e:	781b      	ldrb	r3, [r3, #0]
+ 8000740:	461a      	mov	r2, r3
+ 8000742:	4b09      	ldr	r3, [pc, #36]	; (8000768 <st_Admin_GetUserPassword+0x78>)
+ 8000744:	2100      	movs	r1, #0
+ 8000746:	5499      	strb	r1, [r3, r2]
         userInputCount = 0;
- 8000408:	4b05      	ldr	r3, [pc, #20]	; (8000420 <st_Admin_GetUserPassword+0x70>)
- 800040a:	2200      	movs	r2, #0
- 800040c:	701a      	strb	r2, [r3, #0]
+ 8000748:	4b05      	ldr	r3, [pc, #20]	; (8000760 <st_Admin_GetUserPassword+0x70>)
+ 800074a:	2200      	movs	r2, #0
+ 800074c:	701a      	strb	r2, [r3, #0]
 
         /*Set next state*/
         Admin_Dashboard_State = st_Admin_CheckLoginInfo;
- 800040e:	4b07      	ldr	r3, [pc, #28]	; (800042c <st_Admin_GetUserPassword+0x7c>)
- 8000410:	4a07      	ldr	r2, [pc, #28]	; (8000430 <st_Admin_GetUserPassword+0x80>)
- 8000412:	601a      	str	r2, [r3, #0]
+ 800074e:	4b07      	ldr	r3, [pc, #28]	; (800076c <st_Admin_GetUserPassword+0x7c>)
+ 8000750:	4a07      	ldr	r2, [pc, #28]	; (8000770 <st_Admin_GetUserPassword+0x80>)
+ 8000752:	601a      	str	r2, [r3, #0]
     }else{
         /*Stay in the same state*/
         Admin_Dashboard_State = st_Admin_GetUserPassword;
     }
 }
- 8000414:	e002      	b.n	800041c <st_Admin_GetUserPassword+0x6c>
+ 8000754:	e002      	b.n	800075c <st_Admin_GetUserPassword+0x6c>
         Admin_Dashboard_State = st_Admin_GetUserPassword;
- 8000416:	4b05      	ldr	r3, [pc, #20]	; (800042c <st_Admin_GetUserPassword+0x7c>)
- 8000418:	4a06      	ldr	r2, [pc, #24]	; (8000434 <st_Admin_GetUserPassword+0x84>)
- 800041a:	601a      	str	r2, [r3, #0]
+ 8000756:	4b05      	ldr	r3, [pc, #20]	; (800076c <st_Admin_GetUserPassword+0x7c>)
+ 8000758:	4a06      	ldr	r2, [pc, #24]	; (8000774 <st_Admin_GetUserPassword+0x84>)
+ 800075a:	601a      	str	r2, [r3, #0]
 }
- 800041c:	bf00      	nop
- 800041e:	bd80      	pop	{r7, pc}
- 8000420:	20000035 	.word	0x20000035
- 8000424:	20000034 	.word	0x20000034
- 8000428:	20000040 	.word	0x20000040
- 800042c:	20000048 	.word	0x20000048
- 8000430:	08000439 	.word	0x08000439
- 8000434:	080003b1 	.word	0x080003b1
+ 800075c:	bf00      	nop
+ 800075e:	bd80      	pop	{r7, pc}
+ 8000760:	20000035 	.word	0x20000035
+ 8000764:	20000034 	.word	0x20000034
+ 8000768:	20000040 	.word	0x20000040
+ 800076c:	20000068 	.word	0x20000068
+ 8000770:	08000779 	.word	0x08000779
+ 8000774:	080006f1 	.word	0x080006f1
 
-08000438 <st_Admin_CheckLoginInfo>:
+08000778 <st_Admin_CheckLoginInfo>:
 * @brief		  :   Function to check if the given login info is valid or not.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_CheckLoginInfo(void)
 {
- 8000438:	b580      	push	{r7, lr}
- 800043a:	b082      	sub	sp, #8
- 800043c:	af00      	add	r7, sp, #0
+ 8000778:	b580      	push	{r7, lr}
+ 800077a:	b082      	sub	sp, #8
+ 800077c:	af00      	add	r7, sp, #0
   uint8 validInfo = INVALID_LOGIN_INFO;
- 800043e:	2300      	movs	r3, #0
- 8000440:	71fb      	strb	r3, [r7, #7]
+ 800077e:	2300      	movs	r3, #0
+ 8000780:	71fb      	strb	r3, [r7, #7]
 
   uint8 i;
   for(i = 0; i < NUMBER_OF_ADMINS; i++)
- 8000442:	2300      	movs	r3, #0
- 8000444:	71bb      	strb	r3, [r7, #6]
- 8000446:	e022      	b.n	800048e <st_Admin_CheckLoginInfo+0x56>
+ 8000782:	2300      	movs	r3, #0
+ 8000784:	71bb      	strb	r3, [r7, #6]
+ 8000786:	e022      	b.n	80007ce <st_Admin_CheckLoginInfo+0x56>
   {
      if(!strcmp((const sint8 *)Glob_adminsList[i].adminUserID, (const sint8 *)Glob_userIDinput) && 
- 8000448:	79ba      	ldrb	r2, [r7, #6]
- 800044a:	4613      	mov	r3, r2
- 800044c:	009b      	lsls	r3, r3, #2
- 800044e:	4413      	add	r3, r2
- 8000450:	005b      	lsls	r3, r3, #1
- 8000452:	4a21      	ldr	r2, [pc, #132]	; (80004d8 <st_Admin_CheckLoginInfo+0xa0>)
- 8000454:	4413      	add	r3, r2
- 8000456:	4921      	ldr	r1, [pc, #132]	; (80004dc <st_Admin_CheckLoginInfo+0xa4>)
- 8000458:	4618      	mov	r0, r3
- 800045a:	f7ff fe89 	bl	8000170 <strcmp>
- 800045e:	4603      	mov	r3, r0
- 8000460:	2b00      	cmp	r3, #0
- 8000462:	d111      	bne.n	8000488 <st_Admin_CheckLoginInfo+0x50>
+ 8000788:	79ba      	ldrb	r2, [r7, #6]
+ 800078a:	4613      	mov	r3, r2
+ 800078c:	009b      	lsls	r3, r3, #2
+ 800078e:	4413      	add	r3, r2
+ 8000790:	005b      	lsls	r3, r3, #1
+ 8000792:	4a21      	ldr	r2, [pc, #132]	; (8000818 <st_Admin_CheckLoginInfo+0xa0>)
+ 8000794:	4413      	add	r3, r2
+ 8000796:	4921      	ldr	r1, [pc, #132]	; (800081c <st_Admin_CheckLoginInfo+0xa4>)
+ 8000798:	4618      	mov	r0, r3
+ 800079a:	f7ff fce9 	bl	8000170 <strcmp>
+ 800079e:	4603      	mov	r3, r0
+ 80007a0:	2b00      	cmp	r3, #0
+ 80007a2:	d111      	bne.n	80007c8 <st_Admin_CheckLoginInfo+0x50>
         !strcmp((const sint8 *)Glob_adminsList[i].adminPassword, (const sint8 *)Glob_passwordinput)) 
- 8000464:	79ba      	ldrb	r2, [r7, #6]
- 8000466:	4613      	mov	r3, r2
- 8000468:	009b      	lsls	r3, r3, #2
- 800046a:	4413      	add	r3, r2
- 800046c:	005b      	lsls	r3, r3, #1
- 800046e:	4a1a      	ldr	r2, [pc, #104]	; (80004d8 <st_Admin_CheckLoginInfo+0xa0>)
- 8000470:	4413      	add	r3, r2
- 8000472:	3305      	adds	r3, #5
- 8000474:	491a      	ldr	r1, [pc, #104]	; (80004e0 <st_Admin_CheckLoginInfo+0xa8>)
- 8000476:	4618      	mov	r0, r3
- 8000478:	f7ff fe7a 	bl	8000170 <strcmp>
- 800047c:	4603      	mov	r3, r0
+ 80007a4:	79ba      	ldrb	r2, [r7, #6]
+ 80007a6:	4613      	mov	r3, r2
+ 80007a8:	009b      	lsls	r3, r3, #2
+ 80007aa:	4413      	add	r3, r2
+ 80007ac:	005b      	lsls	r3, r3, #1
+ 80007ae:	4a1a      	ldr	r2, [pc, #104]	; (8000818 <st_Admin_CheckLoginInfo+0xa0>)
+ 80007b0:	4413      	add	r3, r2
+ 80007b2:	3305      	adds	r3, #5
+ 80007b4:	491a      	ldr	r1, [pc, #104]	; (8000820 <st_Admin_CheckLoginInfo+0xa8>)
+ 80007b6:	4618      	mov	r0, r3
+ 80007b8:	f7ff fcda 	bl	8000170 <strcmp>
+ 80007bc:	4603      	mov	r3, r0
      if(!strcmp((const sint8 *)Glob_adminsList[i].adminUserID, (const sint8 *)Glob_userIDinput) && 
- 800047e:	2b00      	cmp	r3, #0
- 8000480:	d102      	bne.n	8000488 <st_Admin_CheckLoginInfo+0x50>
+ 80007be:	2b00      	cmp	r3, #0
+ 80007c0:	d102      	bne.n	80007c8 <st_Admin_CheckLoginInfo+0x50>
      {
         validInfo = VALID_LOGIN_INFO;
- 8000482:	2301      	movs	r3, #1
- 8000484:	71fb      	strb	r3, [r7, #7]
+ 80007c2:	2301      	movs	r3, #1
+ 80007c4:	71fb      	strb	r3, [r7, #7]
         break;
- 8000486:	e005      	b.n	8000494 <st_Admin_CheckLoginInfo+0x5c>
+ 80007c6:	e005      	b.n	80007d4 <st_Admin_CheckLoginInfo+0x5c>
   for(i = 0; i < NUMBER_OF_ADMINS; i++)
- 8000488:	79bb      	ldrb	r3, [r7, #6]
- 800048a:	3301      	adds	r3, #1
- 800048c:	71bb      	strb	r3, [r7, #6]
- 800048e:	79bb      	ldrb	r3, [r7, #6]
- 8000490:	2b01      	cmp	r3, #1
- 8000492:	d9d9      	bls.n	8000448 <st_Admin_CheckLoginInfo+0x10>
+ 80007c8:	79bb      	ldrb	r3, [r7, #6]
+ 80007ca:	3301      	adds	r3, #1
+ 80007cc:	71bb      	strb	r3, [r7, #6]
+ 80007ce:	79bb      	ldrb	r3, [r7, #6]
+ 80007d0:	2b01      	cmp	r3, #1
+ 80007d2:	d9d9      	bls.n	8000788 <st_Admin_CheckLoginInfo+0x10>
      }else{
 
      }
   }
 
   if(validInfo == VALID_LOGIN_INFO)
- 8000494:	79fb      	ldrb	r3, [r7, #7]
- 8000496:	2b01      	cmp	r3, #1
- 8000498:	d106      	bne.n	80004a8 <st_Admin_CheckLoginInfo+0x70>
+ 80007d4:	79fb      	ldrb	r3, [r7, #7]
+ 80007d6:	2b01      	cmp	r3, #1
+ 80007d8:	d106      	bne.n	80007e8 <st_Admin_CheckLoginInfo+0x70>
   {
     loginAttemptsCounter = 1;
- 800049a:	4b12      	ldr	r3, [pc, #72]	; (80004e4 <st_Admin_CheckLoginInfo+0xac>)
- 800049c:	2201      	movs	r2, #1
- 800049e:	701a      	strb	r2, [r3, #0]
+ 80007da:	4b12      	ldr	r3, [pc, #72]	; (8000824 <st_Admin_CheckLoginInfo+0xac>)
+ 80007dc:	2201      	movs	r2, #1
+ 80007de:	701a      	strb	r2, [r3, #0]
 
     /*Set next state*/
     Admin_Dashboard_State = st_Admin_ShowAdminOptions;
- 80004a0:	4b11      	ldr	r3, [pc, #68]	; (80004e8 <st_Admin_CheckLoginInfo+0xb0>)
- 80004a2:	4a12      	ldr	r2, [pc, #72]	; (80004ec <st_Admin_CheckLoginInfo+0xb4>)
- 80004a4:	601a      	str	r2, [r3, #0]
+ 80007e0:	4b11      	ldr	r3, [pc, #68]	; (8000828 <st_Admin_CheckLoginInfo+0xb0>)
+ 80007e2:	4a12      	ldr	r2, [pc, #72]	; (800082c <st_Admin_CheckLoginInfo+0xb4>)
+ 80007e4:	601a      	str	r2, [r3, #0]
 
         Admin_Dashboard_State = st_Admin_InitialMessage;
     }
   }
 
 }
- 80004a6:	e013      	b.n	80004d0 <st_Admin_CheckLoginInfo+0x98>
+ 80007e6:	e013      	b.n	8000810 <st_Admin_CheckLoginInfo+0x98>
     if(loginAttemptsCounter < ADMIN_MAX_LOGIN_ATTEMPTS)
- 80004a8:	4b0e      	ldr	r3, [pc, #56]	; (80004e4 <st_Admin_CheckLoginInfo+0xac>)
- 80004aa:	781b      	ldrb	r3, [r3, #0]
- 80004ac:	2b02      	cmp	r3, #2
- 80004ae:	d809      	bhi.n	80004c4 <st_Admin_CheckLoginInfo+0x8c>
+ 80007e8:	4b0e      	ldr	r3, [pc, #56]	; (8000824 <st_Admin_CheckLoginInfo+0xac>)
+ 80007ea:	781b      	ldrb	r3, [r3, #0]
+ 80007ec:	2b02      	cmp	r3, #2
+ 80007ee:	d809      	bhi.n	8000804 <st_Admin_CheckLoginInfo+0x8c>
         loginAttemptsCounter++;
- 80004b0:	4b0c      	ldr	r3, [pc, #48]	; (80004e4 <st_Admin_CheckLoginInfo+0xac>)
- 80004b2:	781b      	ldrb	r3, [r3, #0]
- 80004b4:	3301      	adds	r3, #1
- 80004b6:	b2da      	uxtb	r2, r3
- 80004b8:	4b0a      	ldr	r3, [pc, #40]	; (80004e4 <st_Admin_CheckLoginInfo+0xac>)
- 80004ba:	701a      	strb	r2, [r3, #0]
+ 80007f0:	4b0c      	ldr	r3, [pc, #48]	; (8000824 <st_Admin_CheckLoginInfo+0xac>)
+ 80007f2:	781b      	ldrb	r3, [r3, #0]
+ 80007f4:	3301      	adds	r3, #1
+ 80007f6:	b2da      	uxtb	r2, r3
+ 80007f8:	4b0a      	ldr	r3, [pc, #40]	; (8000824 <st_Admin_CheckLoginInfo+0xac>)
+ 80007fa:	701a      	strb	r2, [r3, #0]
         Admin_Dashboard_State = st_Admin_LoginMessage;
- 80004bc:	4b0a      	ldr	r3, [pc, #40]	; (80004e8 <st_Admin_CheckLoginInfo+0xb0>)
- 80004be:	4a0c      	ldr	r2, [pc, #48]	; (80004f0 <st_Admin_CheckLoginInfo+0xb8>)
- 80004c0:	601a      	str	r2, [r3, #0]
+ 80007fc:	4b0a      	ldr	r3, [pc, #40]	; (8000828 <st_Admin_CheckLoginInfo+0xb0>)
+ 80007fe:	4a0c      	ldr	r2, [pc, #48]	; (8000830 <st_Admin_CheckLoginInfo+0xb8>)
+ 8000800:	601a      	str	r2, [r3, #0]
 }
- 80004c2:	e005      	b.n	80004d0 <st_Admin_CheckLoginInfo+0x98>
+ 8000802:	e005      	b.n	8000810 <st_Admin_CheckLoginInfo+0x98>
         loginAttemptsCounter = 1;
- 80004c4:	4b07      	ldr	r3, [pc, #28]	; (80004e4 <st_Admin_CheckLoginInfo+0xac>)
- 80004c6:	2201      	movs	r2, #1
- 80004c8:	701a      	strb	r2, [r3, #0]
+ 8000804:	4b07      	ldr	r3, [pc, #28]	; (8000824 <st_Admin_CheckLoginInfo+0xac>)
+ 8000806:	2201      	movs	r2, #1
+ 8000808:	701a      	strb	r2, [r3, #0]
         Admin_Dashboard_State = st_Admin_InitialMessage;
- 80004ca:	4b07      	ldr	r3, [pc, #28]	; (80004e8 <st_Admin_CheckLoginInfo+0xb0>)
- 80004cc:	4a09      	ldr	r2, [pc, #36]	; (80004f4 <st_Admin_CheckLoginInfo+0xbc>)
- 80004ce:	601a      	str	r2, [r3, #0]
+ 800080a:	4b07      	ldr	r3, [pc, #28]	; (8000828 <st_Admin_CheckLoginInfo+0xb0>)
+ 800080c:	4a09      	ldr	r2, [pc, #36]	; (8000834 <st_Admin_CheckLoginInfo+0xbc>)
+ 800080e:	601a      	str	r2, [r3, #0]
 }
- 80004d0:	bf00      	nop
- 80004d2:	3708      	adds	r7, #8
- 80004d4:	46bd      	mov	sp, r7
- 80004d6:	bd80      	pop	{r7, pc}
- 80004d8:	20000000 	.word	0x20000000
- 80004dc:	20000038 	.word	0x20000038
- 80004e0:	20000040 	.word	0x20000040
- 80004e4:	20000014 	.word	0x20000014
- 80004e8:	20000048 	.word	0x20000048
- 80004ec:	080004f9 	.word	0x080004f9
- 80004f0:	080002d1 	.word	0x080002d1
- 80004f4:	08000255 	.word	0x08000255
+ 8000810:	bf00      	nop
+ 8000812:	3708      	adds	r7, #8
+ 8000814:	46bd      	mov	sp, r7
+ 8000816:	bd80      	pop	{r7, pc}
+ 8000818:	20000000 	.word	0x20000000
+ 800081c:	20000038 	.word	0x20000038
+ 8000820:	20000040 	.word	0x20000040
+ 8000824:	20000014 	.word	0x20000014
+ 8000828:	20000068 	.word	0x20000068
+ 800082c:	08000839 	.word	0x08000839
+ 8000830:	08000611 	.word	0x08000611
+ 8000834:	08000595 	.word	0x08000595
 
-080004f8 <st_Admin_ShowAdminOptions>:
+08000838 <st_Admin_ShowAdminOptions>:
 * @brief		  :   Function to get display the available admin operations on the LCD screen.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_ShowAdminOptions(void)
 {
- 80004f8:	b580      	push	{r7, lr}
- 80004fa:	af00      	add	r7, sp, #0
+ 8000838:	b580      	push	{r7, lr}
+ 800083a:	af00      	add	r7, sp, #0
     LCD_Clear_Screen();
- 80004fc:	f000 fb5e 	bl	8000bbc <LCD_Clear_Screen>
+ 800083c:	f000 fc4a 	bl	80010d4 <LCD_Clear_Screen>
 
     LCD_Send_String(stringfy("1.Add new ID"));
- 8000500:	480e      	ldr	r0, [pc, #56]	; (800053c <st_Admin_ShowAdminOptions+0x44>)
- 8000502:	f000 faff 	bl	8000b04 <LCD_Send_String>
+ 8000840:	480e      	ldr	r0, [pc, #56]	; (800087c <st_Admin_ShowAdminOptions+0x44>)
+ 8000842:	f000 fbeb 	bl	800101c <LCD_Send_String>
     LCD_Cursor_XY(LCD_SECOND_LINE, 0);
- 8000506:	2100      	movs	r1, #0
- 8000508:	2001      	movs	r0, #1
- 800050a:	f000 fb0f 	bl	8000b2c <LCD_Cursor_XY>
+ 8000846:	2100      	movs	r1, #0
+ 8000848:	2001      	movs	r0, #1
+ 800084a:	f000 fbfb 	bl	8001044 <LCD_Cursor_XY>
     LCD_Send_String(stringfy("2.Remove an ID"));
- 800050e:	480c      	ldr	r0, [pc, #48]	; (8000540 <st_Admin_ShowAdminOptions+0x48>)
- 8000510:	f000 faf8 	bl	8000b04 <LCD_Send_String>
+ 800084e:	480c      	ldr	r0, [pc, #48]	; (8000880 <st_Admin_ShowAdminOptions+0x48>)
+ 8000850:	f000 fbe4 	bl	800101c <LCD_Send_String>
     LCD_Cursor_XY(LCD_THIRD_LINE, 0);
- 8000514:	2100      	movs	r1, #0
- 8000516:	2002      	movs	r0, #2
- 8000518:	f000 fb08 	bl	8000b2c <LCD_Cursor_XY>
+ 8000854:	2100      	movs	r1, #0
+ 8000856:	2002      	movs	r0, #2
+ 8000858:	f000 fbf4 	bl	8001044 <LCD_Cursor_XY>
     LCD_Send_String(stringfy("3.Save on EEPROM"));
- 800051c:	4809      	ldr	r0, [pc, #36]	; (8000544 <st_Admin_ShowAdminOptions+0x4c>)
- 800051e:	f000 faf1 	bl	8000b04 <LCD_Send_String>
+ 800085c:	4809      	ldr	r0, [pc, #36]	; (8000884 <st_Admin_ShowAdminOptions+0x4c>)
+ 800085e:	f000 fbdd 	bl	800101c <LCD_Send_String>
     LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
- 8000522:	2100      	movs	r1, #0
- 8000524:	2003      	movs	r0, #3
- 8000526:	f000 fb01 	bl	8000b2c <LCD_Cursor_XY>
-    LCD_Send_String(stringfy("'*' to logout: "));
- 800052a:	4807      	ldr	r0, [pc, #28]	; (8000548 <st_Admin_ShowAdminOptions+0x50>)
- 800052c:	f000 faea 	bl	8000b04 <LCD_Send_String>
+ 8000862:	2100      	movs	r1, #0
+ 8000864:	2003      	movs	r0, #3
+ 8000866:	f000 fbed 	bl	8001044 <LCD_Cursor_XY>
+    LCD_Send_String(stringfy("4.More options"));
+ 800086a:	4807      	ldr	r0, [pc, #28]	; (8000888 <st_Admin_ShowAdminOptions+0x50>)
+ 800086c:	f000 fbd6 	bl	800101c <LCD_Send_String>
 
     Admin_Dashboard_State = st_Admin_GetAdminOption;
- 8000530:	4b06      	ldr	r3, [pc, #24]	; (800054c <st_Admin_ShowAdminOptions+0x54>)
- 8000532:	4a07      	ldr	r2, [pc, #28]	; (8000550 <st_Admin_ShowAdminOptions+0x58>)
- 8000534:	601a      	str	r2, [r3, #0]
+ 8000870:	4b06      	ldr	r3, [pc, #24]	; (800088c <st_Admin_ShowAdminOptions+0x54>)
+ 8000872:	4a07      	ldr	r2, [pc, #28]	; (8000890 <st_Admin_ShowAdminOptions+0x58>)
+ 8000874:	601a      	str	r2, [r3, #0]
 }
- 8000536:	bf00      	nop
- 8000538:	bd80      	pop	{r7, pc}
- 800053a:	bf00      	nop
- 800053c:	08000db0 	.word	0x08000db0
- 8000540:	08000dc0 	.word	0x08000dc0
- 8000544:	08000dd0 	.word	0x08000dd0
- 8000548:	08000de4 	.word	0x08000de4
- 800054c:	20000048 	.word	0x20000048
- 8000550:	08000555 	.word	0x08000555
+ 8000876:	bf00      	nop
+ 8000878:	bd80      	pop	{r7, pc}
+ 800087a:	bf00      	nop
+ 800087c:	08001388 	.word	0x08001388
+ 8000880:	08001398 	.word	0x08001398
+ 8000884:	080013a8 	.word	0x080013a8
+ 8000888:	080013bc 	.word	0x080013bc
+ 800088c:	20000068 	.word	0x20000068
+ 8000890:	08000895 	.word	0x08000895
 
-08000554 <st_Admin_GetAdminOption>:
+08000894 <st_Admin_GetAdminOption>:
 * @brief		  :   Function to get the required action to be done from the user.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_GetAdminOption(void)
 {
- 8000554:	b580      	push	{r7, lr}
- 8000556:	af00      	add	r7, sp, #0
+ 8000894:	b580      	push	{r7, lr}
+ 8000896:	af00      	add	r7, sp, #0
   pressedKey = Keypad_Get_Char();
- 8000558:	f000 f89a 	bl	8000690 <Keypad_Get_Char>
- 800055c:	4603      	mov	r3, r0
- 800055e:	461a      	mov	r2, r3
- 8000560:	4b18      	ldr	r3, [pc, #96]	; (80005c4 <st_Admin_GetAdminOption+0x70>)
- 8000562:	701a      	strb	r2, [r3, #0]
+ 8000898:	f000 f986 	bl	8000ba8 <Keypad_Get_Char>
+ 800089c:	4603      	mov	r3, r0
+ 800089e:	461a      	mov	r2, r3
+ 80008a0:	4b21      	ldr	r3, [pc, #132]	; (8000928 <st_Admin_GetAdminOption+0x94>)
+ 80008a2:	701a      	strb	r2, [r3, #0]
 
   switch (pressedKey)
- 8000564:	4b17      	ldr	r3, [pc, #92]	; (80005c4 <st_Admin_GetAdminOption+0x70>)
- 8000566:	781b      	ldrb	r3, [r3, #0]
- 8000568:	3b2a      	subs	r3, #42	; 0x2a
- 800056a:	2b09      	cmp	r3, #9
- 800056c:	d826      	bhi.n	80005bc <st_Admin_GetAdminOption+0x68>
- 800056e:	a201      	add	r2, pc, #4	; (adr r2, 8000574 <st_Admin_GetAdminOption+0x20>)
- 8000570:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000574:	080005b5 	.word	0x080005b5
- 8000578:	080005bd 	.word	0x080005bd
- 800057c:	080005bd 	.word	0x080005bd
- 8000580:	080005bd 	.word	0x080005bd
- 8000584:	080005bd 	.word	0x080005bd
- 8000588:	080005bd 	.word	0x080005bd
- 800058c:	080005bd 	.word	0x080005bd
- 8000590:	0800059d 	.word	0x0800059d
- 8000594:	080005a5 	.word	0x080005a5
- 8000598:	080005ad 	.word	0x080005ad
+ 80008a4:	4b20      	ldr	r3, [pc, #128]	; (8000928 <st_Admin_GetAdminOption+0x94>)
+ 80008a6:	781b      	ldrb	r3, [r3, #0]
+ 80008a8:	3b2a      	subs	r3, #42	; 0x2a
+ 80008aa:	2b0b      	cmp	r3, #11
+ 80008ac:	d834      	bhi.n	8000918 <st_Admin_GetAdminOption+0x84>
+ 80008ae:	a201      	add	r2, pc, #4	; (adr r2, 80008b4 <st_Admin_GetAdminOption+0x20>)
+ 80008b0:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80008b4:	08000911 	.word	0x08000911
+ 80008b8:	08000919 	.word	0x08000919
+ 80008bc:	08000919 	.word	0x08000919
+ 80008c0:	08000919 	.word	0x08000919
+ 80008c4:	08000919 	.word	0x08000919
+ 80008c8:	08000919 	.word	0x08000919
+ 80008cc:	08000919 	.word	0x08000919
+ 80008d0:	080008e5 	.word	0x080008e5
+ 80008d4:	080008ed 	.word	0x080008ed
+ 80008d8:	080008f5 	.word	0x080008f5
+ 80008dc:	080008fd 	.word	0x080008fd
+ 80008e0:	08000905 	.word	0x08000905
   {
   case ADMIN_ADD_ID:
-    Admin_Dashboard_State = st_Admin_AddNewID;
- 800059c:	4b0a      	ldr	r3, [pc, #40]	; (80005c8 <st_Admin_GetAdminOption+0x74>)
- 800059e:	4a0b      	ldr	r2, [pc, #44]	; (80005cc <st_Admin_GetAdminOption+0x78>)
- 80005a0:	601a      	str	r2, [r3, #0]
+    Admin_Dashboard_State = st_Admin_DisplayAddNewIDMessage;
+ 80008e4:	4b11      	ldr	r3, [pc, #68]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 80008e6:	4a12      	ldr	r2, [pc, #72]	; (8000930 <st_Admin_GetAdminOption+0x9c>)
+ 80008e8:	601a      	str	r2, [r3, #0]
     break;
- 80005a2:	e00c      	b.n	80005be <st_Admin_GetAdminOption+0x6a>
+ 80008ea:	e016      	b.n	800091a <st_Admin_GetAdminOption+0x86>
   case ADMIN_REMOVE_ID:
-    Admin_Dashboard_State = st_Admin_RemoveID;
- 80005a4:	4b08      	ldr	r3, [pc, #32]	; (80005c8 <st_Admin_GetAdminOption+0x74>)
- 80005a6:	4a0a      	ldr	r2, [pc, #40]	; (80005d0 <st_Admin_GetAdminOption+0x7c>)
- 80005a8:	601a      	str	r2, [r3, #0]
+    Admin_Dashboard_State = st_Admin_DisplayRemoveIDMessage;
+ 80008ec:	4b0f      	ldr	r3, [pc, #60]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 80008ee:	4a11      	ldr	r2, [pc, #68]	; (8000934 <st_Admin_GetAdminOption+0xa0>)
+ 80008f0:	601a      	str	r2, [r3, #0]
     break;
- 80005aa:	e008      	b.n	80005be <st_Admin_GetAdminOption+0x6a>
+ 80008f2:	e012      	b.n	800091a <st_Admin_GetAdminOption+0x86>
   case ADMIN_SAVE_ID:
     Admin_Dashboard_State = st_Admin_SaveOnEEPROM;
- 80005ac:	4b06      	ldr	r3, [pc, #24]	; (80005c8 <st_Admin_GetAdminOption+0x74>)
- 80005ae:	4a09      	ldr	r2, [pc, #36]	; (80005d4 <st_Admin_GetAdminOption+0x80>)
- 80005b0:	601a      	str	r2, [r3, #0]
+ 80008f4:	4b0d      	ldr	r3, [pc, #52]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 80008f6:	4a10      	ldr	r2, [pc, #64]	; (8000938 <st_Admin_GetAdminOption+0xa4>)
+ 80008f8:	601a      	str	r2, [r3, #0]
     break;
- 80005b2:	e004      	b.n	80005be <st_Admin_GetAdminOption+0x6a>
+ 80008fa:	e00e      	b.n	800091a <st_Admin_GetAdminOption+0x86>
+  case ADMIN_MORE_OPTIONS:
+    Admin_Dashboard_State = st_Admin_MoreOptions;
+ 80008fc:	4b0b      	ldr	r3, [pc, #44]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 80008fe:	4a0f      	ldr	r2, [pc, #60]	; (800093c <st_Admin_GetAdminOption+0xa8>)
+ 8000900:	601a      	str	r2, [r3, #0]
+    break;
+ 8000902:	e00a      	b.n	800091a <st_Admin_GetAdminOption+0x86>
+  case ADMIN_SHOW_IDS_LIST:
+    LCD_Clear_Screen();
+ 8000904:	f000 fbe6 	bl	80010d4 <LCD_Clear_Screen>
+    Admin_Dashboard_State = st_Admin_ShowIDsList;   
+ 8000908:	4b08      	ldr	r3, [pc, #32]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 800090a:	4a0d      	ldr	r2, [pc, #52]	; (8000940 <st_Admin_GetAdminOption+0xac>)
+ 800090c:	601a      	str	r2, [r3, #0]
+    break;
+ 800090e:	e004      	b.n	800091a <st_Admin_GetAdminOption+0x86>
   case ADMIN_LOGOUT:
     Admin_Dashboard_State = st_Admin_InitialMessage;
- 80005b4:	4b04      	ldr	r3, [pc, #16]	; (80005c8 <st_Admin_GetAdminOption+0x74>)
- 80005b6:	4a08      	ldr	r2, [pc, #32]	; (80005d8 <st_Admin_GetAdminOption+0x84>)
- 80005b8:	601a      	str	r2, [r3, #0]
+ 8000910:	4b06      	ldr	r3, [pc, #24]	; (800092c <st_Admin_GetAdminOption+0x98>)
+ 8000912:	4a0c      	ldr	r2, [pc, #48]	; (8000944 <st_Admin_GetAdminOption+0xb0>)
+ 8000914:	601a      	str	r2, [r3, #0]
     break;
- 80005ba:	e000      	b.n	80005be <st_Admin_GetAdminOption+0x6a>
+ 8000916:	e000      	b.n	800091a <st_Admin_GetAdminOption+0x86>
   
   default:
     break;
- 80005bc:	bf00      	nop
+ 8000918:	bf00      	nop
   }
-}
- 80005be:	bf00      	nop
- 80005c0:	bd80      	pop	{r7, pc}
- 80005c2:	bf00      	nop
- 80005c4:	20000034 	.word	0x20000034
- 80005c8:	20000048 	.word	0x20000048
- 80005cc:	080005dd 	.word	0x080005dd
- 80005d0:	080005e9 	.word	0x080005e9
- 80005d4:	080005f5 	.word	0x080005f5
- 80005d8:	08000255 	.word	0x08000255
 
-080005dc <st_Admin_AddNewID>:
+  currentOperation = pressedKey;
+ 800091a:	4b03      	ldr	r3, [pc, #12]	; (8000928 <st_Admin_GetAdminOption+0x94>)
+ 800091c:	781a      	ldrb	r2, [r3, #0]
+ 800091e:	4b0a      	ldr	r3, [pc, #40]	; (8000948 <st_Admin_GetAdminOption+0xb4>)
+ 8000920:	701a      	strb	r2, [r3, #0]
+}
+ 8000922:	bf00      	nop
+ 8000924:	bd80      	pop	{r7, pc}
+ 8000926:	bf00      	nop
+ 8000928:	20000034 	.word	0x20000034
+ 800092c:	20000068 	.word	0x20000068
+ 8000930:	08000299 	.word	0x08000299
+ 8000934:	08000519 	.word	0x08000519
+ 8000938:	08000a85 	.word	0x08000a85
+ 800093c:	08000261 	.word	0x08000261
+ 8000940:	08000a91 	.word	0x08000a91
+ 8000944:	08000595 	.word	0x08000595
+ 8000948:	20000045 	.word	0x20000045
+
+0800094c <st_Admin_AddNewID>:
 * @brief		  :   Function to add a new authorized ID to the garage.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_AddNewID(void)
 {
- 80005dc:	b480      	push	{r7}
- 80005de:	af00      	add	r7, sp, #0
+ 800094c:	b580      	push	{r7, lr}
+ 800094e:	af00      	add	r7, sp, #0
+    LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
+ 8000950:	4b20      	ldr	r3, [pc, #128]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 8000952:	781b      	ldrb	r3, [r3, #0]
+ 8000954:	3309      	adds	r3, #9
+ 8000956:	b2db      	uxtb	r3, r3
+ 8000958:	4619      	mov	r1, r3
+ 800095a:	2000      	movs	r0, #0
+ 800095c:	f000 fb72 	bl	8001044 <LCD_Cursor_XY>
+    
+    pressedKey = Keypad_Get_Char();
+ 8000960:	f000 f922 	bl	8000ba8 <Keypad_Get_Char>
+ 8000964:	4603      	mov	r3, r0
+ 8000966:	461a      	mov	r2, r3
+ 8000968:	4b1b      	ldr	r3, [pc, #108]	; (80009d8 <st_Admin_AddNewID+0x8c>)
+ 800096a:	701a      	strb	r2, [r3, #0]
 
+    if(pressedKey != NULL_CHAR)
+ 800096c:	4b1a      	ldr	r3, [pc, #104]	; (80009d8 <st_Admin_AddNewID+0x8c>)
+ 800096e:	781b      	ldrb	r3, [r3, #0]
+ 8000970:	2b4e      	cmp	r3, #78	; 0x4e
+ 8000972:	d011      	beq.n	8000998 <st_Admin_AddNewID+0x4c>
+    {   
+        LCD_Send_Char(pressedKey);
+ 8000974:	4b18      	ldr	r3, [pc, #96]	; (80009d8 <st_Admin_AddNewID+0x8c>)
+ 8000976:	781b      	ldrb	r3, [r3, #0]
+ 8000978:	4618      	mov	r0, r3
+ 800097a:	f000 fad7 	bl	8000f2c <LCD_Send_Char>
+        Glob_tempDriverIDinput[userInputCount] = pressedKey;
+ 800097e:	4b15      	ldr	r3, [pc, #84]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 8000980:	781b      	ldrb	r3, [r3, #0]
+ 8000982:	461a      	mov	r2, r3
+ 8000984:	4b14      	ldr	r3, [pc, #80]	; (80009d8 <st_Admin_AddNewID+0x8c>)
+ 8000986:	7819      	ldrb	r1, [r3, #0]
+ 8000988:	4b14      	ldr	r3, [pc, #80]	; (80009dc <st_Admin_AddNewID+0x90>)
+ 800098a:	5499      	strb	r1, [r3, r2]
+        userInputCount++;
+ 800098c:	4b11      	ldr	r3, [pc, #68]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 800098e:	781b      	ldrb	r3, [r3, #0]
+ 8000990:	3301      	adds	r3, #1
+ 8000992:	b2da      	uxtb	r2, r3
+ 8000994:	4b0f      	ldr	r3, [pc, #60]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 8000996:	701a      	strb	r2, [r3, #0]
+    }else{
+        
+    }
+
+    if(userInputCount >= AUTHORIZED_ID_SIZE)
+ 8000998:	4b0e      	ldr	r3, [pc, #56]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 800099a:	781b      	ldrb	r3, [r3, #0]
+ 800099c:	2b02      	cmp	r3, #2
+ 800099e:	d914      	bls.n	80009ca <st_Admin_AddNewID+0x7e>
+    {
+        Glob_tempDriverIDinput[userInputCount] = '\0';
+ 80009a0:	4b0c      	ldr	r3, [pc, #48]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 80009a2:	781b      	ldrb	r3, [r3, #0]
+ 80009a4:	461a      	mov	r2, r3
+ 80009a6:	4b0d      	ldr	r3, [pc, #52]	; (80009dc <st_Admin_AddNewID+0x90>)
+ 80009a8:	2100      	movs	r1, #0
+ 80009aa:	5499      	strb	r1, [r3, r2]
+        userInputCount = 0;
+ 80009ac:	4b09      	ldr	r3, [pc, #36]	; (80009d4 <st_Admin_AddNewID+0x88>)
+ 80009ae:	2200      	movs	r2, #0
+ 80009b0:	701a      	strb	r2, [r3, #0]
+
+        /*If there is no registerd IDs in the system no need to check if the ID is repeated*/
+        if(Glob_AuthIDsCount == 0)
+ 80009b2:	4b0b      	ldr	r3, [pc, #44]	; (80009e0 <st_Admin_AddNewID+0x94>)
+ 80009b4:	781b      	ldrb	r3, [r3, #0]
+ 80009b6:	2b00      	cmp	r3, #0
+ 80009b8:	d103      	bne.n	80009c2 <st_Admin_AddNewID+0x76>
+        {
+          /*Set next state*/
+          Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+ 80009ba:	4b0a      	ldr	r3, [pc, #40]	; (80009e4 <st_Admin_AddNewID+0x98>)
+ 80009bc:	4a0a      	ldr	r2, [pc, #40]	; (80009e8 <st_Admin_AddNewID+0x9c>)
+ 80009be:	601a      	str	r2, [r3, #0]
+
+    }else{
+        /*Stay in the same state*/
+        Admin_Dashboard_State = st_Admin_AddNewID;
+    }
 }
- 80005e0:	bf00      	nop
- 80005e2:	46bd      	mov	sp, r7
- 80005e4:	bc80      	pop	{r7}
- 80005e6:	4770      	bx	lr
+ 80009c0:	e006      	b.n	80009d0 <st_Admin_AddNewID+0x84>
+          Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+ 80009c2:	4b08      	ldr	r3, [pc, #32]	; (80009e4 <st_Admin_AddNewID+0x98>)
+ 80009c4:	4a09      	ldr	r2, [pc, #36]	; (80009ec <st_Admin_AddNewID+0xa0>)
+ 80009c6:	601a      	str	r2, [r3, #0]
+}
+ 80009c8:	e002      	b.n	80009d0 <st_Admin_AddNewID+0x84>
+        Admin_Dashboard_State = st_Admin_AddNewID;
+ 80009ca:	4b06      	ldr	r3, [pc, #24]	; (80009e4 <st_Admin_AddNewID+0x98>)
+ 80009cc:	4a08      	ldr	r2, [pc, #32]	; (80009f0 <st_Admin_AddNewID+0xa4>)
+ 80009ce:	601a      	str	r2, [r3, #0]
+}
+ 80009d0:	bf00      	nop
+ 80009d2:	bd80      	pop	{r7, pc}
+ 80009d4:	20000035 	.word	0x20000035
+ 80009d8:	20000034 	.word	0x20000034
+ 80009dc:	20000048 	.word	0x20000048
+ 80009e0:	20000060 	.word	0x20000060
+ 80009e4:	20000068 	.word	0x20000068
+ 80009e8:	080002f1 	.word	0x080002f1
+ 80009ec:	08000445 	.word	0x08000445
+ 80009f0:	0800094d 	.word	0x0800094d
 
-080005e8 <st_Admin_RemoveID>:
+080009f4 <st_Admin_RemoveID>:
 * @brief		  :   Function to remove an existing authorized ID from the garage.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_RemoveID(void)
 {
- 80005e8:	b480      	push	{r7}
- 80005ea:	af00      	add	r7, sp, #0
+ 80009f4:	b580      	push	{r7, lr}
+ 80009f6:	af00      	add	r7, sp, #0
+LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
+ 80009f8:	4b1c      	ldr	r3, [pc, #112]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 80009fa:	781b      	ldrb	r3, [r3, #0]
+ 80009fc:	3309      	adds	r3, #9
+ 80009fe:	b2db      	uxtb	r3, r3
+ 8000a00:	4619      	mov	r1, r3
+ 8000a02:	2000      	movs	r0, #0
+ 8000a04:	f000 fb1e 	bl	8001044 <LCD_Cursor_XY>
+    
+    pressedKey = Keypad_Get_Char();
+ 8000a08:	f000 f8ce 	bl	8000ba8 <Keypad_Get_Char>
+ 8000a0c:	4603      	mov	r3, r0
+ 8000a0e:	461a      	mov	r2, r3
+ 8000a10:	4b17      	ldr	r3, [pc, #92]	; (8000a70 <st_Admin_RemoveID+0x7c>)
+ 8000a12:	701a      	strb	r2, [r3, #0]
 
+    if(pressedKey != NULL_CHAR)
+ 8000a14:	4b16      	ldr	r3, [pc, #88]	; (8000a70 <st_Admin_RemoveID+0x7c>)
+ 8000a16:	781b      	ldrb	r3, [r3, #0]
+ 8000a18:	2b4e      	cmp	r3, #78	; 0x4e
+ 8000a1a:	d011      	beq.n	8000a40 <st_Admin_RemoveID+0x4c>
+    {   
+        LCD_Send_Char(pressedKey);
+ 8000a1c:	4b14      	ldr	r3, [pc, #80]	; (8000a70 <st_Admin_RemoveID+0x7c>)
+ 8000a1e:	781b      	ldrb	r3, [r3, #0]
+ 8000a20:	4618      	mov	r0, r3
+ 8000a22:	f000 fa83 	bl	8000f2c <LCD_Send_Char>
+        Glob_tempDriverIDinput[userInputCount] = pressedKey;
+ 8000a26:	4b11      	ldr	r3, [pc, #68]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a28:	781b      	ldrb	r3, [r3, #0]
+ 8000a2a:	461a      	mov	r2, r3
+ 8000a2c:	4b10      	ldr	r3, [pc, #64]	; (8000a70 <st_Admin_RemoveID+0x7c>)
+ 8000a2e:	7819      	ldrb	r1, [r3, #0]
+ 8000a30:	4b10      	ldr	r3, [pc, #64]	; (8000a74 <st_Admin_RemoveID+0x80>)
+ 8000a32:	5499      	strb	r1, [r3, r2]
+        userInputCount++;
+ 8000a34:	4b0d      	ldr	r3, [pc, #52]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a36:	781b      	ldrb	r3, [r3, #0]
+ 8000a38:	3301      	adds	r3, #1
+ 8000a3a:	b2da      	uxtb	r2, r3
+ 8000a3c:	4b0b      	ldr	r3, [pc, #44]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a3e:	701a      	strb	r2, [r3, #0]
+    }else{
+        
+    }
+
+    if(userInputCount >= AUTHORIZED_ID_SIZE)
+ 8000a40:	4b0a      	ldr	r3, [pc, #40]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a42:	781b      	ldrb	r3, [r3, #0]
+ 8000a44:	2b02      	cmp	r3, #2
+ 8000a46:	d90c      	bls.n	8000a62 <st_Admin_RemoveID+0x6e>
+    {
+        Glob_tempDriverIDinput[userInputCount] = '\0';
+ 8000a48:	4b08      	ldr	r3, [pc, #32]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a4a:	781b      	ldrb	r3, [r3, #0]
+ 8000a4c:	461a      	mov	r2, r3
+ 8000a4e:	4b09      	ldr	r3, [pc, #36]	; (8000a74 <st_Admin_RemoveID+0x80>)
+ 8000a50:	2100      	movs	r1, #0
+ 8000a52:	5499      	strb	r1, [r3, r2]
+        userInputCount = 0;
+ 8000a54:	4b05      	ldr	r3, [pc, #20]	; (8000a6c <st_Admin_RemoveID+0x78>)
+ 8000a56:	2200      	movs	r2, #0
+ 8000a58:	701a      	strb	r2, [r3, #0]
+
+        Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+ 8000a5a:	4b07      	ldr	r3, [pc, #28]	; (8000a78 <st_Admin_RemoveID+0x84>)
+ 8000a5c:	4a07      	ldr	r2, [pc, #28]	; (8000a7c <st_Admin_RemoveID+0x88>)
+ 8000a5e:	601a      	str	r2, [r3, #0]
+    }else{
+        /*Stay in the same state*/
+        Admin_Dashboard_State = st_Admin_AddNewID;
+    }
 }
- 80005ec:	bf00      	nop
- 80005ee:	46bd      	mov	sp, r7
- 80005f0:	bc80      	pop	{r7}
- 80005f2:	4770      	bx	lr
+ 8000a60:	e002      	b.n	8000a68 <st_Admin_RemoveID+0x74>
+        Admin_Dashboard_State = st_Admin_AddNewID;
+ 8000a62:	4b05      	ldr	r3, [pc, #20]	; (8000a78 <st_Admin_RemoveID+0x84>)
+ 8000a64:	4a06      	ldr	r2, [pc, #24]	; (8000a80 <st_Admin_RemoveID+0x8c>)
+ 8000a66:	601a      	str	r2, [r3, #0]
+}
+ 8000a68:	bf00      	nop
+ 8000a6a:	bd80      	pop	{r7, pc}
+ 8000a6c:	20000035 	.word	0x20000035
+ 8000a70:	20000034 	.word	0x20000034
+ 8000a74:	20000048 	.word	0x20000048
+ 8000a78:	20000068 	.word	0x20000068
+ 8000a7c:	08000445 	.word	0x08000445
+ 8000a80:	0800094d 	.word	0x0800094d
 
-080005f4 <st_Admin_SaveOnEEPROM>:
+08000a84 <st_Admin_SaveOnEEPROM>:
 * @brief		  :   Function to save the authorized IDs on the external memory.
 * Note			  :   none.
 ======================================================================================================================
 */
 void st_Admin_SaveOnEEPROM(void)
 {
- 80005f4:	b480      	push	{r7}
- 80005f6:	af00      	add	r7, sp, #0
+ 8000a84:	b480      	push	{r7}
+ 8000a86:	af00      	add	r7, sp, #0
 
 }
- 80005f8:	bf00      	nop
- 80005fa:	46bd      	mov	sp, r7
- 80005fc:	bc80      	pop	{r7}
- 80005fe:	4770      	bx	lr
+ 8000a88:	bf00      	nop
+ 8000a8a:	46bd      	mov	sp, r7
+ 8000a8c:	bc80      	pop	{r7}
+ 8000a8e:	4770      	bx	lr
 
-08000600 <Keypad_Init>:
+08000a90 <st_Admin_ShowIDsList>:
+* @brief		  :   Function to show all the authorized IDs in the system.
+* Note			  :   none.
+======================================================================================================================
+*/
+void st_Admin_ShowIDsList(void)
+{
+ 8000a90:	b580      	push	{r7, lr}
+ 8000a92:	af00      	add	r7, sp, #0
+  static uint8 printedIDcounter = 0;
+
+  if(Glob_AuthIDsCount > 0)
+ 8000a94:	4b18      	ldr	r3, [pc, #96]	; (8000af8 <st_Admin_ShowIDsList+0x68>)
+ 8000a96:	781b      	ldrb	r3, [r3, #0]
+ 8000a98:	2b00      	cmp	r3, #0
+ 8000a9a:	d011      	beq.n	8000ac0 <st_Admin_ShowIDsList+0x30>
+  {
+    LCD_Send_String(Glob_DriversIDsList[printedIDcounter]);
+ 8000a9c:	4b17      	ldr	r3, [pc, #92]	; (8000afc <st_Admin_ShowIDsList+0x6c>)
+ 8000a9e:	781b      	ldrb	r3, [r3, #0]
+ 8000aa0:	009b      	lsls	r3, r3, #2
+ 8000aa2:	4a17      	ldr	r2, [pc, #92]	; (8000b00 <st_Admin_ShowIDsList+0x70>)
+ 8000aa4:	4413      	add	r3, r2
+ 8000aa6:	4618      	mov	r0, r3
+ 8000aa8:	f000 fab8 	bl	800101c <LCD_Send_String>
+    LCD_Send_Char(',');
+ 8000aac:	202c      	movs	r0, #44	; 0x2c
+ 8000aae:	f000 fa3d 	bl	8000f2c <LCD_Send_Char>
+
+    printedIDcounter++;
+ 8000ab2:	4b12      	ldr	r3, [pc, #72]	; (8000afc <st_Admin_ShowIDsList+0x6c>)
+ 8000ab4:	781b      	ldrb	r3, [r3, #0]
+ 8000ab6:	3301      	adds	r3, #1
+ 8000ab8:	b2da      	uxtb	r2, r3
+ 8000aba:	4b10      	ldr	r3, [pc, #64]	; (8000afc <st_Admin_ShowIDsList+0x6c>)
+ 8000abc:	701a      	strb	r2, [r3, #0]
+ 8000abe:	e002      	b.n	8000ac6 <st_Admin_ShowIDsList+0x36>
+  }else{
+
+    LCD_Send_String(stringfy("List Empty"));
+ 8000ac0:	4810      	ldr	r0, [pc, #64]	; (8000b04 <st_Admin_ShowIDsList+0x74>)
+ 8000ac2:	f000 faab 	bl	800101c <LCD_Send_String>
+  }
+
+
+  if(printedIDcounter >= Glob_AuthIDsCount)
+ 8000ac6:	4b0d      	ldr	r3, [pc, #52]	; (8000afc <st_Admin_ShowIDsList+0x6c>)
+ 8000ac8:	781a      	ldrb	r2, [r3, #0]
+ 8000aca:	4b0b      	ldr	r3, [pc, #44]	; (8000af8 <st_Admin_ShowIDsList+0x68>)
+ 8000acc:	781b      	ldrb	r3, [r3, #0]
+ 8000ace:	429a      	cmp	r2, r3
+ 8000ad0:	d30d      	bcc.n	8000aee <st_Admin_ShowIDsList+0x5e>
+  {
+    printedIDcounter = 0;
+ 8000ad2:	4b0a      	ldr	r3, [pc, #40]	; (8000afc <st_Admin_ShowIDsList+0x6c>)
+ 8000ad4:	2200      	movs	r2, #0
+ 8000ad6:	701a      	strb	r2, [r3, #0]
+
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+ 8000ad8:	2100      	movs	r1, #0
+ 8000ada:	2003      	movs	r0, #3
+ 8000adc:	f000 fab2 	bl	8001044 <LCD_Cursor_XY>
+    LCD_Send_String(stringfy("main menu => '*'"));
+ 8000ae0:	4809      	ldr	r0, [pc, #36]	; (8000b08 <st_Admin_ShowIDsList+0x78>)
+ 8000ae2:	f000 fa9b 	bl	800101c <LCD_Send_String>
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+ 8000ae6:	4b09      	ldr	r3, [pc, #36]	; (8000b0c <st_Admin_ShowIDsList+0x7c>)
+ 8000ae8:	4a09      	ldr	r2, [pc, #36]	; (8000b10 <st_Admin_ShowIDsList+0x80>)
+ 8000aea:	601a      	str	r2, [r3, #0]
+  }else{
+
+    Admin_Dashboard_State = st_Admin_ShowIDsList;
+  }
+}
+ 8000aec:	e002      	b.n	8000af4 <st_Admin_ShowIDsList+0x64>
+    Admin_Dashboard_State = st_Admin_ShowIDsList;
+ 8000aee:	4b07      	ldr	r3, [pc, #28]	; (8000b0c <st_Admin_ShowIDsList+0x7c>)
+ 8000af0:	4a08      	ldr	r2, [pc, #32]	; (8000b14 <st_Admin_ShowIDsList+0x84>)
+ 8000af2:	601a      	str	r2, [r3, #0]
+}
+ 8000af4:	bf00      	nop
+ 8000af6:	bd80      	pop	{r7, pc}
+ 8000af8:	20000060 	.word	0x20000060
+ 8000afc:	20000062 	.word	0x20000062
+ 8000b00:	2000004c 	.word	0x2000004c
+ 8000b04:	080013cc 	.word	0x080013cc
+ 8000b08:	080012d8 	.word	0x080012d8
+ 8000b0c:	20000068 	.word	0x20000068
+ 8000b10:	08000231 	.word	0x08000231
+ 8000b14:	08000a91 	.word	0x08000a91
+
+08000b18 <Keypad_Init>:
  * @return_value:   none.
  * Note			:   none.
 ============================================================================================================
  */
 void Keypad_Init(void)
 {
- 8000600:	b580      	push	{r7, lr}
- 8000602:	b082      	sub	sp, #8
- 8000604:	af00      	add	r7, sp, #0
+ 8000b18:	b580      	push	{r7, lr}
+ 8000b1a:	b082      	sub	sp, #8
+ 8000b1c:	af00      	add	r7, sp, #0
 	GPIO_Pin_Config_t config;
 
 	/*Keypad row pins as input with pull-up resistance*/
 	config.pinNumber = KEYPAD_ROW0;
- 8000606:	230c      	movs	r3, #12
- 8000608:	80bb      	strh	r3, [r7, #4]
+ 8000b1e:	230c      	movs	r3, #12
+ 8000b20:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_INPUT_PU;
- 800060a:	2308      	movs	r3, #8
- 800060c:	80fb      	strh	r3, [r7, #6]
+ 8000b22:	2308      	movs	r3, #8
+ 8000b24:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 800060e:	1d3b      	adds	r3, r7, #4
- 8000610:	4619      	mov	r1, r3
- 8000612:	481e      	ldr	r0, [pc, #120]	; (800068c <Keypad_Init+0x8c>)
- 8000614:	f000 fae4 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b26:	1d3b      	adds	r3, r7, #4
+ 8000b28:	4619      	mov	r1, r3
+ 8000b2a:	481e      	ldr	r0, [pc, #120]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b2c:	f000 fae4 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = KEYPAD_ROW1;
- 8000618:	230d      	movs	r3, #13
- 800061a:	80bb      	strh	r3, [r7, #4]
+ 8000b30:	230d      	movs	r3, #13
+ 8000b32:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_INPUT_PU;
- 800061c:	2308      	movs	r3, #8
- 800061e:	80fb      	strh	r3, [r7, #6]
+ 8000b34:	2308      	movs	r3, #8
+ 8000b36:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 8000620:	1d3b      	adds	r3, r7, #4
- 8000622:	4619      	mov	r1, r3
- 8000624:	4819      	ldr	r0, [pc, #100]	; (800068c <Keypad_Init+0x8c>)
- 8000626:	f000 fadb 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b38:	1d3b      	adds	r3, r7, #4
+ 8000b3a:	4619      	mov	r1, r3
+ 8000b3c:	4819      	ldr	r0, [pc, #100]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b3e:	f000 fadb 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = KEYPAD_ROW2;
- 800062a:	230e      	movs	r3, #14
- 800062c:	80bb      	strh	r3, [r7, #4]
+ 8000b42:	230e      	movs	r3, #14
+ 8000b44:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_INPUT_PU;
- 800062e:	2308      	movs	r3, #8
- 8000630:	80fb      	strh	r3, [r7, #6]
+ 8000b46:	2308      	movs	r3, #8
+ 8000b48:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 8000632:	1d3b      	adds	r3, r7, #4
- 8000634:	4619      	mov	r1, r3
- 8000636:	4815      	ldr	r0, [pc, #84]	; (800068c <Keypad_Init+0x8c>)
- 8000638:	f000 fad2 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b4a:	1d3b      	adds	r3, r7, #4
+ 8000b4c:	4619      	mov	r1, r3
+ 8000b4e:	4815      	ldr	r0, [pc, #84]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b50:	f000 fad2 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = KEYPAD_ROW3;
- 800063c:	230f      	movs	r3, #15
- 800063e:	80bb      	strh	r3, [r7, #4]
+ 8000b54:	230f      	movs	r3, #15
+ 8000b56:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_INPUT_PU;
- 8000640:	2308      	movs	r3, #8
- 8000642:	80fb      	strh	r3, [r7, #6]
+ 8000b58:	2308      	movs	r3, #8
+ 8000b5a:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 8000644:	1d3b      	adds	r3, r7, #4
- 8000646:	4619      	mov	r1, r3
- 8000648:	4810      	ldr	r0, [pc, #64]	; (800068c <Keypad_Init+0x8c>)
- 800064a:	f000 fac9 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b5c:	1d3b      	adds	r3, r7, #4
+ 8000b5e:	4619      	mov	r1, r3
+ 8000b60:	4810      	ldr	r0, [pc, #64]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b62:	f000 fac9 	bl	80010f8 <MCAL_GPIO_Init>
 
 	/*Keypad column pins as output*/
 	config.pinNumber = KEYPAD_COL0;
- 800064e:	230b      	movs	r3, #11
- 8000650:	80bb      	strh	r3, [r7, #4]
+ 8000b66:	230b      	movs	r3, #11
+ 8000b68:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 8000652:	2301      	movs	r3, #1
- 8000654:	80fb      	strh	r3, [r7, #6]
+ 8000b6a:	2301      	movs	r3, #1
+ 8000b6c:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 8000656:	1d3b      	adds	r3, r7, #4
- 8000658:	4619      	mov	r1, r3
- 800065a:	480c      	ldr	r0, [pc, #48]	; (800068c <Keypad_Init+0x8c>)
- 800065c:	f000 fac0 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b6e:	1d3b      	adds	r3, r7, #4
+ 8000b70:	4619      	mov	r1, r3
+ 8000b72:	480c      	ldr	r0, [pc, #48]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b74:	f000 fac0 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = KEYPAD_COL1;
- 8000660:	2309      	movs	r3, #9
- 8000662:	80bb      	strh	r3, [r7, #4]
+ 8000b78:	2309      	movs	r3, #9
+ 8000b7a:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 8000664:	2301      	movs	r3, #1
- 8000666:	80fb      	strh	r3, [r7, #6]
+ 8000b7c:	2301      	movs	r3, #1
+ 8000b7e:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 8000668:	1d3b      	adds	r3, r7, #4
- 800066a:	4619      	mov	r1, r3
- 800066c:	4807      	ldr	r0, [pc, #28]	; (800068c <Keypad_Init+0x8c>)
- 800066e:	f000 fab7 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b80:	1d3b      	adds	r3, r7, #4
+ 8000b82:	4619      	mov	r1, r3
+ 8000b84:	4807      	ldr	r0, [pc, #28]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b86:	f000 fab7 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = KEYPAD_COL2;
- 8000672:	2308      	movs	r3, #8
- 8000674:	80bb      	strh	r3, [r7, #4]
+ 8000b8a:	2308      	movs	r3, #8
+ 8000b8c:	80bb      	strh	r3, [r7, #4]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 8000676:	2301      	movs	r3, #1
- 8000678:	80fb      	strh	r3, [r7, #6]
+ 8000b8e:	2301      	movs	r3, #1
+ 8000b90:	80fb      	strh	r3, [r7, #6]
 	MCAL_GPIO_Init(KEYPAD_DATA_PORT, &config);
- 800067a:	1d3b      	adds	r3, r7, #4
- 800067c:	4619      	mov	r1, r3
- 800067e:	4803      	ldr	r0, [pc, #12]	; (800068c <Keypad_Init+0x8c>)
- 8000680:	f000 faae 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000b92:	1d3b      	adds	r3, r7, #4
+ 8000b94:	4619      	mov	r1, r3
+ 8000b96:	4803      	ldr	r0, [pc, #12]	; (8000ba4 <Keypad_Init+0x8c>)
+ 8000b98:	f000 faae 	bl	80010f8 <MCAL_GPIO_Init>
 }
- 8000684:	bf00      	nop
- 8000686:	3708      	adds	r7, #8
- 8000688:	46bd      	mov	sp, r7
- 800068a:	bd80      	pop	{r7, pc}
- 800068c:	40010c00 	.word	0x40010c00
+ 8000b9c:	bf00      	nop
+ 8000b9e:	3708      	adds	r7, #8
+ 8000ba0:	46bd      	mov	sp, r7
+ 8000ba2:	bd80      	pop	{r7, pc}
+ 8000ba4:	40010c00 	.word	0x40010c00
 
-08000690 <Keypad_Get_Char>:
+08000ba8 <Keypad_Get_Char>:
                 :   Or NULL_CHAR if no key was pressed.
  * Note			:   none.
 ============================================================================================================
  */
 uint8 Keypad_Get_Char(void)
 {
- 8000690:	b580      	push	{r7, lr}
- 8000692:	b086      	sub	sp, #24
- 8000694:	af00      	add	r7, sp, #0
+ 8000ba8:	b580      	push	{r7, lr}
+ 8000baa:	b086      	sub	sp, #24
+ 8000bac:	af00      	add	r7, sp, #0
 	uint8 keypad_chars[] = KEYPAD_KEYS;
- 8000696:	4a3a      	ldr	r2, [pc, #232]	; (8000780 <Keypad_Get_Char+0xf0>)
- 8000698:	f107 0308 	add.w	r3, r7, #8
- 800069c:	ca07      	ldmia	r2, {r0, r1, r2}
- 800069e:	e883 0007 	stmia.w	r3, {r0, r1, r2}
+ 8000bae:	4a3a      	ldr	r2, [pc, #232]	; (8000c98 <Keypad_Get_Char+0xf0>)
+ 8000bb0:	f107 0308 	add.w	r3, r7, #8
+ 8000bb4:	ca07      	ldmia	r2, {r0, r1, r2}
+ 8000bb6:	e883 0007 	stmia.w	r3, {r0, r1, r2}
 
  	uint8 KeypadRowPins[] = {KEYPAD_ROW0, KEYPAD_ROW1, KEYPAD_ROW2, KEYPAD_ROW3};
- 80006a2:	4b38      	ldr	r3, [pc, #224]	; (8000784 <Keypad_Get_Char+0xf4>)
- 80006a4:	681b      	ldr	r3, [r3, #0]
- 80006a6:	607b      	str	r3, [r7, #4]
+ 8000bba:	4b38      	ldr	r3, [pc, #224]	; (8000c9c <Keypad_Get_Char+0xf4>)
+ 8000bbc:	681b      	ldr	r3, [r3, #0]
+ 8000bbe:	607b      	str	r3, [r7, #4]
  	uint8 KeypadColPins[] = {KEYPAD_COL0, KEYPAD_COL1, KEYPAD_COL2};
- 80006a8:	4a37      	ldr	r2, [pc, #220]	; (8000788 <Keypad_Get_Char+0xf8>)
- 80006aa:	463b      	mov	r3, r7
- 80006ac:	6812      	ldr	r2, [r2, #0]
- 80006ae:	4611      	mov	r1, r2
- 80006b0:	8019      	strh	r1, [r3, #0]
- 80006b2:	3302      	adds	r3, #2
- 80006b4:	0c12      	lsrs	r2, r2, #16
- 80006b6:	701a      	strb	r2, [r3, #0]
+ 8000bc0:	4a37      	ldr	r2, [pc, #220]	; (8000ca0 <Keypad_Get_Char+0xf8>)
+ 8000bc2:	463b      	mov	r3, r7
+ 8000bc4:	6812      	ldr	r2, [r2, #0]
+ 8000bc6:	4611      	mov	r1, r2
+ 8000bc8:	8019      	strh	r1, [r3, #0]
+ 8000bca:	3302      	adds	r3, #2
+ 8000bcc:	0c12      	lsrs	r2, r2, #16
+ 8000bce:	701a      	strb	r2, [r3, #0]
 
 	uint8 col, row, pressedKey;
 
 	pressedKey = NULL_CHAR;
- 80006b8:	234e      	movs	r3, #78	; 0x4e
- 80006ba:	757b      	strb	r3, [r7, #21]
+ 8000bd0:	234e      	movs	r3, #78	; 0x4e
+ 8000bd2:	757b      	strb	r3, [r7, #21]
 	for(col = 0; col <  KEYPAD_COL_SIZE; col++)
- 80006bc:	2300      	movs	r3, #0
- 80006be:	75fb      	strb	r3, [r7, #23]
- 80006c0:	e053      	b.n	800076a <Keypad_Get_Char+0xda>
+ 8000bd4:	2300      	movs	r3, #0
+ 8000bd6:	75fb      	strb	r3, [r7, #23]
+ 8000bd8:	e053      	b.n	8000c82 <Keypad_Get_Char+0xda>
 	{
 		/*High on all column pins */
 		MCAL_GPIO_WritePin(KEYPAD_DATA_PORT, KEYPAD_COL0, GPIO_PIN_HIGH);
- 80006c2:	2201      	movs	r2, #1
- 80006c4:	210b      	movs	r1, #11
- 80006c6:	4831      	ldr	r0, [pc, #196]	; (800078c <Keypad_Get_Char+0xfc>)
- 80006c8:	f000 fafd 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000bda:	2201      	movs	r2, #1
+ 8000bdc:	210b      	movs	r1, #11
+ 8000bde:	4831      	ldr	r0, [pc, #196]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000be0:	f000 fafd 	bl	80011de <MCAL_GPIO_WritePin>
 		MCAL_GPIO_WritePin(KEYPAD_DATA_PORT, KEYPAD_COL1, GPIO_PIN_HIGH);
- 80006cc:	2201      	movs	r2, #1
- 80006ce:	2109      	movs	r1, #9
- 80006d0:	482e      	ldr	r0, [pc, #184]	; (800078c <Keypad_Get_Char+0xfc>)
- 80006d2:	f000 faf8 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000be4:	2201      	movs	r2, #1
+ 8000be6:	2109      	movs	r1, #9
+ 8000be8:	482e      	ldr	r0, [pc, #184]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000bea:	f000 faf8 	bl	80011de <MCAL_GPIO_WritePin>
 		MCAL_GPIO_WritePin(KEYPAD_DATA_PORT, KEYPAD_COL2, GPIO_PIN_HIGH);
- 80006d6:	2201      	movs	r2, #1
- 80006d8:	2108      	movs	r1, #8
- 80006da:	482c      	ldr	r0, [pc, #176]	; (800078c <Keypad_Get_Char+0xfc>)
- 80006dc:	f000 faf3 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000bee:	2201      	movs	r2, #1
+ 8000bf0:	2108      	movs	r1, #8
+ 8000bf2:	482c      	ldr	r0, [pc, #176]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000bf4:	f000 faf3 	bl	80011de <MCAL_GPIO_WritePin>
 
 		/*Low output on the column to be tested.*/
 		MCAL_GPIO_WritePin(KEYPAD_DATA_PORT, KeypadColPins[col], GPIO_PIN_LOW);
- 80006e0:	7dfb      	ldrb	r3, [r7, #23]
- 80006e2:	f107 0218 	add.w	r2, r7, #24
- 80006e6:	4413      	add	r3, r2
- 80006e8:	f813 3c18 	ldrb.w	r3, [r3, #-24]
- 80006ec:	b29b      	uxth	r3, r3
- 80006ee:	2200      	movs	r2, #0
- 80006f0:	4619      	mov	r1, r3
- 80006f2:	4826      	ldr	r0, [pc, #152]	; (800078c <Keypad_Get_Char+0xfc>)
- 80006f4:	f000 fae7 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000bf8:	7dfb      	ldrb	r3, [r7, #23]
+ 8000bfa:	f107 0218 	add.w	r2, r7, #24
+ 8000bfe:	4413      	add	r3, r2
+ 8000c00:	f813 3c18 	ldrb.w	r3, [r3, #-24]
+ 8000c04:	b29b      	uxth	r3, r3
+ 8000c06:	2200      	movs	r2, #0
+ 8000c08:	4619      	mov	r1, r3
+ 8000c0a:	4826      	ldr	r0, [pc, #152]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000c0c:	f000 fae7 	bl	80011de <MCAL_GPIO_WritePin>
 
 		for(row = 0; row < KEYPAD_ROW_SIZE; row++)
- 80006f8:	2300      	movs	r3, #0
- 80006fa:	75bb      	strb	r3, [r7, #22]
- 80006fc:	e02c      	b.n	8000758 <Keypad_Get_Char+0xc8>
+ 8000c10:	2300      	movs	r3, #0
+ 8000c12:	75bb      	strb	r3, [r7, #22]
+ 8000c14:	e02c      	b.n	8000c70 <Keypad_Get_Char+0xc8>
 		{
 			/*Loop on all the buttons in this coloumn to
             see if any of them dropped to ground*/
 			if(MCAL_GPIO_ReadPin(KEYPAD_DATA_PORT, KeypadRowPins[row]) == GPIO_PIN_LOW)
- 80006fe:	7dbb      	ldrb	r3, [r7, #22]
- 8000700:	f107 0218 	add.w	r2, r7, #24
- 8000704:	4413      	add	r3, r2
- 8000706:	f813 3c14 	ldrb.w	r3, [r3, #-20]
- 800070a:	b29b      	uxth	r3, r3
- 800070c:	4619      	mov	r1, r3
- 800070e:	481f      	ldr	r0, [pc, #124]	; (800078c <Keypad_Get_Char+0xfc>)
- 8000710:	f000 fabd 	bl	8000c8e <MCAL_GPIO_ReadPin>
- 8000714:	4603      	mov	r3, r0
- 8000716:	2b00      	cmp	r3, #0
- 8000718:	d11b      	bne.n	8000752 <Keypad_Get_Char+0xc2>
+ 8000c16:	7dbb      	ldrb	r3, [r7, #22]
+ 8000c18:	f107 0218 	add.w	r2, r7, #24
+ 8000c1c:	4413      	add	r3, r2
+ 8000c1e:	f813 3c14 	ldrb.w	r3, [r3, #-20]
+ 8000c22:	b29b      	uxth	r3, r3
+ 8000c24:	4619      	mov	r1, r3
+ 8000c26:	481f      	ldr	r0, [pc, #124]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000c28:	f000 fabd 	bl	80011a6 <MCAL_GPIO_ReadPin>
+ 8000c2c:	4603      	mov	r3, r0
+ 8000c2e:	2b00      	cmp	r3, #0
+ 8000c30:	d11b      	bne.n	8000c6a <Keypad_Get_Char+0xc2>
 			{
 				while(MCAL_GPIO_ReadPin(KEYPAD_DATA_PORT, KeypadRowPins[row]) == GPIO_PIN_LOW)
- 800071a:	bf00      	nop
- 800071c:	7dbb      	ldrb	r3, [r7, #22]
- 800071e:	f107 0218 	add.w	r2, r7, #24
- 8000722:	4413      	add	r3, r2
- 8000724:	f813 3c14 	ldrb.w	r3, [r3, #-20]
- 8000728:	b29b      	uxth	r3, r3
- 800072a:	4619      	mov	r1, r3
- 800072c:	4817      	ldr	r0, [pc, #92]	; (800078c <Keypad_Get_Char+0xfc>)
- 800072e:	f000 faae 	bl	8000c8e <MCAL_GPIO_ReadPin>
- 8000732:	4603      	mov	r3, r0
- 8000734:	2b00      	cmp	r3, #0
- 8000736:	d0f1      	beq.n	800071c <Keypad_Get_Char+0x8c>
+ 8000c32:	bf00      	nop
+ 8000c34:	7dbb      	ldrb	r3, [r7, #22]
+ 8000c36:	f107 0218 	add.w	r2, r7, #24
+ 8000c3a:	4413      	add	r3, r2
+ 8000c3c:	f813 3c14 	ldrb.w	r3, [r3, #-20]
+ 8000c40:	b29b      	uxth	r3, r3
+ 8000c42:	4619      	mov	r1, r3
+ 8000c44:	4817      	ldr	r0, [pc, #92]	; (8000ca4 <Keypad_Get_Char+0xfc>)
+ 8000c46:	f000 faae 	bl	80011a6 <MCAL_GPIO_ReadPin>
+ 8000c4a:	4603      	mov	r3, r0
+ 8000c4c:	2b00      	cmp	r3, #0
+ 8000c4e:	d0f1      	beq.n	8000c34 <Keypad_Get_Char+0x8c>
 				{
 
 				}
 
 				pressedKey = keypad_chars[(row * KEYPAD_COL_SIZE) + col];
- 8000738:	7dba      	ldrb	r2, [r7, #22]
- 800073a:	4613      	mov	r3, r2
- 800073c:	005b      	lsls	r3, r3, #1
- 800073e:	441a      	add	r2, r3
- 8000740:	7dfb      	ldrb	r3, [r7, #23]
- 8000742:	4413      	add	r3, r2
- 8000744:	f107 0218 	add.w	r2, r7, #24
- 8000748:	4413      	add	r3, r2
- 800074a:	f813 3c10 	ldrb.w	r3, [r3, #-16]
- 800074e:	757b      	strb	r3, [r7, #21]
+ 8000c50:	7dba      	ldrb	r2, [r7, #22]
+ 8000c52:	4613      	mov	r3, r2
+ 8000c54:	005b      	lsls	r3, r3, #1
+ 8000c56:	441a      	add	r2, r3
+ 8000c58:	7dfb      	ldrb	r3, [r7, #23]
+ 8000c5a:	4413      	add	r3, r2
+ 8000c5c:	f107 0218 	add.w	r2, r7, #24
+ 8000c60:	4413      	add	r3, r2
+ 8000c62:	f813 3c10 	ldrb.w	r3, [r3, #-16]
+ 8000c66:	757b      	strb	r3, [r7, #21]
 				break;
- 8000750:	e005      	b.n	800075e <Keypad_Get_Char+0xce>
+ 8000c68:	e005      	b.n	8000c76 <Keypad_Get_Char+0xce>
 		for(row = 0; row < KEYPAD_ROW_SIZE; row++)
- 8000752:	7dbb      	ldrb	r3, [r7, #22]
- 8000754:	3301      	adds	r3, #1
- 8000756:	75bb      	strb	r3, [r7, #22]
- 8000758:	7dbb      	ldrb	r3, [r7, #22]
- 800075a:	2b03      	cmp	r3, #3
- 800075c:	d9cf      	bls.n	80006fe <Keypad_Get_Char+0x6e>
+ 8000c6a:	7dbb      	ldrb	r3, [r7, #22]
+ 8000c6c:	3301      	adds	r3, #1
+ 8000c6e:	75bb      	strb	r3, [r7, #22]
+ 8000c70:	7dbb      	ldrb	r3, [r7, #22]
+ 8000c72:	2b03      	cmp	r3, #3
+ 8000c74:	d9cf      	bls.n	8000c16 <Keypad_Get_Char+0x6e>
 			}
 		}
 
 		if(pressedKey != NULL_CHAR)
- 800075e:	7d7b      	ldrb	r3, [r7, #21]
- 8000760:	2b4e      	cmp	r3, #78	; 0x4e
- 8000762:	d106      	bne.n	8000772 <Keypad_Get_Char+0xe2>
+ 8000c76:	7d7b      	ldrb	r3, [r7, #21]
+ 8000c78:	2b4e      	cmp	r3, #78	; 0x4e
+ 8000c7a:	d106      	bne.n	8000c8a <Keypad_Get_Char+0xe2>
 	for(col = 0; col <  KEYPAD_COL_SIZE; col++)
- 8000764:	7dfb      	ldrb	r3, [r7, #23]
- 8000766:	3301      	adds	r3, #1
- 8000768:	75fb      	strb	r3, [r7, #23]
- 800076a:	7dfb      	ldrb	r3, [r7, #23]
- 800076c:	2b02      	cmp	r3, #2
- 800076e:	d9a8      	bls.n	80006c2 <Keypad_Get_Char+0x32>
- 8000770:	e000      	b.n	8000774 <Keypad_Get_Char+0xe4>
+ 8000c7c:	7dfb      	ldrb	r3, [r7, #23]
+ 8000c7e:	3301      	adds	r3, #1
+ 8000c80:	75fb      	strb	r3, [r7, #23]
+ 8000c82:	7dfb      	ldrb	r3, [r7, #23]
+ 8000c84:	2b02      	cmp	r3, #2
+ 8000c86:	d9a8      	bls.n	8000bda <Keypad_Get_Char+0x32>
+ 8000c88:	e000      	b.n	8000c8c <Keypad_Get_Char+0xe4>
 		{
 			break;
- 8000772:	bf00      	nop
+ 8000c8a:	bf00      	nop
 		}
 	}
 	return pressedKey;
- 8000774:	7d7b      	ldrb	r3, [r7, #21]
+ 8000c8c:	7d7b      	ldrb	r3, [r7, #21]
 }
- 8000776:	4618      	mov	r0, r3
- 8000778:	3718      	adds	r7, #24
- 800077a:	46bd      	mov	sp, r7
- 800077c:	bd80      	pop	{r7, pc}
- 800077e:	bf00      	nop
- 8000780:	08000df4 	.word	0x08000df4
- 8000784:	08000e00 	.word	0x08000e00
- 8000788:	08000e04 	.word	0x08000e04
- 800078c:	40010c00 	.word	0x40010c00
+ 8000c8e:	4618      	mov	r0, r3
+ 8000c90:	3718      	adds	r7, #24
+ 8000c92:	46bd      	mov	sp, r7
+ 8000c94:	bd80      	pop	{r7, pc}
+ 8000c96:	bf00      	nop
+ 8000c98:	080013d8 	.word	0x080013d8
+ 8000c9c:	080013e4 	.word	0x080013e4
+ 8000ca0:	080013e8 	.word	0x080013e8
+ 8000ca4:	40010c00 	.word	0x40010c00
 
-08000790 <_delay_ms>:
+08000ca8 <_delay_ms>:
  * @return_value :	none.
  * Note			:	This isn't an accurate function.
 ============================================================================================================
  */
 void _delay_ms(uint8 delay_Counter)
 {
- 8000790:	b480      	push	{r7}
- 8000792:	b085      	sub	sp, #20
- 8000794:	af00      	add	r7, sp, #0
- 8000796:	4603      	mov	r3, r0
- 8000798:	71fb      	strb	r3, [r7, #7]
+ 8000ca8:	b480      	push	{r7}
+ 8000caa:	b085      	sub	sp, #20
+ 8000cac:	af00      	add	r7, sp, #0
+ 8000cae:	4603      	mov	r3, r0
+ 8000cb0:	71fb      	strb	r3, [r7, #7]
 	volatile uint8 i, j;
 	for(i = 0; i < delay_Counter; i++)
- 800079a:	2300      	movs	r3, #0
- 800079c:	73fb      	strb	r3, [r7, #15]
- 800079e:	e010      	b.n	80007c2 <_delay_ms+0x32>
+ 8000cb2:	2300      	movs	r3, #0
+ 8000cb4:	73fb      	strb	r3, [r7, #15]
+ 8000cb6:	e010      	b.n	8000cda <_delay_ms+0x32>
 	{
 		for ( j = 0; j < 100; j++)
- 80007a0:	2300      	movs	r3, #0
- 80007a2:	73bb      	strb	r3, [r7, #14]
- 80007a4:	e004      	b.n	80007b0 <_delay_ms+0x20>
- 80007a6:	7bbb      	ldrb	r3, [r7, #14]
- 80007a8:	b2db      	uxtb	r3, r3
- 80007aa:	3301      	adds	r3, #1
- 80007ac:	b2db      	uxtb	r3, r3
- 80007ae:	73bb      	strb	r3, [r7, #14]
- 80007b0:	7bbb      	ldrb	r3, [r7, #14]
- 80007b2:	b2db      	uxtb	r3, r3
- 80007b4:	2b63      	cmp	r3, #99	; 0x63
- 80007b6:	d9f6      	bls.n	80007a6 <_delay_ms+0x16>
+ 8000cb8:	2300      	movs	r3, #0
+ 8000cba:	73bb      	strb	r3, [r7, #14]
+ 8000cbc:	e004      	b.n	8000cc8 <_delay_ms+0x20>
+ 8000cbe:	7bbb      	ldrb	r3, [r7, #14]
+ 8000cc0:	b2db      	uxtb	r3, r3
+ 8000cc2:	3301      	adds	r3, #1
+ 8000cc4:	b2db      	uxtb	r3, r3
+ 8000cc6:	73bb      	strb	r3, [r7, #14]
+ 8000cc8:	7bbb      	ldrb	r3, [r7, #14]
+ 8000cca:	b2db      	uxtb	r3, r3
+ 8000ccc:	2b63      	cmp	r3, #99	; 0x63
+ 8000cce:	d9f6      	bls.n	8000cbe <_delay_ms+0x16>
 	for(i = 0; i < delay_Counter; i++)
- 80007b8:	7bfb      	ldrb	r3, [r7, #15]
- 80007ba:	b2db      	uxtb	r3, r3
- 80007bc:	3301      	adds	r3, #1
- 80007be:	b2db      	uxtb	r3, r3
- 80007c0:	73fb      	strb	r3, [r7, #15]
- 80007c2:	7bfb      	ldrb	r3, [r7, #15]
- 80007c4:	b2db      	uxtb	r3, r3
- 80007c6:	79fa      	ldrb	r2, [r7, #7]
- 80007c8:	429a      	cmp	r2, r3
- 80007ca:	d8e9      	bhi.n	80007a0 <_delay_ms+0x10>
+ 8000cd0:	7bfb      	ldrb	r3, [r7, #15]
+ 8000cd2:	b2db      	uxtb	r3, r3
+ 8000cd4:	3301      	adds	r3, #1
+ 8000cd6:	b2db      	uxtb	r3, r3
+ 8000cd8:	73fb      	strb	r3, [r7, #15]
+ 8000cda:	7bfb      	ldrb	r3, [r7, #15]
+ 8000cdc:	b2db      	uxtb	r3, r3
+ 8000cde:	79fa      	ldrb	r2, [r7, #7]
+ 8000ce0:	429a      	cmp	r2, r3
+ 8000ce2:	d8e9      	bhi.n	8000cb8 <_delay_ms+0x10>
 		{
 		}
 	}
 }
- 80007cc:	bf00      	nop
- 80007ce:	3714      	adds	r7, #20
- 80007d0:	46bd      	mov	sp, r7
- 80007d2:	bc80      	pop	{r7}
- 80007d4:	4770      	bx	lr
+ 8000ce4:	bf00      	nop
+ 8000ce6:	3714      	adds	r7, #20
+ 8000ce8:	46bd      	mov	sp, r7
+ 8000cea:	bc80      	pop	{r7}
+ 8000cec:	4770      	bx	lr
 	...
 
-080007d8 <LCD_Enable_Pulse>:
+08000cf0 <LCD_Enable_Pulse>:
  * @return_value :	none.
  * Note			:	none.
 ============================================================================================================
  */
 void LCD_Enable_Pulse()
 {
- 80007d8:	b580      	push	{r7, lr}
- 80007da:	af00      	add	r7, sp, #0
+ 8000cf0:	b580      	push	{r7, lr}
+ 8000cf2:	af00      	add	r7, sp, #0
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_EN_PIN, GPIO_PIN_HIGH);
- 80007dc:	2201      	movs	r2, #1
- 80007de:	2105      	movs	r1, #5
- 80007e0:	4806      	ldr	r0, [pc, #24]	; (80007fc <LCD_Enable_Pulse+0x24>)
- 80007e2:	f000 fa70 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000cf4:	2201      	movs	r2, #1
+ 8000cf6:	2105      	movs	r1, #5
+ 8000cf8:	4806      	ldr	r0, [pc, #24]	; (8000d14 <LCD_Enable_Pulse+0x24>)
+ 8000cfa:	f000 fa70 	bl	80011de <MCAL_GPIO_WritePin>
 	_delay_ms(50);
- 80007e6:	2032      	movs	r0, #50	; 0x32
- 80007e8:	f7ff ffd2 	bl	8000790 <_delay_ms>
+ 8000cfe:	2032      	movs	r0, #50	; 0x32
+ 8000d00:	f7ff ffd2 	bl	8000ca8 <_delay_ms>
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_EN_PIN, GPIO_PIN_LOW);
- 80007ec:	2200      	movs	r2, #0
- 80007ee:	2105      	movs	r1, #5
- 80007f0:	4802      	ldr	r0, [pc, #8]	; (80007fc <LCD_Enable_Pulse+0x24>)
- 80007f2:	f000 fa68 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000d04:	2200      	movs	r2, #0
+ 8000d06:	2105      	movs	r1, #5
+ 8000d08:	4802      	ldr	r0, [pc, #8]	; (8000d14 <LCD_Enable_Pulse+0x24>)
+ 8000d0a:	f000 fa68 	bl	80011de <MCAL_GPIO_WritePin>
 }
- 80007f6:	bf00      	nop
- 80007f8:	bd80      	pop	{r7, pc}
- 80007fa:	bf00      	nop
- 80007fc:	40010c00 	.word	0x40010c00
+ 8000d0e:	bf00      	nop
+ 8000d10:	bd80      	pop	{r7, pc}
+ 8000d12:	bf00      	nop
+ 8000d14:	40010c00 	.word	0x40010c00
 
-08000800 <Check_End_Of_Line>:
+08000d18 <Check_End_Of_Line>:
  * @return_value :	none.
  * Note			:	none.
 ============================================================================================================
  */
 void Check_End_Of_Line()
 {
- 8000800:	b580      	push	{r7, lr}
- 8000802:	af00      	add	r7, sp, #0
+ 8000d18:	b580      	push	{r7, lr}
+ 8000d1a:	af00      	add	r7, sp, #0
 	//If the first line is full go to the next line
 	if(charCounter >= LCD_WIDTH && lineCounter < LCD_HEIGHT - 1)
- 8000804:	4b16      	ldr	r3, [pc, #88]	; (8000860 <Check_End_Of_Line+0x60>)
- 8000806:	781b      	ldrb	r3, [r3, #0]
- 8000808:	2b0f      	cmp	r3, #15
- 800080a:	d913      	bls.n	8000834 <Check_End_Of_Line+0x34>
- 800080c:	4b15      	ldr	r3, [pc, #84]	; (8000864 <Check_End_Of_Line+0x64>)
- 800080e:	781b      	ldrb	r3, [r3, #0]
- 8000810:	2b02      	cmp	r3, #2
- 8000812:	d80f      	bhi.n	8000834 <Check_End_Of_Line+0x34>
+ 8000d1c:	4b16      	ldr	r3, [pc, #88]	; (8000d78 <Check_End_Of_Line+0x60>)
+ 8000d1e:	781b      	ldrb	r3, [r3, #0]
+ 8000d20:	2b0f      	cmp	r3, #15
+ 8000d22:	d913      	bls.n	8000d4c <Check_End_Of_Line+0x34>
+ 8000d24:	4b15      	ldr	r3, [pc, #84]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d26:	781b      	ldrb	r3, [r3, #0]
+ 8000d28:	2b02      	cmp	r3, #2
+ 8000d2a:	d80f      	bhi.n	8000d4c <Check_End_Of_Line+0x34>
 	{
 		charCounter = 0;
- 8000814:	4b12      	ldr	r3, [pc, #72]	; (8000860 <Check_End_Of_Line+0x60>)
- 8000816:	2200      	movs	r2, #0
- 8000818:	701a      	strb	r2, [r3, #0]
+ 8000d2c:	4b12      	ldr	r3, [pc, #72]	; (8000d78 <Check_End_Of_Line+0x60>)
+ 8000d2e:	2200      	movs	r2, #0
+ 8000d30:	701a      	strb	r2, [r3, #0]
 		lineCounter++;
- 800081a:	4b12      	ldr	r3, [pc, #72]	; (8000864 <Check_End_Of_Line+0x64>)
- 800081c:	781b      	ldrb	r3, [r3, #0]
- 800081e:	3301      	adds	r3, #1
- 8000820:	b2da      	uxtb	r2, r3
- 8000822:	4b10      	ldr	r3, [pc, #64]	; (8000864 <Check_End_Of_Line+0x64>)
- 8000824:	701a      	strb	r2, [r3, #0]
+ 8000d32:	4b12      	ldr	r3, [pc, #72]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d34:	781b      	ldrb	r3, [r3, #0]
+ 8000d36:	3301      	adds	r3, #1
+ 8000d38:	b2da      	uxtb	r2, r3
+ 8000d3a:	4b10      	ldr	r3, [pc, #64]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d3c:	701a      	strb	r2, [r3, #0]
 		LCD_Cursor_XY(lineCounter, 0);
- 8000826:	4b0f      	ldr	r3, [pc, #60]	; (8000864 <Check_End_Of_Line+0x64>)
- 8000828:	781b      	ldrb	r3, [r3, #0]
- 800082a:	2100      	movs	r1, #0
- 800082c:	4618      	mov	r0, r3
- 800082e:	f000 f97d 	bl	8000b2c <LCD_Cursor_XY>
+ 8000d3e:	4b0f      	ldr	r3, [pc, #60]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d40:	781b      	ldrb	r3, [r3, #0]
+ 8000d42:	2100      	movs	r1, #0
+ 8000d44:	4618      	mov	r0, r3
+ 8000d46:	f000 f97d 	bl	8001044 <LCD_Cursor_XY>
 		LCD_Clear_Screen();
 		LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW);
 		charCounter = 0;
 		lineCounter = 0;
 	}
 }
- 8000832:	e012      	b.n	800085a <Check_End_Of_Line+0x5a>
+ 8000d4a:	e012      	b.n	8000d72 <Check_End_Of_Line+0x5a>
 	}else if(charCounter >= LCD_WIDTH && lineCounter == LCD_HEIGHT - 1)
- 8000834:	4b0a      	ldr	r3, [pc, #40]	; (8000860 <Check_End_Of_Line+0x60>)
- 8000836:	781b      	ldrb	r3, [r3, #0]
- 8000838:	2b0f      	cmp	r3, #15
- 800083a:	d90e      	bls.n	800085a <Check_End_Of_Line+0x5a>
- 800083c:	4b09      	ldr	r3, [pc, #36]	; (8000864 <Check_End_Of_Line+0x64>)
- 800083e:	781b      	ldrb	r3, [r3, #0]
- 8000840:	2b03      	cmp	r3, #3
- 8000842:	d10a      	bne.n	800085a <Check_End_Of_Line+0x5a>
+ 8000d4c:	4b0a      	ldr	r3, [pc, #40]	; (8000d78 <Check_End_Of_Line+0x60>)
+ 8000d4e:	781b      	ldrb	r3, [r3, #0]
+ 8000d50:	2b0f      	cmp	r3, #15
+ 8000d52:	d90e      	bls.n	8000d72 <Check_End_Of_Line+0x5a>
+ 8000d54:	4b09      	ldr	r3, [pc, #36]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d56:	781b      	ldrb	r3, [r3, #0]
+ 8000d58:	2b03      	cmp	r3, #3
+ 8000d5a:	d10a      	bne.n	8000d72 <Check_End_Of_Line+0x5a>
 		LCD_Clear_Screen();
- 8000844:	f000 f9ba 	bl	8000bbc <LCD_Clear_Screen>
+ 8000d5c:	f000 f9ba 	bl	80010d4 <LCD_Clear_Screen>
 		LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW);
- 8000848:	2080      	movs	r0, #128	; 0x80
- 800084a:	f000 f875 	bl	8000938 <LCD_Send_Command>
+ 8000d60:	2080      	movs	r0, #128	; 0x80
+ 8000d62:	f000 f875 	bl	8000e50 <LCD_Send_Command>
 		charCounter = 0;
- 800084e:	4b04      	ldr	r3, [pc, #16]	; (8000860 <Check_End_Of_Line+0x60>)
- 8000850:	2200      	movs	r2, #0
- 8000852:	701a      	strb	r2, [r3, #0]
+ 8000d66:	4b04      	ldr	r3, [pc, #16]	; (8000d78 <Check_End_Of_Line+0x60>)
+ 8000d68:	2200      	movs	r2, #0
+ 8000d6a:	701a      	strb	r2, [r3, #0]
 		lineCounter = 0;
- 8000854:	4b03      	ldr	r3, [pc, #12]	; (8000864 <Check_End_Of_Line+0x64>)
- 8000856:	2200      	movs	r2, #0
- 8000858:	701a      	strb	r2, [r3, #0]
+ 8000d6c:	4b03      	ldr	r3, [pc, #12]	; (8000d7c <Check_End_Of_Line+0x64>)
+ 8000d6e:	2200      	movs	r2, #0
+ 8000d70:	701a      	strb	r2, [r3, #0]
 }
- 800085a:	bf00      	nop
- 800085c:	bd80      	pop	{r7, pc}
- 800085e:	bf00      	nop
- 8000860:	20000045 	.word	0x20000045
- 8000864:	20000046 	.word	0x20000046
+ 8000d72:	bf00      	nop
+ 8000d74:	bd80      	pop	{r7, pc}
+ 8000d76:	bf00      	nop
+ 8000d78:	20000063 	.word	0x20000063
+ 8000d7c:	20000064 	.word	0x20000064
 
-08000868 <LCD_Init>:
+08000d80 <LCD_Init>:
  * @return_value :   none.
  * Note			:   none.
 ============================================================================================================
  */
 void LCD_Init(void)
 {
- 8000868:	b580      	push	{r7, lr}
- 800086a:	af00      	add	r7, sp, #0
+ 8000d80:	b580      	push	{r7, lr}
+ 8000d82:	af00      	add	r7, sp, #0
 	/*Wait for the VCC to rise to the required value*/
 	_delay_ms(20);
- 800086c:	2014      	movs	r0, #20
- 800086e:	f7ff ff8f 	bl	8000790 <_delay_ms>
+ 8000d84:	2014      	movs	r0, #20
+ 8000d86:	f7ff ff8f 	bl	8000ca8 <_delay_ms>
 
 	/*Set all CTRL bits as output*/
 	config.pinNumber = LCD_RS_PIN;
- 8000872:	4b2e      	ldr	r3, [pc, #184]	; (800092c <LCD_Init+0xc4>)
- 8000874:	2204      	movs	r2, #4
- 8000876:	801a      	strh	r2, [r3, #0]
+ 8000d8a:	4b2e      	ldr	r3, [pc, #184]	; (8000e44 <LCD_Init+0xc4>)
+ 8000d8c:	2204      	movs	r2, #4
+ 8000d8e:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 8000878:	4b2c      	ldr	r3, [pc, #176]	; (800092c <LCD_Init+0xc4>)
- 800087a:	2201      	movs	r2, #1
- 800087c:	805a      	strh	r2, [r3, #2]
+ 8000d90:	4b2c      	ldr	r3, [pc, #176]	; (8000e44 <LCD_Init+0xc4>)
+ 8000d92:	2201      	movs	r2, #1
+ 8000d94:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_CTRL_PORT, &config);
- 800087e:	492b      	ldr	r1, [pc, #172]	; (800092c <LCD_Init+0xc4>)
- 8000880:	482b      	ldr	r0, [pc, #172]	; (8000930 <LCD_Init+0xc8>)
- 8000882:	f000 f9ad 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000d96:	492b      	ldr	r1, [pc, #172]	; (8000e44 <LCD_Init+0xc4>)
+ 8000d98:	482b      	ldr	r0, [pc, #172]	; (8000e48 <LCD_Init+0xc8>)
+ 8000d9a:	f000 f9ad 	bl	80010f8 <MCAL_GPIO_Init>
 
 	config.pinNumber = LCD_EN_PIN;
- 8000886:	4b29      	ldr	r3, [pc, #164]	; (800092c <LCD_Init+0xc4>)
- 8000888:	2205      	movs	r2, #5
- 800088a:	801a      	strh	r2, [r3, #0]
+ 8000d9e:	4b29      	ldr	r3, [pc, #164]	; (8000e44 <LCD_Init+0xc4>)
+ 8000da0:	2205      	movs	r2, #5
+ 8000da2:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 800088c:	4b27      	ldr	r3, [pc, #156]	; (800092c <LCD_Init+0xc4>)
- 800088e:	2201      	movs	r2, #1
- 8000890:	805a      	strh	r2, [r3, #2]
+ 8000da4:	4b27      	ldr	r3, [pc, #156]	; (8000e44 <LCD_Init+0xc4>)
+ 8000da6:	2201      	movs	r2, #1
+ 8000da8:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_CTRL_PORT, &config);
- 8000892:	4926      	ldr	r1, [pc, #152]	; (800092c <LCD_Init+0xc4>)
- 8000894:	4826      	ldr	r0, [pc, #152]	; (8000930 <LCD_Init+0xc8>)
- 8000896:	f000 f9a3 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000daa:	4926      	ldr	r1, [pc, #152]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dac:	4826      	ldr	r0, [pc, #152]	; (8000e48 <LCD_Init+0xc8>)
+ 8000dae:	f000 f9a3 	bl	80010f8 <MCAL_GPIO_Init>
 
 
 	/*Select ins register, Write operation and Enable zero*/
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_EN_PIN, GPIO_PIN_LOW);
- 800089a:	2200      	movs	r2, #0
- 800089c:	2105      	movs	r1, #5
- 800089e:	4824      	ldr	r0, [pc, #144]	; (8000930 <LCD_Init+0xc8>)
- 80008a0:	f000 fa11 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000db2:	2200      	movs	r2, #0
+ 8000db4:	2105      	movs	r1, #5
+ 8000db6:	4824      	ldr	r0, [pc, #144]	; (8000e48 <LCD_Init+0xc8>)
+ 8000db8:	f000 fa11 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_RS_PIN, LCD_INS_REG);
- 80008a4:	2200      	movs	r2, #0
- 80008a6:	2104      	movs	r1, #4
- 80008a8:	4821      	ldr	r0, [pc, #132]	; (8000930 <LCD_Init+0xc8>)
- 80008aa:	f000 fa0c 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000dbc:	2200      	movs	r2, #0
+ 8000dbe:	2104      	movs	r1, #4
+ 8000dc0:	4821      	ldr	r0, [pc, #132]	; (8000e48 <LCD_Init+0xc8>)
+ 8000dc2:	f000 fa0c 	bl	80011de <MCAL_GPIO_WritePin>
 	_delay_ms(15);
- 80008ae:	200f      	movs	r0, #15
- 80008b0:	f7ff ff6e 	bl	8000790 <_delay_ms>
+ 8000dc6:	200f      	movs	r0, #15
+ 8000dc8:	f7ff ff6e 	bl	8000ca8 <_delay_ms>
 	MCAL_GPIO_Init(LCD_DATA_PORT, &config);
 
 	LCD_Send_Command(LCD_FUNC_8BIT_2LINES);
 #elif LCD_MODE_ == FOUR_BIT_MODE
 	/*In case of 4 bits mode the upper 4 pins of the port are output*/
 	config.pinNumber = LCD_D4;
- 80008b4:	4b1d      	ldr	r3, [pc, #116]	; (800092c <LCD_Init+0xc4>)
- 80008b6:	220a      	movs	r2, #10
- 80008b8:	801a      	strh	r2, [r3, #0]
+ 8000dcc:	4b1d      	ldr	r3, [pc, #116]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dce:	220a      	movs	r2, #10
+ 8000dd0:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 80008ba:	4b1c      	ldr	r3, [pc, #112]	; (800092c <LCD_Init+0xc4>)
- 80008bc:	2201      	movs	r2, #1
- 80008be:	805a      	strh	r2, [r3, #2]
+ 8000dd2:	4b1c      	ldr	r3, [pc, #112]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dd4:	2201      	movs	r2, #1
+ 8000dd6:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_DATA_PORT, &config);
- 80008c0:	491a      	ldr	r1, [pc, #104]	; (800092c <LCD_Init+0xc4>)
- 80008c2:	481c      	ldr	r0, [pc, #112]	; (8000934 <LCD_Init+0xcc>)
- 80008c4:	f000 f98c 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000dd8:	491a      	ldr	r1, [pc, #104]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dda:	481c      	ldr	r0, [pc, #112]	; (8000e4c <LCD_Init+0xcc>)
+ 8000ddc:	f000 f98c 	bl	80010f8 <MCAL_GPIO_Init>
 	
 	config.pinNumber = LCD_D5;
- 80008c8:	4b18      	ldr	r3, [pc, #96]	; (800092c <LCD_Init+0xc4>)
- 80008ca:	220b      	movs	r2, #11
- 80008cc:	801a      	strh	r2, [r3, #0]
+ 8000de0:	4b18      	ldr	r3, [pc, #96]	; (8000e44 <LCD_Init+0xc4>)
+ 8000de2:	220b      	movs	r2, #11
+ 8000de4:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 80008ce:	4b17      	ldr	r3, [pc, #92]	; (800092c <LCD_Init+0xc4>)
- 80008d0:	2201      	movs	r2, #1
- 80008d2:	805a      	strh	r2, [r3, #2]
+ 8000de6:	4b17      	ldr	r3, [pc, #92]	; (8000e44 <LCD_Init+0xc4>)
+ 8000de8:	2201      	movs	r2, #1
+ 8000dea:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_DATA_PORT, &config);
- 80008d4:	4915      	ldr	r1, [pc, #84]	; (800092c <LCD_Init+0xc4>)
- 80008d6:	4817      	ldr	r0, [pc, #92]	; (8000934 <LCD_Init+0xcc>)
- 80008d8:	f000 f982 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000dec:	4915      	ldr	r1, [pc, #84]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dee:	4817      	ldr	r0, [pc, #92]	; (8000e4c <LCD_Init+0xcc>)
+ 8000df0:	f000 f982 	bl	80010f8 <MCAL_GPIO_Init>
 	
 	config.pinNumber = LCD_D6;
- 80008dc:	4b13      	ldr	r3, [pc, #76]	; (800092c <LCD_Init+0xc4>)
- 80008de:	220c      	movs	r2, #12
- 80008e0:	801a      	strh	r2, [r3, #0]
+ 8000df4:	4b13      	ldr	r3, [pc, #76]	; (8000e44 <LCD_Init+0xc4>)
+ 8000df6:	220c      	movs	r2, #12
+ 8000df8:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 80008e2:	4b12      	ldr	r3, [pc, #72]	; (800092c <LCD_Init+0xc4>)
- 80008e4:	2201      	movs	r2, #1
- 80008e6:	805a      	strh	r2, [r3, #2]
+ 8000dfa:	4b12      	ldr	r3, [pc, #72]	; (8000e44 <LCD_Init+0xc4>)
+ 8000dfc:	2201      	movs	r2, #1
+ 8000dfe:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_DATA_PORT, &config);
- 80008e8:	4910      	ldr	r1, [pc, #64]	; (800092c <LCD_Init+0xc4>)
- 80008ea:	4812      	ldr	r0, [pc, #72]	; (8000934 <LCD_Init+0xcc>)
- 80008ec:	f000 f978 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000e00:	4910      	ldr	r1, [pc, #64]	; (8000e44 <LCD_Init+0xc4>)
+ 8000e02:	4812      	ldr	r0, [pc, #72]	; (8000e4c <LCD_Init+0xcc>)
+ 8000e04:	f000 f978 	bl	80010f8 <MCAL_GPIO_Init>
 	
 	config.pinNumber = LCD_D7;
- 80008f0:	4b0e      	ldr	r3, [pc, #56]	; (800092c <LCD_Init+0xc4>)
- 80008f2:	220f      	movs	r2, #15
- 80008f4:	801a      	strh	r2, [r3, #0]
+ 8000e08:	4b0e      	ldr	r3, [pc, #56]	; (8000e44 <LCD_Init+0xc4>)
+ 8000e0a:	220f      	movs	r2, #15
+ 8000e0c:	801a      	strh	r2, [r3, #0]
 	config.pinMode = GPIO_MODE_GP_OUTPUT_PP_10MHZ;
- 80008f6:	4b0d      	ldr	r3, [pc, #52]	; (800092c <LCD_Init+0xc4>)
- 80008f8:	2201      	movs	r2, #1
- 80008fa:	805a      	strh	r2, [r3, #2]
+ 8000e0e:	4b0d      	ldr	r3, [pc, #52]	; (8000e44 <LCD_Init+0xc4>)
+ 8000e10:	2201      	movs	r2, #1
+ 8000e12:	805a      	strh	r2, [r3, #2]
 	MCAL_GPIO_Init(LCD_DATA_PORT, &config);
- 80008fc:	490b      	ldr	r1, [pc, #44]	; (800092c <LCD_Init+0xc4>)
- 80008fe:	480d      	ldr	r0, [pc, #52]	; (8000934 <LCD_Init+0xcc>)
- 8000900:	f000 f96e 	bl	8000be0 <MCAL_GPIO_Init>
+ 8000e14:	490b      	ldr	r1, [pc, #44]	; (8000e44 <LCD_Init+0xc4>)
+ 8000e16:	480d      	ldr	r0, [pc, #52]	; (8000e4c <LCD_Init+0xcc>)
+ 8000e18:	f000 f96e 	bl	80010f8 <MCAL_GPIO_Init>
 
 	_delay_ms(5);
- 8000904:	2005      	movs	r0, #5
- 8000906:	f7ff ff43 	bl	8000790 <_delay_ms>
+ 8000e1c:	2005      	movs	r0, #5
+ 8000e1e:	f7ff ff43 	bl	8000ca8 <_delay_ms>
 
 	LCD_Send_Command(LCD_RETURN_HOME);
- 800090a:	2002      	movs	r0, #2
- 800090c:	f000 f814 	bl	8000938 <LCD_Send_Command>
+ 8000e22:	2002      	movs	r0, #2
+ 8000e24:	f000 f814 	bl	8000e50 <LCD_Send_Command>
 	LCD_Send_Command(LCD_FUNC_4BIT_2LINES);
- 8000910:	2028      	movs	r0, #40	; 0x28
- 8000912:	f000 f811 	bl	8000938 <LCD_Send_Command>
+ 8000e28:	2028      	movs	r0, #40	; 0x28
+ 8000e2a:	f000 f811 	bl	8000e50 <LCD_Send_Command>
 #endif
 
 	LCD_Send_Command(LCD_ENTRY_MODE);
- 8000916:	2006      	movs	r0, #6
- 8000918:	f000 f80e 	bl	8000938 <LCD_Send_Command>
+ 8000e2e:	2006      	movs	r0, #6
+ 8000e30:	f000 f80e 	bl	8000e50 <LCD_Send_Command>
 	LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW);
- 800091c:	2080      	movs	r0, #128	; 0x80
- 800091e:	f000 f80b 	bl	8000938 <LCD_Send_Command>
+ 8000e34:	2080      	movs	r0, #128	; 0x80
+ 8000e36:	f000 f80b 	bl	8000e50 <LCD_Send_Command>
 	LCD_Send_Command(LCD_DISPLAY_ON_CURSOR_BLINK);
- 8000922:	200f      	movs	r0, #15
- 8000924:	f000 f808 	bl	8000938 <LCD_Send_Command>
+ 8000e3a:	200f      	movs	r0, #15
+ 8000e3c:	f000 f808 	bl	8000e50 <LCD_Send_Command>
 }
- 8000928:	bf00      	nop
- 800092a:	bd80      	pop	{r7, pc}
- 800092c:	2000004c 	.word	0x2000004c
- 8000930:	40010c00 	.word	0x40010c00
- 8000934:	40010800 	.word	0x40010800
+ 8000e40:	bf00      	nop
+ 8000e42:	bd80      	pop	{r7, pc}
+ 8000e44:	2000006c 	.word	0x2000006c
+ 8000e48:	40010c00 	.word	0x40010c00
+ 8000e4c:	40010800 	.word	0x40010800
 
-08000938 <LCD_Send_Command>:
+08000e50 <LCD_Send_Command>:
  * @return_value :   none.
  * Note			:   none.
 ============================================================================================================
  */
 void LCD_Send_Command(uint8 command)
 {
- 8000938:	b580      	push	{r7, lr}
- 800093a:	b082      	sub	sp, #8
- 800093c:	af00      	add	r7, sp, #0
- 800093e:	4603      	mov	r3, r0
- 8000940:	71fb      	strb	r3, [r7, #7]
+ 8000e50:	b580      	push	{r7, lr}
+ 8000e52:	b082      	sub	sp, #8
+ 8000e54:	af00      	add	r7, sp, #0
+ 8000e56:	4603      	mov	r3, r0
+ 8000e58:	71fb      	strb	r3, [r7, #7]
 	/*Check if the LCD is busy*/
 	/*LCD_Busy_Wait();*/
 
 	/*Select ins register, Write operation and Enable zero*/
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_RS_PIN, LCD_INS_REG);
- 8000942:	2200      	movs	r2, #0
- 8000944:	2104      	movs	r1, #4
- 8000946:	4831      	ldr	r0, [pc, #196]	; (8000a0c <LCD_Send_Command+0xd4>)
- 8000948:	f000 f9bd 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000e5a:	2200      	movs	r2, #0
+ 8000e5c:	2104      	movs	r1, #4
+ 8000e5e:	4831      	ldr	r0, [pc, #196]	; (8000f24 <LCD_Send_Command+0xd4>)
+ 8000e60:	f000 f9bd 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_EN_PIN, GPIO_PIN_LOW);
- 800094c:	2200      	movs	r2, #0
- 800094e:	2105      	movs	r1, #5
- 8000950:	482e      	ldr	r0, [pc, #184]	; (8000a0c <LCD_Send_Command+0xd4>)
- 8000952:	f000 f9b8 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000e64:	2200      	movs	r2, #0
+ 8000e66:	2105      	movs	r1, #5
+ 8000e68:	482e      	ldr	r0, [pc, #184]	; (8000f24 <LCD_Send_Command+0xd4>)
+ 8000e6a:	f000 f9b8 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(command, 7));
 
 	LCD_Enable_Pulse();
 #elif LCD_MODE_ == FOUR_BIT_MODE
 	/*Send the command upper nibble first*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D4, READ_BIT(command, 4));
- 8000956:	79fb      	ldrb	r3, [r7, #7]
- 8000958:	111b      	asrs	r3, r3, #4
- 800095a:	b2db      	uxtb	r3, r3
- 800095c:	f003 0301 	and.w	r3, r3, #1
- 8000960:	b2db      	uxtb	r3, r3
- 8000962:	461a      	mov	r2, r3
- 8000964:	210a      	movs	r1, #10
- 8000966:	482a      	ldr	r0, [pc, #168]	; (8000a10 <LCD_Send_Command+0xd8>)
- 8000968:	f000 f9ad 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000e6e:	79fb      	ldrb	r3, [r7, #7]
+ 8000e70:	111b      	asrs	r3, r3, #4
+ 8000e72:	b2db      	uxtb	r3, r3
+ 8000e74:	f003 0301 	and.w	r3, r3, #1
+ 8000e78:	b2db      	uxtb	r3, r3
+ 8000e7a:	461a      	mov	r2, r3
+ 8000e7c:	210a      	movs	r1, #10
+ 8000e7e:	482a      	ldr	r0, [pc, #168]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000e80:	f000 f9ad 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D5, READ_BIT(command, 5));
- 800096c:	79fb      	ldrb	r3, [r7, #7]
- 800096e:	115b      	asrs	r3, r3, #5
- 8000970:	b2db      	uxtb	r3, r3
- 8000972:	f003 0301 	and.w	r3, r3, #1
- 8000976:	b2db      	uxtb	r3, r3
- 8000978:	461a      	mov	r2, r3
- 800097a:	210b      	movs	r1, #11
- 800097c:	4824      	ldr	r0, [pc, #144]	; (8000a10 <LCD_Send_Command+0xd8>)
- 800097e:	f000 f9a2 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000e84:	79fb      	ldrb	r3, [r7, #7]
+ 8000e86:	115b      	asrs	r3, r3, #5
+ 8000e88:	b2db      	uxtb	r3, r3
+ 8000e8a:	f003 0301 	and.w	r3, r3, #1
+ 8000e8e:	b2db      	uxtb	r3, r3
+ 8000e90:	461a      	mov	r2, r3
+ 8000e92:	210b      	movs	r1, #11
+ 8000e94:	4824      	ldr	r0, [pc, #144]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000e96:	f000 f9a2 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D6, READ_BIT(command, 6));
- 8000982:	79fb      	ldrb	r3, [r7, #7]
- 8000984:	119b      	asrs	r3, r3, #6
- 8000986:	b2db      	uxtb	r3, r3
- 8000988:	f003 0301 	and.w	r3, r3, #1
- 800098c:	b2db      	uxtb	r3, r3
- 800098e:	461a      	mov	r2, r3
- 8000990:	210c      	movs	r1, #12
- 8000992:	481f      	ldr	r0, [pc, #124]	; (8000a10 <LCD_Send_Command+0xd8>)
- 8000994:	f000 f997 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000e9a:	79fb      	ldrb	r3, [r7, #7]
+ 8000e9c:	119b      	asrs	r3, r3, #6
+ 8000e9e:	b2db      	uxtb	r3, r3
+ 8000ea0:	f003 0301 	and.w	r3, r3, #1
+ 8000ea4:	b2db      	uxtb	r3, r3
+ 8000ea6:	461a      	mov	r2, r3
+ 8000ea8:	210c      	movs	r1, #12
+ 8000eaa:	481f      	ldr	r0, [pc, #124]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000eac:	f000 f997 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(command, 7));
- 8000998:	79fb      	ldrb	r3, [r7, #7]
- 800099a:	09db      	lsrs	r3, r3, #7
- 800099c:	b2db      	uxtb	r3, r3
- 800099e:	461a      	mov	r2, r3
- 80009a0:	210f      	movs	r1, #15
- 80009a2:	481b      	ldr	r0, [pc, #108]	; (8000a10 <LCD_Send_Command+0xd8>)
- 80009a4:	f000 f98f 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000eb0:	79fb      	ldrb	r3, [r7, #7]
+ 8000eb2:	09db      	lsrs	r3, r3, #7
+ 8000eb4:	b2db      	uxtb	r3, r3
+ 8000eb6:	461a      	mov	r2, r3
+ 8000eb8:	210f      	movs	r1, #15
+ 8000eba:	481b      	ldr	r0, [pc, #108]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000ebc:	f000 f98f 	bl	80011de <MCAL_GPIO_WritePin>
 	LCD_Enable_Pulse();
- 80009a8:	f7ff ff16 	bl	80007d8 <LCD_Enable_Pulse>
+ 8000ec0:	f7ff ff16 	bl	8000cf0 <LCD_Enable_Pulse>
 
 	/*Send the command lower nibble first*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D4, READ_BIT(command, 0));
- 80009ac:	79fb      	ldrb	r3, [r7, #7]
- 80009ae:	f003 0301 	and.w	r3, r3, #1
- 80009b2:	b2db      	uxtb	r3, r3
- 80009b4:	461a      	mov	r2, r3
- 80009b6:	210a      	movs	r1, #10
- 80009b8:	4815      	ldr	r0, [pc, #84]	; (8000a10 <LCD_Send_Command+0xd8>)
- 80009ba:	f000 f984 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000ec4:	79fb      	ldrb	r3, [r7, #7]
+ 8000ec6:	f003 0301 	and.w	r3, r3, #1
+ 8000eca:	b2db      	uxtb	r3, r3
+ 8000ecc:	461a      	mov	r2, r3
+ 8000ece:	210a      	movs	r1, #10
+ 8000ed0:	4815      	ldr	r0, [pc, #84]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000ed2:	f000 f984 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D5, READ_BIT(command, 1));
- 80009be:	79fb      	ldrb	r3, [r7, #7]
- 80009c0:	105b      	asrs	r3, r3, #1
- 80009c2:	b2db      	uxtb	r3, r3
- 80009c4:	f003 0301 	and.w	r3, r3, #1
- 80009c8:	b2db      	uxtb	r3, r3
- 80009ca:	461a      	mov	r2, r3
- 80009cc:	210b      	movs	r1, #11
- 80009ce:	4810      	ldr	r0, [pc, #64]	; (8000a10 <LCD_Send_Command+0xd8>)
- 80009d0:	f000 f979 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000ed6:	79fb      	ldrb	r3, [r7, #7]
+ 8000ed8:	105b      	asrs	r3, r3, #1
+ 8000eda:	b2db      	uxtb	r3, r3
+ 8000edc:	f003 0301 	and.w	r3, r3, #1
+ 8000ee0:	b2db      	uxtb	r3, r3
+ 8000ee2:	461a      	mov	r2, r3
+ 8000ee4:	210b      	movs	r1, #11
+ 8000ee6:	4810      	ldr	r0, [pc, #64]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000ee8:	f000 f979 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D6, READ_BIT(command, 2));
- 80009d4:	79fb      	ldrb	r3, [r7, #7]
- 80009d6:	109b      	asrs	r3, r3, #2
- 80009d8:	b2db      	uxtb	r3, r3
- 80009da:	f003 0301 	and.w	r3, r3, #1
- 80009de:	b2db      	uxtb	r3, r3
- 80009e0:	461a      	mov	r2, r3
- 80009e2:	210c      	movs	r1, #12
- 80009e4:	480a      	ldr	r0, [pc, #40]	; (8000a10 <LCD_Send_Command+0xd8>)
- 80009e6:	f000 f96e 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000eec:	79fb      	ldrb	r3, [r7, #7]
+ 8000eee:	109b      	asrs	r3, r3, #2
+ 8000ef0:	b2db      	uxtb	r3, r3
+ 8000ef2:	f003 0301 	and.w	r3, r3, #1
+ 8000ef6:	b2db      	uxtb	r3, r3
+ 8000ef8:	461a      	mov	r2, r3
+ 8000efa:	210c      	movs	r1, #12
+ 8000efc:	480a      	ldr	r0, [pc, #40]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000efe:	f000 f96e 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(command, 3));
- 80009ea:	79fb      	ldrb	r3, [r7, #7]
- 80009ec:	10db      	asrs	r3, r3, #3
- 80009ee:	b2db      	uxtb	r3, r3
- 80009f0:	f003 0301 	and.w	r3, r3, #1
- 80009f4:	b2db      	uxtb	r3, r3
- 80009f6:	461a      	mov	r2, r3
- 80009f8:	210f      	movs	r1, #15
- 80009fa:	4805      	ldr	r0, [pc, #20]	; (8000a10 <LCD_Send_Command+0xd8>)
- 80009fc:	f000 f963 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f02:	79fb      	ldrb	r3, [r7, #7]
+ 8000f04:	10db      	asrs	r3, r3, #3
+ 8000f06:	b2db      	uxtb	r3, r3
+ 8000f08:	f003 0301 	and.w	r3, r3, #1
+ 8000f0c:	b2db      	uxtb	r3, r3
+ 8000f0e:	461a      	mov	r2, r3
+ 8000f10:	210f      	movs	r1, #15
+ 8000f12:	4805      	ldr	r0, [pc, #20]	; (8000f28 <LCD_Send_Command+0xd8>)
+ 8000f14:	f000 f963 	bl	80011de <MCAL_GPIO_WritePin>
 	LCD_Enable_Pulse();
- 8000a00:	f7ff feea 	bl	80007d8 <LCD_Enable_Pulse>
+ 8000f18:	f7ff feea 	bl	8000cf0 <LCD_Enable_Pulse>
 #endif
 }
- 8000a04:	bf00      	nop
- 8000a06:	3708      	adds	r7, #8
- 8000a08:	46bd      	mov	sp, r7
- 8000a0a:	bd80      	pop	{r7, pc}
- 8000a0c:	40010c00 	.word	0x40010c00
- 8000a10:	40010800 	.word	0x40010800
+ 8000f1c:	bf00      	nop
+ 8000f1e:	3708      	adds	r7, #8
+ 8000f20:	46bd      	mov	sp, r7
+ 8000f22:	bd80      	pop	{r7, pc}
+ 8000f24:	40010c00 	.word	0x40010c00
+ 8000f28:	40010800 	.word	0x40010800
 
-08000a14 <LCD_Send_Char>:
+08000f2c <LCD_Send_Char>:
 * Note			:   when you get to the end of the line the next character will be printed on the next line.
 *               :   if the entire LCD is full the LCD will be cleared first then print the character.
 ============================================================================================================
  */
 void LCD_Send_Char(uint8 data)
 {
- 8000a14:	b580      	push	{r7, lr}
- 8000a16:	b082      	sub	sp, #8
- 8000a18:	af00      	add	r7, sp, #0
- 8000a1a:	4603      	mov	r3, r0
- 8000a1c:	71fb      	strb	r3, [r7, #7]
+ 8000f2c:	b580      	push	{r7, lr}
+ 8000f2e:	b082      	sub	sp, #8
+ 8000f30:	af00      	add	r7, sp, #0
+ 8000f32:	4603      	mov	r3, r0
+ 8000f34:	71fb      	strb	r3, [r7, #7]
 	/*Check if the LCD is busy*/
 	/*LCD_Busy_Wait();*/
 	Check_End_Of_Line();
- 8000a1e:	f7ff feef 	bl	8000800 <Check_End_Of_Line>
+ 8000f36:	f7ff feef 	bl	8000d18 <Check_End_Of_Line>
 
 	/*Data reigster, Write operation and Enable zero*/
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_RS_PIN, LCD_DATA_REG);
- 8000a22:	2201      	movs	r2, #1
- 8000a24:	2104      	movs	r1, #4
- 8000a26:	4834      	ldr	r0, [pc, #208]	; (8000af8 <LCD_Send_Char+0xe4>)
- 8000a28:	f000 f94d 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f3a:	2201      	movs	r2, #1
+ 8000f3c:	2104      	movs	r1, #4
+ 8000f3e:	4834      	ldr	r0, [pc, #208]	; (8001010 <LCD_Send_Char+0xe4>)
+ 8000f40:	f000 f94d 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_CTRL_PORT, LCD_EN_PIN, GPIO_PIN_LOW);
- 8000a2c:	2200      	movs	r2, #0
- 8000a2e:	2105      	movs	r1, #5
- 8000a30:	4831      	ldr	r0, [pc, #196]	; (8000af8 <LCD_Send_Char+0xe4>)
- 8000a32:	f000 f948 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f44:	2200      	movs	r2, #0
+ 8000f46:	2105      	movs	r1, #5
+ 8000f48:	4831      	ldr	r0, [pc, #196]	; (8001010 <LCD_Send_Char+0xe4>)
+ 8000f4a:	f000 f948 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(data, 7));
 
 	LCD_Enable_Pulse();
 #elif LCD_MODE_ == FOUR_BIT_MODE
 	/*Send the data upper nibble first*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D4, READ_BIT(data, 4));
- 8000a36:	79fb      	ldrb	r3, [r7, #7]
- 8000a38:	111b      	asrs	r3, r3, #4
- 8000a3a:	b2db      	uxtb	r3, r3
- 8000a3c:	f003 0301 	and.w	r3, r3, #1
- 8000a40:	b2db      	uxtb	r3, r3
- 8000a42:	461a      	mov	r2, r3
- 8000a44:	210a      	movs	r1, #10
- 8000a46:	482d      	ldr	r0, [pc, #180]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000a48:	f000 f93d 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f4e:	79fb      	ldrb	r3, [r7, #7]
+ 8000f50:	111b      	asrs	r3, r3, #4
+ 8000f52:	b2db      	uxtb	r3, r3
+ 8000f54:	f003 0301 	and.w	r3, r3, #1
+ 8000f58:	b2db      	uxtb	r3, r3
+ 8000f5a:	461a      	mov	r2, r3
+ 8000f5c:	210a      	movs	r1, #10
+ 8000f5e:	482d      	ldr	r0, [pc, #180]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000f60:	f000 f93d 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D5, READ_BIT(data, 5));
- 8000a4c:	79fb      	ldrb	r3, [r7, #7]
- 8000a4e:	115b      	asrs	r3, r3, #5
- 8000a50:	b2db      	uxtb	r3, r3
- 8000a52:	f003 0301 	and.w	r3, r3, #1
- 8000a56:	b2db      	uxtb	r3, r3
- 8000a58:	461a      	mov	r2, r3
- 8000a5a:	210b      	movs	r1, #11
- 8000a5c:	4827      	ldr	r0, [pc, #156]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000a5e:	f000 f932 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f64:	79fb      	ldrb	r3, [r7, #7]
+ 8000f66:	115b      	asrs	r3, r3, #5
+ 8000f68:	b2db      	uxtb	r3, r3
+ 8000f6a:	f003 0301 	and.w	r3, r3, #1
+ 8000f6e:	b2db      	uxtb	r3, r3
+ 8000f70:	461a      	mov	r2, r3
+ 8000f72:	210b      	movs	r1, #11
+ 8000f74:	4827      	ldr	r0, [pc, #156]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000f76:	f000 f932 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D6, READ_BIT(data, 6));
- 8000a62:	79fb      	ldrb	r3, [r7, #7]
- 8000a64:	119b      	asrs	r3, r3, #6
- 8000a66:	b2db      	uxtb	r3, r3
- 8000a68:	f003 0301 	and.w	r3, r3, #1
- 8000a6c:	b2db      	uxtb	r3, r3
- 8000a6e:	461a      	mov	r2, r3
- 8000a70:	210c      	movs	r1, #12
- 8000a72:	4822      	ldr	r0, [pc, #136]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000a74:	f000 f927 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f7a:	79fb      	ldrb	r3, [r7, #7]
+ 8000f7c:	119b      	asrs	r3, r3, #6
+ 8000f7e:	b2db      	uxtb	r3, r3
+ 8000f80:	f003 0301 	and.w	r3, r3, #1
+ 8000f84:	b2db      	uxtb	r3, r3
+ 8000f86:	461a      	mov	r2, r3
+ 8000f88:	210c      	movs	r1, #12
+ 8000f8a:	4822      	ldr	r0, [pc, #136]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000f8c:	f000 f927 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(data, 7));
- 8000a78:	79fb      	ldrb	r3, [r7, #7]
- 8000a7a:	09db      	lsrs	r3, r3, #7
- 8000a7c:	b2db      	uxtb	r3, r3
- 8000a7e:	461a      	mov	r2, r3
- 8000a80:	210f      	movs	r1, #15
- 8000a82:	481e      	ldr	r0, [pc, #120]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000a84:	f000 f91f 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000f90:	79fb      	ldrb	r3, [r7, #7]
+ 8000f92:	09db      	lsrs	r3, r3, #7
+ 8000f94:	b2db      	uxtb	r3, r3
+ 8000f96:	461a      	mov	r2, r3
+ 8000f98:	210f      	movs	r1, #15
+ 8000f9a:	481e      	ldr	r0, [pc, #120]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000f9c:	f000 f91f 	bl	80011de <MCAL_GPIO_WritePin>
 	LCD_Enable_Pulse();
- 8000a88:	f7ff fea6 	bl	80007d8 <LCD_Enable_Pulse>
+ 8000fa0:	f7ff fea6 	bl	8000cf0 <LCD_Enable_Pulse>
 
 	/*Send the data lower nibble first*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D4, READ_BIT(data, 0));
- 8000a8c:	79fb      	ldrb	r3, [r7, #7]
- 8000a8e:	f003 0301 	and.w	r3, r3, #1
- 8000a92:	b2db      	uxtb	r3, r3
- 8000a94:	461a      	mov	r2, r3
- 8000a96:	210a      	movs	r1, #10
- 8000a98:	4818      	ldr	r0, [pc, #96]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000a9a:	f000 f914 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000fa4:	79fb      	ldrb	r3, [r7, #7]
+ 8000fa6:	f003 0301 	and.w	r3, r3, #1
+ 8000faa:	b2db      	uxtb	r3, r3
+ 8000fac:	461a      	mov	r2, r3
+ 8000fae:	210a      	movs	r1, #10
+ 8000fb0:	4818      	ldr	r0, [pc, #96]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000fb2:	f000 f914 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D5, READ_BIT(data, 1));
- 8000a9e:	79fb      	ldrb	r3, [r7, #7]
- 8000aa0:	105b      	asrs	r3, r3, #1
- 8000aa2:	b2db      	uxtb	r3, r3
- 8000aa4:	f003 0301 	and.w	r3, r3, #1
- 8000aa8:	b2db      	uxtb	r3, r3
- 8000aaa:	461a      	mov	r2, r3
- 8000aac:	210b      	movs	r1, #11
- 8000aae:	4813      	ldr	r0, [pc, #76]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000ab0:	f000 f909 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000fb6:	79fb      	ldrb	r3, [r7, #7]
+ 8000fb8:	105b      	asrs	r3, r3, #1
+ 8000fba:	b2db      	uxtb	r3, r3
+ 8000fbc:	f003 0301 	and.w	r3, r3, #1
+ 8000fc0:	b2db      	uxtb	r3, r3
+ 8000fc2:	461a      	mov	r2, r3
+ 8000fc4:	210b      	movs	r1, #11
+ 8000fc6:	4813      	ldr	r0, [pc, #76]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000fc8:	f000 f909 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D6, READ_BIT(data, 2));
- 8000ab4:	79fb      	ldrb	r3, [r7, #7]
- 8000ab6:	109b      	asrs	r3, r3, #2
- 8000ab8:	b2db      	uxtb	r3, r3
- 8000aba:	f003 0301 	and.w	r3, r3, #1
- 8000abe:	b2db      	uxtb	r3, r3
- 8000ac0:	461a      	mov	r2, r3
- 8000ac2:	210c      	movs	r1, #12
- 8000ac4:	480d      	ldr	r0, [pc, #52]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000ac6:	f000 f8fe 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000fcc:	79fb      	ldrb	r3, [r7, #7]
+ 8000fce:	109b      	asrs	r3, r3, #2
+ 8000fd0:	b2db      	uxtb	r3, r3
+ 8000fd2:	f003 0301 	and.w	r3, r3, #1
+ 8000fd6:	b2db      	uxtb	r3, r3
+ 8000fd8:	461a      	mov	r2, r3
+ 8000fda:	210c      	movs	r1, #12
+ 8000fdc:	480d      	ldr	r0, [pc, #52]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000fde:	f000 f8fe 	bl	80011de <MCAL_GPIO_WritePin>
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_D7, READ_BIT(data, 3));
- 8000aca:	79fb      	ldrb	r3, [r7, #7]
- 8000acc:	10db      	asrs	r3, r3, #3
- 8000ace:	b2db      	uxtb	r3, r3
- 8000ad0:	f003 0301 	and.w	r3, r3, #1
- 8000ad4:	b2db      	uxtb	r3, r3
- 8000ad6:	461a      	mov	r2, r3
- 8000ad8:	210f      	movs	r1, #15
- 8000ada:	4808      	ldr	r0, [pc, #32]	; (8000afc <LCD_Send_Char+0xe8>)
- 8000adc:	f000 f8f3 	bl	8000cc6 <MCAL_GPIO_WritePin>
+ 8000fe2:	79fb      	ldrb	r3, [r7, #7]
+ 8000fe4:	10db      	asrs	r3, r3, #3
+ 8000fe6:	b2db      	uxtb	r3, r3
+ 8000fe8:	f003 0301 	and.w	r3, r3, #1
+ 8000fec:	b2db      	uxtb	r3, r3
+ 8000fee:	461a      	mov	r2, r3
+ 8000ff0:	210f      	movs	r1, #15
+ 8000ff2:	4808      	ldr	r0, [pc, #32]	; (8001014 <LCD_Send_Char+0xe8>)
+ 8000ff4:	f000 f8f3 	bl	80011de <MCAL_GPIO_WritePin>
 	LCD_Enable_Pulse();
- 8000ae0:	f7ff fe7a 	bl	80007d8 <LCD_Enable_Pulse>
+ 8000ff8:	f7ff fe7a 	bl	8000cf0 <LCD_Enable_Pulse>
 #endif
 	charCounter++;
- 8000ae4:	4b06      	ldr	r3, [pc, #24]	; (8000b00 <LCD_Send_Char+0xec>)
- 8000ae6:	781b      	ldrb	r3, [r3, #0]
- 8000ae8:	3301      	adds	r3, #1
- 8000aea:	b2da      	uxtb	r2, r3
- 8000aec:	4b04      	ldr	r3, [pc, #16]	; (8000b00 <LCD_Send_Char+0xec>)
- 8000aee:	701a      	strb	r2, [r3, #0]
+ 8000ffc:	4b06      	ldr	r3, [pc, #24]	; (8001018 <LCD_Send_Char+0xec>)
+ 8000ffe:	781b      	ldrb	r3, [r3, #0]
+ 8001000:	3301      	adds	r3, #1
+ 8001002:	b2da      	uxtb	r2, r3
+ 8001004:	4b04      	ldr	r3, [pc, #16]	; (8001018 <LCD_Send_Char+0xec>)
+ 8001006:	701a      	strb	r2, [r3, #0]
 }
- 8000af0:	bf00      	nop
- 8000af2:	3708      	adds	r7, #8
- 8000af4:	46bd      	mov	sp, r7
- 8000af6:	bd80      	pop	{r7, pc}
- 8000af8:	40010c00 	.word	0x40010c00
- 8000afc:	40010800 	.word	0x40010800
- 8000b00:	20000045 	.word	0x20000045
+ 8001008:	bf00      	nop
+ 800100a:	3708      	adds	r7, #8
+ 800100c:	46bd      	mov	sp, r7
+ 800100e:	bd80      	pop	{r7, pc}
+ 8001010:	40010c00 	.word	0x40010c00
+ 8001014:	40010800 	.word	0x40010800
+ 8001018:	20000063 	.word	0x20000063
 
-08000b04 <LCD_Send_String>:
+0800101c <LCD_Send_String>:
  * Note			:   when you get to the end of the line the next character will be printed on the next line.
  *              :   if the entire LCD is full the LCD will be cleared first then print the character.
 ============================================================================================================
  */
 void LCD_Send_String(uint8* string)
 {
- 8000b04:	b580      	push	{r7, lr}
- 8000b06:	b082      	sub	sp, #8
- 8000b08:	af00      	add	r7, sp, #0
- 8000b0a:	6078      	str	r0, [r7, #4]
+ 800101c:	b580      	push	{r7, lr}
+ 800101e:	b082      	sub	sp, #8
+ 8001020:	af00      	add	r7, sp, #0
+ 8001022:	6078      	str	r0, [r7, #4]
 	while(*string)
- 8000b0c:	e006      	b.n	8000b1c <LCD_Send_String+0x18>
+ 8001024:	e006      	b.n	8001034 <LCD_Send_String+0x18>
 	{
 		LCD_Send_Char(*string++);
- 8000b0e:	687b      	ldr	r3, [r7, #4]
- 8000b10:	1c5a      	adds	r2, r3, #1
- 8000b12:	607a      	str	r2, [r7, #4]
- 8000b14:	781b      	ldrb	r3, [r3, #0]
- 8000b16:	4618      	mov	r0, r3
- 8000b18:	f7ff ff7c 	bl	8000a14 <LCD_Send_Char>
+ 8001026:	687b      	ldr	r3, [r7, #4]
+ 8001028:	1c5a      	adds	r2, r3, #1
+ 800102a:	607a      	str	r2, [r7, #4]
+ 800102c:	781b      	ldrb	r3, [r3, #0]
+ 800102e:	4618      	mov	r0, r3
+ 8001030:	f7ff ff7c 	bl	8000f2c <LCD_Send_Char>
 	while(*string)
- 8000b1c:	687b      	ldr	r3, [r7, #4]
- 8000b1e:	781b      	ldrb	r3, [r3, #0]
- 8000b20:	2b00      	cmp	r3, #0
- 8000b22:	d1f4      	bne.n	8000b0e <LCD_Send_String+0xa>
+ 8001034:	687b      	ldr	r3, [r7, #4]
+ 8001036:	781b      	ldrb	r3, [r3, #0]
+ 8001038:	2b00      	cmp	r3, #0
+ 800103a:	d1f4      	bne.n	8001026 <LCD_Send_String+0xa>
 	}
 }
- 8000b24:	bf00      	nop
- 8000b26:	3708      	adds	r7, #8
- 8000b28:	46bd      	mov	sp, r7
- 8000b2a:	bd80      	pop	{r7, pc}
+ 800103c:	bf00      	nop
+ 800103e:	3708      	adds	r7, #8
+ 8001040:	46bd      	mov	sp, r7
+ 8001042:	bd80      	pop	{r7, pc}
 
-08000b2c <LCD_Cursor_XY>:
+08001044 <LCD_Cursor_XY>:
  * @return_value:   none.
  * Note			:   none.
 ============================================================================================================
  */
 void LCD_Cursor_XY(uint8 line, uint8 col)
 {
- 8000b2c:	b580      	push	{r7, lr}
- 8000b2e:	b082      	sub	sp, #8
- 8000b30:	af00      	add	r7, sp, #0
- 8000b32:	4603      	mov	r3, r0
- 8000b34:	460a      	mov	r2, r1
- 8000b36:	71fb      	strb	r3, [r7, #7]
- 8000b38:	4613      	mov	r3, r2
- 8000b3a:	71bb      	strb	r3, [r7, #6]
+ 8001044:	b580      	push	{r7, lr}
+ 8001046:	b082      	sub	sp, #8
+ 8001048:	af00      	add	r7, sp, #0
+ 800104a:	4603      	mov	r3, r0
+ 800104c:	460a      	mov	r2, r1
+ 800104e:	71fb      	strb	r3, [r7, #7]
+ 8001050:	4613      	mov	r3, r2
+ 8001052:	71bb      	strb	r3, [r7, #6]
 	/*Check if the arguments are in the allowed range*/
 	if(((col >= 0) && (col < LCD_WIDTH)) && ((line >= 0) && (line < LCD_HEIGHT)))
- 8000b3c:	79bb      	ldrb	r3, [r7, #6]
- 8000b3e:	2b0f      	cmp	r3, #15
- 8000b40:	d833      	bhi.n	8000baa <LCD_Cursor_XY+0x7e>
- 8000b42:	79fb      	ldrb	r3, [r7, #7]
- 8000b44:	2b03      	cmp	r3, #3
- 8000b46:	d830      	bhi.n	8000baa <LCD_Cursor_XY+0x7e>
+ 8001054:	79bb      	ldrb	r3, [r7, #6]
+ 8001056:	2b0f      	cmp	r3, #15
+ 8001058:	d833      	bhi.n	80010c2 <LCD_Cursor_XY+0x7e>
+ 800105a:	79fb      	ldrb	r3, [r7, #7]
+ 800105c:	2b03      	cmp	r3, #3
+ 800105e:	d830      	bhi.n	80010c2 <LCD_Cursor_XY+0x7e>
 	{
 		switch (line)
- 8000b48:	79fb      	ldrb	r3, [r7, #7]
- 8000b4a:	2b03      	cmp	r3, #3
- 8000b4c:	d826      	bhi.n	8000b9c <LCD_Cursor_XY+0x70>
- 8000b4e:	a201      	add	r2, pc, #4	; (adr r2, 8000b54 <LCD_Cursor_XY+0x28>)
- 8000b50:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8000b54:	08000b65 	.word	0x08000b65
- 8000b58:	08000b73 	.word	0x08000b73
- 8000b5c:	08000b81 	.word	0x08000b81
- 8000b60:	08000b8f 	.word	0x08000b8f
+ 8001060:	79fb      	ldrb	r3, [r7, #7]
+ 8001062:	2b03      	cmp	r3, #3
+ 8001064:	d826      	bhi.n	80010b4 <LCD_Cursor_XY+0x70>
+ 8001066:	a201      	add	r2, pc, #4	; (adr r2, 800106c <LCD_Cursor_XY+0x28>)
+ 8001068:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 800106c:	0800107d 	.word	0x0800107d
+ 8001070:	0800108b 	.word	0x0800108b
+ 8001074:	08001099 	.word	0x08001099
+ 8001078:	080010a7 	.word	0x080010a7
 		{
 		case LCD_FIRST_LINE:
 			LCD_Send_Command(LCD_BEGIN_AT_FIRST_ROW + col);
- 8000b64:	79bb      	ldrb	r3, [r7, #6]
- 8000b66:	3b80      	subs	r3, #128	; 0x80
- 8000b68:	b2db      	uxtb	r3, r3
- 8000b6a:	4618      	mov	r0, r3
- 8000b6c:	f7ff fee4 	bl	8000938 <LCD_Send_Command>
+ 800107c:	79bb      	ldrb	r3, [r7, #6]
+ 800107e:	3b80      	subs	r3, #128	; 0x80
+ 8001080:	b2db      	uxtb	r3, r3
+ 8001082:	4618      	mov	r0, r3
+ 8001084:	f7ff fee4 	bl	8000e50 <LCD_Send_Command>
 			break;
- 8000b70:	e015      	b.n	8000b9e <LCD_Cursor_XY+0x72>
+ 8001088:	e015      	b.n	80010b6 <LCD_Cursor_XY+0x72>
 		case LCD_SECOND_LINE:
 			LCD_Send_Command(LCD_BEGIN_AT_SECOND_ROW + col);
- 8000b72:	79bb      	ldrb	r3, [r7, #6]
- 8000b74:	3b40      	subs	r3, #64	; 0x40
- 8000b76:	b2db      	uxtb	r3, r3
- 8000b78:	4618      	mov	r0, r3
- 8000b7a:	f7ff fedd 	bl	8000938 <LCD_Send_Command>
+ 800108a:	79bb      	ldrb	r3, [r7, #6]
+ 800108c:	3b40      	subs	r3, #64	; 0x40
+ 800108e:	b2db      	uxtb	r3, r3
+ 8001090:	4618      	mov	r0, r3
+ 8001092:	f7ff fedd 	bl	8000e50 <LCD_Send_Command>
 			break;
- 8000b7e:	e00e      	b.n	8000b9e <LCD_Cursor_XY+0x72>
+ 8001096:	e00e      	b.n	80010b6 <LCD_Cursor_XY+0x72>
 		case LCD_THIRD_LINE:
 			LCD_Send_Command(LCD_BEGIN_AT_THIRD_ROW + col);
- 8000b80:	79bb      	ldrb	r3, [r7, #6]
- 8000b82:	3b70      	subs	r3, #112	; 0x70
- 8000b84:	b2db      	uxtb	r3, r3
- 8000b86:	4618      	mov	r0, r3
- 8000b88:	f7ff fed6 	bl	8000938 <LCD_Send_Command>
+ 8001098:	79bb      	ldrb	r3, [r7, #6]
+ 800109a:	3b70      	subs	r3, #112	; 0x70
+ 800109c:	b2db      	uxtb	r3, r3
+ 800109e:	4618      	mov	r0, r3
+ 80010a0:	f7ff fed6 	bl	8000e50 <LCD_Send_Command>
 			break;
- 8000b8c:	e007      	b.n	8000b9e <LCD_Cursor_XY+0x72>
+ 80010a4:	e007      	b.n	80010b6 <LCD_Cursor_XY+0x72>
 		case LCD_FOURTH_LINE:
 			LCD_Send_Command(LCD_BEGIN_AT_FOURTH_ROW + col);
- 8000b8e:	79bb      	ldrb	r3, [r7, #6]
- 8000b90:	3b30      	subs	r3, #48	; 0x30
- 8000b92:	b2db      	uxtb	r3, r3
- 8000b94:	4618      	mov	r0, r3
- 8000b96:	f7ff fecf 	bl	8000938 <LCD_Send_Command>
+ 80010a6:	79bb      	ldrb	r3, [r7, #6]
+ 80010a8:	3b30      	subs	r3, #48	; 0x30
+ 80010aa:	b2db      	uxtb	r3, r3
+ 80010ac:	4618      	mov	r0, r3
+ 80010ae:	f7ff fecf 	bl	8000e50 <LCD_Send_Command>
 			break;
- 8000b9a:	e000      	b.n	8000b9e <LCD_Cursor_XY+0x72>
+ 80010b2:	e000      	b.n	80010b6 <LCD_Cursor_XY+0x72>
 
 		default:
 			break;
- 8000b9c:	bf00      	nop
+ 80010b4:	bf00      	nop
 		}
 
 		lineCounter = line;
- 8000b9e:	4a05      	ldr	r2, [pc, #20]	; (8000bb4 <LCD_Cursor_XY+0x88>)
- 8000ba0:	79fb      	ldrb	r3, [r7, #7]
- 8000ba2:	7013      	strb	r3, [r2, #0]
+ 80010b6:	4a05      	ldr	r2, [pc, #20]	; (80010cc <LCD_Cursor_XY+0x88>)
+ 80010b8:	79fb      	ldrb	r3, [r7, #7]
+ 80010ba:	7013      	strb	r3, [r2, #0]
 		charCounter = col;
- 8000ba4:	4a04      	ldr	r2, [pc, #16]	; (8000bb8 <LCD_Cursor_XY+0x8c>)
- 8000ba6:	79bb      	ldrb	r3, [r7, #6]
- 8000ba8:	7013      	strb	r3, [r2, #0]
+ 80010bc:	4a04      	ldr	r2, [pc, #16]	; (80010d0 <LCD_Cursor_XY+0x8c>)
+ 80010be:	79bb      	ldrb	r3, [r7, #6]
+ 80010c0:	7013      	strb	r3, [r2, #0]
 	}
 }
- 8000baa:	bf00      	nop
- 8000bac:	3708      	adds	r7, #8
- 8000bae:	46bd      	mov	sp, r7
- 8000bb0:	bd80      	pop	{r7, pc}
- 8000bb2:	bf00      	nop
- 8000bb4:	20000046 	.word	0x20000046
- 8000bb8:	20000045 	.word	0x20000045
+ 80010c2:	bf00      	nop
+ 80010c4:	3708      	adds	r7, #8
+ 80010c6:	46bd      	mov	sp, r7
+ 80010c8:	bd80      	pop	{r7, pc}
+ 80010ca:	bf00      	nop
+ 80010cc:	20000064 	.word	0x20000064
+ 80010d0:	20000063 	.word	0x20000063
 
-08000bbc <LCD_Clear_Screen>:
+080010d4 <LCD_Clear_Screen>:
  * @return_value :   none.
  * Note			:   none.
 ============================================================================================================
  */
 void LCD_Clear_Screen()
 {
- 8000bbc:	b580      	push	{r7, lr}
- 8000bbe:	af00      	add	r7, sp, #0
+ 80010d4:	b580      	push	{r7, lr}
+ 80010d6:	af00      	add	r7, sp, #0
 	LCD_Send_Command(LCD_CLEAR_SCREEN);
- 8000bc0:	2001      	movs	r0, #1
- 8000bc2:	f7ff feb9 	bl	8000938 <LCD_Send_Command>
+ 80010d8:	2001      	movs	r0, #1
+ 80010da:	f7ff feb9 	bl	8000e50 <LCD_Send_Command>
 	charCounter = 0;
- 8000bc6:	4b04      	ldr	r3, [pc, #16]	; (8000bd8 <LCD_Clear_Screen+0x1c>)
- 8000bc8:	2200      	movs	r2, #0
- 8000bca:	701a      	strb	r2, [r3, #0]
+ 80010de:	4b04      	ldr	r3, [pc, #16]	; (80010f0 <LCD_Clear_Screen+0x1c>)
+ 80010e0:	2200      	movs	r2, #0
+ 80010e2:	701a      	strb	r2, [r3, #0]
 	lineCounter = 0;
- 8000bcc:	4b03      	ldr	r3, [pc, #12]	; (8000bdc <LCD_Clear_Screen+0x20>)
- 8000bce:	2200      	movs	r2, #0
- 8000bd0:	701a      	strb	r2, [r3, #0]
+ 80010e4:	4b03      	ldr	r3, [pc, #12]	; (80010f4 <LCD_Clear_Screen+0x20>)
+ 80010e6:	2200      	movs	r2, #0
+ 80010e8:	701a      	strb	r2, [r3, #0]
 }
- 8000bd2:	bf00      	nop
- 8000bd4:	bd80      	pop	{r7, pc}
- 8000bd6:	bf00      	nop
- 8000bd8:	20000045 	.word	0x20000045
- 8000bdc:	20000046 	.word	0x20000046
+ 80010ea:	bf00      	nop
+ 80010ec:	bd80      	pop	{r7, pc}
+ 80010ee:	bf00      	nop
+ 80010f0:	20000063 	.word	0x20000063
+ 80010f4:	20000064 	.word	0x20000064
 
-08000be0 <MCAL_GPIO_Init>:
+080010f8 <MCAL_GPIO_Init>:
 * Note			:   Stm32F103C6 MCU has GPIO A,B,C,D,E Modules,
 * 				:	But LQFP48 Package has only GPIO A,B,PART of C/D exported as external PINS from the MCU
 *===============================================
 */
 void MCAL_GPIO_Init(volatile GPIO_t* GPIOx ,GPIO_Pin_Config_t* pinConfig)
 {
- 8000be0:	b480      	push	{r7}
- 8000be2:	b085      	sub	sp, #20
- 8000be4:	af00      	add	r7, sp, #0
- 8000be6:	6078      	str	r0, [r7, #4]
- 8000be8:	6039      	str	r1, [r7, #0]
+ 80010f8:	b480      	push	{r7}
+ 80010fa:	b085      	sub	sp, #20
+ 80010fc:	af00      	add	r7, sp, #0
+ 80010fe:	6078      	str	r0, [r7, #4]
+ 8001100:	6039      	str	r1, [r7, #0]
     /*
     Choose the correct control register based on the pin number
     CRL for pin(0 >> 7)
     CRH for pin(8 >> 15)
      */
     CTRL = (pinConfig->pinNumber < 8)? &(GPIOx->CRL) : &(GPIOx->CRH);
- 8000bea:	683b      	ldr	r3, [r7, #0]
- 8000bec:	881b      	ldrh	r3, [r3, #0]
- 8000bee:	2b07      	cmp	r3, #7
- 8000bf0:	d801      	bhi.n	8000bf6 <MCAL_GPIO_Init+0x16>
- 8000bf2:	687b      	ldr	r3, [r7, #4]
- 8000bf4:	e001      	b.n	8000bfa <MCAL_GPIO_Init+0x1a>
- 8000bf6:	687b      	ldr	r3, [r7, #4]
- 8000bf8:	3304      	adds	r3, #4
- 8000bfa:	60fb      	str	r3, [r7, #12]
+ 8001102:	683b      	ldr	r3, [r7, #0]
+ 8001104:	881b      	ldrh	r3, [r3, #0]
+ 8001106:	2b07      	cmp	r3, #7
+ 8001108:	d801      	bhi.n	800110e <MCAL_GPIO_Init+0x16>
+ 800110a:	687b      	ldr	r3, [r7, #4]
+ 800110c:	e001      	b.n	8001112 <MCAL_GPIO_Init+0x1a>
+ 800110e:	687b      	ldr	r3, [r7, #4]
+ 8001110:	3304      	adds	r3, #4
+ 8001112:	60fb      	str	r3, [r7, #12]
 
     /*Get the needed shift for each pin as each pin takes 4 bits in the register*/
     shift = ((pinConfig->pinNumber % 8) * 4);
- 8000bfc:	683b      	ldr	r3, [r7, #0]
- 8000bfe:	881b      	ldrh	r3, [r3, #0]
- 8000c00:	b2db      	uxtb	r3, r3
- 8000c02:	f003 0307 	and.w	r3, r3, #7
- 8000c06:	b2db      	uxtb	r3, r3
- 8000c08:	009b      	lsls	r3, r3, #2
- 8000c0a:	72fb      	strb	r3, [r7, #11]
+ 8001114:	683b      	ldr	r3, [r7, #0]
+ 8001116:	881b      	ldrh	r3, [r3, #0]
+ 8001118:	b2db      	uxtb	r3, r3
+ 800111a:	f003 0307 	and.w	r3, r3, #7
+ 800111e:	b2db      	uxtb	r3, r3
+ 8001120:	009b      	lsls	r3, r3, #2
+ 8001122:	72fb      	strb	r3, [r7, #11]
 
 
     *(CTRL) &= ~(0xF << shift);                /*Clear the bits assigned for the required pin number*/
- 8000c0c:	68fb      	ldr	r3, [r7, #12]
- 8000c0e:	681b      	ldr	r3, [r3, #0]
- 8000c10:	7afa      	ldrb	r2, [r7, #11]
- 8000c12:	210f      	movs	r1, #15
- 8000c14:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c18:	43d2      	mvns	r2, r2
- 8000c1a:	401a      	ands	r2, r3
- 8000c1c:	68fb      	ldr	r3, [r7, #12]
- 8000c1e:	601a      	str	r2, [r3, #0]
+ 8001124:	68fb      	ldr	r3, [r7, #12]
+ 8001126:	681b      	ldr	r3, [r3, #0]
+ 8001128:	7afa      	ldrb	r2, [r7, #11]
+ 800112a:	210f      	movs	r1, #15
+ 800112c:	fa01 f202 	lsl.w	r2, r1, r2
+ 8001130:	43d2      	mvns	r2, r2
+ 8001132:	401a      	ands	r2, r3
+ 8001134:	68fb      	ldr	r3, [r7, #12]
+ 8001136:	601a      	str	r2, [r3, #0]
 
     /*Input pull-up and pull-down have the same configuration code*/
     if(pinConfig->pinMode == GPIO_MODE_INPUT_PD)
- 8000c20:	683b      	ldr	r3, [r7, #0]
- 8000c22:	885b      	ldrh	r3, [r3, #2]
- 8000c24:	2b10      	cmp	r3, #16
- 8000c26:	d114      	bne.n	8000c52 <MCAL_GPIO_Init+0x72>
+ 8001138:	683b      	ldr	r3, [r7, #0]
+ 800113a:	885b      	ldrh	r3, [r3, #2]
+ 800113c:	2b10      	cmp	r3, #16
+ 800113e:	d114      	bne.n	800116a <MCAL_GPIO_Init+0x72>
     {
         *(CTRL) |= (GPIO_MODE_INPUT_PU << shift);
- 8000c28:	68fb      	ldr	r3, [r7, #12]
- 8000c2a:	681b      	ldr	r3, [r3, #0]
- 8000c2c:	7afa      	ldrb	r2, [r7, #11]
- 8000c2e:	2108      	movs	r1, #8
- 8000c30:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c34:	431a      	orrs	r2, r3
- 8000c36:	68fb      	ldr	r3, [r7, #12]
- 8000c38:	601a      	str	r2, [r3, #0]
+ 8001140:	68fb      	ldr	r3, [r7, #12]
+ 8001142:	681b      	ldr	r3, [r3, #0]
+ 8001144:	7afa      	ldrb	r2, [r7, #11]
+ 8001146:	2108      	movs	r1, #8
+ 8001148:	fa01 f202 	lsl.w	r2, r1, r2
+ 800114c:	431a      	orrs	r2, r3
+ 800114e:	68fb      	ldr	r3, [r7, #12]
+ 8001150:	601a      	str	r2, [r3, #0]
         CLEAR_BIT(GPIOx->ODR, pinConfig->pinNumber);
- 8000c3a:	687b      	ldr	r3, [r7, #4]
- 8000c3c:	68db      	ldr	r3, [r3, #12]
- 8000c3e:	683a      	ldr	r2, [r7, #0]
- 8000c40:	8812      	ldrh	r2, [r2, #0]
- 8000c42:	4611      	mov	r1, r2
- 8000c44:	2201      	movs	r2, #1
- 8000c46:	408a      	lsls	r2, r1
- 8000c48:	43d2      	mvns	r2, r2
- 8000c4a:	401a      	ands	r2, r3
- 8000c4c:	687b      	ldr	r3, [r7, #4]
- 8000c4e:	60da      	str	r2, [r3, #12]
+ 8001152:	687b      	ldr	r3, [r7, #4]
+ 8001154:	68db      	ldr	r3, [r3, #12]
+ 8001156:	683a      	ldr	r2, [r7, #0]
+ 8001158:	8812      	ldrh	r2, [r2, #0]
+ 800115a:	4611      	mov	r1, r2
+ 800115c:	2201      	movs	r2, #1
+ 800115e:	408a      	lsls	r2, r1
+ 8001160:	43d2      	mvns	r2, r2
+ 8001162:	401a      	ands	r2, r3
+ 8001164:	687b      	ldr	r3, [r7, #4]
+ 8001166:	60da      	str	r2, [r3, #12]
         if(pinConfig->pinMode == GPIO_MODE_INPUT_PU)
         {
             SET_BIT(GPIOx->ODR, pinConfig->pinNumber);
         }
     }
 }
- 8000c50:	e018      	b.n	8000c84 <MCAL_GPIO_Init+0xa4>
+ 8001168:	e018      	b.n	800119c <MCAL_GPIO_Init+0xa4>
         *(CTRL) |= (pinConfig->pinMode << shift);  /*Set the mode*/
- 8000c52:	68fb      	ldr	r3, [r7, #12]
- 8000c54:	681b      	ldr	r3, [r3, #0]
- 8000c56:	683a      	ldr	r2, [r7, #0]
- 8000c58:	8852      	ldrh	r2, [r2, #2]
- 8000c5a:	4611      	mov	r1, r2
- 8000c5c:	7afa      	ldrb	r2, [r7, #11]
- 8000c5e:	fa01 f202 	lsl.w	r2, r1, r2
- 8000c62:	431a      	orrs	r2, r3
- 8000c64:	68fb      	ldr	r3, [r7, #12]
- 8000c66:	601a      	str	r2, [r3, #0]
+ 800116a:	68fb      	ldr	r3, [r7, #12]
+ 800116c:	681b      	ldr	r3, [r3, #0]
+ 800116e:	683a      	ldr	r2, [r7, #0]
+ 8001170:	8852      	ldrh	r2, [r2, #2]
+ 8001172:	4611      	mov	r1, r2
+ 8001174:	7afa      	ldrb	r2, [r7, #11]
+ 8001176:	fa01 f202 	lsl.w	r2, r1, r2
+ 800117a:	431a      	orrs	r2, r3
+ 800117c:	68fb      	ldr	r3, [r7, #12]
+ 800117e:	601a      	str	r2, [r3, #0]
         if(pinConfig->pinMode == GPIO_MODE_INPUT_PU)
- 8000c68:	683b      	ldr	r3, [r7, #0]
- 8000c6a:	885b      	ldrh	r3, [r3, #2]
- 8000c6c:	2b08      	cmp	r3, #8
- 8000c6e:	d109      	bne.n	8000c84 <MCAL_GPIO_Init+0xa4>
+ 8001180:	683b      	ldr	r3, [r7, #0]
+ 8001182:	885b      	ldrh	r3, [r3, #2]
+ 8001184:	2b08      	cmp	r3, #8
+ 8001186:	d109      	bne.n	800119c <MCAL_GPIO_Init+0xa4>
             SET_BIT(GPIOx->ODR, pinConfig->pinNumber);
- 8000c70:	687b      	ldr	r3, [r7, #4]
- 8000c72:	68db      	ldr	r3, [r3, #12]
- 8000c74:	683a      	ldr	r2, [r7, #0]
- 8000c76:	8812      	ldrh	r2, [r2, #0]
- 8000c78:	4611      	mov	r1, r2
- 8000c7a:	2201      	movs	r2, #1
- 8000c7c:	408a      	lsls	r2, r1
- 8000c7e:	431a      	orrs	r2, r3
- 8000c80:	687b      	ldr	r3, [r7, #4]
- 8000c82:	60da      	str	r2, [r3, #12]
+ 8001188:	687b      	ldr	r3, [r7, #4]
+ 800118a:	68db      	ldr	r3, [r3, #12]
+ 800118c:	683a      	ldr	r2, [r7, #0]
+ 800118e:	8812      	ldrh	r2, [r2, #0]
+ 8001190:	4611      	mov	r1, r2
+ 8001192:	2201      	movs	r2, #1
+ 8001194:	408a      	lsls	r2, r1
+ 8001196:	431a      	orrs	r2, r3
+ 8001198:	687b      	ldr	r3, [r7, #4]
+ 800119a:	60da      	str	r2, [r3, #12]
 }
- 8000c84:	bf00      	nop
- 8000c86:	3714      	adds	r7, #20
- 8000c88:	46bd      	mov	sp, r7
- 8000c8a:	bc80      	pop	{r7}
- 8000c8c:	4770      	bx	lr
+ 800119c:	bf00      	nop
+ 800119e:	3714      	adds	r7, #20
+ 80011a0:	46bd      	mov	sp, r7
+ 80011a2:	bc80      	pop	{r7}
+ 80011a4:	4770      	bx	lr
 
-08000c8e <MCAL_GPIO_ReadPin>:
+080011a6 <MCAL_GPIO_ReadPin>:
 * @return_value :   Current pin status which can be a value of @ref GPIO_PIN_STATUS.
 * Note			:   none.
 *===============================================
 */
 uint8 MCAL_GPIO_ReadPin(volatile GPIO_t* GPIOx, uint16 pinNumber)
 {
- 8000c8e:	b480      	push	{r7}
- 8000c90:	b085      	sub	sp, #20
- 8000c92:	af00      	add	r7, sp, #0
- 8000c94:	6078      	str	r0, [r7, #4]
- 8000c96:	460b      	mov	r3, r1
- 8000c98:	807b      	strh	r3, [r7, #2]
+ 80011a6:	b480      	push	{r7}
+ 80011a8:	b085      	sub	sp, #20
+ 80011aa:	af00      	add	r7, sp, #0
+ 80011ac:	6078      	str	r0, [r7, #4]
+ 80011ae:	460b      	mov	r3, r1
+ 80011b0:	807b      	strh	r3, [r7, #2]
     uint8 status;
     status = (READ_BIT(GPIOx->IDR, pinNumber))? (uint8)(GPIO_PIN_HIGH): (uint8)(GPIO_PIN_LOW);
- 8000c9a:	687b      	ldr	r3, [r7, #4]
- 8000c9c:	689b      	ldr	r3, [r3, #8]
- 8000c9e:	887a      	ldrh	r2, [r7, #2]
- 8000ca0:	2101      	movs	r1, #1
- 8000ca2:	fa01 f202 	lsl.w	r2, r1, r2
- 8000ca6:	401a      	ands	r2, r3
- 8000ca8:	887b      	ldrh	r3, [r7, #2]
- 8000caa:	fa22 f303 	lsr.w	r3, r2, r3
- 8000cae:	2b00      	cmp	r3, #0
- 8000cb0:	bf14      	ite	ne
- 8000cb2:	2301      	movne	r3, #1
- 8000cb4:	2300      	moveq	r3, #0
- 8000cb6:	b2db      	uxtb	r3, r3
- 8000cb8:	73fb      	strb	r3, [r7, #15]
+ 80011b2:	687b      	ldr	r3, [r7, #4]
+ 80011b4:	689b      	ldr	r3, [r3, #8]
+ 80011b6:	887a      	ldrh	r2, [r7, #2]
+ 80011b8:	2101      	movs	r1, #1
+ 80011ba:	fa01 f202 	lsl.w	r2, r1, r2
+ 80011be:	401a      	ands	r2, r3
+ 80011c0:	887b      	ldrh	r3, [r7, #2]
+ 80011c2:	fa22 f303 	lsr.w	r3, r2, r3
+ 80011c6:	2b00      	cmp	r3, #0
+ 80011c8:	bf14      	ite	ne
+ 80011ca:	2301      	movne	r3, #1
+ 80011cc:	2300      	moveq	r3, #0
+ 80011ce:	b2db      	uxtb	r3, r3
+ 80011d0:	73fb      	strb	r3, [r7, #15]
 
     return status;
- 8000cba:	7bfb      	ldrb	r3, [r7, #15]
+ 80011d2:	7bfb      	ldrb	r3, [r7, #15]
 }
- 8000cbc:	4618      	mov	r0, r3
- 8000cbe:	3714      	adds	r7, #20
- 8000cc0:	46bd      	mov	sp, r7
- 8000cc2:	bc80      	pop	{r7}
- 8000cc4:	4770      	bx	lr
+ 80011d4:	4618      	mov	r0, r3
+ 80011d6:	3714      	adds	r7, #20
+ 80011d8:	46bd      	mov	sp, r7
+ 80011da:	bc80      	pop	{r7}
+ 80011dc:	4770      	bx	lr
 
-08000cc6 <MCAL_GPIO_WritePin>:
+080011de <MCAL_GPIO_WritePin>:
 * @return_value :   none.
 * Note			:   none.
 *===============================================
 */
 void MCAL_GPIO_WritePin(volatile GPIO_t* GPIOx, uint16 pinNumber, uint8 value)
 {
- 8000cc6:	b480      	push	{r7}
- 8000cc8:	b083      	sub	sp, #12
- 8000cca:	af00      	add	r7, sp, #0
- 8000ccc:	6078      	str	r0, [r7, #4]
- 8000cce:	460b      	mov	r3, r1
- 8000cd0:	807b      	strh	r3, [r7, #2]
- 8000cd2:	4613      	mov	r3, r2
- 8000cd4:	707b      	strb	r3, [r7, #1]
+ 80011de:	b480      	push	{r7}
+ 80011e0:	b083      	sub	sp, #12
+ 80011e2:	af00      	add	r7, sp, #0
+ 80011e4:	6078      	str	r0, [r7, #4]
+ 80011e6:	460b      	mov	r3, r1
+ 80011e8:	807b      	strh	r3, [r7, #2]
+ 80011ea:	4613      	mov	r3, r2
+ 80011ec:	707b      	strb	r3, [r7, #1]
     if(value == GPIO_PIN_HIGH)
- 8000cd6:	787b      	ldrb	r3, [r7, #1]
- 8000cd8:	2b01      	cmp	r3, #1
- 8000cda:	d109      	bne.n	8000cf0 <MCAL_GPIO_WritePin+0x2a>
+ 80011ee:	787b      	ldrb	r3, [r7, #1]
+ 80011f0:	2b01      	cmp	r3, #1
+ 80011f2:	d109      	bne.n	8001208 <MCAL_GPIO_WritePin+0x2a>
     {
         SET_BIT(GPIOx->ODR, pinNumber);
- 8000cdc:	687b      	ldr	r3, [r7, #4]
- 8000cde:	68db      	ldr	r3, [r3, #12]
- 8000ce0:	887a      	ldrh	r2, [r7, #2]
- 8000ce2:	2101      	movs	r1, #1
- 8000ce4:	fa01 f202 	lsl.w	r2, r1, r2
- 8000ce8:	431a      	orrs	r2, r3
- 8000cea:	687b      	ldr	r3, [r7, #4]
- 8000cec:	60da      	str	r2, [r3, #12]
+ 80011f4:	687b      	ldr	r3, [r7, #4]
+ 80011f6:	68db      	ldr	r3, [r3, #12]
+ 80011f8:	887a      	ldrh	r2, [r7, #2]
+ 80011fa:	2101      	movs	r1, #1
+ 80011fc:	fa01 f202 	lsl.w	r2, r1, r2
+ 8001200:	431a      	orrs	r2, r3
+ 8001202:	687b      	ldr	r3, [r7, #4]
+ 8001204:	60da      	str	r2, [r3, #12]
     }else{
         CLEAR_BIT(GPIOx->ODR, pinNumber);
     }
 }
- 8000cee:	e009      	b.n	8000d04 <MCAL_GPIO_WritePin+0x3e>
+ 8001206:	e009      	b.n	800121c <MCAL_GPIO_WritePin+0x3e>
         CLEAR_BIT(GPIOx->ODR, pinNumber);
- 8000cf0:	687b      	ldr	r3, [r7, #4]
- 8000cf2:	68db      	ldr	r3, [r3, #12]
- 8000cf4:	887a      	ldrh	r2, [r7, #2]
- 8000cf6:	2101      	movs	r1, #1
- 8000cf8:	fa01 f202 	lsl.w	r2, r1, r2
- 8000cfc:	43d2      	mvns	r2, r2
- 8000cfe:	401a      	ands	r2, r3
- 8000d00:	687b      	ldr	r3, [r7, #4]
- 8000d02:	60da      	str	r2, [r3, #12]
+ 8001208:	687b      	ldr	r3, [r7, #4]
+ 800120a:	68db      	ldr	r3, [r3, #12]
+ 800120c:	887a      	ldrh	r2, [r7, #2]
+ 800120e:	2101      	movs	r1, #1
+ 8001210:	fa01 f202 	lsl.w	r2, r1, r2
+ 8001214:	43d2      	mvns	r2, r2
+ 8001216:	401a      	ands	r2, r3
+ 8001218:	687b      	ldr	r3, [r7, #4]
+ 800121a:	60da      	str	r2, [r3, #12]
 }
- 8000d04:	bf00      	nop
- 8000d06:	370c      	adds	r7, #12
- 8000d08:	46bd      	mov	sp, r7
- 8000d0a:	bc80      	pop	{r7}
- 8000d0c:	4770      	bx	lr
+ 800121c:	bf00      	nop
+ 800121e:	370c      	adds	r7, #12
+ 8001220:	46bd      	mov	sp, r7
+ 8001222:	bc80      	pop	{r7}
+ 8001224:	4770      	bx	lr
 	...
 
-08000d10 <__libc_init_array>:
- 8000d10:	b570      	push	{r4, r5, r6, lr}
- 8000d12:	2500      	movs	r5, #0
- 8000d14:	4e0c      	ldr	r6, [pc, #48]	; (8000d48 <__libc_init_array+0x38>)
- 8000d16:	4c0d      	ldr	r4, [pc, #52]	; (8000d4c <__libc_init_array+0x3c>)
- 8000d18:	1ba4      	subs	r4, r4, r6
- 8000d1a:	10a4      	asrs	r4, r4, #2
- 8000d1c:	42a5      	cmp	r5, r4
- 8000d1e:	d109      	bne.n	8000d34 <__libc_init_array+0x24>
- 8000d20:	f000 f81a 	bl	8000d58 <_init>
- 8000d24:	2500      	movs	r5, #0
- 8000d26:	4e0a      	ldr	r6, [pc, #40]	; (8000d50 <__libc_init_array+0x40>)
- 8000d28:	4c0a      	ldr	r4, [pc, #40]	; (8000d54 <__libc_init_array+0x44>)
- 8000d2a:	1ba4      	subs	r4, r4, r6
- 8000d2c:	10a4      	asrs	r4, r4, #2
- 8000d2e:	42a5      	cmp	r5, r4
- 8000d30:	d105      	bne.n	8000d3e <__libc_init_array+0x2e>
- 8000d32:	bd70      	pop	{r4, r5, r6, pc}
- 8000d34:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 8000d38:	4798      	blx	r3
- 8000d3a:	3501      	adds	r5, #1
- 8000d3c:	e7ee      	b.n	8000d1c <__libc_init_array+0xc>
- 8000d3e:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 8000d42:	4798      	blx	r3
- 8000d44:	3501      	adds	r5, #1
- 8000d46:	e7f2      	b.n	8000d2e <__libc_init_array+0x1e>
- 8000d48:	08000e08 	.word	0x08000e08
- 8000d4c:	08000e08 	.word	0x08000e08
- 8000d50:	08000e08 	.word	0x08000e08
- 8000d54:	08000e0c 	.word	0x08000e0c
+08001228 <__libc_init_array>:
+ 8001228:	b570      	push	{r4, r5, r6, lr}
+ 800122a:	2500      	movs	r5, #0
+ 800122c:	4e0c      	ldr	r6, [pc, #48]	; (8001260 <__libc_init_array+0x38>)
+ 800122e:	4c0d      	ldr	r4, [pc, #52]	; (8001264 <__libc_init_array+0x3c>)
+ 8001230:	1ba4      	subs	r4, r4, r6
+ 8001232:	10a4      	asrs	r4, r4, #2
+ 8001234:	42a5      	cmp	r5, r4
+ 8001236:	d109      	bne.n	800124c <__libc_init_array+0x24>
+ 8001238:	f000 f822 	bl	8001280 <_init>
+ 800123c:	2500      	movs	r5, #0
+ 800123e:	4e0a      	ldr	r6, [pc, #40]	; (8001268 <__libc_init_array+0x40>)
+ 8001240:	4c0a      	ldr	r4, [pc, #40]	; (800126c <__libc_init_array+0x44>)
+ 8001242:	1ba4      	subs	r4, r4, r6
+ 8001244:	10a4      	asrs	r4, r4, #2
+ 8001246:	42a5      	cmp	r5, r4
+ 8001248:	d105      	bne.n	8001256 <__libc_init_array+0x2e>
+ 800124a:	bd70      	pop	{r4, r5, r6, pc}
+ 800124c:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 8001250:	4798      	blx	r3
+ 8001252:	3501      	adds	r5, #1
+ 8001254:	e7ee      	b.n	8001234 <__libc_init_array+0xc>
+ 8001256:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 800125a:	4798      	blx	r3
+ 800125c:	3501      	adds	r5, #1
+ 800125e:	e7f2      	b.n	8001246 <__libc_init_array+0x1e>
+ 8001260:	080013ec 	.word	0x080013ec
+ 8001264:	080013ec 	.word	0x080013ec
+ 8001268:	080013ec 	.word	0x080013ec
+ 800126c:	080013f0 	.word	0x080013f0
 
-08000d58 <_init>:
- 8000d58:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000d5a:	bf00      	nop
- 8000d5c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000d5e:	bc08      	pop	{r3}
- 8000d60:	469e      	mov	lr, r3
- 8000d62:	4770      	bx	lr
+08001270 <strcpy>:
+ 8001270:	4603      	mov	r3, r0
+ 8001272:	f811 2b01 	ldrb.w	r2, [r1], #1
+ 8001276:	f803 2b01 	strb.w	r2, [r3], #1
+ 800127a:	2a00      	cmp	r2, #0
+ 800127c:	d1f9      	bne.n	8001272 <strcpy+0x2>
+ 800127e:	4770      	bx	lr
 
-08000d64 <_fini>:
- 8000d64:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000d66:	bf00      	nop
- 8000d68:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000d6a:	bc08      	pop	{r3}
- 8000d6c:	469e      	mov	lr, r3
- 8000d6e:	4770      	bx	lr
+08001280 <_init>:
+ 8001280:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8001282:	bf00      	nop
+ 8001284:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8001286:	bc08      	pop	{r3}
+ 8001288:	469e      	mov	lr, r3
+ 800128a:	4770      	bx	lr
+
+0800128c <_fini>:
+ 800128c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800128e:	bf00      	nop
+ 8001290:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8001292:	bc08      	pop	{r3}
+ 8001294:	469e      	mov	lr, r3
+ 8001296:	4770      	bx	lr

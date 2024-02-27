@@ -33,6 +33,11 @@
 /** @defgroup Local Defines
   * @{
   */
+
+/**
+ * @brief A struct to hold the admin login information.
+ * 
+ */
 typedef struct 
 {
     uint8 adminUserID[ADMIN_USERID_SIZE + 1];
@@ -46,20 +51,48 @@ typedef struct
   * @{
   */
 
-/*Input of keypad*/
+/** @defgroup KEYPAD_INPUT
+  * @{
+  */
 static uint8 pressedKey;    
 static uint8 userInputCount = 0;
+/**
+  * @}
+  */
 
-/*User input*/
+
+/** @defgroup USER_INPUT
+  * @{
+  */
 static uint8 Glob_userIDinput[ADMIN_USERID_SIZE + 1];
 static uint8 Glob_passwordinput[ADMIN_PASSWORD_SIZE + 1];
+/**
+  * @}
+  */
 
-/*Authorized admins login info list*/
+/** @defgroup ADMIN_INFO
+  * @{
+  */
+/**
+ * @brief This array holds the login information of all the authorized admins. 
+ * 
+ */
 static sAdmin_Info_t Glob_adminsList[NUMBER_OF_ADMINS] = ADMINS_LIST;
 
 static uint8 loginAttemptsCounter = 1;
 
-/*Authorized drivers IDs info list*/
+/**
+ * @brief Current operation being performed by the admin.
+ * 
+ */
+static uint8 currentOperation;
+/**
+  * @}
+  */
+
+/** @defgroup DRIVER_IDS_INFO
+  * @{
+  */
 static uint8 Glob_tempDriverIDinput[AUTHORIZED_ID_SIZE + 1];
 static uint8 Glob_DriversIDsList[AUTHORIZED_IDS_MAX_COUNT][AUTHORIZED_ID_SIZE + 1];
 static uint8 Glob_AuthIDsCount = 0;
@@ -67,8 +100,12 @@ static uint8 Glob_AuthIDsCount = 0;
   * @}
   */
 
+/**
+  * @}
+  */
 
-/** @defgroup Local Functions
+
+/** @defgroup PRIVATE_FUNCTIONS_DEFENITIONS
   * @{
   */
 
@@ -159,6 +196,12 @@ void st_Admin_DisplayAddNewIDMessage(void)
 */
 void st_Admin_AddedIDsuccessfully(void)
 {
+   /*Copy the ID into the main list*/
+   strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
+
+   /*Increase the IDs count in the system*/
+   Glob_AuthIDsCount++;
+   
    LCD_Clear_Screen();
 
    LCD_Send_String(stringfy("ID Added successfully"));
@@ -187,6 +230,63 @@ void st_Admin_IDalreadyExists(void)
 
 /**
 ======================================================================================================================
+* @Func_name	: st_Admin_RemovedIDsuccessfully
+* @brief		  : A function to warn the admin if he tries to register an already registered ID.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_RemovedIDsuccessfully(void)
+{
+  LCD_Clear_Screen();
+  LCD_Send_String(stringfy("ID Deleted!"));
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+  LCD_Send_String(stringfy("main menu => '*'"));
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_IDnotFound
+* @brief		  : Function to inform the user that the required ID doesn't exist.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_IDnotFound(void)
+{
+  LCD_Clear_Screen();
+  LCD_Send_String(stringfy("ID Doesn't Exist"));
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+  LCD_Send_String(stringfy("main menu => '*'"));
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+
+}
+
+/**
+======================================================================================================================
+* @Func_name	: deleteID
+* @brief		  : Function to remove an element from the list by copying the last element in its place.
+* @param [in]	: IDindex: index of the element to be removed.
+* Note			  : The order of the elements in the list does not matter.
+======================================================================================================================
+*/
+void deleteID(uint8 IDindex)
+{
+  /*If the ID to be deleted is in the end of the list just decrease the IDs count*/
+  if(IDindex < Glob_AuthIDsCount - 1)
+  {
+    /*Delete the required ID from the list*/
+    strcpy((sint8  *)Glob_DriversIDsList[IDindex], (const sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount - 1]);
+  }else{
+
+  }
+
+  Glob_AuthIDsCount--;
+}
+
+/**
+======================================================================================================================
 * @Func_name	: st_Admin_CheckRepeatedID
 * @brief		  : FUnction to check if the ID to be registered already exists in the system.
 * Note			  : none.
@@ -200,11 +300,25 @@ void st_Admin_CheckRepeatedID(void)
   if(!strcmp((const sint8 *)Glob_tempDriverIDinput, (const sint8 *)Glob_DriversIDsList[counter]))
   {
       repeated = TRUE;
+  }else{
+
   }
 
   if(repeated)
   {
-    Admin_Dashboard_State = st_Admin_IDalreadyExists;
+    if(currentOperation == ADMIN_ADD_ID)
+    {
+      Admin_Dashboard_State = st_Admin_IDalreadyExists;
+    }else if(currentOperation == ADMIN_REMOVE_ID)
+    {
+      deleteID(counter);
+      Admin_Dashboard_State = st_Admin_RemovedIDsuccessfully;
+    }else{
+
+    }
+
+    counter = 0;    
+
   }else{
     counter++;
 
@@ -214,14 +328,44 @@ void st_Admin_CheckRepeatedID(void)
       Admin_Dashboard_State = st_Admin_CheckRepeatedID;
     }else{
       counter = 0;
-      /*Copy the ID into the main list*/
-      strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
 
-      /*Increase the IDs count in the system*/
-      Glob_AuthIDsCount++;
+      if(currentOperation == ADMIN_ADD_ID)
+      {
+        Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+      }else if(currentOperation == ADMIN_REMOVE_ID)
+      { 
+        Admin_Dashboard_State = st_Admin_IDnotFound;
+      }else{
 
-      Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+      }
     }
+  }
+}
+
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_DisplayRemoveIDMessage
+* @brief		  : A function to prompt the user to enter a an ID to be deleted from the system.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_DisplayRemoveIDMessage(void)
+{
+  LCD_Clear_Screen();
+
+  if(Glob_AuthIDsCount > 0)
+  {
+    LCD_Send_String(stringfy("Enter ID:"));
+
+    Admin_Dashboard_State = st_Admin_RemoveID;
+  }else{
+
+    LCD_Send_String(stringfy("IDs List Empty"));
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("main menu => '*'"));
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
   }
 }
 /**
@@ -487,7 +631,7 @@ void st_Admin_GetAdminOption(void)
     Admin_Dashboard_State = st_Admin_DisplayAddNewIDMessage;
     break;
   case ADMIN_REMOVE_ID:
-    Admin_Dashboard_State = st_Admin_RemoveID;
+    Admin_Dashboard_State = st_Admin_DisplayRemoveIDMessage;
     break;
   case ADMIN_SAVE_ID:
     Admin_Dashboard_State = st_Admin_SaveOnEEPROM;
@@ -506,6 +650,8 @@ void st_Admin_GetAdminOption(void)
   default:
     break;
   }
+
+  currentOperation = pressedKey;
 }
 
 /**
@@ -538,11 +684,6 @@ void st_Admin_AddNewID(void)
         /*If there is no registerd IDs in the system no need to check if the ID is repeated*/
         if(Glob_AuthIDsCount == 0)
         {
-          /*Copy the ID into the main list*/
-          strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
-
-          Glob_AuthIDsCount++;
-
           /*Set next state*/
           Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
         }else{
@@ -564,7 +705,29 @@ void st_Admin_AddNewID(void)
 */
 void st_Admin_RemoveID(void)
 {
+LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
+    
+    pressedKey = Keypad_Get_Char();
 
+    if(pressedKey != NULL_CHAR)
+    {   
+        LCD_Send_Char(pressedKey);
+        Glob_tempDriverIDinput[userInputCount] = pressedKey;
+        userInputCount++;
+    }else{
+        
+    }
+
+    if(userInputCount >= AUTHORIZED_ID_SIZE)
+    {
+        Glob_tempDriverIDinput[userInputCount] = '\0';
+        userInputCount = 0;
+
+        Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+    }else{
+        /*Stay in the same state*/
+        Admin_Dashboard_State = st_Admin_AddNewID;
+    }
 }
 
 /**
