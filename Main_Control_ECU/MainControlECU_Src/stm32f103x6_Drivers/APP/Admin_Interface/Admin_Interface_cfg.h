@@ -13,6 +13,11 @@
 *           Configuration Macros 
 *===============================================
 */
+
+/** @defgroup ADMIN_CONFIGURATIONS
+  * @{
+  */
+
 /*Set the maximum allowed login attempts before timeour*/
 #define ADMIN_MAX_LOGIN_ATTEMPTS    3
 
@@ -26,5 +31,23 @@
 /*A list of all the admins info {userID, password}*/
 #define ADMINS_LIST                 {{"1234", "0000"},\
                                     {"1482", "6666"}}   
+/**
+  * @}
+  */
+ 
+/** @defgroup DRIVERS_CONFIGURATION
+   * @{
+   */
+  
+/*Set the maximum allowed number of authorized IDs*/
+#define AUTHORIZED_IDS_MAX_COUNT     5
+
+/*Set the maximum size of an authorized IDs*/
+#define AUTHORIZED_ID_SIZE          3
+
+ /**
+   * @}
+   */
+
 
 #endif  /* APP_ADMIN_INTERFACE_ADMIN_INTERFACE_CFG_H_ */

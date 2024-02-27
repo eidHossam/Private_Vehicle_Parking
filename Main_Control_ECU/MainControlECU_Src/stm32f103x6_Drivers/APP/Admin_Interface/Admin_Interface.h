@@ -142,6 +142,15 @@ void st_Admin_RemoveID(void);
 */
 void st_Admin_SaveOnEEPROM(void);
 
+/**
+======================================================================================================================
+* @Func_name	:   st_Admin_ShowIDsList
+* @brief		  :   Function to show all the authorized IDs in the system.
+* Note			  :   none.
+======================================================================================================================
+*/
+void st_Admin_ShowIDsList(void);
+
 
 
 #endif /* APP_ADMIN_INTERFACE_H_ */

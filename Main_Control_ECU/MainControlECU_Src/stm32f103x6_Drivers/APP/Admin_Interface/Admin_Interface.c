@@ -22,6 +22,8 @@
 #define ADMIN_ADD_ID              '1'
 #define ADMIN_REMOVE_ID           '2'
 #define ADMIN_SAVE_ID             '3'
+#define ADMIN_MORE_OPTIONS        '4'
+#define ADMIN_SHOW_IDS_LIST       '5'
 #define ADMIN_LOGOUT              '*'
 
 /**
@@ -43,16 +45,24 @@ typedef struct
 /** @defgroup Local Variables
   * @{
   */
-static uint8 pressedKey;    /*Input of keypad*/
+
+/*Input of keypad*/
+static uint8 pressedKey;    
 static uint8 userInputCount = 0;
 
+/*User input*/
 static uint8 Glob_userIDinput[ADMIN_USERID_SIZE + 1];
 static uint8 Glob_passwordinput[ADMIN_PASSWORD_SIZE + 1];
 
+/*Authorized admins login info list*/
 static sAdmin_Info_t Glob_adminsList[NUMBER_OF_ADMINS] = ADMINS_LIST;
 
 static uint8 loginAttemptsCounter = 1;
 
+/*Authorized drivers IDs info list*/
+static uint8 Glob_tempDriverIDinput[AUTHORIZED_ID_SIZE + 1];
+static uint8 Glob_DriversIDsList[AUTHORIZED_IDS_MAX_COUNT][AUTHORIZED_ID_SIZE + 1];
+static uint8 Glob_AuthIDsCount = 0;
 /**
   * @}
   */
@@ -62,6 +72,13 @@ static uint8 loginAttemptsCounter = 1;
   * @{
   */
 
+/**
+======================================================================================================================
+* @Func_name	: Peripheral_Clock_Init
+* @brief		  : Enable all the required peripherals clocks.
+* Note			  : none.
+======================================================================================================================
+*/
 void Peripheral_Clock_Init()
 {
 	/*Enable GPIO_A*/
@@ -72,8 +89,146 @@ void Peripheral_Clock_Init()
 }
 
 /**
+======================================================================================================================
+* @Func_name	: st_Admin_BacktoMainMenu
+* @brief		  : Function to route the user back to the admin interface main menu.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_BacktoMainMenu(void)
+{
+   pressedKey = Keypad_Get_Char();
+
+   if(pressedKey == '*')
+   {
+      Admin_Dashboard_State = st_Admin_ShowAdminOptions;
+   }else{
+
+   }
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_MoreOptions
+* @brief		  : An extension for the function that prints the admin options on the LCD.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_MoreOptions()
+{
+    LCD_Clear_Screen();
+    LCD_Send_String(stringfy("5.Show IDs list"));
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("'*' To Logout"));
+
+  Admin_Dashboard_State = st_Admin_GetAdminOption;
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_DisplayAddNewIDMessage
+* @brief		  : A function to prompt the user to enter a new ID to be registered.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_DisplayAddNewIDMessage(void)
+{
+  LCD_Clear_Screen();
+
+  if(Glob_AuthIDsCount < AUTHORIZED_IDS_MAX_COUNT)
+  {
+    LCD_Send_String(stringfy("Enter ID:"));
+
+    Admin_Dashboard_State = st_Admin_AddNewID;
+  }else{
+
+    LCD_Send_String(stringfy("IDs count exceeded"));
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("main menu => '*'"));
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+  }
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_AddedIDsuccessfully
+* @brief		  : Function to tell the user that the process of adding a new ID had been successfull.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_AddedIDsuccessfully(void)
+{
+   LCD_Clear_Screen();
+
+   LCD_Send_String(stringfy("ID Added successfully"));
+   LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+   LCD_Send_String(stringfy("main menu => '*'"));
+
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_IDalreadyExists
+* @brief		  : A function to warn the admin if he tries to register an already registered ID.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_IDalreadyExists(void)
+{
+  LCD_Clear_Screen();
+  LCD_Send_String(stringfy("ID already exist"));
+  LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+  LCD_Send_String(stringfy("main menu => '*'"));
+  
+  Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_CheckRepeatedID
+* @brief		  : FUnction to check if the ID to be registered already exists in the system.
+* Note			  : none.
+======================================================================================================================
+*/
+void st_Admin_CheckRepeatedID(void)
+{
+  static uint8 counter = 0;
+  boolean repeated = FALSE;
+
+  if(!strcmp((const sint8 *)Glob_tempDriverIDinput, (const sint8 *)Glob_DriversIDsList[counter]))
+  {
+      repeated = TRUE;
+  }
+
+  if(repeated)
+  {
+    Admin_Dashboard_State = st_Admin_IDalreadyExists;
+  }else{
+    counter++;
+
+    /*Check the other IDs in the system if there is any*/
+    if(counter < Glob_AuthIDsCount)
+    {
+      Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+    }else{
+      counter = 0;
+      /*Copy the ID into the main list*/
+      strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
+
+      /*Increase the IDs count in the system*/
+      Glob_AuthIDsCount++;
+
+      Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+    }
+  }
+}
+/**
   * @}
   */
+
+
 /**************************************************************************************************************************
 ===============================================
 *       States Definitions
@@ -310,7 +465,7 @@ void st_Admin_ShowAdminOptions(void)
     LCD_Cursor_XY(LCD_THIRD_LINE, 0);
     LCD_Send_String(stringfy("3.Save on EEPROM"));
     LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
-    LCD_Send_String(stringfy("'*' to logout: "));
+    LCD_Send_String(stringfy("4.More options"));
 
     Admin_Dashboard_State = st_Admin_GetAdminOption;
 }
@@ -329,13 +484,20 @@ void st_Admin_GetAdminOption(void)
   switch (pressedKey)
   {
   case ADMIN_ADD_ID:
-    Admin_Dashboard_State = st_Admin_AddNewID;
+    Admin_Dashboard_State = st_Admin_DisplayAddNewIDMessage;
     break;
   case ADMIN_REMOVE_ID:
     Admin_Dashboard_State = st_Admin_RemoveID;
     break;
   case ADMIN_SAVE_ID:
     Admin_Dashboard_State = st_Admin_SaveOnEEPROM;
+    break;
+  case ADMIN_MORE_OPTIONS:
+    Admin_Dashboard_State = st_Admin_MoreOptions;
+    break;
+  case ADMIN_SHOW_IDS_LIST:
+    LCD_Clear_Screen();
+    Admin_Dashboard_State = st_Admin_ShowIDsList;   
     break;
   case ADMIN_LOGOUT:
     Admin_Dashboard_State = st_Admin_InitialMessage;
@@ -355,7 +517,42 @@ void st_Admin_GetAdminOption(void)
 */
 void st_Admin_AddNewID(void)
 {
+    LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
+    
+    pressedKey = Keypad_Get_Char();
 
+    if(pressedKey != NULL_CHAR)
+    {   
+        LCD_Send_Char(pressedKey);
+        Glob_tempDriverIDinput[userInputCount] = pressedKey;
+        userInputCount++;
+    }else{
+        
+    }
+
+    if(userInputCount >= AUTHORIZED_ID_SIZE)
+    {
+        Glob_tempDriverIDinput[userInputCount] = '\0';
+        userInputCount = 0;
+
+        /*If there is no registerd IDs in the system no need to check if the ID is repeated*/
+        if(Glob_AuthIDsCount == 0)
+        {
+          /*Copy the ID into the main list*/
+          strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
+
+          Glob_AuthIDsCount++;
+
+          /*Set next state*/
+          Admin_Dashboard_State = st_Admin_AddedIDsuccessfully;
+        }else{
+          Admin_Dashboard_State = st_Admin_CheckRepeatedID;
+        }
+
+    }else{
+        /*Stay in the same state*/
+        Admin_Dashboard_State = st_Admin_AddNewID;
+    }
 }
 
 /**
@@ -382,3 +579,39 @@ void st_Admin_SaveOnEEPROM(void)
 
 }
 
+/**
+======================================================================================================================
+* @Func_name	:   st_Admin_ShowIDsList
+* @brief		  :   Function to show all the authorized IDs in the system.
+* Note			  :   none.
+======================================================================================================================
+*/
+void st_Admin_ShowIDsList(void)
+{
+  static uint8 printedIDcounter = 0;
+
+  if(Glob_AuthIDsCount > 0)
+  {
+    LCD_Send_String(Glob_DriversIDsList[printedIDcounter]);
+    LCD_Send_Char(',');
+
+    printedIDcounter++;
+  }else{
+
+    LCD_Send_String(stringfy("List Empty"));
+  }
+
+
+  if(printedIDcounter >= Glob_AuthIDsCount)
+  {
+    printedIDcounter = 0;
+
+    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
+    LCD_Send_String(stringfy("main menu => '*'"));
+
+    Admin_Dashboard_State = st_Admin_BacktoMainMenu;
+  }else{
+
+    Admin_Dashboard_State = st_Admin_ShowIDsList;
+  }
+}
