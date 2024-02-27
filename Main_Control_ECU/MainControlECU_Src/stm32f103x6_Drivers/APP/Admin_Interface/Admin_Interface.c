@@ -116,7 +116,7 @@ static uint8 Glob_AuthIDsCount = 0;
 * Note			  : none.
 ======================================================================================================================
 */
-void Peripheral_Clock_Init()
+static void Peripheral_Clock_Init()
 {
 	/*Enable GPIO_A*/
 	APB2_PERI_CLOCK_EN(APB2_IOPA);
@@ -132,7 +132,7 @@ void Peripheral_Clock_Init()
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_BacktoMainMenu(void)
+static void st_Admin_BacktoMainMenu(void)
 {
    pressedKey = Keypad_Get_Char();
 
@@ -151,7 +151,7 @@ void st_Admin_BacktoMainMenu(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_MoreOptions()
+static void st_Admin_MoreOptions()
 {
     LCD_Clear_Screen();
     LCD_Send_String(stringfy("5.Show IDs list"));
@@ -168,7 +168,7 @@ void st_Admin_MoreOptions()
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_DisplayAddNewIDMessage(void)
+static void st_Admin_DisplayAddNewIDMessage(void)
 {
   LCD_Clear_Screen();
 
@@ -194,7 +194,7 @@ void st_Admin_DisplayAddNewIDMessage(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_AddedIDsuccessfully(void)
+static void st_Admin_AddedIDsuccessfully(void)
 {
    /*Copy the ID into the main list*/
    strcpy((sint8 *)Glob_DriversIDsList[Glob_AuthIDsCount], (const sint8 *)Glob_tempDriverIDinput);
@@ -218,7 +218,7 @@ void st_Admin_AddedIDsuccessfully(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_IDalreadyExists(void)
+static void st_Admin_IDalreadyExists(void)
 {
   LCD_Clear_Screen();
   LCD_Send_String(stringfy("ID already exist"));
@@ -235,7 +235,7 @@ void st_Admin_IDalreadyExists(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_RemovedIDsuccessfully(void)
+static void st_Admin_RemovedIDsuccessfully(void)
 {
   LCD_Clear_Screen();
   LCD_Send_String(stringfy("ID Deleted!"));
@@ -252,7 +252,7 @@ void st_Admin_RemovedIDsuccessfully(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_IDnotFound(void)
+static void st_Admin_IDnotFound(void)
 {
   LCD_Clear_Screen();
   LCD_Send_String(stringfy("ID Doesn't Exist"));
@@ -271,7 +271,7 @@ void st_Admin_IDnotFound(void)
 * Note			  : The order of the elements in the list does not matter.
 ======================================================================================================================
 */
-void deleteID(uint8 IDindex)
+static void deleteID(uint8 IDindex)
 {
   /*If the ID to be deleted is in the end of the list just decrease the IDs count*/
   if(IDindex < Glob_AuthIDsCount - 1)
@@ -292,7 +292,7 @@ void deleteID(uint8 IDindex)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_CheckRepeatedID(void)
+static void st_Admin_CheckRepeatedID(void)
 {
   static uint8 counter = 0;
   boolean repeated = FALSE;
@@ -350,7 +350,7 @@ void st_Admin_CheckRepeatedID(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_DisplayRemoveIDMessage(void)
+static void st_Admin_DisplayRemoveIDMessage(void)
 {
   LCD_Clear_Screen();
 

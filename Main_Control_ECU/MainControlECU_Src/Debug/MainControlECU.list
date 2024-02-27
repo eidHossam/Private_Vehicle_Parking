@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002b32  00000000  00000000  00020041  2**0
+ 12 .debug_info   00002b27  00000000  00000000  00020041  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000007e1  00000000  00000000  00022b73  2**0
+ 13 .debug_abbrev 00000809  00000000  00000000  00022b68  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00000b94  00000000  00000000  00023354  2**0
+ 14 .debug_loc    00000b94  00000000  00000000  00023371  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_aranges 00000238  00000000  00000000  00023ee8  2**3
+ 15 .debug_aranges 00000238  00000000  00000000  00023f08  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 000001d0  00000000  00000000  00024120  2**3
+ 16 .debug_ranges 000001d0  00000000  00000000  00024140  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macro  00002352  00000000  00000000  000242f0  2**0
+ 17 .debug_macro  00002352  00000000  00000000  00024310  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_line   000023ac  00000000  00000000  00026642  2**0
+ 18 .debug_line   000023ac  00000000  00000000  00026662  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_str    00009617  00000000  00000000  000289ee  2**0
+ 19 .debug_str    00009617  00000000  00000000  00028a0e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .comment      0000007b  00000000  00000000  00032005  2**0
+ 20 .comment      0000007b  00000000  00000000  00032025  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  000006d4  00000000  00000000  00032080  2**2
+ 21 .debug_frame  000006d4  00000000  00000000  000320a0  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -254,7 +254,7 @@ void Dashboard_ECU_APP_Loop(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void Peripheral_Clock_Init()
+static void Peripheral_Clock_Init()
 {
  8000208:	b480      	push	{r7}
  800020a:	af00      	add	r7, sp, #0
@@ -285,7 +285,7 @@ void Peripheral_Clock_Init()
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_BacktoMainMenu(void)
+static void st_Admin_BacktoMainMenu(void)
 {
  8000230:	b580      	push	{r7, lr}
  8000232:	af00      	add	r7, sp, #0
@@ -322,7 +322,7 @@ void st_Admin_BacktoMainMenu(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_MoreOptions()
+static void st_Admin_MoreOptions()
 {
  8000260:	b580      	push	{r7, lr}
  8000262:	af00      	add	r7, sp, #0
@@ -357,7 +357,7 @@ void st_Admin_MoreOptions()
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_DisplayAddNewIDMessage(void)
+static void st_Admin_DisplayAddNewIDMessage(void)
 {
  8000298:	b580      	push	{r7, lr}
  800029a:	af00      	add	r7, sp, #0
@@ -415,7 +415,7 @@ void st_Admin_DisplayAddNewIDMessage(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_AddedIDsuccessfully(void)
+static void st_Admin_AddedIDsuccessfully(void)
 {
  80002f0:	b580      	push	{r7, lr}
  80002f2:	af00      	add	r7, sp, #0
@@ -473,7 +473,7 @@ void st_Admin_AddedIDsuccessfully(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_IDalreadyExists(void)
+static void st_Admin_IDalreadyExists(void)
 {
  8000350:	b580      	push	{r7, lr}
  8000352:	af00      	add	r7, sp, #0
@@ -508,7 +508,7 @@ void st_Admin_IDalreadyExists(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_RemovedIDsuccessfully(void)
+static void st_Admin_RemovedIDsuccessfully(void)
 {
  8000388:	b580      	push	{r7, lr}
  800038a:	af00      	add	r7, sp, #0
@@ -543,7 +543,7 @@ void st_Admin_RemovedIDsuccessfully(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_IDnotFound(void)
+static void st_Admin_IDnotFound(void)
 {
  80003c0:	b580      	push	{r7, lr}
  80003c2:	af00      	add	r7, sp, #0
@@ -579,7 +579,7 @@ void st_Admin_IDnotFound(void)
 * Note			  : The order of the elements in the list does not matter.
 ======================================================================================================================
 */
-void deleteID(uint8 IDindex)
+static void deleteID(uint8 IDindex)
 {
  80003f8:	b580      	push	{r7, lr}
  80003fa:	b082      	sub	sp, #8
@@ -633,7 +633,7 @@ void deleteID(uint8 IDindex)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_CheckRepeatedID(void)
+static void st_Admin_CheckRepeatedID(void)
 {
  8000444:	b580      	push	{r7, lr}
  8000446:	b082      	sub	sp, #8
@@ -775,7 +775,7 @@ void st_Admin_CheckRepeatedID(void)
 * Note			  : none.
 ======================================================================================================================
 */
-void st_Admin_DisplayRemoveIDMessage(void)
+static void st_Admin_DisplayRemoveIDMessage(void)
 {
  8000518:	b580      	push	{r7, lr}
  800051a:	af00      	add	r7, sp, #0
