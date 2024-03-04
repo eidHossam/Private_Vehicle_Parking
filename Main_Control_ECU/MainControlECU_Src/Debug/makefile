@@ -8,6 +8,8 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include stm32f103x6_Drivers/MCAL/SYSTICK/subdir.mk
+-include stm32f103x6_Drivers/MCAL/RCC/subdir.mk
 -include stm32f103x6_Drivers/MCAL/GPIO/subdir.mk
 -include stm32f103x6_Drivers/HAL/LCD_Driver/subdir.mk
 -include stm32f103x6_Drivers/HAL/Keypad_Driver/subdir.mk

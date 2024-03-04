@@ -13,10 +13,33 @@
 *                   Includes
 *===============================================
 */
+/** @defgroup APP
+  * @{
+  */
+#include "string.h"
 #include "Admin_Interface_cfg.h"
+/**
+  * @}
+  */
+
+/** @defgroup MCAL
+  * @{
+  */
+#include "SYSTICK/Cortex_m3_SYSTICK_Interface.h"
+/**
+  * @}
+  */
+
+/** @defgroup HAL
+  * @{
+  */
 #include "Keypad_Driver/Keypad_interface.h"
 #include "LCD_Driver/LCD_interface.h"
-#include "string.h"
+/**
+  * @}
+  */
+
+
 
 /** @defgroup Admin_Interface_Current_State
   * @{
@@ -99,6 +122,24 @@ void st_Admin_CheckLoginInfo(void);
 
 /**
 ======================================================================================================================
+* @Func_name	: st_Admin_LoginTimeout
+* @brief		  : Timeout the user from tying to login after passing the maximum number of allowed login attempts.
+* @note			  : The only way to get out of this state is through the SYSTICK timer handler.
+======================================================================================================================
+*/
+void st_Admin_LoginTimeout(void);
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_Idle
+* @brief	    : Function to make the ECU go into idle mode.
+* @note			  :
+======================================================================================================================
+*/
+void st_Admin_Idle(void);
+
+/**
+======================================================================================================================
 * @Func_name	:   st_Admin_ShowAdminOptions
 * @brief		  :   Function to get display the available admin operations on the LCD screen.
 * Note			  :   none.
@@ -132,15 +173,6 @@ void st_Admin_AddNewID(void);
 ======================================================================================================================
 */
 void st_Admin_RemoveID(void);
-
-/**
-======================================================================================================================
-* @Func_name	:   st_Admin_SaveOnEEPROM
-* @brief		  :   Function to save the authorized IDs on the external memory.
-* Note			  :   none.
-======================================================================================================================
-*/
-void st_Admin_SaveOnEEPROM(void);
 
 /**
 ======================================================================================================================

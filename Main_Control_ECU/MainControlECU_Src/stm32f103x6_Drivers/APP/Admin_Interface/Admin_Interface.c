@@ -18,14 +18,18 @@
 #define VALID_LOGIN_INFO          1
 #define INVALID_LOGIN_INFO        0
 
-/*Admin options*/
+/** @defgroup ADMIN_OPTIONS
+  * @{
+  */
 #define ADMIN_ADD_ID              '1'
 #define ADMIN_REMOVE_ID           '2'
-#define ADMIN_SAVE_ID             '3'
-#define ADMIN_MORE_OPTIONS        '4'
-#define ADMIN_SHOW_IDS_LIST       '5'
+#define ADMIN_SHOW_IDS_LIST       '3'
 #define ADMIN_LOGOUT              '*'
+/**
+  * @}
+  */
 
+#define TIMEOUT_10_SECONDS         4 /*Specify the timeout period using formula ((time / 2) - 1)*/
 /**
   * @}
   */
@@ -123,6 +127,9 @@ static void Peripheral_Clock_Init()
 
 	/*Enable GPIO_B*/
 	APB2_PERI_CLOCK_EN(APB2_IOPB);
+
+  /*Enable AFIO*/
+	APB2_PERI_CLOCK_EN(APB2_AFIO);
 }
 
 /**
@@ -142,23 +149,6 @@ static void st_Admin_BacktoMainMenu(void)
    }else{
 
    }
-}
-
-/**
-======================================================================================================================
-* @Func_name	: st_Admin_MoreOptions
-* @brief		  : An extension for the function that prints the admin options on the LCD.
-* Note			  : none.
-======================================================================================================================
-*/
-static void st_Admin_MoreOptions()
-{
-    LCD_Clear_Screen();
-    LCD_Send_String(stringfy("5.Show IDs list"));
-    LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
-    LCD_Send_String(stringfy("'*' To Logout"));
-
-  Admin_Dashboard_State = st_Admin_GetAdminOption;
 }
 
 /**
@@ -368,6 +358,28 @@ static void st_Admin_DisplayRemoveIDMessage(void)
     Admin_Dashboard_State = st_Admin_BacktoMainMenu;
   }
 }
+
+
+/** @defgroup ISR_CALLBACK_FUNCTION
+  * @{
+  */
+void SYSTICK_Callback(void)
+{
+  static uint8 counter = 0;
+
+  if(counter == TIMEOUT_10_SECONDS)
+  {
+      counter = 0;
+      MCAL_SYST_Stop();
+      Admin_Dashboard_State = st_Admin_InitialMessage;
+  }else{
+    counter++;
+  }
+}
+/**
+  * @}
+  */
+
 /**
   * @}
   */
@@ -396,6 +408,7 @@ void st_Admin_DashboardInit(void)
  
   LCD_Init();
   Keypad_Init();
+
  
   /*Set the next state*/
   Admin_Dashboard_State = st_Admin_InitialMessage;
@@ -583,14 +596,45 @@ void st_Admin_CheckLoginInfo(void)
 
         loginAttemptsCounter = 1;
 
-      /*TODO: Timeout and error message*/
-
-        Admin_Dashboard_State = st_Admin_InitialMessage;
+        Admin_Dashboard_State = st_Admin_LoginTimeout;
     }
   }
 
 }
 
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_LoginTimeout
+* @brief		  : Timeout the user from tying to login after passing the maximum number of allowed login attempts.
+* @note			  : The only way to get out of this state is through the SYSTICK timer handler.
+======================================================================================================================
+*/
+void st_Admin_LoginTimeout(void)
+{
+   LCD_Clear_Screen();
+
+   LCD_Cursor_XY(LCD_SECOND_LINE, 2);
+   LCD_Send_String(stringfy("Try again in"));
+   LCD_Cursor_XY(LCD_THIRD_LINE, 3);
+   LCD_Send_String(stringfy("10 seconds"));
+
+   /*Start the timer*/
+   MCAL_SYST_SetIntervalPeriodic(2000000UL, SYSTICK_Callback);
+
+   Admin_Dashboard_State = st_Admin_Idle;
+}
+
+/**
+======================================================================================================================
+* @Func_name	: st_Admin_Idle
+* @brief	    : Function to make the ECU go into idle mode.
+* @note			  :
+======================================================================================================================
+*/
+void st_Admin_Idle(void)
+{
+
+}
 
 /**
 ======================================================================================================================
@@ -607,9 +651,9 @@ void st_Admin_ShowAdminOptions(void)
     LCD_Cursor_XY(LCD_SECOND_LINE, 0);
     LCD_Send_String(stringfy("2.Remove an ID"));
     LCD_Cursor_XY(LCD_THIRD_LINE, 0);
-    LCD_Send_String(stringfy("3.Save on EEPROM"));
+    LCD_Send_String(stringfy("3.Show IDs List"));
     LCD_Cursor_XY(LCD_FOURTH_LINE, 0);
-    LCD_Send_String(stringfy("4.More options"));
+    LCD_Send_String(stringfy("'*' to logout"));
 
     Admin_Dashboard_State = st_Admin_GetAdminOption;
 }
@@ -632,12 +676,6 @@ void st_Admin_GetAdminOption(void)
     break;
   case ADMIN_REMOVE_ID:
     Admin_Dashboard_State = st_Admin_DisplayRemoveIDMessage;
-    break;
-  case ADMIN_SAVE_ID:
-    Admin_Dashboard_State = st_Admin_SaveOnEEPROM;
-    break;
-  case ADMIN_MORE_OPTIONS:
-    Admin_Dashboard_State = st_Admin_MoreOptions;
     break;
   case ADMIN_SHOW_IDS_LIST:
     LCD_Clear_Screen();
@@ -728,18 +766,6 @@ LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
         /*Stay in the same state*/
         Admin_Dashboard_State = st_Admin_AddNewID;
     }
-}
-
-/**
-======================================================================================================================
-* @Func_name	:   st_Admin_SaveOnEEPROM
-* @brief		  :   Function to save the authorized IDs on the external memory.
-* Note			  :   none.
-======================================================================================================================
-*/
-void st_Admin_SaveOnEEPROM(void)
-{
-
 }
 
 /**

@@ -7,3 +7,5 @@
 "stm32f103x6_Drivers/HAL/Keypad_Driver/Keypad_program.o"
 "stm32f103x6_Drivers/HAL/LCD_Driver/LCD_program.o"
 "stm32f103x6_Drivers/MCAL/GPIO/stm32f103x6_GPIO.o"
+"stm32f103x6_Drivers/MCAL/RCC/stm32f103x6_RCC.o"
+"stm32f103x6_Drivers/MCAL/SYSTICK/Cortex_m3_SYSTICK_Program.o"
