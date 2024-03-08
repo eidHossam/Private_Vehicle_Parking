@@ -29,6 +29,8 @@
   * @{
   */
 #include "../MCAL/GPIO/Atmega32_GPIO.h"
+#include "UART/Atmega32_UART.h"
+
 /**
   * @}
   */
@@ -77,4 +79,10 @@ void st_UAI_ShowWelcomeMsg(void);
  * 
  */
 void st_UAI_Idle(void);
+
+/**
+ * @brief this state sends the driver's ID to the Admin ECU for authentication. 
+ * 
+ */
+void st_UAI_SendIDToAdmin(void);
 #endif /* USER_ADMIN_INTERFACE_H_ */

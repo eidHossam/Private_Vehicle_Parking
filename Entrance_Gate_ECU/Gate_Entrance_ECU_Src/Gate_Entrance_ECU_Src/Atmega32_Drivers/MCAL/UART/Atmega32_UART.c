@@ -160,6 +160,47 @@ eStatus_t MCAL_UART_Init(sUSART_config_t* config)
 
 /**
 ======================================================================================================================
+* @Func_name	:   MCAL_UART_RESET
+* @brief		:   Reset the specified UART instance to its original state.
+* @@note			:   none.
+======================================================================================================================
+*/
+void MCAL_UART_RESET()
+{
+    USART->UDR   = 0x00u;
+    USART->UCSRA = 0x20u;
+    USART->UCSRB = 0x00u;
+    USART_UCSRC  = 0x82u;
+    USART->UBRRL = 0x00u;
+    USART_UBRRH  = 0x00u;
+}
+
+/**
+======================================================================================================================
+* @Func_name	:   MCAL_UART_Disable
+* @brief		:   Function to disable the UART TX and RX channels.
+* @note			:   none
+======================================================================================================================
+*/
+void MCAL_UART_Disable()
+{
+    USART->UCSRB &= ~(USART_UCSRB_RXEN_MASK | USART_UCSRB_TXEN_MASK);
+}
+
+/**
+======================================================================================================================
+* @Func_name	:   MCAL_UART_Enable
+* @brief		:   Function to enable the UART TX and RX channels (Based on the user configuration).
+* @note			:   none.
+======================================================================================================================
+*/
+void MCAL_UART_Enable()
+{
+    USART->UCSRB |= LOC_cfg.USART_Mode;
+}
+
+/**
+======================================================================================================================
 * @Func_name	:   MCAL_UART_Send_Data
 * @brief		:   Sends data through the UART instance.
 * @param [in]	:   pTxBuffer: pointer to the data to be sent.

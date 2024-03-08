@@ -40,6 +40,7 @@ SUBDIRS :=  \
 ../Atmega32_Drivers/LIB/ \
 ../Atmega32_Drivers/MCAL/ \
 ../Atmega32_Drivers/MCAL/GPIO/ \
+../Atmega32_Drivers/MCAL/UART/ \
 ../Atmega32_Drivers/Service/
 
 
@@ -49,6 +50,7 @@ C_SRCS +=  \
 ../Atmega32_Drivers/APP/User_Admin_Interface.c \
 ../Atmega32_Drivers/HAL/LCD_Driver/LCD_program.c \
 ../Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.c \
+../Atmega32_Drivers/MCAL/UART/Atmega32_UART.c \
 ../main.c
 
 
@@ -63,6 +65,7 @@ Atmega32_Drivers/APP/APP.o \
 Atmega32_Drivers/APP/User_Admin_Interface.o \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o \
+Atmega32_Drivers/MCAL/UART/Atmega32_UART.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -70,6 +73,7 @@ Atmega32_Drivers/APP/APP.o \
 Atmega32_Drivers/APP/User_Admin_Interface.o \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o \
+Atmega32_Drivers/MCAL/UART/Atmega32_UART.o \
 main.o
 
 C_DEPS +=  \
@@ -77,6 +81,7 @@ Atmega32_Drivers/APP/APP.d \
 Atmega32_Drivers/APP/User_Admin_Interface.d \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.d \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.d \
+Atmega32_Drivers/MCAL/UART/Atmega32_UART.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
@@ -84,6 +89,7 @@ Atmega32_Drivers/APP/APP.d \
 Atmega32_Drivers/APP/User_Admin_Interface.d \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.d \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.d \
+Atmega32_Drivers/MCAL/UART/Atmega32_UART.d \
 main.d
 
 OUTPUT_FILE_PATH +=Gate_Entrance_ECU_Src.elf
@@ -122,6 +128,13 @@ Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o: ../Atmega32_Drivers/HAL/LCD_Drive
 	
 
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o: ../Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Atmega32_Drivers/MCAL/UART/Atmega32_UART.o: ../Atmega32_Drivers/MCAL/UART/Atmega32_UART.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

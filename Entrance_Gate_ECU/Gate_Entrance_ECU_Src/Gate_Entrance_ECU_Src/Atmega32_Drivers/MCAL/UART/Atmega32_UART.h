@@ -193,6 +193,24 @@ void MCAL_UART_RESET();
 
 /**
 ======================================================================================================================
+* @Func_name	:   MCAL_UART_Disable
+* @brief		:   Function to disable the UART TX and RX channels.
+* @note			:   none
+======================================================================================================================
+*/
+void MCAL_UART_Disable();
+
+/**
+======================================================================================================================
+* @Func_name	:   MCAL_UART_Enable
+* @brief		:   Function to enable the UART TX and RX channels (Based on the user configuration).
+* @note			:   none.
+======================================================================================================================
+*/
+void MCAL_UART_Enable();
+
+/**
+======================================================================================================================
 * @Func_name	:   MCAL_UART_Send_Data
 * @brief		:   Sends data through the UART instance.
 * @param [in]	:   pTxBuffer: pointer to the data to be sent.
