@@ -1,3 +1,0 @@
-E2PROM_program.c:34:6:E2PROM_Init	32	static
-E2PROM_program.c:57:9:E2PROM_write_Nbytes	288	static
-E2PROM_program.c:97:9:E2PROM_read_nbytes	32	static

@@ -8,7 +8,6 @@
 #define CPU_BYTE_ORDER LOW_BYTE_FIRST
 
 /*--------Types------------*/
-#define NULL                ((void *)(0))
 
 typedef unsigned char       boolean;
 #define TRUE                (1U)

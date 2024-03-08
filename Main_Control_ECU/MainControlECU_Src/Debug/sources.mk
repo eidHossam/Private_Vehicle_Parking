@@ -26,7 +26,10 @@ stm32f103x6_Drivers/APP \
 stm32f103x6_Drivers/APP/Admin_Interface \
 stm32f103x6_Drivers/HAL/Keypad_Driver \
 stm32f103x6_Drivers/HAL/LCD_Driver \
+stm32f103x6_Drivers/MCAL/AFIO \
 stm32f103x6_Drivers/MCAL/GPIO \
+stm32f103x6_Drivers/MCAL/NVIC \
 stm32f103x6_Drivers/MCAL/RCC \
+stm32f103x6_Drivers/MCAL/SPI \
 stm32f103x6_Drivers/MCAL/SYSTICK \
 

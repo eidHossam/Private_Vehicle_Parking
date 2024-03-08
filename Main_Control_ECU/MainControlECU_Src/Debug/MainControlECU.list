@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000130  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         0000137c  08000130  08000130  00010130  2**2
+  1 .text         0000146c  08000130  08000130  00010130  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       0000014c  080014ac  080014ac  000114ac  2**2
+  2 .rodata       0000014c  0800159c  0800159c  0001159c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080015f8  080015f8  00020018  2**0
+  3 .ARM.extab    00000000  080016e8  080016e8  00020018  2**0
                   CONTENTS
-  4 .ARM          00000000  080015f8  080015f8  00020018  2**0
+  4 .ARM          00000000  080016e8  080016e8  00020018  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080015f8  080015f8  00020018  2**0
+  5 .preinit_array 00000000  080016e8  080016e8  00020018  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080015f8  080015f8  000115f8  2**2
+  6 .init_array   00000004  080016e8  080016e8  000116e8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080015fc  080015fc  000115fc  2**2
+  7 .fini_array   00000004  080016ec  080016ec  000116ec  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000018  20000000  08001600  00020000  2**2
+  8 .data         00000018  20000000  080016f0  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000060  20000018  08001618  00020018  2**2
+  9 .bss          00000078  20000018  08001708  00020018  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000078  08001618  00020078  2**0
+ 10 ._user_heap_stack 00000600  20000090  08001708  00020090  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00004500  00000000  00000000  00020041  2**0
+ 12 .debug_info   00004bf0  00000000  00000000  00020041  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000cb4  00000000  00000000  00024541  2**0
+ 13 .debug_abbrev 00000e38  00000000  00000000  00024c31  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00001150  00000000  00000000  000251f5  2**0
+ 14 .debug_loc    000014b4  00000000  00000000  00025a69  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_aranges 00000308  00000000  00000000  00026348  2**3
+ 15 .debug_aranges 00000378  00000000  00000000  00026f20  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 00000280  00000000  00000000  00026650  2**3
+ 16 .debug_ranges 000002e0  00000000  00000000  00027298  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_macro  00002891  00000000  00000000  000268d0  2**0
+ 17 .debug_macro  00002c1a  00000000  00000000  00027578  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_line   00003569  00000000  00000000  00029161  2**0
+ 18 .debug_line   00003cad  00000000  00000000  0002a192  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_str    0000a664  00000000  00000000  0002c6ca  2**0
+ 19 .debug_str    0000b536  00000000  00000000  0002de3f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .comment      0000007b  00000000  00000000  00036d2e  2**0
+ 20 .comment      0000007b  00000000  00000000  00039375  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  000009c0  00000000  00000000  00036dac  2**2
+ 21 .debug_frame  00000b64  00000000  00000000  000393f0  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  8000146:	bd10      	pop	{r4, pc}
  8000148:	20000018 	.word	0x20000018
  800014c:	00000000 	.word	0x00000000
- 8000150:	08001494 	.word	0x08001494
+ 8000150:	08001584 	.word	0x08001584
 
 08000154 <frame_dummy>:
  8000154:	b508      	push	{r3, lr}
@@ -76,7 +76,7 @@ Disassembly of section .text:
  8000162:	bd08      	pop	{r3, pc}
  8000164:	00000000 	.word	0x00000000
  8000168:	2000001c 	.word	0x2000001c
- 800016c:	08001494 	.word	0x08001494
+ 800016c:	08001584 	.word	0x08001584
 
 08000170 <strcmp>:
  8000170:	f810 2b01 	ldrb.w	r2, [r0], #1
@@ -182,7 +182,7 @@ LoopFillZerobss:
 
 /* Call static constructors */
   bl __libc_init_array
- 80001c2:	f001 f93b 	bl	800143c <__libc_init_array>
+ 80001c2:	f001 f9b3 	bl	800152c <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
  80001c6:	f7ff ffdd 	bl	8000184 <main>
@@ -199,11 +199,11 @@ LoopForever:
   ldr r1, =_edata
  80001d4:	20000018 	.word	0x20000018
   ldr r2, =_sidata
- 80001d8:	08001600 	.word	0x08001600
+ 80001d8:	080016f0 	.word	0x080016f0
   ldr r2, =_sbss
  80001dc:	20000018 	.word	0x20000018
   ldr r4, =_ebss
- 80001e0:	20000078 	.word	0x20000078
+ 80001e0:	20000090 	.word	0x20000090
 
 080001e4 <ADC1_2_IRQHandler>:
  * @retval : None
@@ -247,7 +247,7 @@ void Dashboard_ECU_APP_Loop(void)
  80001fe:	bf00      	nop
  8000200:	bd80      	pop	{r7, pc}
  8000202:	bf00      	nop
- 8000204:	20000070 	.word	0x20000070
+ 8000204:	20000088 	.word	0x20000088
 
 08000208 <Peripheral_Clock_Init>:
 * @brief		  : Enable all the required peripherals clocks.
@@ -322,7 +322,7 @@ static void st_Admin_BacktoMainMenu(void)
  800025c:	bd80      	pop	{r7, pc}
  800025e:	bf00      	nop
  8000260:	20000034 	.word	0x20000034
- 8000264:	20000070 	.word	0x20000070
+ 8000264:	20000088 	.word	0x20000088
  8000268:	080008a5 	.word	0x080008a5
 
 0800026c <st_Admin_DisplayAddNewIDMessage>:
@@ -376,11 +376,11 @@ static void st_Admin_DisplayAddNewIDMessage(void)
  80002a4:	bf00      	nop
  80002a6:	bd80      	pop	{r7, pc}
  80002a8:	20000060 	.word	0x20000060
- 80002ac:	080014ac 	.word	0x080014ac
- 80002b0:	20000070 	.word	0x20000070
+ 80002ac:	0800159c 	.word	0x0800159c
+ 80002b0:	20000088 	.word	0x20000088
  80002b4:	08000999 	.word	0x08000999
- 80002b8:	080014b8 	.word	0x080014b8
- 80002bc:	080014cc 	.word	0x080014cc
+ 80002b8:	080015a8 	.word	0x080015a8
+ 80002bc:	080015bc 	.word	0x080015bc
  80002c0:	0800023d 	.word	0x0800023d
 
 080002c4 <st_Admin_AddedIDsuccessfully>:
@@ -401,7 +401,7 @@ static void st_Admin_AddedIDsuccessfully(void)
  80002d0:	4413      	add	r3, r2
  80002d2:	490f      	ldr	r1, [pc, #60]	; (8000310 <st_Admin_AddedIDsuccessfully+0x4c>)
  80002d4:	4618      	mov	r0, r3
- 80002d6:	f001 f8d5 	bl	8001484 <strcpy>
+ 80002d6:	f001 f94d 	bl	8001574 <strcpy>
 
    /*Increase the IDs count in the system*/
    Glob_AuthIDsCount++;
@@ -436,9 +436,9 @@ static void st_Admin_AddedIDsuccessfully(void)
  8000308:	20000060 	.word	0x20000060
  800030c:	2000004c 	.word	0x2000004c
  8000310:	20000048 	.word	0x20000048
- 8000314:	080014e0 	.word	0x080014e0
- 8000318:	080014cc 	.word	0x080014cc
- 800031c:	20000070 	.word	0x20000070
+ 8000314:	080015d0 	.word	0x080015d0
+ 8000318:	080015bc 	.word	0x080015bc
+ 800031c:	20000088 	.word	0x20000088
  8000320:	0800023d 	.word	0x0800023d
 
 08000324 <st_Admin_IDalreadyExists>:
@@ -471,9 +471,9 @@ static void st_Admin_IDalreadyExists(void)
  8000346:	bf00      	nop
  8000348:	bd80      	pop	{r7, pc}
  800034a:	bf00      	nop
- 800034c:	080014f8 	.word	0x080014f8
- 8000350:	080014cc 	.word	0x080014cc
- 8000354:	20000070 	.word	0x20000070
+ 800034c:	080015e8 	.word	0x080015e8
+ 8000350:	080015bc 	.word	0x080015bc
+ 8000354:	20000088 	.word	0x20000088
  8000358:	0800023d 	.word	0x0800023d
 
 0800035c <st_Admin_RemovedIDsuccessfully>:
@@ -506,9 +506,9 @@ static void st_Admin_RemovedIDsuccessfully(void)
  800037e:	bf00      	nop
  8000380:	bd80      	pop	{r7, pc}
  8000382:	bf00      	nop
- 8000384:	0800150c 	.word	0x0800150c
- 8000388:	080014cc 	.word	0x080014cc
- 800038c:	20000070 	.word	0x20000070
+ 8000384:	080015fc 	.word	0x080015fc
+ 8000388:	080015bc 	.word	0x080015bc
+ 800038c:	20000088 	.word	0x20000088
  8000390:	0800023d 	.word	0x0800023d
 
 08000394 <st_Admin_IDnotFound>:
@@ -542,9 +542,9 @@ static void st_Admin_IDnotFound(void)
  80003b6:	bf00      	nop
  80003b8:	bd80      	pop	{r7, pc}
  80003ba:	bf00      	nop
- 80003bc:	08001518 	.word	0x08001518
- 80003c0:	080014cc 	.word	0x080014cc
- 80003c4:	20000070 	.word	0x20000070
+ 80003bc:	08001608 	.word	0x08001608
+ 80003c0:	080015bc 	.word	0x080015bc
+ 80003c4:	20000088 	.word	0x20000088
  80003c8:	0800023d 	.word	0x0800023d
 
 080003cc <deleteID>:
@@ -581,7 +581,7 @@ static void deleteID(uint8 IDindex)
  80003f2:	4a08      	ldr	r2, [pc, #32]	; (8000414 <deleteID+0x48>)
  80003f4:	4413      	add	r3, r2
  80003f6:	4619      	mov	r1, r3
- 80003f8:	f001 f844 	bl	8001484 <strcpy>
+ 80003f8:	f001 f8bc 	bl	8001574 <strcpy>
   }else{
 
   }
@@ -735,7 +735,7 @@ static void st_Admin_CheckRepeatedID(void)
  80004c4:	2000004c 	.word	0x2000004c
  80004c8:	20000048 	.word	0x20000048
  80004cc:	20000045 	.word	0x20000045
- 80004d0:	20000070 	.word	0x20000070
+ 80004d0:	20000088 	.word	0x20000088
  80004d4:	08000325 	.word	0x08000325
  80004d8:	0800035d 	.word	0x0800035d
  80004dc:	20000060 	.word	0x20000060
@@ -794,11 +794,11 @@ static void st_Admin_DisplayRemoveIDMessage(void)
  8000524:	bf00      	nop
  8000526:	bd80      	pop	{r7, pc}
  8000528:	20000060 	.word	0x20000060
- 800052c:	080014ac 	.word	0x080014ac
- 8000530:	20000070 	.word	0x20000070
+ 800052c:	0800159c 	.word	0x0800159c
+ 8000530:	20000088 	.word	0x20000088
  8000534:	08000a41 	.word	0x08000a41
- 8000538:	0800152c 	.word	0x0800152c
- 800053c:	080014cc 	.word	0x080014cc
+ 8000538:	0800161c 	.word	0x0800161c
+ 800053c:	080015bc 	.word	0x080015bc
  8000540:	0800023d 	.word	0x0800023d
 
 08000544 <SYSTICK_Callback>:
@@ -823,7 +823,7 @@ void SYSTICK_Callback(void)
  8000552:	2200      	movs	r2, #0
  8000554:	701a      	strb	r2, [r3, #0]
       MCAL_SYST_Stop();
- 8000556:	f000 fefb 	bl	8001350 <MCAL_SYST_Stop>
+ 8000556:	f000 ff73 	bl	8001440 <MCAL_SYST_Stop>
       Admin_Dashboard_State = st_Admin_InitialMessage;
  800055a:	4b07      	ldr	r3, [pc, #28]	; (8000578 <SYSTICK_Callback+0x34>)
  800055c:	4a07      	ldr	r2, [pc, #28]	; (800057c <SYSTICK_Callback+0x38>)
@@ -845,7 +845,7 @@ void SYSTICK_Callback(void)
  8000570:	bd80      	pop	{r7, pc}
  8000572:	bf00      	nop
  8000574:	20000062 	.word	0x20000062
- 8000578:	20000070 	.word	0x20000070
+ 8000578:	20000088 	.word	0x20000088
  800057c:	080005a5 	.word	0x080005a5
 
 08000580 <st_Admin_DashboardInit>:
@@ -876,7 +876,7 @@ void st_Admin_DashboardInit(void)
  8000596:	bf00      	nop
  8000598:	bd80      	pop	{r7, pc}
  800059a:	bf00      	nop
- 800059c:	20000070 	.word	0x20000070
+ 800059c:	20000088 	.word	0x20000088
  80005a0:	080005a5 	.word	0x080005a5
 
 080005a4 <st_Admin_InitialMessage>:
@@ -917,9 +917,9 @@ void st_Admin_InitialMessage(void)
  80005ce:	bf00      	nop
  80005d0:	bd80      	pop	{r7, pc}
  80005d2:	bf00      	nop
- 80005d4:	0800153c 	.word	0x0800153c
- 80005d8:	08001548 	.word	0x08001548
- 80005dc:	20000070 	.word	0x20000070
+ 80005d4:	0800162c 	.word	0x0800162c
+ 80005d8:	08001638 	.word	0x08001638
+ 80005dc:	20000088 	.word	0x20000088
  80005e0:	080005e5 	.word	0x080005e5
 
 080005e4 <st_Admin_GetUserInput>:
@@ -963,7 +963,7 @@ void st_Admin_GetUserInput(void)
  800060c:	bd80      	pop	{r7, pc}
  800060e:	bf00      	nop
  8000610:	20000034 	.word	0x20000034
- 8000614:	20000070 	.word	0x20000070
+ 8000614:	20000088 	.word	0x20000088
  8000618:	08000621 	.word	0x08000621
  800061c:	080005e5 	.word	0x080005e5
 
@@ -1013,11 +1013,11 @@ void st_Admin_LoginMessage(void)
 }
  8000658:	bf00      	nop
  800065a:	bd80      	pop	{r7, pc}
- 800065c:	08001554 	.word	0x08001554
- 8000660:	0800155c 	.word	0x0800155c
+ 800065c:	08001644 	.word	0x08001644
+ 8000660:	0800164c 	.word	0x0800164c
  8000664:	20000014 	.word	0x20000014
- 8000668:	08001568 	.word	0x08001568
- 800066c:	20000070 	.word	0x20000070
+ 8000668:	08001658 	.word	0x08001658
+ 800066c:	20000088 	.word	0x20000088
  8000670:	08000675 	.word	0x08000675
 
 08000674 <st_Admin_GetUserID>:
@@ -1112,7 +1112,7 @@ void st_Admin_GetUserID(void)
  80006e8:	20000035 	.word	0x20000035
  80006ec:	20000034 	.word	0x20000034
  80006f0:	20000038 	.word	0x20000038
- 80006f4:	20000070 	.word	0x20000070
+ 80006f4:	20000088 	.word	0x20000088
  80006f8:	08000701 	.word	0x08000701
  80006fc:	08000675 	.word	0x08000675
 
@@ -1206,7 +1206,7 @@ void st_Admin_GetUserPassword(void)
  8000770:	20000035 	.word	0x20000035
  8000774:	20000034 	.word	0x20000034
  8000778:	20000040 	.word	0x20000040
- 800077c:	20000070 	.word	0x20000070
+ 800077c:	20000088 	.word	0x20000088
  8000780:	08000789 	.word	0x08000789
  8000784:	08000701 	.word	0x08000701
 
@@ -1335,7 +1335,7 @@ void st_Admin_CheckLoginInfo(void)
  800082c:	20000038 	.word	0x20000038
  8000830:	20000040 	.word	0x20000040
  8000834:	20000014 	.word	0x20000014
- 8000838:	20000070 	.word	0x20000070
+ 8000838:	20000088 	.word	0x20000088
  800083c:	080008a5 	.word	0x080008a5
  8000840:	08000621 	.word	0x08000621
  8000844:	08000849 	.word	0x08000849
@@ -1371,7 +1371,7 @@ void st_Admin_LoginTimeout(void)
    MCAL_SYST_SetIntervalPeriodic(2000000UL, SYSTICK_Callback);
  800086c:	4906      	ldr	r1, [pc, #24]	; (8000888 <st_Admin_LoginTimeout+0x40>)
  800086e:	4807      	ldr	r0, [pc, #28]	; (800088c <st_Admin_LoginTimeout+0x44>)
- 8000870:	f000 fd7c 	bl	800136c <MCAL_SYST_SetIntervalPeriodic>
+ 8000870:	f000 fdf4 	bl	800145c <MCAL_SYST_SetIntervalPeriodic>
 
    Admin_Dashboard_State = st_Admin_Idle;
  8000874:	4b06      	ldr	r3, [pc, #24]	; (8000890 <st_Admin_LoginTimeout+0x48>)
@@ -1381,11 +1381,11 @@ void st_Admin_LoginTimeout(void)
  800087a:	bf00      	nop
  800087c:	bd80      	pop	{r7, pc}
  800087e:	bf00      	nop
- 8000880:	0800157c 	.word	0x0800157c
- 8000884:	0800158c 	.word	0x0800158c
+ 8000880:	0800166c 	.word	0x0800166c
+ 8000884:	0800167c 	.word	0x0800167c
  8000888:	08000545 	.word	0x08000545
  800088c:	001e8480 	.word	0x001e8480
- 8000890:	20000070 	.word	0x20000070
+ 8000890:	20000088 	.word	0x20000088
  8000894:	08000899 	.word	0x08000899
 
 08000898 <st_Admin_Idle>:
@@ -1449,11 +1449,11 @@ void st_Admin_ShowAdminOptions(void)
  80008e2:	bf00      	nop
  80008e4:	bd80      	pop	{r7, pc}
  80008e6:	bf00      	nop
- 80008e8:	08001598 	.word	0x08001598
- 80008ec:	080015a8 	.word	0x080015a8
- 80008f0:	080015b8 	.word	0x080015b8
- 80008f4:	080015c8 	.word	0x080015c8
- 80008f8:	20000070 	.word	0x20000070
+ 80008e8:	08001688 	.word	0x08001688
+ 80008ec:	08001698 	.word	0x08001698
+ 80008f0:	080016a8 	.word	0x080016a8
+ 80008f4:	080016b8 	.word	0x080016b8
+ 80008f8:	20000088 	.word	0x20000088
  80008fc:	08000901 	.word	0x08000901
 
 08000900 <st_Admin_GetAdminOption>:
@@ -1537,7 +1537,7 @@ void st_Admin_GetAdminOption(void)
  8000978:	bd80      	pop	{r7, pc}
  800097a:	bf00      	nop
  800097c:	20000034 	.word	0x20000034
- 8000980:	20000070 	.word	0x20000070
+ 8000980:	20000088 	.word	0x20000088
  8000984:	0800026d 	.word	0x0800026d
  8000988:	080004ed 	.word	0x080004ed
  800098c:	08000ad1 	.word	0x08000ad1
@@ -1653,7 +1653,7 @@ void st_Admin_AddNewID(void)
  8000a24:	20000034 	.word	0x20000034
  8000a28:	20000048 	.word	0x20000048
  8000a2c:	20000060 	.word	0x20000060
- 8000a30:	20000070 	.word	0x20000070
+ 8000a30:	20000088 	.word	0x20000088
  8000a34:	080002c5 	.word	0x080002c5
  8000a38:	08000419 	.word	0x08000419
  8000a3c:	08000999 	.word	0x08000999
@@ -1751,7 +1751,7 @@ LCD_Cursor_XY(LCD_FIRST_LINE, 9 + userInputCount);
  8000ab8:	20000035 	.word	0x20000035
  8000abc:	20000034 	.word	0x20000034
  8000ac0:	20000048 	.word	0x20000048
- 8000ac4:	20000070 	.word	0x20000070
+ 8000ac4:	20000088 	.word	0x20000088
  8000ac8:	08000419 	.word	0x08000419
  8000acc:	08000999 	.word	0x08000999
 
@@ -1841,9 +1841,9 @@ void st_Admin_ShowIDsList(void)
  8000b38:	20000060 	.word	0x20000060
  8000b3c:	20000063 	.word	0x20000063
  8000b40:	2000004c 	.word	0x2000004c
- 8000b44:	080015d8 	.word	0x080015d8
- 8000b48:	080014cc 	.word	0x080014cc
- 8000b4c:	20000070 	.word	0x20000070
+ 8000b44:	080016c8 	.word	0x080016c8
+ 8000b48:	080015bc 	.word	0x080015bc
+ 8000b4c:	20000088 	.word	0x20000088
  8000b50:	0800023d 	.word	0x0800023d
  8000b54:	08000ad1 	.word	0x08000ad1
 
@@ -2105,9 +2105,9 @@ uint8 Keypad_Get_Char(void)
  8000cd2:	46bd      	mov	sp, r7
  8000cd4:	bd80      	pop	{r7, pc}
  8000cd6:	bf00      	nop
- 8000cd8:	080015e4 	.word	0x080015e4
- 8000cdc:	080015f0 	.word	0x080015f0
- 8000ce0:	080015f4 	.word	0x080015f4
+ 8000cd8:	080016d4 	.word	0x080016d4
+ 8000cdc:	080016e0 	.word	0x080016e0
+ 8000ce0:	080016e4 	.word	0x080016e4
  8000ce4:	40010c00 	.word	0x40010c00
 
 08000ce8 <_delay_ms>:
@@ -2401,7 +2401,7 @@ void LCD_Init(void)
 }
  8000e80:	bf00      	nop
  8000e82:	bd80      	pop	{r7, pc}
- 8000e84:	20000074 	.word	0x20000074
+ 8000e84:	2000008c 	.word	0x2000008c
  8000e88:	40010c00 	.word	0x40010c00
  8000e8c:	40010800 	.word	0x40010800
 
@@ -3095,355 +3095,500 @@ uint32 MCAL_RCC_GET_SYSCLK(void)
  80012ac:	007a1200 	.word	0x007a1200
  80012b0:	00f42400 	.word	0x00f42400
 
-080012b4 <MCAL_SYST_CalculateCLKFreq>:
+080012b4 <SPI1_IRQHandler>:
+*               SPI ISR functions
+*===============================================
+*/
+
+void SPI1_IRQHandler(void)
+{
+ 80012b4:	b580      	push	{r7, lr}
+ 80012b6:	af00      	add	r7, sp, #0
+    if((SPI1->CR2 & SPI_IRQ_ERRIE) && ((SPI1->SR & SPI_SR_OVR) || (SPI1->SR & SPI_SR_MODF)))
+ 80012b8:	4b1a      	ldr	r3, [pc, #104]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 80012ba:	685b      	ldr	r3, [r3, #4]
+ 80012bc:	f003 0320 	and.w	r3, r3, #32
+ 80012c0:	2b00      	cmp	r3, #0
+ 80012c2:	d00e      	beq.n	80012e2 <SPI1_IRQHandler+0x2e>
+ 80012c4:	4b17      	ldr	r3, [pc, #92]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 80012c6:	689b      	ldr	r3, [r3, #8]
+ 80012c8:	f003 0340 	and.w	r3, r3, #64	; 0x40
+ 80012cc:	2b00      	cmp	r3, #0
+ 80012ce:	d105      	bne.n	80012dc <SPI1_IRQHandler+0x28>
+ 80012d0:	4b14      	ldr	r3, [pc, #80]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 80012d2:	689b      	ldr	r3, [r3, #8]
+ 80012d4:	f003 0320 	and.w	r3, r3, #32
+ 80012d8:	2b00      	cmp	r3, #0
+ 80012da:	d002      	beq.n	80012e2 <SPI1_IRQHandler+0x2e>
+    {
+        p_IRQ_callback_SPI1[SPI_IRQ_ERRIE >> 6]();
+ 80012dc:	4b12      	ldr	r3, [pc, #72]	; (8001328 <SPI1_IRQHandler+0x74>)
+ 80012de:	681b      	ldr	r3, [r3, #0]
+ 80012e0:	4798      	blx	r3
+    }
+
+    if((SPI1->CR2 & SPI_IRQ_RXNEIE) && (SPI1->SR & SPI_SR_RXNE))
+ 80012e2:	4b10      	ldr	r3, [pc, #64]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 80012e4:	685b      	ldr	r3, [r3, #4]
+ 80012e6:	f003 0340 	and.w	r3, r3, #64	; 0x40
+ 80012ea:	2b00      	cmp	r3, #0
+ 80012ec:	d008      	beq.n	8001300 <SPI1_IRQHandler+0x4c>
+ 80012ee:	4b0d      	ldr	r3, [pc, #52]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 80012f0:	689b      	ldr	r3, [r3, #8]
+ 80012f2:	f003 0301 	and.w	r3, r3, #1
+ 80012f6:	2b00      	cmp	r3, #0
+ 80012f8:	d002      	beq.n	8001300 <SPI1_IRQHandler+0x4c>
+    {
+        p_IRQ_callback_SPI1[SPI_IRQ_RXNEIE >> 6]();
+ 80012fa:	4b0b      	ldr	r3, [pc, #44]	; (8001328 <SPI1_IRQHandler+0x74>)
+ 80012fc:	685b      	ldr	r3, [r3, #4]
+ 80012fe:	4798      	blx	r3
+    }
+    
+    if((SPI1->CR2 & SPI_IRQ_TXEIE) && (SPI1->SR & SPI_SR_TXE))
+ 8001300:	4b08      	ldr	r3, [pc, #32]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 8001302:	685b      	ldr	r3, [r3, #4]
+ 8001304:	f003 0380 	and.w	r3, r3, #128	; 0x80
+ 8001308:	2b00      	cmp	r3, #0
+ 800130a:	d008      	beq.n	800131e <SPI1_IRQHandler+0x6a>
+ 800130c:	4b05      	ldr	r3, [pc, #20]	; (8001324 <SPI1_IRQHandler+0x70>)
+ 800130e:	689b      	ldr	r3, [r3, #8]
+ 8001310:	f003 0302 	and.w	r3, r3, #2
+ 8001314:	2b00      	cmp	r3, #0
+ 8001316:	d002      	beq.n	800131e <SPI1_IRQHandler+0x6a>
+    {
+        p_IRQ_callback_SPI1[SPI_IRQ_TXEIE >> 6]();
+ 8001318:	4b03      	ldr	r3, [pc, #12]	; (8001328 <SPI1_IRQHandler+0x74>)
+ 800131a:	689b      	ldr	r3, [r3, #8]
+ 800131c:	4798      	blx	r3
+    }
+}
+ 800131e:	bf00      	nop
+ 8001320:	bd80      	pop	{r7, pc}
+ 8001322:	bf00      	nop
+ 8001324:	40013000 	.word	0x40013000
+ 8001328:	20000068 	.word	0x20000068
+
+0800132c <SPI2_IRQHandler>:
+
+void SPI2_IRQHandler(void)
+{
+ 800132c:	b580      	push	{r7, lr}
+ 800132e:	af00      	add	r7, sp, #0
+    if((SPI2->CR2 & SPI_IRQ_ERRIE) && ((SPI2->SR & SPI_SR_OVR) || (SPI2->SR & SPI_SR_MODF)))
+ 8001330:	4b1a      	ldr	r3, [pc, #104]	; (800139c <SPI2_IRQHandler+0x70>)
+ 8001332:	685b      	ldr	r3, [r3, #4]
+ 8001334:	f003 0320 	and.w	r3, r3, #32
+ 8001338:	2b00      	cmp	r3, #0
+ 800133a:	d00e      	beq.n	800135a <SPI2_IRQHandler+0x2e>
+ 800133c:	4b17      	ldr	r3, [pc, #92]	; (800139c <SPI2_IRQHandler+0x70>)
+ 800133e:	689b      	ldr	r3, [r3, #8]
+ 8001340:	f003 0340 	and.w	r3, r3, #64	; 0x40
+ 8001344:	2b00      	cmp	r3, #0
+ 8001346:	d105      	bne.n	8001354 <SPI2_IRQHandler+0x28>
+ 8001348:	4b14      	ldr	r3, [pc, #80]	; (800139c <SPI2_IRQHandler+0x70>)
+ 800134a:	689b      	ldr	r3, [r3, #8]
+ 800134c:	f003 0320 	and.w	r3, r3, #32
+ 8001350:	2b00      	cmp	r3, #0
+ 8001352:	d002      	beq.n	800135a <SPI2_IRQHandler+0x2e>
+    {
+        p_IRQ_callback_SPI2[SPI_IRQ_ERRIE >> 6]();
+ 8001354:	4b12      	ldr	r3, [pc, #72]	; (80013a0 <SPI2_IRQHandler+0x74>)
+ 8001356:	681b      	ldr	r3, [r3, #0]
+ 8001358:	4798      	blx	r3
+    }
+
+    if((SPI2->CR2 & SPI_IRQ_RXNEIE) && (SPI2->SR & SPI_SR_RXNE))
+ 800135a:	4b10      	ldr	r3, [pc, #64]	; (800139c <SPI2_IRQHandler+0x70>)
+ 800135c:	685b      	ldr	r3, [r3, #4]
+ 800135e:	f003 0340 	and.w	r3, r3, #64	; 0x40
+ 8001362:	2b00      	cmp	r3, #0
+ 8001364:	d008      	beq.n	8001378 <SPI2_IRQHandler+0x4c>
+ 8001366:	4b0d      	ldr	r3, [pc, #52]	; (800139c <SPI2_IRQHandler+0x70>)
+ 8001368:	689b      	ldr	r3, [r3, #8]
+ 800136a:	f003 0301 	and.w	r3, r3, #1
+ 800136e:	2b00      	cmp	r3, #0
+ 8001370:	d002      	beq.n	8001378 <SPI2_IRQHandler+0x4c>
+    {
+        p_IRQ_callback_SPI2[SPI_IRQ_RXNEIE >> 6]();
+ 8001372:	4b0b      	ldr	r3, [pc, #44]	; (80013a0 <SPI2_IRQHandler+0x74>)
+ 8001374:	685b      	ldr	r3, [r3, #4]
+ 8001376:	4798      	blx	r3
+    }
+    
+    if((SPI2->CR2 & SPI_IRQ_TXEIE) && (SPI2->SR & SPI_SR_TXE))
+ 8001378:	4b08      	ldr	r3, [pc, #32]	; (800139c <SPI2_IRQHandler+0x70>)
+ 800137a:	685b      	ldr	r3, [r3, #4]
+ 800137c:	f003 0380 	and.w	r3, r3, #128	; 0x80
+ 8001380:	2b00      	cmp	r3, #0
+ 8001382:	d008      	beq.n	8001396 <SPI2_IRQHandler+0x6a>
+ 8001384:	4b05      	ldr	r3, [pc, #20]	; (800139c <SPI2_IRQHandler+0x70>)
+ 8001386:	689b      	ldr	r3, [r3, #8]
+ 8001388:	f003 0302 	and.w	r3, r3, #2
+ 800138c:	2b00      	cmp	r3, #0
+ 800138e:	d002      	beq.n	8001396 <SPI2_IRQHandler+0x6a>
+    {
+        p_IRQ_callback_SPI2[SPI_IRQ_TXEIE >> 6]();
+ 8001390:	4b03      	ldr	r3, [pc, #12]	; (80013a0 <SPI2_IRQHandler+0x74>)
+ 8001392:	689b      	ldr	r3, [r3, #8]
+ 8001394:	4798      	blx	r3
+    }
+}
+ 8001396:	bf00      	nop
+ 8001398:	bd80      	pop	{r7, pc}
+ 800139a:	bf00      	nop
+ 800139c:	40003800 	.word	0x40003800
+ 80013a0:	20000074 	.word	0x20000074
+
+080013a4 <MCAL_SYST_CalculateCLKFreq>:
 ===============================================
 *       Local Functions
 *===============================================
 */
 static uint32 MCAL_SYST_CalculateCLKFreq(uint32 copy_TimeUnit)
 {
- 80012b4:	b580      	push	{r7, lr}
- 80012b6:	b084      	sub	sp, #16
- 80012b8:	af00      	add	r7, sp, #0
- 80012ba:	6078      	str	r0, [r7, #4]
+ 80013a4:	b580      	push	{r7, lr}
+ 80013a6:	b084      	sub	sp, #16
+ 80013a8:	af00      	add	r7, sp, #0
+ 80013aa:	6078      	str	r0, [r7, #4]
     uint32 LOC_SYST_Clk = 0;
- 80012bc:	2300      	movs	r3, #0
- 80012be:	60fb      	str	r3, [r7, #12]
+ 80013ac:	2300      	movs	r3, #0
+ 80013ae:	60fb      	str	r3, [r7, #12]
     
     /*Calculates the clock of the systick timer*/
     #if SYST_CLKSRC == SYST_INTERNAL_CLK_DIV_1
         LOC_SYST_Clk = MCAL_RCC_GET_SYSCLK();
- 80012c0:	f7ff ffd2 	bl	8001268 <MCAL_RCC_GET_SYSCLK>
- 80012c4:	60f8      	str	r0, [r7, #12]
+ 80013b0:	f7ff ff5a 	bl	8001268 <MCAL_RCC_GET_SYSCLK>
+ 80013b4:	60f8      	str	r0, [r7, #12]
     #else
         #error "Please choose an acceptable clock source"
     #endif
 
     /*Divide by the time unit to avoid doing floating point operations*/
     LOC_SYST_Clk /= copy_TimeUnit;  
- 80012c6:	68fa      	ldr	r2, [r7, #12]
- 80012c8:	687b      	ldr	r3, [r7, #4]
- 80012ca:	fbb2 f3f3 	udiv	r3, r2, r3
- 80012ce:	60fb      	str	r3, [r7, #12]
+ 80013b6:	68fa      	ldr	r2, [r7, #12]
+ 80013b8:	687b      	ldr	r3, [r7, #4]
+ 80013ba:	fbb2 f3f3 	udiv	r3, r2, r3
+ 80013be:	60fb      	str	r3, [r7, #12]
 
     return LOC_SYST_Clk;
- 80012d0:	68fb      	ldr	r3, [r7, #12]
+ 80013c0:	68fb      	ldr	r3, [r7, #12]
 }
- 80012d2:	4618      	mov	r0, r3
- 80012d4:	3710      	adds	r7, #16
- 80012d6:	46bd      	mov	sp, r7
- 80012d8:	bd80      	pop	{r7, pc}
+ 80013c2:	4618      	mov	r0, r3
+ 80013c4:	3710      	adds	r7, #16
+ 80013c6:	46bd      	mov	sp, r7
+ 80013c8:	bd80      	pop	{r7, pc}
 	...
 
-080012dc <MCAL_SYST_Init>:
+080013cc <MCAL_SYST_Init>:
 * @return       :    E_OK on success, E_NOK on failure..
 * @note			:   Actual timer duration is based on the clock frequency.
 ======================================================================================================================
 */
 eStatus_t MCAL_SYST_Init(uint32 copy_ReloadVal)
 {
- 80012dc:	b580      	push	{r7, lr}
- 80012de:	b084      	sub	sp, #16
- 80012e0:	af00      	add	r7, sp, #0
- 80012e2:	6078      	str	r0, [r7, #4]
+ 80013cc:	b580      	push	{r7, lr}
+ 80013ce:	b084      	sub	sp, #16
+ 80013d0:	af00      	add	r7, sp, #0
+ 80013d2:	6078      	str	r0, [r7, #4]
     eStatus_t LOC_estatus = E_OK;
- 80012e4:	2300      	movs	r3, #0
- 80012e6:	73fb      	strb	r3, [r7, #15]
+ 80013d4:	2300      	movs	r3, #0
+ 80013d6:	73fb      	strb	r3, [r7, #15]
     
     if((SYST_ASSERT_RELOAD_VALUE(copy_ReloadVal)) &&
- 80012e8:	687b      	ldr	r3, [r7, #4]
- 80012ea:	f1b3 7f80 	cmp.w	r3, #16777216	; 0x1000000
- 80012ee:	d217      	bcs.n	8001320 <MCAL_SYST_Init+0x44>
+ 80013d8:	687b      	ldr	r3, [r7, #4]
+ 80013da:	f1b3 7f80 	cmp.w	r3, #16777216	; 0x1000000
+ 80013de:	d217      	bcs.n	8001410 <MCAL_SYST_Init+0x44>
        (SYST_ASSERT_CLK(SYST_CLKSRC)) && (SYST_ASSERT_TICKINT(SYST_TICKINT)))
     {
         /*Disable the systick timer*/
         MCAL_SYST_Stop();
- 80012f0:	f000 f82e 	bl	8001350 <MCAL_SYST_Stop>
+ 80013e0:	f000 f82e 	bl	8001440 <MCAL_SYST_Stop>
         
         /*1. Program reload value.*/
         SYST->RVR = copy_ReloadVal;
- 80012f4:	4a0e      	ldr	r2, [pc, #56]	; (8001330 <MCAL_SYST_Init+0x54>)
- 80012f6:	687b      	ldr	r3, [r7, #4]
- 80012f8:	6053      	str	r3, [r2, #4]
+ 80013e4:	4a0e      	ldr	r2, [pc, #56]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 80013e6:	687b      	ldr	r3, [r7, #4]
+ 80013e8:	6053      	str	r3, [r2, #4]
         
         /*2. Clear current value.
             A write of any value clears the field to 0,
             and also clears the SYST_CSR COUNTFLAG bit to 0.
         */
         SYST->CVR = 0;
- 80012fa:	4b0d      	ldr	r3, [pc, #52]	; (8001330 <MCAL_SYST_Init+0x54>)
- 80012fc:	2200      	movs	r2, #0
- 80012fe:	609a      	str	r2, [r3, #8]
+ 80013ea:	4b0d      	ldr	r3, [pc, #52]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 80013ec:	2200      	movs	r2, #0
+ 80013ee:	609a      	str	r2, [r3, #8]
 
         /*3. Program Control and Status register.*/
         SYST->CSR |= (SYST->CSR & ~(SYST_CSR_CLKSRC_MASK | SYST_CSR_TICKINT_MASK)); /*Clear the CLKSRC and TICKINT bits*/
- 8001300:	4b0b      	ldr	r3, [pc, #44]	; (8001330 <MCAL_SYST_Init+0x54>)
- 8001302:	681b      	ldr	r3, [r3, #0]
- 8001304:	f023 0206 	bic.w	r2, r3, #6
- 8001308:	4b09      	ldr	r3, [pc, #36]	; (8001330 <MCAL_SYST_Init+0x54>)
- 800130a:	681b      	ldr	r3, [r3, #0]
- 800130c:	4908      	ldr	r1, [pc, #32]	; (8001330 <MCAL_SYST_Init+0x54>)
- 800130e:	4313      	orrs	r3, r2
- 8001310:	600b      	str	r3, [r1, #0]
+ 80013f0:	4b0b      	ldr	r3, [pc, #44]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 80013f2:	681b      	ldr	r3, [r3, #0]
+ 80013f4:	f023 0206 	bic.w	r2, r3, #6
+ 80013f8:	4b09      	ldr	r3, [pc, #36]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 80013fa:	681b      	ldr	r3, [r3, #0]
+ 80013fc:	4908      	ldr	r1, [pc, #32]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 80013fe:	4313      	orrs	r3, r2
+ 8001400:	600b      	str	r3, [r1, #0]
         SYST->CSR |= (SYST_CLKSRC | SYST_TICKINT);
- 8001312:	4b07      	ldr	r3, [pc, #28]	; (8001330 <MCAL_SYST_Init+0x54>)
- 8001314:	681b      	ldr	r3, [r3, #0]
- 8001316:	4a06      	ldr	r2, [pc, #24]	; (8001330 <MCAL_SYST_Init+0x54>)
- 8001318:	f043 0306 	orr.w	r3, r3, #6
- 800131c:	6013      	str	r3, [r2, #0]
- 800131e:	e001      	b.n	8001324 <MCAL_SYST_Init+0x48>
+ 8001402:	4b07      	ldr	r3, [pc, #28]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 8001404:	681b      	ldr	r3, [r3, #0]
+ 8001406:	4a06      	ldr	r2, [pc, #24]	; (8001420 <MCAL_SYST_Init+0x54>)
+ 8001408:	f043 0306 	orr.w	r3, r3, #6
+ 800140c:	6013      	str	r3, [r2, #0]
+ 800140e:	e001      	b.n	8001414 <MCAL_SYST_Init+0x48>
     }else{
         LOC_estatus = E_NOK;
- 8001320:	2301      	movs	r3, #1
- 8001322:	73fb      	strb	r3, [r7, #15]
+ 8001410:	2301      	movs	r3, #1
+ 8001412:	73fb      	strb	r3, [r7, #15]
     }
 
     return LOC_estatus;
- 8001324:	7bfb      	ldrb	r3, [r7, #15]
+ 8001414:	7bfb      	ldrb	r3, [r7, #15]
 }
- 8001326:	4618      	mov	r0, r3
- 8001328:	3710      	adds	r7, #16
- 800132a:	46bd      	mov	sp, r7
- 800132c:	bd80      	pop	{r7, pc}
- 800132e:	bf00      	nop
- 8001330:	e000e010 	.word	0xe000e010
+ 8001416:	4618      	mov	r0, r3
+ 8001418:	3710      	adds	r7, #16
+ 800141a:	46bd      	mov	sp, r7
+ 800141c:	bd80      	pop	{r7, pc}
+ 800141e:	bf00      	nop
+ 8001420:	e000e010 	.word	0xe000e010
 
-08001334 <MCAL_SYST_Start>:
+08001424 <MCAL_SYST_Start>:
 * @return       :   none.
 * @note			:   none.
 ======================================================================================================================
 */
 void MCAL_SYST_Start(void)
 {
- 8001334:	b480      	push	{r7}
- 8001336:	af00      	add	r7, sp, #0
+ 8001424:	b480      	push	{r7}
+ 8001426:	af00      	add	r7, sp, #0
     SYST->CSR |= SYST_CSR_EN_MASK;
- 8001338:	4b04      	ldr	r3, [pc, #16]	; (800134c <MCAL_SYST_Start+0x18>)
- 800133a:	681b      	ldr	r3, [r3, #0]
- 800133c:	4a03      	ldr	r2, [pc, #12]	; (800134c <MCAL_SYST_Start+0x18>)
- 800133e:	f043 0301 	orr.w	r3, r3, #1
- 8001342:	6013      	str	r3, [r2, #0]
+ 8001428:	4b04      	ldr	r3, [pc, #16]	; (800143c <MCAL_SYST_Start+0x18>)
+ 800142a:	681b      	ldr	r3, [r3, #0]
+ 800142c:	4a03      	ldr	r2, [pc, #12]	; (800143c <MCAL_SYST_Start+0x18>)
+ 800142e:	f043 0301 	orr.w	r3, r3, #1
+ 8001432:	6013      	str	r3, [r2, #0]
 }
- 8001344:	bf00      	nop
- 8001346:	46bd      	mov	sp, r7
- 8001348:	bc80      	pop	{r7}
- 800134a:	4770      	bx	lr
- 800134c:	e000e010 	.word	0xe000e010
+ 8001434:	bf00      	nop
+ 8001436:	46bd      	mov	sp, r7
+ 8001438:	bc80      	pop	{r7}
+ 800143a:	4770      	bx	lr
+ 800143c:	e000e010 	.word	0xe000e010
 
-08001350 <MCAL_SYST_Stop>:
+08001440 <MCAL_SYST_Stop>:
 * @return       :   none.
 * @note			:   none.
 ======================================================================================================================
 */
 void MCAL_SYST_Stop(void)
 {
- 8001350:	b480      	push	{r7}
- 8001352:	af00      	add	r7, sp, #0
+ 8001440:	b480      	push	{r7}
+ 8001442:	af00      	add	r7, sp, #0
     SYST->CSR &= ~SYST_CSR_EN_MASK;
- 8001354:	4b04      	ldr	r3, [pc, #16]	; (8001368 <MCAL_SYST_Stop+0x18>)
- 8001356:	681b      	ldr	r3, [r3, #0]
- 8001358:	4a03      	ldr	r2, [pc, #12]	; (8001368 <MCAL_SYST_Stop+0x18>)
- 800135a:	f023 0301 	bic.w	r3, r3, #1
- 800135e:	6013      	str	r3, [r2, #0]
+ 8001444:	4b04      	ldr	r3, [pc, #16]	; (8001458 <MCAL_SYST_Stop+0x18>)
+ 8001446:	681b      	ldr	r3, [r3, #0]
+ 8001448:	4a03      	ldr	r2, [pc, #12]	; (8001458 <MCAL_SYST_Stop+0x18>)
+ 800144a:	f023 0301 	bic.w	r3, r3, #1
+ 800144e:	6013      	str	r3, [r2, #0]
 }
- 8001360:	bf00      	nop
- 8001362:	46bd      	mov	sp, r7
- 8001364:	bc80      	pop	{r7}
- 8001366:	4770      	bx	lr
- 8001368:	e000e010 	.word	0xe000e010
+ 8001450:	bf00      	nop
+ 8001452:	46bd      	mov	sp, r7
+ 8001454:	bc80      	pop	{r7}
+ 8001456:	4770      	bx	lr
+ 8001458:	e000e010 	.word	0xe000e010
 
-0800136c <MCAL_SYST_SetIntervalPeriodic>:
+0800145c <MCAL_SYST_SetIntervalPeriodic>:
 * @return       :   E_OK on success, E_NOK on failure.
 * @note			:   none.
 ======================================================================================================================
 */
 eStatus_t MCAL_SYST_SetIntervalPeriodic(uint32 copy_Microseconds, fptr_Callback callback)
 {
- 800136c:	b590      	push	{r4, r7, lr}
- 800136e:	b089      	sub	sp, #36	; 0x24
- 8001370:	af00      	add	r7, sp, #0
- 8001372:	6078      	str	r0, [r7, #4]
- 8001374:	6039      	str	r1, [r7, #0]
+ 800145c:	b590      	push	{r4, r7, lr}
+ 800145e:	b089      	sub	sp, #36	; 0x24
+ 8001460:	af00      	add	r7, sp, #0
+ 8001462:	6078      	str	r0, [r7, #4]
+ 8001464:	6039      	str	r1, [r7, #0]
     eStatus_t LOC_eStatus = E_OK;
- 8001376:	2300      	movs	r3, #0
- 8001378:	77fb      	strb	r3, [r7, #31]
+ 8001466:	2300      	movs	r3, #0
+ 8001468:	77fb      	strb	r3, [r7, #31]
     uint64 LOC_u32TicksCount = 0;
- 800137a:	f04f 0300 	mov.w	r3, #0
- 800137e:	f04f 0400 	mov.w	r4, #0
- 8001382:	e9c7 3404 	strd	r3, r4, [r7, #16]
+ 800146a:	f04f 0300 	mov.w	r3, #0
+ 800146e:	f04f 0400 	mov.w	r4, #0
+ 8001472:	e9c7 3404 	strd	r3, r4, [r7, #16]
     uint32 LOC_SYST_Clk = 0;
- 8001386:	2300      	movs	r3, #0
- 8001388:	60fb      	str	r3, [r7, #12]
+ 8001476:	2300      	movs	r3, #0
+ 8001478:	60fb      	str	r3, [r7, #12]
     
     LOC_SYST_Clk = MCAL_SYST_CalculateCLKFreq(SYST_DELAY_US);
- 800138a:	4819      	ldr	r0, [pc, #100]	; (80013f0 <MCAL_SYST_SetIntervalPeriodic+0x84>)
- 800138c:	f7ff ff92 	bl	80012b4 <MCAL_SYST_CalculateCLKFreq>
- 8001390:	60f8      	str	r0, [r7, #12]
+ 800147a:	4819      	ldr	r0, [pc, #100]	; (80014e0 <MCAL_SYST_SetIntervalPeriodic+0x84>)
+ 800147c:	f7ff ff92 	bl	80013a4 <MCAL_SYST_CalculateCLKFreq>
+ 8001480:	60f8      	str	r0, [r7, #12]
     
     /*Calculate the required number of ticks*/
     LOC_u32TicksCount = copy_Microseconds * LOC_SYST_Clk;
- 8001392:	687b      	ldr	r3, [r7, #4]
- 8001394:	68fa      	ldr	r2, [r7, #12]
- 8001396:	fb02 f303 	mul.w	r3, r2, r3
- 800139a:	f04f 0400 	mov.w	r4, #0
- 800139e:	e9c7 3404 	strd	r3, r4, [r7, #16]
+ 8001482:	687b      	ldr	r3, [r7, #4]
+ 8001484:	68fa      	ldr	r2, [r7, #12]
+ 8001486:	fb02 f303 	mul.w	r3, r2, r3
+ 800148a:	f04f 0400 	mov.w	r4, #0
+ 800148e:	e9c7 3404 	strd	r3, r4, [r7, #16]
 
     if(SYST_ASSERT_RELOAD_VALUE(LOC_u32TicksCount) && callback)
- 80013a2:	e9d7 3404 	ldrd	r3, r4, [r7, #16]
- 80013a6:	f06f 417f 	mvn.w	r1, #4278190080	; 0xff000000
- 80013aa:	f04f 0200 	mov.w	r2, #0
- 80013ae:	42a2      	cmp	r2, r4
- 80013b0:	bf08      	it	eq
- 80013b2:	4299      	cmpeq	r1, r3
- 80013b4:	d315      	bcc.n	80013e2 <MCAL_SYST_SetIntervalPeriodic+0x76>
- 80013b6:	683b      	ldr	r3, [r7, #0]
- 80013b8:	2b00      	cmp	r3, #0
- 80013ba:	d012      	beq.n	80013e2 <MCAL_SYST_SetIntervalPeriodic+0x76>
+ 8001492:	e9d7 3404 	ldrd	r3, r4, [r7, #16]
+ 8001496:	f06f 417f 	mvn.w	r1, #4278190080	; 0xff000000
+ 800149a:	f04f 0200 	mov.w	r2, #0
+ 800149e:	42a2      	cmp	r2, r4
+ 80014a0:	bf08      	it	eq
+ 80014a2:	4299      	cmpeq	r1, r3
+ 80014a4:	d315      	bcc.n	80014d2 <MCAL_SYST_SetIntervalPeriodic+0x76>
+ 80014a6:	683b      	ldr	r3, [r7, #0]
+ 80014a8:	2b00      	cmp	r3, #0
+ 80014aa:	d012      	beq.n	80014d2 <MCAL_SYST_SetIntervalPeriodic+0x76>
     {
         MCAL_SYST_Init(LOC_u32TicksCount);
- 80013bc:	693b      	ldr	r3, [r7, #16]
- 80013be:	4618      	mov	r0, r3
- 80013c0:	f7ff ff8c 	bl	80012dc <MCAL_SYST_Init>
+ 80014ac:	693b      	ldr	r3, [r7, #16]
+ 80014ae:	4618      	mov	r0, r3
+ 80014b0:	f7ff ff8c 	bl	80013cc <MCAL_SYST_Init>
 
         /*Set the callback function to be called when the interrupt is raised*/
         Glob_SYSTCallback = callback;
- 80013c4:	4a0b      	ldr	r2, [pc, #44]	; (80013f4 <MCAL_SYST_SetIntervalPeriodic+0x88>)
- 80013c6:	683b      	ldr	r3, [r7, #0]
- 80013c8:	6013      	str	r3, [r2, #0]
+ 80014b4:	4a0b      	ldr	r2, [pc, #44]	; (80014e4 <MCAL_SYST_SetIntervalPeriodic+0x88>)
+ 80014b6:	683b      	ldr	r3, [r7, #0]
+ 80014b8:	6013      	str	r3, [r2, #0]
 
         /*Set the timer mode*/
         Glob_SYSTMode = SYST_PERIODIC_MODE;
- 80013ca:	4b0b      	ldr	r3, [pc, #44]	; (80013f8 <MCAL_SYST_SetIntervalPeriodic+0x8c>)
- 80013cc:	2201      	movs	r2, #1
- 80013ce:	701a      	strb	r2, [r3, #0]
+ 80014ba:	4b0b      	ldr	r3, [pc, #44]	; (80014e8 <MCAL_SYST_SetIntervalPeriodic+0x8c>)
+ 80014bc:	2201      	movs	r2, #1
+ 80014be:	701a      	strb	r2, [r3, #0]
     
         /*Enable the interrupt*/
         SYST->CSR |= SYST_CSR_TICKINT_MASK;
- 80013d0:	4b0a      	ldr	r3, [pc, #40]	; (80013fc <MCAL_SYST_SetIntervalPeriodic+0x90>)
- 80013d2:	681b      	ldr	r3, [r3, #0]
- 80013d4:	4a09      	ldr	r2, [pc, #36]	; (80013fc <MCAL_SYST_SetIntervalPeriodic+0x90>)
- 80013d6:	f043 0302 	orr.w	r3, r3, #2
- 80013da:	6013      	str	r3, [r2, #0]
+ 80014c0:	4b0a      	ldr	r3, [pc, #40]	; (80014ec <MCAL_SYST_SetIntervalPeriodic+0x90>)
+ 80014c2:	681b      	ldr	r3, [r3, #0]
+ 80014c4:	4a09      	ldr	r2, [pc, #36]	; (80014ec <MCAL_SYST_SetIntervalPeriodic+0x90>)
+ 80014c6:	f043 0302 	orr.w	r3, r3, #2
+ 80014ca:	6013      	str	r3, [r2, #0]
 
         /*Start the counter*/
         MCAL_SYST_Start();
- 80013dc:	f7ff ffaa 	bl	8001334 <MCAL_SYST_Start>
- 80013e0:	e001      	b.n	80013e6 <MCAL_SYST_SetIntervalPeriodic+0x7a>
+ 80014cc:	f7ff ffaa 	bl	8001424 <MCAL_SYST_Start>
+ 80014d0:	e001      	b.n	80014d6 <MCAL_SYST_SetIntervalPeriodic+0x7a>
 
     }else{
         LOC_eStatus = E_NOK;
- 80013e2:	2301      	movs	r3, #1
- 80013e4:	77fb      	strb	r3, [r7, #31]
+ 80014d2:	2301      	movs	r3, #1
+ 80014d4:	77fb      	strb	r3, [r7, #31]
     }
 
     return LOC_eStatus;
- 80013e6:	7ffb      	ldrb	r3, [r7, #31]
+ 80014d6:	7ffb      	ldrb	r3, [r7, #31]
 }
- 80013e8:	4618      	mov	r0, r3
- 80013ea:	3724      	adds	r7, #36	; 0x24
- 80013ec:	46bd      	mov	sp, r7
- 80013ee:	bd90      	pop	{r4, r7, pc}
- 80013f0:	000f4240 	.word	0x000f4240
- 80013f4:	20000068 	.word	0x20000068
- 80013f8:	2000006c 	.word	0x2000006c
- 80013fc:	e000e010 	.word	0xe000e010
+ 80014d8:	4618      	mov	r0, r3
+ 80014da:	3724      	adds	r7, #36	; 0x24
+ 80014dc:	46bd      	mov	sp, r7
+ 80014de:	bd90      	pop	{r4, r7, pc}
+ 80014e0:	000f4240 	.word	0x000f4240
+ 80014e4:	20000080 	.word	0x20000080
+ 80014e8:	20000084 	.word	0x20000084
+ 80014ec:	e000e010 	.word	0xe000e010
 
-08001400 <SysTick_Handler>:
+080014f0 <SysTick_Handler>:
 *       SYSTICK_ISR_DEFINITION
 *===============================================
 */
 
 void SysTick_Handler(void)
 {   
- 8001400:	b580      	push	{r7, lr}
- 8001402:	af00      	add	r7, sp, #0
+ 80014f0:	b580      	push	{r7, lr}
+ 80014f2:	af00      	add	r7, sp, #0
     /*Stop the counter if we are in the single use mode*/
     if(Glob_SYSTMode == SYST_SINGLE_MODE)
- 8001404:	4b0a      	ldr	r3, [pc, #40]	; (8001430 <SysTick_Handler+0x30>)
- 8001406:	781b      	ldrb	r3, [r3, #0]
- 8001408:	2b00      	cmp	r3, #0
- 800140a:	d101      	bne.n	8001410 <SysTick_Handler+0x10>
+ 80014f4:	4b0a      	ldr	r3, [pc, #40]	; (8001520 <SysTick_Handler+0x30>)
+ 80014f6:	781b      	ldrb	r3, [r3, #0]
+ 80014f8:	2b00      	cmp	r3, #0
+ 80014fa:	d101      	bne.n	8001500 <SysTick_Handler+0x10>
     {
         MCAL_SYST_Stop();
- 800140c:	f7ff ffa0 	bl	8001350 <MCAL_SYST_Stop>
+ 80014fc:	f7ff ffa0 	bl	8001440 <MCAL_SYST_Stop>
     }
 
     if(Glob_SYSTCallback)
- 8001410:	4b08      	ldr	r3, [pc, #32]	; (8001434 <SysTick_Handler+0x34>)
- 8001412:	681b      	ldr	r3, [r3, #0]
- 8001414:	2b00      	cmp	r3, #0
- 8001416:	d002      	beq.n	800141e <SysTick_Handler+0x1e>
+ 8001500:	4b08      	ldr	r3, [pc, #32]	; (8001524 <SysTick_Handler+0x34>)
+ 8001502:	681b      	ldr	r3, [r3, #0]
+ 8001504:	2b00      	cmp	r3, #0
+ 8001506:	d002      	beq.n	800150e <SysTick_Handler+0x1e>
     {
         Glob_SYSTCallback();
- 8001418:	4b06      	ldr	r3, [pc, #24]	; (8001434 <SysTick_Handler+0x34>)
- 800141a:	681b      	ldr	r3, [r3, #0]
- 800141c:	4798      	blx	r3
+ 8001508:	4b06      	ldr	r3, [pc, #24]	; (8001524 <SysTick_Handler+0x34>)
+ 800150a:	681b      	ldr	r3, [r3, #0]
+ 800150c:	4798      	blx	r3
     }
 
     SYST->CSR &= ~SYST_CSR_COUNT_FLAG_MASK;
- 800141e:	4b06      	ldr	r3, [pc, #24]	; (8001438 <SysTick_Handler+0x38>)
- 8001420:	681b      	ldr	r3, [r3, #0]
- 8001422:	4a05      	ldr	r2, [pc, #20]	; (8001438 <SysTick_Handler+0x38>)
- 8001424:	f423 3380 	bic.w	r3, r3, #65536	; 0x10000
- 8001428:	6013      	str	r3, [r2, #0]
- 800142a:	bf00      	nop
- 800142c:	bd80      	pop	{r7, pc}
- 800142e:	bf00      	nop
- 8001430:	2000006c 	.word	0x2000006c
- 8001434:	20000068 	.word	0x20000068
- 8001438:	e000e010 	.word	0xe000e010
+ 800150e:	4b06      	ldr	r3, [pc, #24]	; (8001528 <SysTick_Handler+0x38>)
+ 8001510:	681b      	ldr	r3, [r3, #0]
+ 8001512:	4a05      	ldr	r2, [pc, #20]	; (8001528 <SysTick_Handler+0x38>)
+ 8001514:	f423 3380 	bic.w	r3, r3, #65536	; 0x10000
+ 8001518:	6013      	str	r3, [r2, #0]
+ 800151a:	bf00      	nop
+ 800151c:	bd80      	pop	{r7, pc}
+ 800151e:	bf00      	nop
+ 8001520:	20000084 	.word	0x20000084
+ 8001524:	20000080 	.word	0x20000080
+ 8001528:	e000e010 	.word	0xe000e010
 
-0800143c <__libc_init_array>:
- 800143c:	b570      	push	{r4, r5, r6, lr}
- 800143e:	2500      	movs	r5, #0
- 8001440:	4e0c      	ldr	r6, [pc, #48]	; (8001474 <__libc_init_array+0x38>)
- 8001442:	4c0d      	ldr	r4, [pc, #52]	; (8001478 <__libc_init_array+0x3c>)
- 8001444:	1ba4      	subs	r4, r4, r6
- 8001446:	10a4      	asrs	r4, r4, #2
- 8001448:	42a5      	cmp	r5, r4
- 800144a:	d109      	bne.n	8001460 <__libc_init_array+0x24>
- 800144c:	f000 f822 	bl	8001494 <_init>
- 8001450:	2500      	movs	r5, #0
- 8001452:	4e0a      	ldr	r6, [pc, #40]	; (800147c <__libc_init_array+0x40>)
- 8001454:	4c0a      	ldr	r4, [pc, #40]	; (8001480 <__libc_init_array+0x44>)
- 8001456:	1ba4      	subs	r4, r4, r6
- 8001458:	10a4      	asrs	r4, r4, #2
- 800145a:	42a5      	cmp	r5, r4
- 800145c:	d105      	bne.n	800146a <__libc_init_array+0x2e>
- 800145e:	bd70      	pop	{r4, r5, r6, pc}
- 8001460:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 8001464:	4798      	blx	r3
- 8001466:	3501      	adds	r5, #1
- 8001468:	e7ee      	b.n	8001448 <__libc_init_array+0xc>
- 800146a:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 800146e:	4798      	blx	r3
- 8001470:	3501      	adds	r5, #1
- 8001472:	e7f2      	b.n	800145a <__libc_init_array+0x1e>
- 8001474:	080015f8 	.word	0x080015f8
- 8001478:	080015f8 	.word	0x080015f8
- 800147c:	080015f8 	.word	0x080015f8
- 8001480:	080015fc 	.word	0x080015fc
+0800152c <__libc_init_array>:
+ 800152c:	b570      	push	{r4, r5, r6, lr}
+ 800152e:	2500      	movs	r5, #0
+ 8001530:	4e0c      	ldr	r6, [pc, #48]	; (8001564 <__libc_init_array+0x38>)
+ 8001532:	4c0d      	ldr	r4, [pc, #52]	; (8001568 <__libc_init_array+0x3c>)
+ 8001534:	1ba4      	subs	r4, r4, r6
+ 8001536:	10a4      	asrs	r4, r4, #2
+ 8001538:	42a5      	cmp	r5, r4
+ 800153a:	d109      	bne.n	8001550 <__libc_init_array+0x24>
+ 800153c:	f000 f822 	bl	8001584 <_init>
+ 8001540:	2500      	movs	r5, #0
+ 8001542:	4e0a      	ldr	r6, [pc, #40]	; (800156c <__libc_init_array+0x40>)
+ 8001544:	4c0a      	ldr	r4, [pc, #40]	; (8001570 <__libc_init_array+0x44>)
+ 8001546:	1ba4      	subs	r4, r4, r6
+ 8001548:	10a4      	asrs	r4, r4, #2
+ 800154a:	42a5      	cmp	r5, r4
+ 800154c:	d105      	bne.n	800155a <__libc_init_array+0x2e>
+ 800154e:	bd70      	pop	{r4, r5, r6, pc}
+ 8001550:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 8001554:	4798      	blx	r3
+ 8001556:	3501      	adds	r5, #1
+ 8001558:	e7ee      	b.n	8001538 <__libc_init_array+0xc>
+ 800155a:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 800155e:	4798      	blx	r3
+ 8001560:	3501      	adds	r5, #1
+ 8001562:	e7f2      	b.n	800154a <__libc_init_array+0x1e>
+ 8001564:	080016e8 	.word	0x080016e8
+ 8001568:	080016e8 	.word	0x080016e8
+ 800156c:	080016e8 	.word	0x080016e8
+ 8001570:	080016ec 	.word	0x080016ec
 
-08001484 <strcpy>:
- 8001484:	4603      	mov	r3, r0
- 8001486:	f811 2b01 	ldrb.w	r2, [r1], #1
- 800148a:	f803 2b01 	strb.w	r2, [r3], #1
- 800148e:	2a00      	cmp	r2, #0
- 8001490:	d1f9      	bne.n	8001486 <strcpy+0x2>
- 8001492:	4770      	bx	lr
+08001574 <strcpy>:
+ 8001574:	4603      	mov	r3, r0
+ 8001576:	f811 2b01 	ldrb.w	r2, [r1], #1
+ 800157a:	f803 2b01 	strb.w	r2, [r3], #1
+ 800157e:	2a00      	cmp	r2, #0
+ 8001580:	d1f9      	bne.n	8001576 <strcpy+0x2>
+ 8001582:	4770      	bx	lr
 
-08001494 <_init>:
- 8001494:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8001496:	bf00      	nop
- 8001498:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800149a:	bc08      	pop	{r3}
- 800149c:	469e      	mov	lr, r3
- 800149e:	4770      	bx	lr
+08001584 <_init>:
+ 8001584:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8001586:	bf00      	nop
+ 8001588:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800158a:	bc08      	pop	{r3}
+ 800158c:	469e      	mov	lr, r3
+ 800158e:	4770      	bx	lr
 
-080014a0 <_fini>:
- 80014a0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80014a2:	bf00      	nop
- 80014a4:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80014a6:	bc08      	pop	{r3}
- 80014a8:	469e      	mov	lr, r3
- 80014aa:	4770      	bx	lr
+08001590 <_fini>:
+ 8001590:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8001592:	bf00      	nop
+ 8001594:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8001596:	bc08      	pop	{r3}
+ 8001598:	469e      	mov	lr, r3
+ 800159a:	4770      	bx	lr
