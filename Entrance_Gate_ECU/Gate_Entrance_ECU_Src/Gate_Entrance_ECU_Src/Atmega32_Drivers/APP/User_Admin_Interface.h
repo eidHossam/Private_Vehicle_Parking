@@ -29,6 +29,7 @@
   * @{
   */
 #include "../MCAL/GPIO/Atmega32_GPIO.h"
+#include "Timer0/Atmega32_Timer0.h"
 #include "UART/Atmega32_UART.h"
 #include "SPI/Atmega32_SPI.h"
 
@@ -86,4 +87,18 @@ void st_UAI_Idle(void);
  * 
  */
 void st_UAI_SendIDToAdmin(void);
+
+/**
+ * @brief This state sends the open gate request and informs the driver that his ID is valid.
+ * 
+ */
+void st_UAI_IDAuthenticationPassed(void);
+
+/**
+ * @brief This state informs the driver that his ID is invalid.
+ * 
+ * 
+ */
+void st_UAI_IDAuthenticationFailed(void);
+
 #endif /* USER_ADMIN_INTERFACE_H_ */

@@ -11,6 +11,9 @@ typedef enum{
 }eStatus_t;
 
 typedef unsigned char        boolean;
+#define TRUE                (1U)
+#define FALSE               (0U)
+
 typedef signed char          sint8_t;
 typedef signed short         sint16_t;
 typedef signed long          sint32_t;

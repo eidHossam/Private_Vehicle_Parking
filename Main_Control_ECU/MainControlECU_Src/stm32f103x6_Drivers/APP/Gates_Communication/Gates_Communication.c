@@ -21,6 +21,27 @@
   * @{
   */
 #define MAX_NUMBER_OF_REQUESTS        2
+
+/** @defgroup AUTHENTICATION_RESULT
+  * @{
+  */
+#define AUTHENTICATION_RESULT_PASS     0xFFu
+#define AUTHENTICATION_RESULT_FAIL     0x00u
+/**
+  * @}
+  */
+
+/** @defgroup GATES_ECUS_ADDRESSES
+  * @{
+  */
+#define ENTRANCE_GATE_ECU_ADDRESS       0xE7u
+#define ENTRANCE_GATE_ECU_SPI           SPI1
+
+#define EXIT_GATE_ECU_ADDRESS           0xFFu
+#define EXIT_GATE_ECU_SPI               SPI2
+/**
+  * @}
+  */
 /**
   * @}
   */
@@ -29,10 +50,22 @@
 /** @defgroup Local Variables
   * @{
   */
-static sGateRequestInfo_t LOC_szGatesRequests[MAX_NUMBER_OF_REQUESTS];
-static sFIFO_Buf_t LOC_sQueueBuffer;
 
-static sGateRequestInfo_t LOC_sTempRequest;
+/**
+ * @brief Queue to hold all the requests from the 2 gates to be processed
+ *  by following the First In First Out schema.
+ * 
+ */
+static sFIFO_Buf_t Glob_sQueueBuffer;
+static sGateRequestInfo_t Glob_szGatesRequests[MAX_NUMBER_OF_REQUESTS];
+
+static sGateRequestInfo_t Glob_sEntranceGateRequest;
+
+/**
+ * @brief Holds the address of the gate which has a request currenlty being processed.
+ * 
+ */
+static uint8 Glob_u8ServedRequestGateAddress;
 /**
   * @}
   */
@@ -42,44 +75,53 @@ static sGateRequestInfo_t LOC_sTempRequest;
 /** @defgroup ISR_CALLBACK_DEFINITIONS
   * @{
   */
-void SPI_TXEmpty_ISR_Callback(void)
+void ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback(void)
 {
     static uint8 LOC_u8TransmitCounter = 0;
-    
+    static uint8 LOC_u8FailedTrasnsmissionCounter = 0;
     
     if(LOC_u8TransmitCounter == 0)
     {
-        MCAL_SPI_ReceiveData(SPI1, (uint16 *)&LOC_sTempRequest.GateAddress, PollingDisable);
+        MCAL_SPI_ReceiveData(ENTRANCE_GATE_ECU_SPI, (uint16 *)&Glob_sEntranceGateRequest.GateAddress, PollingDisable);
+        
+        /*Wait the acknowledge byte from the slave*/
+        if(Glob_sEntranceGateRequest.GateAddress != ENTRANCE_GATE_ECU_ADDRESS)
+        {
+            LOC_u8FailedTrasnsmissionCounter++;
+            LOC_u8TransmitCounter--;
+        }
+
     }else{
-        MCAL_SPI_ReceiveData(SPI1, (uint16 *)&LOC_sTempRequest.szDriverID[LOC_u8TransmitCounter - 1], PollingDisable);
+        MCAL_SPI_ReceiveData(ENTRANCE_GATE_ECU_SPI, 
+                            (uint16 *)&Glob_sEntranceGateRequest.szDriverID[LOC_u8TransmitCounter - 1], PollingDisable);
     }
 
     LOC_u8TransmitCounter++;
 
     /*If we received all the required information add it to the queue*/
-    if(LOC_u8TransmitCounter == 4)
+    if(LOC_u8TransmitCounter == 4 || LOC_u8FailedTrasnsmissionCounter == 10)
     {
-        LOC_sTempRequest.szDriverID[LOC_u8TransmitCounter - 1] = '\0';
-        
-        LOC_u8TransmitCounter = 0;
+        if(LOC_u8FailedTrasnsmissionCounter != 10)
+        {
+            Glob_sEntranceGateRequest.szDriverID[LOC_u8TransmitCounter - 1] = '\0';
+            
+            FIFO_enqueue(&Glob_sQueueBuffer, Glob_sEntranceGateRequest);
+        }
 
-        FIFO_enqueue(&LOC_sQueueBuffer, LOC_sTempRequest);
+            LOC_u8TransmitCounter = 0;
     }else{
         /*Dummy data to receive the information from the slave*/
-        uint16 *LOC_pu16TxBuffer;
-        *LOC_pu16TxBuffer = 0x0000u;
+        uint16 LOC_pu16TxBuffer = 0x0000u;
 
-        MCAL_SPI_SendData(SPI1, LOC_pu16TxBuffer, PollingDisable);    
+        MCAL_SPI_SendData(ENTRANCE_GATE_ECU_SPI, &LOC_pu16TxBuffer, PollingDisable);    
     }
 }
 
 void EXTI_Line4_ISR_Callback(void)
 {
-    uint16 *LOC_pu16TxBuffer;
-    *LOC_pu16TxBuffer = 0xFFFFu;
+    uint16 LOC_pu16TxBuffer = 0xFFFFu;
 
-
-    MCAL_SPI_SendData(SPI1, LOC_pu16TxBuffer, PollingDisable);
+    MCAL_SPI_SendData(ENTRANCE_GATE_ECU_SPI, &LOC_pu16TxBuffer, PollingDisable);
 }
 /**
   * @}
@@ -89,11 +131,11 @@ void EXTI_Line4_ISR_Callback(void)
 /** @defgroup Private Functions
   * @{
   */
-void SPI_Init(void)
+void ENTRANCE_GATE_ECU_SPI_Init(void)
 {
-    uint16 *dummy;
     SPI_Config_t config;
-	config.SPI_Mode = SPI_MODE_MASTER;
+	
+    config.SPI_Mode = SPI_MODE_MASTER;
 	config.SPI_Direction = SPI_DIRECTION_2LINES_FULL_DUPLEX;
 	config.SPI_DataSize = SPI_DATA_SIZE_8BIT;
 	config.SPI_BitOrder = SPI_FIRST_BIT_LSB;
@@ -102,11 +144,9 @@ void SPI_Init(void)
 	config.SPI_NSS_Managment = SPI_NSS_SW_SET;
 	config.SPI_BR_Prescaler = SPI_BAUD_RATE_PRESCALER_8;
 
-	MCAL_SPI_Init(SPI1, &config);
-    *dummy = 0x0000;
-    MCAL_SPI_SendData(SPI1, dummy, PollingEnable);
+	MCAL_SPI_Init(ENTRANCE_GATE_ECU_SPI, &config);
     
-    MCAL_SPI_Interrupt_EN(SPI1, SPI_IRQ_TXEIE, SPI_TXEmpty_ISR_Callback);
+    MCAL_SPI_Interrupt_EN(ENTRANCE_GATE_ECU_SPI, SPI_IRQ_TXEIE, ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback);
 
     /*Give the SPI interrupt higher priority as it's more important*/
     MCAL_NVIC_SetPriority(NVIC_SPI1_IVT_INDEX, NVIC_PRIORITY_5);
@@ -128,7 +168,7 @@ void EXTI_Init(void)
 
 void FIFOBuff_Init(void)
 {
-    FIFO_init(&LOC_sQueueBuffer, LOC_szGatesRequests, MAX_NUMBER_OF_REQUESTS);
+    FIFO_init(&Glob_sQueueBuffer, Glob_szGatesRequests, MAX_NUMBER_OF_REQUESTS);
 }
 /**
   * @}
@@ -147,7 +187,7 @@ void FIFOBuff_Init(void)
 void st_GatesComm_Init(void)
 {
     /*Initialize the SPI module to communicate with the gates ECUs*/
-    SPI_Init();
+    ENTRANCE_GATE_ECU_SPI_Init();
 
     /*Initialize the EXTI module to communicate with the gates ECUs*/
     EXTI_Init();
@@ -166,17 +206,162 @@ void st_GatesComm_Init(void)
 void st_GatesComm_CheckPendingRequests(void)
 {
     sGateRequestInfo_t request;
-    if(LOC_sQueueBuffer.size == 2)
+
+    /*If there are any requests in the queue start processing them*/
+    if(Glob_sQueueBuffer.size > 0)
     {
-        LCD_Cursor_XY(LCD_FIRST_LINE, 0);
+        /*Remove the request from the queue*/
+        FIFO_dequeue(&Glob_sQueueBuffer, &request);
 
-        FIFO_dequeue(&LOC_sQueueBuffer, &request);
-        LCD_Send_Char(request.GateAddress);
-        LCD_Send_String(request.szDriverID);
+        /*Save the gate address*/
+        Glob_u8ServedRequestGateAddress = request.GateAddress;
 
-        LCD_Cursor_XY(LCD_SECOND_LINE, 0);
-        FIFO_dequeue(&LOC_sQueueBuffer, &request);
-        LCD_Send_String(request.szDriverID);
-        LCD_Send_Char(request.GateAddress);
+        AI_GC_SendIDForAuthentication(request.szDriverID);
+
+        fptr_GateCommState = st_Admin_AuthenticateID;
     }
 }
+
+/**
+ * @brief This state sends the request approval signal to the gate ECUs and to the 7-segment display to be updated.
+ * 
+ */
+void st_GatesComm_SendIDApprovedSignal(void)
+{
+    uint16 LOC_u16TxBuffer = Glob_u8ServedRequestGateAddress;
+    uint8 LOC_u8FailedTransmissionCount = 0;
+    volatile SPI_Typedef* SPIx;
+    fptr_Callback callback;
+
+    /*Determine which SPI instance to used based on the gate being served*/
+    if(Glob_u8ServedRequestGateAddress == ENTRANCE_GATE_ECU_ADDRESS)
+    {
+        SPIx = ENTRANCE_GATE_ECU_SPI;
+        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
+
+        /** TODO: Increase the car count on the 7-segment display*/
+
+    }else{
+        SPIx = EXIT_GATE_ECU_SPI;
+        /** TODO: Change to the ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback*/
+        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
+
+        /** TODO: Decrease the car count on the 7-segment display*/
+
+    }
+        
+    /*Disable the interrupts to send the signal using polling*/
+    MCAL_SPI_Interrupt_Disable(SPIx, SPI_IRQ_TXEIE);
+
+    do
+    {
+        /*Send the address of the gate being served to act as the start of the frame*/
+        MCAL_SPI_ExchangeData(SPIx, (uint16 *)&LOC_u16TxBuffer);
+
+        /*Put a limit on the number of failed tries to avoid getting stuck in this loop*/
+        LOC_u8FailedTransmissionCount++;
+
+    } while ((LOC_u16TxBuffer != Glob_u8ServedRequestGateAddress) && 
+              LOC_u8FailedTransmissionCount < 10);
+    
+    /*Check if we failed to get an aknowledge from the slave then abort*/
+    if(LOC_u8FailedTransmissionCount < 10)
+    {
+        /*Send the successful authentication code*/
+        LOC_u16TxBuffer = AUTHENTICATION_RESULT_PASS;
+        MCAL_SPI_SendData(SPIx, &LOC_u16TxBuffer, PollingEnable);
+    }else{
+
+    }
+
+    /*Enable the interrupts again*/
+    MCAL_SPI_Interrupt_EN(SPIx, SPI_IRQ_TXEIE, callback);
+
+    fptr_GateCommState = st_GatesComm_CheckPendingRequests;
+}
+
+/**
+ * @brief This state sends the request disapproval to the gate ECU.
+ * 
+ */
+void st_GatesComm_SendIDDisapprovedSignal(void)
+{
+    uint16 LOC_u16TxBuffer = Glob_u8ServedRequestGateAddress;
+    uint8 LOC_u8FailedTransmissionCount = 0;
+    volatile SPI_Typedef* SPIx;
+    fptr_Callback callback;
+
+    /*Determine which SPI instance to used based on the gate being served*/
+    if(Glob_u8ServedRequestGateAddress == ENTRANCE_GATE_ECU_ADDRESS)
+    {
+        SPIx = ENTRANCE_GATE_ECU_SPI;
+        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
+
+    }else{
+
+        SPIx = EXIT_GATE_ECU_SPI;
+        /** TODO: Change to the ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback*/
+        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
+    }
+        
+
+    /*Disable the interrupts to send the signal using polling*/
+    MCAL_SPI_Interrupt_Disable(SPIx, SPI_IRQ_TXEIE);
+
+    do
+    {
+        /*Send the address of the gate being served to act as the start of the frame*/
+        MCAL_SPI_ExchangeData(SPIx, (uint16 *)&LOC_u16TxBuffer);
+
+        /*Put a limit on the number of failed tries to avoid getting stuck in this loop*/
+        LOC_u8FailedTransmissionCount++;
+
+    } while ((LOC_u16TxBuffer != Glob_u8ServedRequestGateAddress) &&
+              LOC_u8FailedTransmissionCount < 10);
+    
+    if(LOC_u8FailedTransmissionCount < 10)
+    {
+        /*Send the failed authentication code*/
+        LOC_u16TxBuffer = AUTHENTICATION_RESULT_FAIL;
+        MCAL_SPI_SendData(SPIx, &LOC_u16TxBuffer, PollingEnable);
+    }else{
+
+    }
+
+    /*Enable the interrupts again*/
+    MCAL_SPI_Interrupt_EN(SPIx, SPI_IRQ_TXEIE, callback);
+
+    fptr_GateCommState = st_GatesComm_CheckPendingRequests;
+}
+
+/** @defgroup Signals between the Admin_Interface and Gates_Communication modules
+  * @{
+  */
+
+/**
+======================================================================================================================
+* @Func_name	:  AI_GC_IDApproved
+* @brief		   :  Function to inform that the authentication process has been approved and the ID is valid.
+* @note			:  none
+======================================================================================================================
+*/
+void AI_GC_IDApproved(void)
+{
+    fptr_GateCommState = st_GatesComm_SendIDApprovedSignal;
+}
+
+/**
+======================================================================================================================
+* @Func_name	:  AI_GC_IDApproved
+* @brief		   :  Function to inform that the authentication process has been approved and the ID is valid.
+* @note			:  none
+======================================================================================================================
+*/
+void AI_GC_IDDisapproved(void)
+{
+    fptr_GateCommState = st_GatesComm_SendIDDisapprovedSignal;
+}
+
+/**
+  * @}
+  */

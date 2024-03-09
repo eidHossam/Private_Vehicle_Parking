@@ -79,5 +79,16 @@ void st_GatesComm_Init(void);
  */
 void st_GatesComm_CheckPendingRequests(void);
 
+/**
+ * @brief This state sends the request approval signal to the gate ECUs and to the 7-segment display to be updated.
+ * 
+ */
+void st_GatesComm_SendIDApprovedSignal(void);
+
+/**
+ * @brief This state sends the request disapproval to the gate ECU.
+ * 
+ */
+void st_GatesComm_SendIDDisapprovedSignal(void);
 
 #endif /* APP_GATES_COMMUNICATION_GATES_COMMUNICATION_H_ */

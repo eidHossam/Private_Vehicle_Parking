@@ -34,7 +34,7 @@
 typedef struct
 {
     uint8   EXTI_lineNumber;            /*Specifies the EXTI line number must be a val of @ref EXTI_LINE_DEFINE*/
-    GPIO_t* GPIO_PORT;                  /*The GPIO port to be used with this external interrupt*/
+    volatile GPIO_t* GPIO_PORT;                  /*The GPIO port to be used with this external interrupt*/
     uint8   GPIO_pinNumber;             /*The GPIO pin number to be used with this external interrupt*/
     uint8   AFIO_Port_config;           /*The used port ID in the AFIO module*/  
     uint8   EXTI_IVT_index;             /*The index of this interrupt in the vector table*/  

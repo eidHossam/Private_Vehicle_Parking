@@ -18,6 +18,7 @@
   */
 #include "string.h"
 #include "Admin_Interface_cfg.h"
+#include "../Interface.h"
 /**
   * @}
   */

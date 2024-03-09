@@ -98,8 +98,10 @@ static uint8 currentOperation;
   * @{
   */
 static uint8 Glob_tempDriverIDinput[AUTHORIZED_ID_SIZE + 1];
-static uint8 Glob_DriversIDsList[AUTHORIZED_IDS_MAX_COUNT][AUTHORIZED_ID_SIZE + 1];
-static uint8 Glob_AuthIDsCount = 0;
+static uint8 Glob_DriversIDsList[AUTHORIZED_IDS_MAX_COUNT][AUTHORIZED_ID_SIZE + 1] = {"123", "000", "666"};
+static uint8 Glob_AuthIDsCount = 3;
+
+static uint8 Glob_szAuthorizationRequestDriverID[AUTHORIZED_ID_SIZE + 1];
 /**
   * @}
   */
@@ -804,3 +806,70 @@ void st_Admin_ShowIDsList(void)
     Admin_Dashboard_State = st_Admin_ShowIDsList;
   }
 }
+
+/**
+======================================================================================================================
+* @Func_name	:   st_Admin_AuthenticateID
+* @brief		  :   Function to authenticate the ID of the driver that wants to enter/exit the garage.
+* @note			  :   This function is called by the Gates_Communcation module.
+======================================================================================================================
+*/
+void st_Admin_AuthenticateID(void)
+{
+  static uint8 LOC_u8Counter = 0;
+  boolean LOC_BoolValidID = FALSE;
+
+  /*Check if the list is empty*/
+  if(Glob_AuthIDsCount > 0)
+  {
+    /*check if the ID matches an ID that exists in the list*/
+    if(!strcmp((const sint8 *)Glob_szAuthorizationRequestDriverID, (const sint8 *)Glob_DriversIDsList[LOC_u8Counter]))
+    {
+      LOC_BoolValidID = TRUE;
+    }
+
+    LOC_u8Counter++;
+  }else{
+
+  }
+
+
+  if(LOC_BoolValidID)
+  {
+    LOC_u8Counter = 0;
+
+    /*If the ID matches an ID that exists in the list send IDApproved signal*/
+    AI_GC_IDApproved();
+  }
+  /*If the ID doesn't exist in the list send IDDisapproved signal*/
+  else if(LOC_u8Counter >= Glob_AuthIDsCount)
+  {
+    LOC_u8Counter = 0;
+
+    AI_GC_IDDisapproved();
+  }else{
+
+  }
+}
+
+
+/** @defgroup Signals between the Admin_Interface and Gates_Communication modules
+  * @{
+  */
+
+/**
+======================================================================================================================
+* @Func_name	:  AI_GC_SendIDForAuthentication
+* @brief		   :  Function to send the Driver ID to be authroized
+* @param [in]	:  ptr_DriverID: pointer to the array holding the Driver ID
+* @note			:  none.
+======================================================================================================================
+*/
+void AI_GC_SendIDForAuthentication(uint8* ptr_DriverID)
+{ 
+   /*Copy the driver ID to be authorized*/
+   strcpy((sint8  *)Glob_szAuthorizationRequestDriverID, (const sint8  *)ptr_DriverID);
+}
+/**
+  * @}
+  */
