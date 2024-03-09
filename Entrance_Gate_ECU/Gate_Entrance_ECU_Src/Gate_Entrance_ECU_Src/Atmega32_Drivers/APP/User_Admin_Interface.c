@@ -20,7 +20,12 @@
 /** @defgroup Local Macros
   * @{
   */
-#define DRIVER_ID_SIZE      3
+#define ENTRANCE_GATE_ECU_ADDRESS       0xE7u
+
+#define DRIVER_ID_SIZE                  3
+
+#define ADMIN_ECU_INTERRUPT_PORT        GPIOB
+#define ADMIN_ECU_INTERRUPT_PIN         GPIO_PIN3
 /**
   * @}
   */
@@ -29,7 +34,8 @@
 /** @defgroup Local Variables
   * @{
   */
-static uint8_t LOC_u8DriverID[DRIVER_ID_SIZE];
+static uint8_t LOC_u8DriverID[DRIVER_ID_SIZE + 1];
+static const uint8_t LOC_u8GateAddress = ENTRANCE_GATE_ECU_ADDRESS;
 /**
   * @}
   */
@@ -54,6 +60,9 @@ static void USART_RX_ISR_Callback(void)
 
     if(sLOC_u8CharCounter == DRIVER_ID_SIZE)
     {
+        /*Add a NULL character at the end*/
+        LOC_u8DriverID[sLOC_u8CharCounter] = '\0';
+
         sLOC_u8CharCounter = 0;
  
         /*Disable the UART to stop it from serving another customer 
@@ -61,6 +70,29 @@ static void USART_RX_ISR_Callback(void)
         MCAL_UART_Disable();
 
         fptr_st_UserAdminInterface = st_UAI_SendIDToAdmin;
+    }else{
+
+    }
+}
+
+static void SPI_ISR_Callback(void)
+{
+    static uint8_t sLOC_u8CharCounter = 0;
+
+    if(sLOC_u8CharCounter == 0)
+    {
+        MCAL_SPI_SendData((uint8_t *)&LOC_u8GateAddress, PollingDisable);
+    }else{
+        MCAL_SPI_SendData(&LOC_u8DriverID[sLOC_u8CharCounter - 1], PollingDisable);
+    }
+            
+    sLOC_u8CharCounter++;
+
+    if(sLOC_u8CharCounter == (DRIVER_ID_SIZE + 1))
+    {
+        sLOC_u8CharCounter = 0;
+
+        fptr_st_UserAdminInterface = st_UAI_Idle;
     }else{
 
     }
@@ -93,6 +125,26 @@ static void USART_Init()
     MCAL_UART_Disable();
 }
 
+static void SPI_Init()
+{
+    SPI_Config_t LOC_sSPI_cfg;
+    GPIO_Pin_Config_t LOC_sGPIO_CFG;
+
+    LOC_sSPI_cfg.SPI_Mode       = SPI_MODE_SLAVE;
+    LOC_sSPI_cfg.SPI_DataOrder  = SPI_FIRST_BIT_LSB;
+    LOC_sSPI_cfg.SPI_CPOL       = SPI_IDLE_HIGH;
+    LOC_sSPI_cfg.SPI_CPHA       = SPI_SAMPLE_SECOND_EDGE;
+    LOC_sSPI_cfg.SPI_IRQ_EN     = SPI_IRQ_ENABLE;
+    LOC_sSPI_cfg.SPI_IRQHandler = SPI_ISR_Callback;
+
+    MCAL_SPI_Init(&LOC_sSPI_cfg);
+
+    /*Configure the pin to be used to interrupt the admin ECU to request attention*/
+    LOC_sGPIO_CFG.pinMode = GPIO_MODE_OUTPUT;
+    LOC_sGPIO_CFG.pinNumber = ADMIN_ECU_INTERRUPT_PIN;
+    MCAL_GPIO_Init(ADMIN_ECU_INTERRUPT_PORT, &LOC_sGPIO_CFG);
+
+}
 /**
   * @}
   */
@@ -111,6 +163,9 @@ void st_UAI_Init(void)
 {
     /*Initialize the USART module to get the input from the user*/
     USART_Init();
+
+    /*Initialize the SPI module to communicate with the admin ECU*/
+    SPI_Init();
 
     /*Initialize the LCD module to print messages to the driver*/
     LCD_Init();
@@ -154,6 +209,15 @@ void st_UAI_Idle(void)
  * 
  */
 void st_UAI_SendIDToAdmin(void)
-{
+{    
     
+    LCD_Clear_Screen();
+    LCD_Cursor_XY(LCD_SECOND_LINE, 4);
+    LCD_Send_String(stringfy("Processing!"));
+
+    /*Toggle the ADMIN_ECU_INTERRUPT_PIN to alert the admin that we need attention*/
+    MCAL_GPIO_TogglePin(ADMIN_ECU_INTERRUPT_PORT, ADMIN_ECU_INTERRUPT_PIN);
+        
+    
+    fptr_st_UserAdminInterface = st_UAI_Idle;
 }

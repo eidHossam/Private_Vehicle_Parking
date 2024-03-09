@@ -128,7 +128,7 @@ enum Polling_mechanism{
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_Init(SPI_Typedef* SPIx, SPI_Config_t* config);
+void MCAL_SPI_Init(volatile SPI_Typedef* SPIx, SPI_Config_t* config);
 
 /*
 ======================================================================================================================
@@ -140,7 +140,7 @@ void MCAL_SPI_Init(SPI_Typedef* SPIx, SPI_Config_t* config);
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_Reset(SPI_Typedef* SPIx);
+void MCAL_SPI_Reset(volatile SPI_Typedef* SPIx);
 
 /*
 ======================================================================================================================
@@ -153,7 +153,7 @@ void MCAL_SPI_Reset(SPI_Typedef* SPIx);
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_SendData(SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechanism polling);
+void MCAL_SPI_SendData(volatile SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechanism polling);
 
 /*
 ======================================================================================================================
@@ -166,21 +166,20 @@ void MCAL_SPI_SendData(SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechan
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_ReceiveData(SPI_Typedef* SPIx, uint16* pRxBuffer, enum Polling_mechanism polling);
+void MCAL_SPI_ReceiveData(volatile SPI_Typedef* SPIx, uint16* pRxBuffer, enum Polling_mechanism polling);
 
 /*
 ======================================================================================================================
 * @Func_name	:   MCAL_SPI_ExchangeData
 * @brief		:   Send and Receive data from the specified SPI channel.
 * @param [in]	:   SPIx: specifies the SPI instance to be initialized can be (SPI1, SPI2).
-* @param [in]	:   polling: Enable or disable polling mechanism.
 * @param [in]	:   pBuffer: Pointer to the buffer holding data to be send.
 * @param [out]	:   pBuffer: Pointer to the buffer to store the received data in.
 * @return_value :   none.
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_ExchangeData(SPI_Typedef* SPIx, uint16* pBuffer, enum Polling_mechanism polling);
+void MCAL_SPI_ExchangeData(volatile SPI_Typedef* SPIx, uint16* pBuffer);
 
 /*
 ======================================================================================================================
@@ -204,7 +203,7 @@ void MCAL_SPI_WAIT_TC(USART_Typedef * SPIx);
 * @return_value :   none.
 * Note          :   In case of interrupt from the MODF or OVR flag you need to clear the flag manually.======================================================================================================================
 */
-void MCAL_SPI_Interrupt_EN(SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback)(void));
+void MCAL_SPI_Interrupt_EN(volatile SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback)(void));
 
 /*
 ======================================================================================================================
@@ -216,5 +215,5 @@ void MCAL_SPI_Interrupt_EN(SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback
 * Note			:   This function won't disable the SPI instance interrupt in NVIC you have to manually disable it.
 ======================================================================================================================
 */
-void MCAL_SPI_Interrupt_Disable(SPI_Typedef * SPIx, uint8 IRQ);
+void MCAL_SPI_Interrupt_Disable(volatile SPI_Typedef * SPIx, uint8 IRQ);
 #endif /* MCAL_SPI_STM32F103X8_SPI_H_ */

@@ -55,7 +55,7 @@ static void (* p_IRQ_callback_SPI2[3])(void);
 * Note			:   none.
 ======================================================================================================================
 */
-static void MCAL_SPI_GPIO_Set_Pins(SPI_Typedef * SPIx)
+static void MCAL_SPI_GPIO_Set_Pins(volatile SPI_Typedef * SPIx)
 {
     uint8 index, SCK_pin, MOSI_Pin, MISO_Pin, SS_Pin;
     volatile GPIO_t* GPIOx;
@@ -195,7 +195,7 @@ static void MCAL_SPI_GPIO_Set_Pins(SPI_Typedef * SPIx)
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_Init(SPI_Typedef* SPIx, SPI_Config_t* config)
+void MCAL_SPI_Init(volatile SPI_Typedef* SPIx, SPI_Config_t* config)
 {
     /*Activate the peripheral clock and save the config in a global variable to be used
         in other functions in the driver.*/
@@ -248,7 +248,7 @@ void MCAL_SPI_Init(SPI_Typedef* SPIx, SPI_Config_t* config)
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_Reset(SPI_Typedef* SPIx)
+void MCAL_SPI_Reset(volatile SPI_Typedef* SPIx)
 {
      if(SPIx == SPI1)
     {
@@ -269,7 +269,7 @@ void MCAL_SPI_Reset(SPI_Typedef* SPIx)
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_SendData(SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechanism polling)
+void MCAL_SPI_SendData(volatile SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechanism polling)
 {
     uint8 index;
     index = (SPIx == SPI1)? SPI1_INDEX : SPI2_INDEX;
@@ -303,7 +303,7 @@ void MCAL_SPI_SendData(SPI_Typedef* SPIx, uint16* pTxBuffer, enum Polling_mechan
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_ReceiveData(SPI_Typedef* SPIx, uint16* pRxBuffer, enum Polling_mechanism polling)
+void MCAL_SPI_ReceiveData(volatile SPI_Typedef* SPIx, uint16* pRxBuffer, enum Polling_mechanism polling)
 {
     uint8 index;
     index = (SPIx == SPI1)? SPI1_INDEX : SPI2_INDEX;
@@ -331,14 +331,13 @@ void MCAL_SPI_ReceiveData(SPI_Typedef* SPIx, uint16* pRxBuffer, enum Polling_mec
 * @Func_name	:   MCAL_SPI_ExchangeData
 * @brief		:   Send and Receive data from the specified SPI channel.
 * @param [in]	:   SPIx: specifies the SPI instance to be initialized can be (SPI1, SPI2).
-* @param [in]	:   polling: Enable or disable polling mechanism.
 * @param [in]	:   pBuffer: Pointer to the buffer holding data to be send.
 * @param [out]	:   pBuffer: Pointer to the buffer to store the received data in.
 * @return_value :   none.
-* Note			:   none.
+* Note			:   This function works with polling mechanism.
 ======================================================================================================================
 */
-void MCAL_SPI_ExchangeData(SPI_Typedef* SPIx, uint16* pBuffer, enum Polling_mechanism polling)
+void MCAL_SPI_ExchangeData(volatile SPI_Typedef* SPIx, uint16* pBuffer)
 {
    
     /*Loop as long as the TXE flag is zero*/
@@ -380,7 +379,7 @@ void MCAL_SPI_WAIT_TC(USART_Typedef * SPIx)
 * Note			:   none.
 ======================================================================================================================
 */
-void MCAL_SPI_Interrupt_EN(SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback)(void))
+void MCAL_SPI_Interrupt_EN(volatile SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback)(void))
 {
     if(SPIx == SPI1)
     {
@@ -405,7 +404,7 @@ void MCAL_SPI_Interrupt_EN(SPI_Typedef * SPIx, uint8 IRQ, void (* p_IRQ_callback
 * Note			:   This function won't disable the SPI instance interrupt in NVIC you have to manually disable it.
 ======================================================================================================================
 */
-void MCAL_SPI_Interrupt_Disable(SPI_Typedef * SPIx, uint8 IRQ)
+void MCAL_SPI_Interrupt_Disable(volatile SPI_Typedef * SPIx, uint8 IRQ)
 {
     if(SPIx == SPI1)
     {

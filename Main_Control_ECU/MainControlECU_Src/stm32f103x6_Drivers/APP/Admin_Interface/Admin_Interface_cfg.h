@@ -8,6 +8,16 @@
 #ifndef APP_ADMIN_INTERFACE_ADMIN_INTERFACE_CFG_H_
 #define APP_ADMIN_INTERFACE_ADMIN_INTERFACE_CFG_H_
 
+/** @defgroup INCLUDES
+  * @{
+  */
+
+#include "../Interface.h"
+
+/**
+  * @}
+  */
+
 /**************************************************************************************************************************
 *===============================================
 *           Configuration Macros 
@@ -41,10 +51,6 @@
   
 /*Set the maximum allowed number of authorized IDs*/
 #define AUTHORIZED_IDS_MAX_COUNT     5
-
-/*Set the maximum size of an authorized IDs*/
-#define AUTHORIZED_ID_SIZE          3
-
  /**
    * @}
    */

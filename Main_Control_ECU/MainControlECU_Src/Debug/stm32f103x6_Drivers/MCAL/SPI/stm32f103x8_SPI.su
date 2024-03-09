@@ -3,9 +3,9 @@ stm32f103x8_SPI.c:198:6:MCAL_SPI_Init	24	static
 stm32f103x8_SPI.c:251:6:MCAL_SPI_Reset	16	static
 stm32f103x8_SPI.c:272:6:MCAL_SPI_SendData	32	static
 stm32f103x8_SPI.c:306:6:MCAL_SPI_ReceiveData	32	static
-stm32f103x8_SPI.c:341:6:MCAL_SPI_ExchangeData	24	static
-stm32f103x8_SPI.c:367:6:MCAL_SPI_WAIT_TC	16	static
-stm32f103x8_SPI.c:383:6:MCAL_SPI_Interrupt_EN	24	static
-stm32f103x8_SPI.c:408:6:MCAL_SPI_Interrupt_Disable	16	static
-stm32f103x8_SPI.c:428:6:SPI1_IRQHandler	8	static
-stm32f103x8_SPI.c:446:6:SPI2_IRQHandler	8	static
+stm32f103x8_SPI.c:340:6:MCAL_SPI_ExchangeData	16	static
+stm32f103x8_SPI.c:366:6:MCAL_SPI_WAIT_TC	16	static
+stm32f103x8_SPI.c:382:6:MCAL_SPI_Interrupt_EN	24	static
+stm32f103x8_SPI.c:407:6:MCAL_SPI_Interrupt_Disable	16	static
+stm32f103x8_SPI.c:427:6:SPI1_IRQHandler	8	static
+stm32f103x8_SPI.c:445:6:SPI2_IRQHandler	8	static

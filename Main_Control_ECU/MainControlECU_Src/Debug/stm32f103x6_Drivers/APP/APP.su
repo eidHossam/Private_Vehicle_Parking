@@ -1,2 +1,2 @@
 APP.c:23:6:Dashboard_ECU_APP_SETUP	8	static
-APP.c:35:6:Dashboard_ECU_APP_Loop	8	static
+APP.c:37:6:Dashboard_ECU_APP_Loop	8	static

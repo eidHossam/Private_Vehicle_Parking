@@ -1,0 +1,11 @@
+stm32f103x6_EXTI.c:42:6:MCAL_EXTI_Enable	24	static
+stm32f103x6_EXTI.c:102:6:MCAL_EXTI_Update_Config	16	static
+stm32f103x6_EXTI.c:117:6:MCAL_EXTI_Disable	16	static
+stm32f103x6_EXTI.c:134:6:MCAL_EXTI_Reset	8	static
+stm32f103x6_EXTI.c:162:6:EXTI0_IRQHandler	8	static
+stm32f103x6_EXTI.c:171:6:EXTI1_IRQHandler	8	static
+stm32f103x6_EXTI.c:180:6:EXTI2_IRQHandler	8	static
+stm32f103x6_EXTI.c:189:6:EXTI3_IRQHandler	8	static
+stm32f103x6_EXTI.c:198:6:EXTI4_IRQHandler	8	static
+stm32f103x6_EXTI.c:207:6:EXTI9_5_IRQHandler	8	static
+stm32f103x6_EXTI.c:216:6:EXTI15_10_IRQHandler	8	static

@@ -1,0 +1,7 @@
+Gates_Communication.c:45:6:SPI_TXEmpty_ISR_Callback	16	static
+Gates_Communication.c:76:6:EXTI_Line4_ISR_Callback	16	static
+Gates_Communication.c:92:6:SPI_Init	32	static
+Gates_Communication.c:115:6:EXTI_Init	32	static
+Gates_Communication.c:129:6:FIFOBuff_Init	8	static
+Gates_Communication.c:147:6:st_GatesComm_Init	8	static
+Gates_Communication.c:166:6:st_GatesComm_CheckPendingRequests	16	static

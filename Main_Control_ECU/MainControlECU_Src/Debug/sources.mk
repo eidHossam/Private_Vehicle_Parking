@@ -24,9 +24,12 @@ Src \
 Startup \
 stm32f103x6_Drivers/APP \
 stm32f103x6_Drivers/APP/Admin_Interface \
+stm32f103x6_Drivers/APP/Gates_Communication \
 stm32f103x6_Drivers/HAL/Keypad_Driver \
 stm32f103x6_Drivers/HAL/LCD_Driver \
+stm32f103x6_Drivers/LIB/FIFO_Buffer_Driver \
 stm32f103x6_Drivers/MCAL/AFIO \
+stm32f103x6_Drivers/MCAL/EXTI \
 stm32f103x6_Drivers/MCAL/GPIO \
 stm32f103x6_Drivers/MCAL/NVIC \
 stm32f103x6_Drivers/MCAL/RCC \

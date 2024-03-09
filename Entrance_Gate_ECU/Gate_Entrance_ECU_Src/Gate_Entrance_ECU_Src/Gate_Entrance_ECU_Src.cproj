@@ -156,6 +156,12 @@
     <Compile Include="Atmega32_Drivers\MCAL\GPIO\Atmega32_GPIO.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Atmega32_Drivers\MCAL\SPI\Atmega32_SPI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\MCAL\SPI\Atmega32_SPI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Atmega32_Drivers\MCAL\UART\Atmega32_UART.c">
       <SubType>compile</SubType>
     </Compile>
@@ -177,10 +183,14 @@
     <Folder Include="Atmega32_Drivers\LIB\" />
     <Folder Include="Atmega32_Drivers\MCAL\" />
     <Folder Include="Atmega32_Drivers\MCAL\GPIO\" />
+    <Folder Include="Atmega32_Drivers\MCAL\SPI\" />
     <Folder Include="Atmega32_Drivers\MCAL\UART\" />
     <Folder Include="Atmega32_Drivers\Service\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atmega32_Drivers\MCAL\GPIO\README.md">
+      <SubType>compile</SubType>
+    </None>
     <None Include="Atmega32_Drivers\MCAL\UART\README.md">
       <SubType>compile</SubType>
     </None>

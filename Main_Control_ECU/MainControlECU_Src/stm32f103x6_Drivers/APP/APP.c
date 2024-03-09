@@ -23,6 +23,8 @@
 void Dashboard_ECU_APP_SETUP(void)
 {
     st_Admin_DashboardInit();
+
+    st_GatesComm_Init();
 }
 
 /**
@@ -35,6 +37,8 @@ void Dashboard_ECU_APP_SETUP(void)
 void Dashboard_ECU_APP_Loop(void)
 {
     Admin_Dashboard_State();
+
+    fptr_GateCommState();
 }
 
 

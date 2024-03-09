@@ -10,6 +10,8 @@ Atmega32_Drivers\HAL\LCD_Driver\LCD_program.c
 
 Atmega32_Drivers\MCAL\GPIO\Atmega32_GPIO.c
 
+Atmega32_Drivers\MCAL\SPI\Atmega32_SPI.c
+
 Atmega32_Drivers\MCAL\UART\Atmega32_UART.c
 
 main.c

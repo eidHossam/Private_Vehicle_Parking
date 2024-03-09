@@ -1,0 +1,3 @@
+FIFO_Buff.c:15:16:FIFO_init	24	static
+FIFO_Buff.c:31:16:FIFO_enqueue	24	static
+FIFO_Buff.c:54:16:FIFO_dequeue	16	static

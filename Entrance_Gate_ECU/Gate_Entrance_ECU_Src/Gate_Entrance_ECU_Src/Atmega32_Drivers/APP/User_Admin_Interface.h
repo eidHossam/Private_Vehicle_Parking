@@ -30,6 +30,7 @@
   */
 #include "../MCAL/GPIO/Atmega32_GPIO.h"
 #include "UART/Atmega32_UART.h"
+#include "SPI/Atmega32_SPI.h"
 
 /**
   * @}
