@@ -2,6 +2,7 @@ Atmega32_Drivers/APP/User_Admin_Interface.d \
  Atmega32_Drivers/APP/User_Admin_Interface.o: \
  ../Atmega32_Drivers/APP/User_Admin_Interface.c \
  ../Atmega32_Drivers/APP/User_Admin_Interface.h \
+ ../Atmega32_Drivers/APP/Interface.h \
  ../Atmega32_Drivers/APP/../MCAL/GPIO/Atmega32_GPIO.h \
  ../Atmega32_Drivers/Service/Atmega32.h \
  ../Atmega32_Drivers/LIB/Bit_Math.h \
@@ -16,6 +17,8 @@ Atmega32_Drivers/APP/User_Admin_Interface.d \
  ../Atmega32_Drivers/LIB/../MCAL/GPIO/Atmega32_GPIO.h
 
 ../Atmega32_Drivers/APP/User_Admin_Interface.h:
+
+../Atmega32_Drivers/APP/Interface.h:
 
 ../Atmega32_Drivers/APP/../MCAL/GPIO/Atmega32_GPIO.h:
 

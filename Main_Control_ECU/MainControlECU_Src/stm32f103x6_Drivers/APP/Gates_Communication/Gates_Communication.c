@@ -255,6 +255,8 @@ void st_GatesComm_SendIDApprovedSignal(void)
 
     do
     {
+        LOC_u16TxBuffer = Glob_u8ServedRequestGateAddress;
+
         /*Send the address of the gate being served to act as the start of the frame*/
         MCAL_SPI_ExchangeData(SPIx, (uint16 *)&LOC_u16TxBuffer);
 
@@ -310,6 +312,8 @@ void st_GatesComm_SendIDDisapprovedSignal(void)
 
     do
     {
+        LOC_u16TxBuffer = Glob_u8ServedRequestGateAddress;
+
         /*Send the address of the gate being served to act as the start of the frame*/
         MCAL_SPI_ExchangeData(SPIx, (uint16 *)&LOC_u16TxBuffer);
 

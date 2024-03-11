@@ -22,6 +22,15 @@
 #include "Bit_Math.h"
 #include "Platform_Types.h"
 
+/*
+*===============================================
+*                   Includes
+*===============================================
+*/
+#ifndef F_CPU
+#define F_CPU    8000000u
+#endif
+
 /*================================================================*/
 //-----------------------------
 //Base addresses for Memories
@@ -47,6 +56,9 @@
 
 /*---------------------------Timer0-----------------------------*/
 #define Timer0_BASE     (uint8_t)(PERIPHERAL_MEMORY_BASE + 0x32)
+
+/*---------------------------Timer2-----------------------------*/
+#define Timer2_BASE     (uint8_t)(PERIPHERAL_MEMORY_BASE + 0x22)
 
 /*---------------------------ADC-----------------------------*/
 #define ADC_BASE        (uint8_t)(PERIPHERAL_MEMORY_BASE + 0x04)
@@ -97,6 +109,13 @@ typedef struct{
 }Timer0_typedef;
 
 typedef struct{
+    vuint8_t ASSR;                  /*Timer2 Asynchronous Status Register*/
+    vuint8_t OCR2;                  /*Timer2 output compare Register*/
+    vuint8_t TCNT2;                 /*Timer2 count Register*/
+    vuint8_t TCCR2;                 /*Timer2 Control Register*/
+}Timer2_typedef;
+
+typedef struct{
     vuint8_t  ADCL;                 /*ADC Data Register Low*/
     vuint8_t  ADCH;                 /*ADC Data Register High*/
     vuint8_t  ADCSRA;               /*ADC Control and Status Register A*/
@@ -130,6 +149,9 @@ typedef struct{
 
 /*----------------Timer0-----------------------*/
 #define TIMER0  ((Timer0_typedef *)(Timer0_BASE))
+
+/*----------------Timer0-----------------------*/
+#define TIMER2  ((Timer2_typedef *)(Timer2_BASE))
 
 /*----------------ADC-----------------------*/
 #define ADC     ((ADC_typedef *)(ADC_BASE))
@@ -205,6 +227,32 @@ typedef struct{
   * @}
   */
 
+/*---------------------Timer2------------------------*/
+
+/** @defgroup TCCR0
+  * @{
+  */
+#define TIMER2_TCCR_CS0_POS         0
+#define TIMER2_TCCR_CS0_MASK        (1 << TIMER2_TCCR_CS0_POS)
+#define TIMER2_TCCR_CS1_POS         1
+#define TIMER2_TCCR_CS1_MASK        (1 << TIMER2_TCCR_CS1_POS)
+#define TIMER2_TCCR_CS2_POS         2
+#define TIMER2_TCCR_CS2_MASK        (1 << TIMER2_TCCR_CS2_POS)
+#define TIMER2_TCCR_CS_MASK         (TIMER2_TCCR_CS0_MASK | TIMER2_TCCR_CS1_MASK | TIMER2_TCCR_CS2_MASK)
+#define TIMER2_TCCR_WGM0_POS        6
+#define TIMER2_TCCR_WGM0_MASK       (1 << TIMER2_TCCR_WGM0_POS)
+#define TIMER2_TCCR_WGM1_POS        3
+#define TIMER2_TCCR_WGM1_MASK       (1 << TIMER2_TCCR_WGM1_POS)
+#define TIMER2_TCCR_WGM_MASK        (TIMER2_TCCR_WGM0_MASK | TIMER2_TCCR_WGM1_MASK)
+#define TIMER2_TCCR_COM0_POS        4
+#define TIMER2_TCCR_COM0_MASK       (1 << TIMER2_TCCR_COM0_POS)
+#define TIMER2_TCCR_COM1_POS        5
+#define TIMER2_TCCR_COM1_MASK       (1 << TIMER2_TCCR_COM1_POS)
+#define TIMER2_TCCR_COM_MASK        (TIMER2_TCCR_COM0_MASK | TIMER2_TCCR_COM1_MASK)
+/**
+  * @}
+  */
+
 /** @defgroup TIMSK
   * @{
   */
@@ -213,6 +261,11 @@ typedef struct{
 #define TIMER0_TIMSK_TOIE0_MASK        (1 << TIMER0_TIMSK_TOIE0_POS)
 #define TIMER0_TIMSK_OCIE0_POS         1
 #define TIMER0_TIMSK_OCIE0_MASK        (1 << TIMER0_TIMSK_OCIE0_POS)
+
+#define TIMER2_TIMSK_TOIE2_POS         6
+#define TIMER2_TIMSK_TOIE2_MASK        (1 << TIMER2_TIMSK_TOIE2_POS)
+#define TIMER2_TIMSK_OCIE2_POS         7
+#define TIMER2_TIMSK_OCIE2_MASK        (1 << TIMER2_TIMSK_OCIE2_POS)
 
 /**
   * @}
@@ -226,6 +279,11 @@ typedef struct{
 #define TIMER0_TIFR_TOV0_MASK         (1 << TIMER0_TIFR_TOV0_POS)
 #define TIMER0_TIFR_OCF0_POS          1
 #define TIMER0_TIFR_OCF0_MASK         (1 << TIMER0_TIFR_OCF0_POS)
+
+#define TIMER2_TIFR_TOV2_POS          6
+#define TIMER2_TIFR_TOV2_MASK         (1 << TIMER2_TIFR_TOV2_POS)
+#define TIMER2_TIFR_OCF2_POS          7
+#define TIMER2_TIFR_OCF2_MASK         (1 << TIMER2_TIFR_OCF2_POS)
 
 /**
   * @}

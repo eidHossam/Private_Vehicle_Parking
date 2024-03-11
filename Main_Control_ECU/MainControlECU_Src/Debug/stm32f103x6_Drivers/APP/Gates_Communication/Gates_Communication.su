@@ -6,6 +6,6 @@ Gates_Communication.c:169:6:FIFOBuff_Init	8	static
 Gates_Communication.c:187:6:st_GatesComm_Init	8	static
 Gates_Communication.c:206:6:st_GatesComm_CheckPendingRequests	16	static
 Gates_Communication.c:229:6:st_GatesComm_SendIDApprovedSignal	24	static
-Gates_Communication.c:287:6:st_GatesComm_SendIDDisapprovedSignal	24	static
-Gates_Communication.c:348:6:AI_GC_IDApproved	4	static
-Gates_Communication.c:360:6:AI_GC_IDDisapproved	4	static
+Gates_Communication.c:289:6:st_GatesComm_SendIDDisapprovedSignal	24	static
+Gates_Communication.c:352:6:AI_GC_IDApproved	4	static
+Gates_Communication.c:364:6:AI_GC_IDDisapproved	4	static

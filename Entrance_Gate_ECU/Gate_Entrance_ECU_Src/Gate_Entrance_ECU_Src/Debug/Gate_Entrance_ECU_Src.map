@@ -16,13 +16,11 @@ d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.
 Allocating common symbols
 Common symbol       size              file
 
-outputCompareMatchCallback
-                    0x2               Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-timer0_CFG          0x5               Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-overflowCallback    0x2               Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
 fptr_st_UserAdminInterface
                     0x2               Atmega32_Drivers/APP/APP.o
 config              0x2               Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+fptr_st_GateController
+                    0x2               Atmega32_Drivers/APP/APP.o
 
 Discarded input sections
 
@@ -31,6 +29,9 @@ Discarded input sections
  .text          0x00000000        0x0 Atmega32_Drivers/APP/APP.o
  .data          0x00000000        0x0 Atmega32_Drivers/APP/APP.o
  .bss           0x00000000        0x0 Atmega32_Drivers/APP/APP.o
+ .text          0x00000000        0x0 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .data          0x00000000        0x0 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .bss           0x00000000        0x0 Atmega32_Drivers/APP/Gate_Controller_Program.o
  .text          0x00000000        0x0 Atmega32_Drivers/APP/User_Admin_Interface.o
  .data          0x00000000        0x0 Atmega32_Drivers/APP/User_Admin_Interface.o
  .bss           0x00000000        0x0 Atmega32_Drivers/APP/User_Admin_Interface.o
@@ -39,6 +40,9 @@ Discarded input sections
  .bss           0x00000000        0x0 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
  .text.LCD_Busy_Wait
                 0x00000000       0xb2 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .text          0x00000000        0x0 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .data          0x00000000        0x0 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .bss           0x00000000        0x0 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
  .text          0x00000000        0x0 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
  .data          0x00000000        0x0 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
  .bss           0x00000000        0x0 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
@@ -55,8 +59,8 @@ Discarded input sections
  .bss           0x00000000        0x0 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .text.MCAL_SPI_Reset
                 0x00000000        0x6 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .text.MCAL_SPI_ReceiveData
-                0x00000000       0x10 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .text.MCAL_SPI_ExchangeData
+                0x00000000       0x12 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .text.MCAL_SPI_Enable
                 0x00000000        0x8 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .text.MCAL_SPI_Disable
@@ -64,6 +68,8 @@ Discarded input sections
  .text          0x00000000        0x0 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .data          0x00000000        0x0 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .bss           0x00000000        0x0 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .text.MCAL_TIMER0_Start
+                0x00000000        0xe Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .text.MCAL_TIMER0_GetCompare
                 0x00000000        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .text.MCAL_TIMER0_GetCounter
@@ -72,8 +78,37 @@ Discarded input sections
                 0x00000000       0x1e Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .text.MCAL_TIMER0_SetOverflow
                 0x00000000       0x14 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .text.MCAL_TIMER0_BusyWaitDelayms
+                0x00000000       0x74 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .text.MCAL_TIMER0_BusyWaitDelayus
+                0x00000000       0x90 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .text.MCAL_TIMER0_CALLBACK_Overflow_INTERRUPT
                 0x00000000        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .text          0x00000000        0x0 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .data          0x00000000        0x0 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .bss           0x00000000        0x0 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_Stop
+                0x00000000        0xa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_Start
+                0x00000000        0xe Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_GetCompare
+                0x00000000        0xa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_GetCounter
+                0x00000000        0xa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_SetCounter
+                0x00000000        0x6 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_GetOverflow
+                0x00000000       0x1e Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_SetOverflow
+                0x00000000       0x14 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_BusyWaitDelayms
+                0x00000000       0x74 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_BusyWaitDelayus
+                0x00000000       0x90 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_CALLBACK_Overflow_INTERRUPT
+                0x00000000        0xa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .text.MCAL_TIMER2_CALLBACK_CompareMatch_INTERRUPT
+                0x00000000        0xa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
  .text          0x00000000        0x0 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  .data          0x00000000        0x0 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  .bss           0x00000000        0x0 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
@@ -197,11 +232,14 @@ Linker script and memory map
 
 LOAD D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
 LOAD Atmega32_Drivers/APP/APP.o
+LOAD Atmega32_Drivers/APP/Gate_Controller_Program.o
 LOAD Atmega32_Drivers/APP/User_Admin_Interface.o
 LOAD Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+LOAD Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
 LOAD Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
 LOAD Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
 LOAD Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+LOAD Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
 LOAD Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
 LOAD main.o
 START GROUP
@@ -313,7 +351,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xf28
+.text           0x00000000     0x1218
  *(.vectors)
  .vectors       0x00000000       0x54 D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -379,8 +417,6 @@ END GROUP
                 0x0000008e                __vector_17
                 0x0000008e                __vector_19
                 0x0000008e                __vector_7
-                0x0000008e                __vector_5
-                0x0000008e                __vector_4
                 0x0000008e                __vector_9
                 0x0000008e                __vector_2
                 0x0000008e                __vector_8
@@ -390,163 +426,201 @@ END GROUP
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
  .text.EntranceGate_ECU_APP_SETUP
-                0x00000092        0x6 Atmega32_Drivers/APP/APP.o
+                0x00000092        0xa Atmega32_Drivers/APP/APP.o
                 0x00000092                EntranceGate_ECU_APP_SETUP
  .text.EntranceGate_ECU_APP_Loop
-                0x00000098        0xc Atmega32_Drivers/APP/APP.o
-                0x00000098                EntranceGate_ECU_APP_Loop
+                0x0000009c       0x16 Atmega32_Drivers/APP/APP.o
+                0x0000009c                EntranceGate_ECU_APP_Loop
+ .text.Timer0_DelaycheckCar_Callback
+                0x000000b2        0xe Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .text.st_GateController_Idle
+                0x000000c0        0x2 Atmega32_Drivers/APP/Gate_Controller_Program.o
+                0x000000c0                st_GateController_Idle
+ .text.st_GateController_OpenGate
+                0x000000c2       0x24 Atmega32_Drivers/APP/Gate_Controller_Program.o
+                0x000000c2                st_GateController_OpenGate
+ .text.st_GateController_CheckCarPassed
+                0x000000e6       0x18 Atmega32_Drivers/APP/Gate_Controller_Program.o
+                0x000000e6                st_GateController_CheckCarPassed
+ .text.st_GateController_Init
+                0x000000fe       0x12 Atmega32_Drivers/APP/Gate_Controller_Program.o
+                0x000000fe                st_GateController_Init
+ .text.UAI_GC_OpenGateReuest
+                0x00000110        0xe Atmega32_Drivers/APP/Gate_Controller_Program.o
+                0x00000110                UAI_GC_OpenGateReuest
+ .text.Timer0_SingleIntervalDelaycallback
+                0x0000011e        0xe Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.st_UAI_Idle
-                0x000000a4        0x2 Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x000000a4                st_UAI_Idle
+                0x0000012c        0x2 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x0000012c                st_UAI_Idle
  .text.USART_Init
-                0x000000a6       0x5a Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x0000012e       0x5a Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.USART_RX_ISR_Callback
-                0x00000100       0x4c Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x00000188       0x4c Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.SPI_Init
-                0x0000014c       0x5e Atmega32_Drivers/APP/User_Admin_Interface.o
- .text.Timer0_callback
-                0x000001aa       0x62 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x000001d4       0x5e Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.SPI_SendingID
-                0x0000020c       0x54 Atmega32_Drivers/APP/User_Admin_Interface.o
- .text.Timer0_Init
-                0x00000260       0x4a Atmega32_Drivers/APP/User_Admin_Interface.o
- .text.st_UAI_IDAuthenticationPassed
-                0x000002aa       0x2c Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x000002aa                st_UAI_IDAuthenticationPassed
+                0x00000232       0x5a Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.st_UAI_IDAuthenticationFailed
-                0x000002d6       0x2c Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x000002d6                st_UAI_IDAuthenticationFailed
+                0x0000028c       0x32 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x0000028c                st_UAI_IDAuthenticationFailed
  .text.st_UAI_ShowWelcomeMsg
-                0x00000302       0x3a Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x00000302                st_UAI_ShowWelcomeMsg
+                0x000002be       0x3a Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x000002be                st_UAI_ShowWelcomeMsg
  .text.st_UAI_SendIDToAdmin
-                0x0000033c       0x3c Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x0000033c                st_UAI_SendIDToAdmin
+                0x000002f8       0x42 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x000002f8                st_UAI_SendIDToAdmin
+ .text.st_UAI_IDAuthenticationPassed
+                0x0000033a       0x26 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x0000033a                st_UAI_IDAuthenticationPassed
  .text.SPI_GetAuthenticationResult
-                0x00000378       0x64 Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x00000378                SPI_GetAuthenticationResult
+                0x00000360       0x74 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x00000360                SPI_GetAuthenticationResult
  .text.SPI_ISR_Callback
-                0x000003dc       0x1a Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x000003d4       0x1a Atmega32_Drivers/APP/User_Admin_Interface.o
  .text.st_UAI_Init
-                0x000003f6       0x1e Atmega32_Drivers/APP/User_Admin_Interface.o
-                0x000003f6                st_UAI_Init
+                0x000003ee       0x1a Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x000003ee                st_UAI_Init
+ .text.GC_UAI_GateClosed
+                0x00000408        0xe Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x00000408                GC_UAI_GateClosed
  .text._delay_ms
-                0x00000414       0x34 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000414                _delay_ms
+                0x00000416       0x34 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x00000416                _delay_ms
  .text.LCD_Enable_Pulse
-                0x00000448       0x20 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000448                LCD_Enable_Pulse
+                0x0000044a       0x20 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x0000044a                LCD_Enable_Pulse
  .text.LCD_Send_Command
-                0x00000468       0xf4 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000468                LCD_Send_Command
+                0x0000046a       0xf4 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x0000046a                LCD_Send_Command
  .text.LCD_Init
-                0x0000055c       0xb8 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x0000055c                LCD_Init
+                0x0000055e       0xb8 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x0000055e                LCD_Init
  .text.LCD_Cursor_XY
-                0x00000614       0x54 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000614                LCD_Cursor_XY
+                0x00000616       0x54 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x00000616                LCD_Cursor_XY
  .text.LCD_Clear_Screen
-                0x00000668       0x10 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000668                LCD_Clear_Screen
+                0x0000066a       0x10 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x0000066a                LCD_Clear_Screen
  .text.Check_End_Of_Line
-                0x00000678       0x42 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x00000678                Check_End_Of_Line
+                0x0000067a       0x42 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x0000067a                Check_End_Of_Line
  .text.LCD_Send_Char
-                0x000006ba      0x102 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x000006ba                LCD_Send_Char
+                0x000006bc      0x102 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x000006bc                LCD_Send_Char
  .text.LCD_Send_String
-                0x000007bc       0x1a Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x000007bc                LCD_Send_String
+                0x000007be       0x1a Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x000007be                LCD_Send_String
+ .text.HAL_ServoMotorInit
+                0x000007d8       0x5c Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+                0x000007d8                HAL_ServoMotorInit
+ .text.HAL_ServoMotorTurn
+                0x00000834        0x8 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+                0x00000834                HAL_ServoMotorTurn
  .text.MCAL_GPIO_Init
-                0x000007d6       0x72 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
-                0x000007d6                MCAL_GPIO_Init
+                0x0000083c       0x72 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+                0x0000083c                MCAL_GPIO_Init
  .text.MCAL_GPIO_WritePin
-                0x00000848       0x34 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
-                0x00000848                MCAL_GPIO_WritePin
+                0x000008ae       0x34 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+                0x000008ae                MCAL_GPIO_WritePin
  .text.MCAL_GPIO_TogglePin
-                0x0000087c       0x18 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
-                0x0000087c                MCAL_GPIO_TogglePin
+                0x000008e2       0x18 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+                0x000008e2                MCAL_GPIO_TogglePin
  .text.MCAL_SPI_GPIO_Set_Pins
-                0x00000894       0xf6 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x000008fa       0xf6 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .text.MCAL_SPI_Init
-                0x0000098a       0x56 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
-                0x0000098a                MCAL_SPI_Init
+                0x000009f0       0x56 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x000009f0                MCAL_SPI_Init
  .text.MCAL_SPI_SendData
-                0x000009e0       0x10 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
-                0x000009e0                MCAL_SPI_SendData
- .text.MCAL_SPI_ExchangeData
-                0x000009f0       0x12 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
-                0x000009f0                MCAL_SPI_ExchangeData
+                0x00000a46       0x10 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x00000a46                MCAL_SPI_SendData
+ .text.MCAL_SPI_ReceiveData
+                0x00000a56       0x10 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x00000a56                MCAL_SPI_ReceiveData
  .text.__vector_12
-                0x00000a02       0x4e Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
-                0x00000a02                __vector_12
+                0x00000a66       0x4e Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x00000a66                __vector_12
  .text.MCAL_TIMER0_Init
-                0x00000a50       0xe6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000a50                MCAL_TIMER0_Init
+                0x00000ab4       0xe6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000ab4                MCAL_TIMER0_Init
  .text.MCAL_TIMER0_Stop
-                0x00000b36        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b36                MCAL_TIMER0_Stop
- .text.MCAL_TIMER0_Start
-                0x00000b40        0xe Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b40                MCAL_TIMER0_Start
+                0x00000b9a        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000b9a                MCAL_TIMER0_Stop
+ .text.Timer0_SingleIntervalDelayCallback
+                0x00000ba4       0x68 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .text.MCAL_TIMER0_SetCompare
-                0x00000b4e        0x6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b4e                MCAL_TIMER0_SetCompare
+                0x00000c0c        0x6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000c0c                MCAL_TIMER0_SetCompare
  .text.MCAL_TIMER0_SetCounter
-                0x00000b54        0x6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b54                MCAL_TIMER0_SetCounter
+                0x00000c12        0x6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000c12                MCAL_TIMER0_SetCounter
  .text.MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT
-                0x00000b5a        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b5a                MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT
+                0x00000c18        0xa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000c18                MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT
+ .text.MCAL_TIMER0_SingleIntervalDelayms
+                0x00000c22       0x80 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000c22                MCAL_TIMER0_SingleIntervalDelayms
  .text.__vector_10
-                0x00000b64       0x4e Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000b64                __vector_10
+                0x00000ca2       0x4e Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000ca2                __vector_10
  .text.__vector_11
-                0x00000bb2       0x74 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x00000bb2                __vector_11
+                0x00000cf0       0x74 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000cf0                __vector_11
+ .text.MCAL_TIMER2_Init
+                0x00000d64       0xea Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+                0x00000d64                MCAL_TIMER2_Init
+ .text.MCAL_TIMER2_SetCompare
+                0x00000e4e        0x6 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+                0x00000e4e                MCAL_TIMER2_SetCompare
+ .text.__vector_4
+                0x00000e54       0x4e Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+                0x00000e54                __vector_4
+ .text.__vector_5
+                0x00000ea2       0x74 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+                0x00000ea2                __vector_5
  .text.MCAL_UART_Init
-                0x00000c26       0xb2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000c26                MCAL_UART_Init
+                0x00000f16       0xb2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00000f16                MCAL_UART_Init
  .text.MCAL_UART_Disable
-                0x00000cd8        0x8 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000cd8                MCAL_UART_Disable
+                0x00000fc8        0x8 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00000fc8                MCAL_UART_Disable
  .text.MCAL_UART_Enable
-                0x00000ce0        0xc Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000ce0                MCAL_UART_Enable
+                0x00000fd0        0xc Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00000fd0                MCAL_UART_Enable
  .text.MCAL_UART_Send_Data
-                0x00000cec       0x2a Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000cec                MCAL_UART_Send_Data
+                0x00000fdc       0x2a Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00000fdc                MCAL_UART_Send_Data
  .text.MCAL_UART_Get_Data
-                0x00000d16       0x4a Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000d16                MCAL_UART_Get_Data
+                0x00001006       0x4a Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00001006                MCAL_UART_Get_Data
  .text.MCAL_UART_Interrupt_EN
-                0x00000d60       0x58 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000d60                MCAL_UART_Interrupt_EN
+                0x00001050       0x58 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00001050                MCAL_UART_Interrupt_EN
  .text.__vector_13
-                0x00000db8       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000db8                __vector_13
+                0x000010a8       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x000010a8                __vector_13
  .text.__vector_14
-                0x00000e06       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000e06                __vector_14
+                0x000010f6       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x000010f6                __vector_14
  .text.__vector_15
-                0x00000e54       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
-                0x00000e54                __vector_15
- .text.main     0x00000ea2        0xa main.o
-                0x00000ea2                main
+                0x00001144       0x4e Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x00001144                __vector_15
+ .text.main     0x00001192        0xa main.o
+                0x00001192                main
  .text.libgcc.div
-                0x00000eac       0x44 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000eac                __udivmodsi4
+                0x0000119c       0x44 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000119c                __udivmodsi4
  .text.libgcc.mul
-                0x00000ef0       0x16 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00000ef0                __muluhisi3
+                0x000011e0       0x16 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x000011e0                __muluhisi3
  .text.libgcc.mul
-                0x00000f06       0x1e d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000f06                __umulhisi3
-                0x00000f24                . = ALIGN (0x2)
+                0x000011f6       0x1e d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x000011f6                __umulhisi3
+                0x00001214                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000f24        0x0 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000f24                _exit
-                0x00000f24                exit
+ .fini9         0x00001214        0x0 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00001214                _exit
+                0x00001214                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -565,78 +639,92 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000f24        0x4 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001214        0x4 d:/programming/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000f28                _etext = .
+                0x00001218                _etext = .
 
-.data           0x00800060       0x44 load address 0x00000f28
+.data           0x00800060       0x40 load address 0x00001218
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800060        0x5 Atmega32_Drivers/APP/User_Admin_Interface.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800065       0x3e Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x00800060       0x3e Atmega32_Drivers/APP/User_Admin_Interface.o
                                  0x48 (size before relaxing)
  .rodata.Glob_u8GateAddress
-                0x008000a3        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x0080009e        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
  *(.gnu.linkonce.r*)
-                0x008000a4                . = ALIGN (0x2)
-                0x008000a4                _edata = .
-                0x008000a4                PROVIDE (__data_end, .)
+                0x008000a0                . = ALIGN (0x2)
+ *fill*         0x0080009f        0x1 
+                0x008000a0                _edata = .
+                0x008000a0                PROVIDE (__data_end, .)
 
-.bss            0x008000a4       0x30
-                0x008000a4                PROVIDE (__bss_start, .)
+.bss            0x008000a0       0x45
+                0x008000a0                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.counter.1905
-                0x008000a4        0x4 Atmega32_Drivers/APP/User_Admin_Interface.o
- .bss.sLOC_u8CharCounter.1888
-                0x008000a8        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
- .bss.sLOC_u8CharCounter.1884
-                0x008000a9        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
- .bss.LOC_boolDetectedGateAddress.1892
-                0x008000aa        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .bss.sLOC_u8CharCounter.1908
+                0x008000a0        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .bss.sLOC_u8CharCounter.1904
+                0x008000a1        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .bss.LOC_boolDetectedGateAddress.1912
+                0x008000a2        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
  .bss.Glob_u8DriverID
-                0x008000ab        0x4 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x008000a3        0x4 Atmega32_Drivers/APP/User_Admin_Interface.o
  .bss.Glob_u8ModuleCurrentState
-                0x008000af        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x008000a7        0x1 Atmega32_Drivers/APP/User_Admin_Interface.o
  .bss.lineCounter
-                0x008000b0        0x1 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x008000a8        0x1 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
  .bss.charCounter
-                0x008000b1        0x1 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x008000a9        0x1 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
  .bss.p_IRQ_callback_SPI
-                0x008000b2        0x2 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x008000aa        0x2 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .bss.LOC_u32CTCcounter.1746
+                0x008000ac        0x4 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.Glob_fptrInterruptedDelayCallback
+                0x008000b0        0x2 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.outputCompareMatchCallback
+                0x008000b2        0x2 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.overflowCallback
+                0x008000b4        0x2 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.Glob_u32DelayInMilliseconds
+                0x008000b6        0x4 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
  .bss.overflowCounter
-                0x008000b4        0x4 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x008000b4                overflowCounter
+                0x008000ba        0x4 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.timer0_CFG
+                0x008000be        0x5 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .bss.outputCompareMatchCallback
+                0x008000c3        0x2 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .bss.overflowCallback
+                0x008000c5        0x2 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .bss.overflowCounter
+                0x008000c7        0x4 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .bss.Timer2_CFG
+                0x008000cb        0x5 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
  .bss.LOC_fptr_UDRE_callback
-                0x008000b8        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x008000d0        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  .bss.LOC_fptr_TXC_callback
-                0x008000ba        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x008000d2        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  .bss.LOC_fptr_RXC_callback
-                0x008000bc        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .bss.LOC_cfg   0x008000be        0x9 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x008000d4        0x2 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .bss.LOC_cfg   0x008000d6        0x9 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  *(COMMON)
- COMMON         0x008000c7        0x2 Atmega32_Drivers/APP/APP.o
-                0x008000c7                fptr_st_UserAdminInterface
- COMMON         0x008000c9        0x2 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
-                0x008000c9                config
- COMMON         0x008000cb        0x9 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                0x008000cb                outputCompareMatchCallback
-                0x008000cd                timer0_CFG
-                0x008000d2                overflowCallback
-                0x008000d4                PROVIDE (__bss_end, .)
-                0x00000f28                __data_load_start = LOADADDR (.data)
-                0x00000f6c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008000df        0x4 Atmega32_Drivers/APP/APP.o
+                0x008000df                fptr_st_UserAdminInterface
+                0x008000e1                fptr_st_GateController
+ COMMON         0x008000e3        0x2 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x008000e3                config
+                0x008000e5                PROVIDE (__bss_end, .)
+                0x00001218                __data_load_start = LOADADDR (.data)
+                0x00001258                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008000d4        0x0
+.noinit         0x008000e5        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008000d4                _end = .
+                0x008000e5                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -680,11 +768,14 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 Atmega32_Drivers/APP/APP.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 Atmega32_Drivers/APP/Gate_Controller_Program.o
  .comment       0x00000030       0x31 Atmega32_Drivers/APP/User_Admin_Interface.o
  .comment       0x00000030       0x31 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .comment       0x00000030       0x31 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
  .comment       0x00000030       0x31 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
  .comment       0x00000030       0x31 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .comment       0x00000030       0x31 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .comment       0x00000030       0x31 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
  .comment       0x00000030       0x31 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
  .comment       0x00000030       0x31 main.o
 
@@ -708,103 +799,129 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2f0
+.debug_aranges  0x00000000      0x410
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 Atmega32_Drivers/APP/APP.o
  .debug_aranges
-                0x00000028       0x88 Atmega32_Drivers/APP/User_Admin_Interface.o
+                0x00000028       0x48 Atmega32_Drivers/APP/Gate_Controller_Program.o
  .debug_aranges
-                0x000000b0       0x68 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+                0x00000070       0x88 Atmega32_Drivers/APP/User_Admin_Interface.o
  .debug_aranges
-                0x00000118       0x50 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+                0x000000f8       0x68 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
  .debug_aranges
-                0x00000168       0x60 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+                0x00000160       0x28 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
  .debug_aranges
-                0x000001c8       0x80 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                0x00000188       0x50 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
  .debug_aranges
-                0x00000248       0x88 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+                0x000001d8       0x60 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
  .debug_aranges
-                0x000002d0       0x20 main.o
+                0x00000238       0xa0 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_aranges
+                0x000002d8       0x90 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_aranges
+                0x00000368       0x88 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_aranges
+                0x000003f0       0x20 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3053
+.debug_info     0x00000000     0x3d2e
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6       0xd8 Atmega32_Drivers/APP/APP.o
- .debug_info    0x000005be      0xc45 Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_info    0x00001203      0x973 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_info    0x00001b76      0x2b1 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_info    0x00001e27      0x55c Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_info    0x00002383      0x5c6 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_info    0x00002949      0x62d Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .debug_info    0x00002f76       0xdd main.o
+ .debug_info    0x000004e6      0x100 Atmega32_Drivers/APP/APP.o
+ .debug_info    0x000005e6      0x1db Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .debug_info    0x000007c1      0xaa2 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_info    0x00001263      0x973 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_info    0x00001bd6      0x38a Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_info    0x00001f60      0x2b1 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_info    0x00002211      0x55c Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_info    0x0000276d      0x7cb Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_info    0x00002f38      0x6da Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_info    0x00003612      0x62d Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_info    0x00003c3f       0xef main.o
 
-.debug_abbrev   0x00000000      0xfdc
+.debug_abbrev   0x00000000     0x14c2
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x9c Atmega32_Drivers/APP/APP.o
- .debug_abbrev  0x0000053f      0x208 Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_abbrev  0x00000747      0x19c Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_abbrev  0x000008e3       0xef Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_abbrev  0x000009d2      0x179 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_abbrev  0x00000b4b      0x1df Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_abbrev  0x00000d2a      0x229 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .debug_abbrev  0x00000f53       0x89 main.o
+ .debug_abbrev  0x0000053f      0x100 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .debug_abbrev  0x0000063f      0x206 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_abbrev  0x00000845      0x19c Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_abbrev  0x000009e1      0x13e Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_abbrev  0x00000b1f       0xef Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_abbrev  0x00000c0e      0x179 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_abbrev  0x00000d87      0x249 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_abbrev  0x00000fd0      0x240 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_abbrev  0x00001210      0x229 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_abbrev  0x00001439       0x89 main.o
 
-.debug_line     0x00000000     0x1982
+.debug_line     0x00000000     0x2329
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116       0x81 Atmega32_Drivers/APP/APP.o
- .debug_line    0x00000197      0x55e Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_line    0x000006f5      0x4eb Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_line    0x00000be0      0x1e9 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_line    0x00000dc9      0x335 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_line    0x000010fe      0x395 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_line    0x00001493      0x469 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .debug_line    0x000018fc       0x86 main.o
+ .debug_line    0x00000116       0xac Atmega32_Drivers/APP/APP.o
+ .debug_line    0x000001c2      0x1a6 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .debug_line    0x00000368      0x525 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_line    0x0000088d      0x4eb Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_line    0x00000d78      0x214 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_line    0x00000f8c      0x1e9 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_line    0x00001175      0x335 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_line    0x000014aa      0x4fa Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_line    0x000019a4      0x477 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_line    0x00001e1b      0x469 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_line    0x00002284       0xa5 main.o
 
-.debug_frame    0x00000000      0x7cc
+.debug_frame    0x00000000      0xb44
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 Atmega32_Drivers/APP/APP.o
- .debug_frame   0x00000034      0x134 Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_frame   0x00000168      0x11c Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_frame   0x00000284       0x84 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_frame   0x00000308      0x108 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_frame   0x00000410      0x190 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_frame   0x000005a0      0x208 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .debug_frame   0x000007a8       0x24 main.o
+ .debug_frame   0x00000034       0x74 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .debug_frame   0x000000a8      0x124 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_frame   0x000001cc      0x11c Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_frame   0x000002e8       0x4c Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_frame   0x00000334       0x84 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_frame   0x000003b8      0x108 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_frame   0x000004c0      0x254 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_frame   0x00000714      0x204 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_frame   0x00000918      0x208 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_frame   0x00000b20       0x24 main.o
 
-.debug_str      0x00000000     0x1364
+.debug_str      0x00000000     0x1a4f
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/programming/Atmel/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x1e8 Atmega32_Drivers/APP/APP.o
-                                0x21c (size before relaxing)
- .debug_str     0x0000037e      0xa06 Atmega32_Drivers/APP/User_Admin_Interface.o
-                                0xbe7 (size before relaxing)
- .debug_str     0x00000d84       0xdd Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_str     0x00000196      0x216 Atmega32_Drivers/APP/APP.o
+                                0x24a (size before relaxing)
+ .debug_str     0x000003ac      0x14f Atmega32_Drivers/APP/Gate_Controller_Program.o
+                                0x31f (size before relaxing)
+ .debug_str     0x000004fb      0x7b5 Atmega32_Drivers/APP/User_Admin_Interface.o
+                                0x9d9 (size before relaxing)
+ .debug_str     0x00000cb0       0xdd Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
                                 0x314 (size before relaxing)
- .debug_str     0x00000e61       0x8e Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_str     0x00000d8d      0x2cd Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+                                0x527 (size before relaxing)
+ .debug_str     0x0000105a       0x8e Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
                                 0x2b4 (size before relaxing)
- .debug_str     0x00000eef      0x127 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_str     0x000010e8      0x128 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
                                 0x454 (size before relaxing)
- .debug_str     0x00001016      0x180 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
-                                0x5e8 (size before relaxing)
- .debug_str     0x00001196      0x1bd Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_str     0x00001210      0x4c7 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+                                0x717 (size before relaxing)
+ .debug_str     0x000016d7      0x1aa Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+                                0x6bc (size before relaxing)
+ .debug_str     0x00001881      0x1bd Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
                                 0x766 (size before relaxing)
- .debug_str     0x00001353       0x11 main.o
-                                0x203 (size before relaxing)
+ .debug_str     0x00001a3e       0x11 main.o
+                                0x21a (size before relaxing)
 
-.debug_loc      0x00000000     0x10bc
+.debug_loc      0x00000000     0x1985
  *(.debug_loc)
- .debug_loc     0x00000000      0x11e Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_loc     0x0000011e      0x2e5 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_loc     0x00000403       0xb0 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_loc     0x000004b3      0x1c5 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_loc     0x00000678      0x345 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_loc     0x000009bd      0x6ff Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_loc     0x00000000       0xd6 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_loc     0x000000d6      0x2e5 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_loc     0x000003bb       0x94 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_loc     0x0000044f       0xb0 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_loc     0x000004ff      0x1c5 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_loc     0x000006c4      0x668 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_loc     0x00000d2c      0x55a Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_loc     0x00001286      0x6ff Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -824,16 +941,19 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x270
+.debug_ranges   0x00000000      0x360
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 Atmega32_Drivers/APP/APP.o
- .debug_ranges  0x00000018       0x78 Atmega32_Drivers/APP/User_Admin_Interface.o
- .debug_ranges  0x00000090       0x58 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
- .debug_ranges  0x000000e8       0x40 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
- .debug_ranges  0x00000128       0x50 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
- .debug_ranges  0x00000178       0x70 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
- .debug_ranges  0x000001e8       0x78 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
- .debug_ranges  0x00000260       0x10 main.o
+ .debug_ranges  0x00000018       0x38 Atmega32_Drivers/APP/Gate_Controller_Program.o
+ .debug_ranges  0x00000050       0x78 Atmega32_Drivers/APP/User_Admin_Interface.o
+ .debug_ranges  0x000000c8       0x58 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o
+ .debug_ranges  0x00000120       0x18 Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o
+ .debug_ranges  0x00000138       0x40 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o
+ .debug_ranges  0x00000178       0x50 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o
+ .debug_ranges  0x000001c8       0x90 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o
+ .debug_ranges  0x00000258       0x80 Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o
+ .debug_ranges  0x000002d8       0x78 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o
+ .debug_ranges  0x00000350       0x10 main.o
 
 .debug_macro
  *(.debug_macro)

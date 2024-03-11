@@ -132,6 +132,15 @@
     <Compile Include="Atmega32_Drivers\APP\APP.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Atmega32_Drivers\APP\Gate_Controller_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\APP\Gate_Controller_Program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\APP\Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Atmega32_Drivers\APP\User_Admin_Interface.c">
       <SubType>compile</SubType>
     </Compile>
@@ -142,6 +151,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\HAL\LCD_Driver\LCD_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\Servo_Motor_Driver\Servo_Motor_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\Servo_Motor_Driver\Servo_Motor_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\LIB\Bit_Math.h">
@@ -168,6 +183,12 @@
     <Compile Include="Atmega32_Drivers\MCAL\Timer0\Atmega32_Timer0.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Atmega32_Drivers\MCAL\Timer2\Atmega32_Timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\MCAL\Timer2\Atmega32_Timer2.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Atmega32_Drivers\MCAL\UART\Atmega32_UART.c">
       <SubType>compile</SubType>
     </Compile>
@@ -186,11 +207,13 @@
     <Folder Include="Atmega32_Drivers\APP\" />
     <Folder Include="Atmega32_Drivers\HAL\" />
     <Folder Include="Atmega32_Drivers\HAL\LCD_Driver\" />
+    <Folder Include="Atmega32_Drivers\HAL\Servo_Motor_Driver\" />
     <Folder Include="Atmega32_Drivers\LIB\" />
     <Folder Include="Atmega32_Drivers\MCAL\" />
     <Folder Include="Atmega32_Drivers\MCAL\GPIO\" />
     <Folder Include="Atmega32_Drivers\MCAL\SPI\" />
     <Folder Include="Atmega32_Drivers\MCAL\Timer0\" />
+    <Folder Include="Atmega32_Drivers\MCAL\Timer2\" />
     <Folder Include="Atmega32_Drivers\MCAL\UART\" />
     <Folder Include="Atmega32_Drivers\Service\" />
   </ItemGroup>

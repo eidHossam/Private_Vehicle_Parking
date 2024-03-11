@@ -37,11 +37,13 @@ SUBDIRS :=  \
 ../Atmega32_Drivers/APP/ \
 ../Atmega32_Drivers/HAL/ \
 ../Atmega32_Drivers/HAL/LCD_Driver/ \
+../Atmega32_Drivers/HAL/Servo_Motor_Driver/ \
 ../Atmega32_Drivers/LIB/ \
 ../Atmega32_Drivers/MCAL/ \
 ../Atmega32_Drivers/MCAL/GPIO/ \
 ../Atmega32_Drivers/MCAL/SPI/ \
 ../Atmega32_Drivers/MCAL/Timer0/ \
+../Atmega32_Drivers/MCAL/Timer2/ \
 ../Atmega32_Drivers/MCAL/UART/ \
 ../Atmega32_Drivers/Service/
 
@@ -49,11 +51,14 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Atmega32_Drivers/APP/APP.c \
+../Atmega32_Drivers/APP/Gate_Controller_Program.c \
 ../Atmega32_Drivers/APP/User_Admin_Interface.c \
 ../Atmega32_Drivers/HAL/LCD_Driver/LCD_program.c \
+../Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.c \
 ../Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.c \
 ../Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.c \
 ../Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.c \
+../Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.c \
 ../Atmega32_Drivers/MCAL/UART/Atmega32_UART.c \
 ../main.c
 
@@ -66,41 +71,53 @@ ASM_SRCS +=
 
 OBJS +=  \
 Atmega32_Drivers/APP/APP.o \
+Atmega32_Drivers/APP/Gate_Controller_Program.o \
 Atmega32_Drivers/APP/User_Admin_Interface.o \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o \
+Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o \
 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o \
 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o \
+Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o \
 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o \
 main.o
 
 OBJS_AS_ARGS +=  \
 Atmega32_Drivers/APP/APP.o \
+Atmega32_Drivers/APP/Gate_Controller_Program.o \
 Atmega32_Drivers/APP/User_Admin_Interface.o \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o \
+Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.o \
 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o \
 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o \
+Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o \
 Atmega32_Drivers/MCAL/UART/Atmega32_UART.o \
 main.o
 
 C_DEPS +=  \
 Atmega32_Drivers/APP/APP.d \
+Atmega32_Drivers/APP/Gate_Controller_Program.d \
 Atmega32_Drivers/APP/User_Admin_Interface.d \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.d \
+Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.d \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.d \
 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.d \
 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.d \
+Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.d \
 Atmega32_Drivers/MCAL/UART/Atmega32_UART.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
 Atmega32_Drivers/APP/APP.d \
+Atmega32_Drivers/APP/Gate_Controller_Program.d \
 Atmega32_Drivers/APP/User_Admin_Interface.d \
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.d \
+Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.d \
 Atmega32_Drivers/MCAL/GPIO/Atmega32_GPIO.d \
 Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.d \
 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.d \
+Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.d \
 Atmega32_Drivers/MCAL/UART/Atmega32_UART.d \
 main.d
 
@@ -125,6 +142,13 @@ Atmega32_Drivers/APP/APP.o: ../Atmega32_Drivers/APP/APP.c
 	@echo Finished building: $<
 	
 
+Atmega32_Drivers/APP/Gate_Controller_Program.o: ../Atmega32_Drivers/APP/Gate_Controller_Program.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 Atmega32_Drivers/APP/User_Admin_Interface.o: ../Atmega32_Drivers/APP/User_Admin_Interface.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -133,6 +157,13 @@ Atmega32_Drivers/APP/User_Admin_Interface.o: ../Atmega32_Drivers/APP/User_Admin_
 	
 
 Atmega32_Drivers/HAL/LCD_Driver/LCD_program.o: ../Atmega32_Drivers/HAL/LCD_Driver/LCD_program.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.o: ../Atmega32_Drivers/HAL/Servo_Motor_Driver/Servo_Motor_Program.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -154,6 +185,13 @@ Atmega32_Drivers/MCAL/SPI/Atmega32_SPI.o: ../Atmega32_Drivers/MCAL/SPI/Atmega32_
 	
 
 Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.o: ../Atmega32_Drivers/MCAL/Timer0/Atmega32_Timer0.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.o: ../Atmega32_Drivers/MCAL/Timer2/Atmega32_Timer2.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\programming\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Atmega32_Drivers/LIB" -I"../Atmega32_Drivers/Service" -I"../Atmega32_Drivers/MCAL" -I"../Atmega32_Drivers/HAL" -I"../Atmega32_Drivers/APP"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -gdwarf-2 -Wall -mmcu=atmega32 -B "D:\programming\Atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
