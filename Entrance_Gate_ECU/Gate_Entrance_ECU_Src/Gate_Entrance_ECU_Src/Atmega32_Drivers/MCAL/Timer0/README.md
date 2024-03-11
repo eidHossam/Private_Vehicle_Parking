@@ -11,11 +11,12 @@ The Atmega32 Timer0 driver facilitates precise timing and event generation capab
 ## Features
 
 - **Timer0 Initialization**: Initialize Timer0 with specified configuration parameters.
-- **Timer0 Start/Stop**: Start or stop the Timer0 peripheral.
-- **Get/Set Compare Value**: Get or set the value of the output compare register.
-- **Get/Set Counter Value**: Get or set the value of the counter register.
-- **Get/Set Overflow Value**: Get or set the number of overflow events.
+- **Timer0 Start/Stop**: Start or stop Timer0 operation.
+- **Get/Set Compare Value**: Retrieve or modify the value of the output compare register.
+- **Get/Set Counter Value**: Retrieve or modify the value of the counter register.
+- **Get/Set Overflow Value**: Retrieve or modify the number of overflow events.
 - **Interrupt Callbacks**: Set callbacks for overflow and compare match interrupts.
+- **Busy Wait Delay**: Functions for busy wait delays in milliseconds and microseconds.
 
 ## Getting Started
 
@@ -32,10 +33,10 @@ The Atmega32 Timer0 driver facilitates precise timing and event generation capab
 
 ## Usage
 
-1. **Timer0 Initialization**: Initialize Timer0 using `MCAL_TIMER0_Init()` with configuration parameters in the `sTimer0_Config_t` structure.
+1. **Timer0 Initialization**: Initialize Timer0 using `MCAL_TIMER0_Init()` with configuration parameters in the `sTIMER0_Config_t` structure.
 
     ```c
-    sTimer0_Config_t config;
+    sTIMER0_Config_t config;
     // Set configuration parameters
     MCAL_TIMER0_Init(&config);
     ```
@@ -75,58 +76,47 @@ The Atmega32 Timer0 driver facilitates precise timing and event generation capab
     }
     MCAL_TIMER0_CALLBACK_Overflow_INTERRUPT(overflow_callback);
     ```
-# Timer0 Example
 
-This example demonstrates how to use the Timer0 driver to blink an LED connected to a GPIO pin.
+7. **Busy Wait Delay**: Use `MCAL_TIMER0_BusyWaitDelayms()` and `MCAL_TIMER0_BusyWaitDelayus()` for busy wait delays in milliseconds and microseconds respectively.
 
-## Code Example
+    ```c
+    MCAL_TIMER0_BusyWaitDelayms(1000); // Delay for 1000 milliseconds
+    ```
 
-```c
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "Atmega32_Timer0.h"
+8. **Single Interval Delay**: Utilize `MCAL_TIMER0_SingleIntervalDelayms()` to create a delay without halting the CPU, using interrupts.
 
-#define LED_PIN     PB0
-
-// Define callback functions for Timer0 interrupts
-void overflow_callback() {
-    // Overflow interrupt handler
-}
-
-void compare_match_callback() {
-    // Compare match interrupt handler
-}
-
-int main(void) {
-    // Initialize Timer0 configuration struct
-    sTimer0_Config_t timer_config;
-    timer_config.Timer_CLK_SRC = Timer_CLK_SRC_CPU_1024;
-    timer_config.Timer_Mode = Timer_Mode_Normal;
-    timer_config.Timer_COM = Timer_COM_Disconnected;
-    timer_config.Timer_OIE = Timer_TOI_Enable;
-    timer_config.Timer_OCIE = Timer_TOCI_Disable;
-
-    // Initialize Timer0
-    MCAL_TIMER0_Init(&timer_config);
-
-    // Set callbacks for Timer0 interrupts
-    MCAL_TIMER0_CALLBACK_Overflow_INTERRUPT(overflow_callback);
-    MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT(compare_match_callback);
-
-    // Set LED pin as output
-    DDRB |= (1 << LED_PIN);
-
-    // Enable global interrupts
-    sei();
-
-    while (1) {
-        // Toggle LED every 500 ms
-        _delay_ms(500);
-        PORTB ^= (1 << LED_PIN);
+    ```c
+    void delay_complete_callback() {
+        // Delay complete callback handler
     }
 
-    return 0;
-}
-```
+    int main(void) {
+        // Initialize Timer0 configuration struct
+        sTIMER0_Config_t timer_config;
+        timer_config.TIMER0_CLK_SRC = TIMER0_Prescale_64;
+        timer_config.TIMER0_Mode = TIMER0_CTC_Mode;
+        timer_config.TIMER0_COM = TIMER0_COM_Disconnected;
+        timer_config.TIMER0_OCIE = TIMER0_TOCI_Enable;
+        timer_config.TIMER0_OIE = TIMER0_TOI_Enable;
 
-In this example, the Timer0 module is initialized with a prescaler value of 1024 and configured in normal mode. The overflow interrupt is enabled, while the compare match interrupt is disabled. Two callback functions, `overflow_callback` and `compare_match_callback`, are defined to handle Timer0 overflow and compare match interrupts, respectively. The main function initializes Timer0, sets the LED pin as an output, enables global interrupts, and toggles the LED pin every 500 milliseconds.
+        // Initialize Timer0
+        MCAL_TIMER0_Init(&timer_config);
+
+        // Set callback for delay completion
+        MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT(delay_complete_callback);
+
+        // Enable global interrupts
+        sei();
+
+        // Perform a single interval delay of 1000 milliseconds
+        MCAL_TIMER0_SingleIntervalDelayms(1000, delay_complete_callback);
+
+        while (1) {
+            // Main application code
+        }
+
+        return 0;
+    }
+    ```
+
+    In this usage example, the `MCAL_TIMER0_SingleIntervalDelayms()` function is employed to create a delay of 1000 milliseconds without halting the CPU. An overflow interrupt handler can be specified with `delay_complete_callback` to execute code when the delay completes.
