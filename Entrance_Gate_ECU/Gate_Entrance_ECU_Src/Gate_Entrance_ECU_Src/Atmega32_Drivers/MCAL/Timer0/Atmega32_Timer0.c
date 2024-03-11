@@ -28,12 +28,14 @@
 /** @defgroup Global variables
   * @{
   */
-sTimer0_Config_t timer0_CFG;
+static sTIMER0_Config_t timer0_CFG;
 
-uint32_t overflowCounter = 0;
+static uint32_t overflowCounter = 0;
+static uint32_t Glob_u32DelayInMilliseconds;
 
-Ptr_Func overflowCallback;
-Ptr_Func outputCompareMatchCallback;
+static Ptr_Func overflowCallback;
+static Ptr_Func outputCompareMatchCallback;
+static Ptr_Func Glob_fptrInterruptedDelayCallback;
 
 /**
   * @}
@@ -42,7 +44,25 @@ Ptr_Func outputCompareMatchCallback;
 /** @defgroup Local functions
   * @{
   */
+static void Timer0_SingleIntervalDelayCallback(void)
+{
+    static uint32_t LOC_u32CTCcounter = 0;
 
+    if(LOC_u32CTCcounter < Glob_u32DelayInMilliseconds)
+    {
+        LOC_u32CTCcounter++;
+        
+        /*Clear the flag*/
+        SET_BIT(TIFR, TIMER0_TIFR_OCF0_POS);
+    }else{
+        LOC_u32CTCcounter = 0;
+        MCAL_TIMER0_Stop();
+
+        /*Execute the user's function*/
+        Glob_fptrInterruptedDelayCallback();
+    }
+    
+}
 
 /**
   * @}
@@ -62,7 +82,7 @@ Ptr_Func outputCompareMatchCallback;
 * @return       :   eStatus_t: Status of the function call.
 ======================================================================================================================
 */
-eStatus_t MCAL_TIMER0_Init(sTimer0_Config_t* timerCFG)
+eStatus_t MCAL_TIMER0_Init(sTIMER0_Config_t* timerCFG)
 {
     eStatus_t status = E_OK;
 
@@ -71,9 +91,9 @@ eStatus_t MCAL_TIMER0_Init(sTimer0_Config_t* timerCFG)
         status = E_NOK;
     
     }/*Assert all the parameters in the configuration struct*/
-    else if(!ASSERT_TIMER_CLK(timerCFG->Timer_CLK_SRC) || !ASSERT_TIMER_MODE(timerCFG->Timer_Mode) ||
-            !ASSERT_TIMER_COM(timerCFG->Timer_COM)     || !ASSERT_TIMER_TOIE(timerCFG->Timer_OIE)  ||
-            !ASSERT_TIMER_TOCIE(timerCFG->Timer_OCIE)){
+    else if(!ASSERT_TIMER0_CLK(timerCFG->TIMER0_CLK_SRC) || !ASSERT_TIMER0_MODE(timerCFG->TIMER0_Mode) ||
+            !ASSERT_TIMER0_COM(timerCFG->TIMER0_COM)     || !ASSERT_TIMER0_TOIE(timerCFG->TIMER0_OIE)  ||
+            !ASSERT_TIMER0_TOCIE(timerCFG->TIMER0_OCIE)){
                 
         status = E_NOK;
     }else{
@@ -84,13 +104,13 @@ eStatus_t MCAL_TIMER0_Init(sTimer0_Config_t* timerCFG)
         /*Clear the register*/
         TIMER0->TCCR0 = 0;
         
-        TIMER0->TCCR0 = ((timerCFG->Timer_CLK_SRC) | (timerCFG->Timer_Mode) | (timerCFG->Timer_COM)) ;
+        TIMER0->TCCR0 = ((timerCFG->TIMER0_CLK_SRC) | (timerCFG->TIMER0_Mode) | (timerCFG->TIMER0_COM)) ;
 
         /*Clear the interrupt mask bits*/
         TIMSK &= ~(TIMER0_TIMSK_OCIE0_MASK | TIMER0_TIMSK_TOIE0_MASK);
-        TIMSK |= ((timerCFG->Timer_OIE) | (timerCFG->Timer_OCIE));
+        TIMSK |= ((timerCFG->TIMER0_OIE) | (timerCFG->TIMER0_OCIE));
 
-        if(Timer_COM_Disconnected != timerCFG->Timer_COM)
+        if(TIMER0_COM_Disconnected != timerCFG->TIMER0_COM)
         {
             /*
             *   the Data Direction Register (DDR) bit corresponding to the OC0 
@@ -100,7 +120,7 @@ eStatus_t MCAL_TIMER0_Init(sTimer0_Config_t* timerCFG)
             MCAL_GPIO_Init(TIMER0_OC0_PORT, &cfg);
         }
 
-        if((Timer_TOCI_Enable == timerCFG->Timer_OCIE) || (Timer_TOI_Enable == timerCFG->Timer_OIE))
+        if((TIMER0_TOCI_Enable == timerCFG->TIMER0_OCIE) || (TIMER0_TOI_Enable == timerCFG->TIMER0_OIE))
         {
             /*Enable the global interrupt*/
             G_INTERRUPT_ENABLE;
@@ -139,10 +159,11 @@ eStatus_t MCAL_TIMER0_Start()
     eStatus_t status = E_OK;
 
     /*Enable the clock to start the timer*/
-    TIMER0->TCCR0 |= timer0_CFG.Timer_CLK_SRC;
+    TIMER0->TCCR0 |= timer0_CFG.TIMER0_CLK_SRC;
 
     return status;
 }
+
 
 /**
 ======================================================================================================================
@@ -236,6 +257,114 @@ eStatus_t MCAL_TIMER0_SetOverflow(uint32_t overflowVal)
     return status;
 
 }
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER0_BusyWaitDelayms
+* @brief		  : Function to delay the timer for a certain amount of time.
+* @param [in]	: copy_Milliseconds number of milliseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_BusyWaitDelayms(uint32_t copy_Milliseconds)
+{
+    sTIMER0_Config_t Timer0_cfg;
+    uint8_t LOC_u8CompareValue;
+    uint32_t LOC_u32CTCcounter = 0;
+
+    Timer0_cfg.TIMER0_CLK_SRC = TIMER0_Prescale_64;
+    Timer0_cfg.TIMER0_Mode = TIMER0_CTC_Mode;
+    Timer0_cfg.TIMER0_COM = TIMER0_COM_Disconnected;
+    Timer0_cfg.TIMER0_OCIE = TIMER0_TOCI_Disable;
+    Timer0_cfg.TIMER0_OIE = TIMER0_TOI_Disable;
+
+    /*Delay of one millisecond*/
+    LOC_u8CompareValue = (uint8_t)(((F_CPU / 1000) / 64) - 1);
+    MCAL_TIMER0_SetCompare(LOC_u8CompareValue);
+
+    MCAL_TIMER0_Init(&Timer0_cfg);
+
+    while(LOC_u32CTCcounter < copy_Milliseconds)
+    {
+        while(!READ_BIT(TIFR, TIMER0_TIFR_OCF0_POS));
+
+        LOC_u32CTCcounter++;
+        
+        /*Clear the flag*/
+        SET_BIT(TIFR, TIMER0_TIFR_OCF0_POS);
+    }
+
+}
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER0_SingleIntervalDelayms
+* @brief		  : Function to delay the TIMER0 for a certain amount of time without halting the CPU.
+* @param [in]	: copy_Milliseconds number of milliseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_SingleIntervalDelayms(uint32_t copy_Milliseconds, Ptr_Func func)
+{
+    sTIMER0_Config_t Timer0_cfg;
+    uint8_t LOC_u8CompareValue;
+
+    Timer0_cfg.TIMER0_CLK_SRC = TIMER0_Prescale_64;
+    Timer0_cfg.TIMER0_Mode = TIMER0_CTC_Mode;
+    Timer0_cfg.TIMER0_COM = TIMER0_COM_Disconnected;
+    Timer0_cfg.TIMER0_OCIE = TIMER0_TOCI_Enable;
+    Timer0_cfg.TIMER0_OIE = TIMER0_TOI_Disable;
+
+    /*Delay of one millisecond*/
+    LOC_u8CompareValue = (uint8_t)(((F_CPU / 1000) / 64) - 1);
+    MCAL_TIMER0_SetCompare(LOC_u8CompareValue);
+    MCAL_TIMER0_SetCounter(0x00);
+    
+    MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT(Timer0_SingleIntervalDelayCallback);    
+
+    Glob_u32DelayInMilliseconds = copy_Milliseconds;
+    Glob_fptrInterruptedDelayCallback = func;
+    MCAL_TIMER0_Init(&Timer0_cfg);
+}
+
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER0_BusyWaitDelayus
+* @brief		  : Function to delay the timer for a certain amount of time.
+* @param [in]	: copy_Microseconds number of microseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_BusyWaitDelayus(uint32_t copy_Microseconds)
+{
+    sTIMER0_Config_t Timer0_cfg;
+    uint8_t LOC_u8CompareValue;
+    uint32_t LOC_u32CTCcounter = 0;
+
+    Timer0_cfg.TIMER0_CLK_SRC = TIMER0_Prescale_1;
+    Timer0_cfg.TIMER0_Mode = TIMER0_CTC_Mode;
+    Timer0_cfg.TIMER0_COM = TIMER0_COM_Disconnected;
+    Timer0_cfg.TIMER0_OCIE = TIMER0_TOCI_Disable;
+    Timer0_cfg.TIMER0_OIE = TIMER0_TOI_Disable;
+
+    /*Delay of one millisecond*/
+    LOC_u8CompareValue = (uint8_t)(((F_CPU / 1000000)) - 1);
+    MCAL_TIMER0_SetCompare(LOC_u8CompareValue);
+
+    MCAL_TIMER0_Init(&Timer0_cfg);
+    
+    copy_Microseconds = (copy_Microseconds / 2) + 1;
+
+    while(LOC_u32CTCcounter < copy_Microseconds)
+    {
+        while(!READ_BIT(TIFR, TIMER0_TIFR_OCF0_POS));
+
+        LOC_u32CTCcounter++;
+        
+        /*Clear the flag*/
+        SET_BIT(TIFR, TIMER0_TIFR_OCF0_POS);
+    }
+
+}
+
 
 /**
 ======================================================================================================================

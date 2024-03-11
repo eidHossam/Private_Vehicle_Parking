@@ -1,10 +1,10 @@
 /**
 **************************************************************************************************************************
-* brief     : This module contains functions for configuring and controlling the Timer0 module.
+* brief     : This module contains functions for configuring and controlling the TIMER0 module.
 * Author    : Hossam Eid
 * Created on: 1/12/2023
 **************************************************************************************************************************
-* Description: This file contains the function prototypes and definitions for the Timer0 driver.
+* Description: This file contains the function prototypes and definitions for the TIMER0 driver.
 **************************************************************************************************************************
 */
 
@@ -25,45 +25,45 @@
 *===============================================
 */
 
-/*----------- @ref TIMER_CLK_DEFINE ----------------*/
-enum Timer_CLK_SRC{
-    Timer_no_CLK_SRC,                   /*!< No clock source (Timer/Counter stopped).*/   
-    Timer_Prescale_1,                   /*!< clkI/O/1 (No prescaling)*/
-    Timer_Prescale_8,                   /*!< clkI/O/8 (From prescaler)*/
-    Timer_Prescale_64,                  /*!< clkI/O/64 (From prescaler)*/
-    Timer_Prescale_256,                 /*!< clkI/O/256 (From prescaler)*/
-    Timer_Prescale_1024,                /*!< clkI/O/1024 (From prescaler)*/
-    Timer_EXT_CLK_Falling,              /*!< External clock source on T0 pin. Clock on falling edge.*/
-    Timer_EXT_CLK_Rising                /*!< External clock source on T0 pin. Clock on rising edge.*/
+/*----------- @ref TIMER0_CLK_DEFINE ----------------*/
+enum TIMER0_CLK_SRC{
+    TIMER0_no_CLK_SRC,                   /*!< No clock source (TIMER0/Counter stopped).*/   
+    TIMER0_Prescale_1,                   /*!< clkI/O/1 (No prescaling)*/
+    TIMER0_Prescale_8,                   /*!< clkI/O/8 (From prescaler)*/
+    TIMER0_Prescale_64,                  /*!< clkI/O/64 (From prescaler)*/
+    TIMER0_Prescale_256,                 /*!< clkI/O/256 (From prescaler)*/
+    TIMER0_Prescale_1024,                /*!< clkI/O/1024 (From prescaler)*/
+    TIMER0_EXT_CLK_Falling,              /*!< External clock source on T0 pin. Clock on falling edge.*/
+    TIMER0_EXT_CLK_Rising                /*!< External clock source on T0 pin. Clock on rising edge.*/
 };
-#define ASSERT_TIMER_CLK(CLK)  (Timer_no_CLK_SRC <= CLK &&  \
-                               (Timer_EXT_CLK_Rising >= CLK))
+#define ASSERT_TIMER0_CLK(CLK)  (TIMER0_no_CLK_SRC <= CLK &&  \
+                               (TIMER0_EXT_CLK_Rising >= CLK))
 
-/*----------- @ref TIMER_DEFINE_MODE ----------------*/
-enum Timer_Mode{
-    Timer_Normal_Mode,                                          /*!< Timer in normal operating mode*/   
-    Timer_PWM_Mode = TIMER0_TCCR_WGM0_MASK,                     /*!< Timer in PWM mode */
-    Timer_CTC_Mode = TIMER0_TCCR_WGM1_MASK,                     /*!< Timer in Clear On Compare Match mode */
-    Timer_FAST_PWM_Mode = (TIMER0_TCCR_WGM0_MASK |              /*!< Timer in fast PWM mode */
+/*----------- @ref TIMER0_DEFINE_MODE ----------------*/
+enum TIMER0_Mode{
+    TIMER0_Normal_Mode,                                          /*!< TIMER0 in normal operating mode*/   
+    TIMER0_PWM_Mode = TIMER0_TCCR_WGM0_MASK,                     /*!< TIMER0 in PWM mode */
+    TIMER0_CTC_Mode = TIMER0_TCCR_WGM1_MASK,                     /*!< TIMER0 in Clear On Compare Match mode */
+    TIMER0_FAST_PWM_Mode = (TIMER0_TCCR_WGM0_MASK |              /*!< TIMER0 in fast PWM mode */
                            TIMER0_TCCR_WGM1_MASK)                     
 
 };
-#define ASSERT_TIMER_MODE(mode) ((Timer_Normal_Mode     == mode)    || \
-                                 (Timer_CTC_Mode        == mode)    || \
-                                 (Timer_PWM_Mode        == mode)    || \
-                                 (Timer_FAST_PWM_Mode   == mode))
+#define ASSERT_TIMER0_MODE(mode) ((TIMER0_Normal_Mode     == mode)    || \
+                                 (TIMER0_CTC_Mode        == mode)    || \
+                                 (TIMER0_PWM_Mode        == mode)    || \
+                                 (TIMER0_FAST_PWM_Mode   == mode))
 
 
-/*----------- @ref TIMER_COM_DEFINE ----------------*/
+/*----------- @ref TIMER0_COM_DEFINE ----------------*/
 /** @defgroup Non-PWM Mode
   * @{
   */
  /**
- * Timer_COM                    Description
- * Timer_COM_Disconnected : Normal port operation, OC0 disconnected.
- * Timer_COM_Toggle       : Toggle OC0 on Compare Match
- * Timer_COM_Clear        : Clear OC0 on Compare Match
- * Timer_COM_Set          : Set OC0 on Compare Match
+ * TIMER0_COM                    Description
+ * TIMER0_COM_Disconnected : Normal port operation, OC0 disconnected.
+ * TIMER0_COM_Toggle       : Toggle OC0 on Compare Match
+ * TIMER0_COM_Clear        : Clear OC0 on Compare Match
+ * TIMER0_COM_Set          : Set OC0 on Compare Match
  */
 /**
   * @}
@@ -73,10 +73,10 @@ enum Timer_Mode{
   * @{
   */
  /**
- * Timer_COM                    Description
- * Timer_COM_Disconnected : Normal port operation, OC0 disconnected.
- * Timer_COM_Clear        : Clear OC0 on Compare Match, set OC0 at BOTTOM, ((non-inverting mode)
- * Timer_COM_Set          : Set OC0 on Compare Match, clear OC0 at BOTTOM, (inverting mode)
+ * TIMER0_COM                    Description
+ * TIMER0_COM_Disconnected : Normal port operation, OC0 disconnected.
+ * TIMER0_COM_Clear        : Clear OC0 on Compare Match, set OC0 at BOTTOM, ((non-inverting mode)
+ * TIMER0_COM_Set          : Set OC0 on Compare Match, clear OC0 at BOTTOM, (inverting mode)
  */
 /**
   * @}
@@ -86,45 +86,45 @@ enum Timer_Mode{
   * @{
   */
  /**
- * Timer_COM                    Description
- * Timer_COM_Disconnected : Normal port operation, OC0 disconnected.
- * Timer_COM_Clear        : Clear OC0 on Compare Match when up-counting. Set OC0 on Compare Match when downcounting
- * Timer_COM_Set          : Set OC0 on Compare Match when up-counting. Clear OC0 on Compare Match when downcounting.
+ * TIMER0_COM                    Description
+ * TIMER0_COM_Disconnected : Normal port operation, OC0 disconnected.
+ * TIMER0_COM_Clear        : Clear OC0 on Compare Match when up-counting. Set OC0 on Compare Match when downcounting
+ * TIMER0_COM_Set          : Set OC0 on Compare Match when up-counting. Clear OC0 on Compare Match when downcounting.
  */
 /**
   * @}
   */
 
 
-enum Timer_COM{
-    Timer_COM_Disconnected,                                       /*!< Normal port operation, OC0 disconnected*/   
-    Timer_COM_Toggle    = TIMER0_TCCR_COM0_MASK,                  /*!< Toggle OC0 on Compare Match*/
-    Timer_COM_Clear     = TIMER0_TCCR_COM1_MASK,                  /*!< Clear OC0 on Compare Match */
-    Timer_COM_Set       = TIMER0_TCCR_COM_MASK                    /*!< Set OC0 on Compare Match */
+enum TIMER0_COM{
+    TIMER0_COM_Disconnected,                                       /*!< Normal port operation, OC0 disconnected*/   
+    TIMER0_COM_Toggle    = TIMER0_TCCR_COM0_MASK,                  /*!< Toggle OC0 on Compare Match*/
+    TIMER0_COM_Clear     = TIMER0_TCCR_COM1_MASK,                  /*!< Clear OC0 on Compare Match */
+    TIMER0_COM_Set       = TIMER0_TCCR_COM_MASK                    /*!< Set OC0 on Compare Match */
 };
-#define ASSERT_TIMER_COM(com)  ((Timer_COM_Disconnected == com)     || \
-                                (Timer_COM_Toggle       == com)     || \
-                                (Timer_COM_Clear        == com)     || \
-                                (Timer_COM_Set          == com))      
+#define ASSERT_TIMER0_COM(com)  ((TIMER0_COM_Disconnected == com)     || \
+                                (TIMER0_COM_Toggle       == com)     || \
+                                (TIMER0_COM_Clear        == com)     || \
+                                (TIMER0_COM_Set          == com))      
 
 
-/*----------- @ref TIMER_TOIE_DEFINE ----------------*/
-enum Timer_TOIE{
-    Timer_TOI_Disable,                                              /*!< Timer Overflow interrupt disable */
-    Timer_TOI_Enable = TIMER0_TIMSK_TOIE0_MASK,                     /*!< Timer Overflow interrupt enable*/   
+/*----------- @ref TIMER0_TOIE_DEFINE ----------------*/
+enum TIMER0_TOIE{
+    TIMER0_TOI_Disable,                                              /*!< TIMER0 Overflow interrupt disable */
+    TIMER0_TOI_Enable = TIMER0_TIMSK_TOIE0_MASK,                     /*!< TIMER0 Overflow interrupt enable*/   
 };
-#define ASSERT_TIMER_TOIE(TOIE) ((Timer_TOI_Disable == TOIE)     || \
-                                 (Timer_TOI_Enable  == TOIE))
+#define ASSERT_TIMER0_TOIE(TOIE) ((TIMER0_TOI_Disable == TOIE)     || \
+                                 (TIMER0_TOI_Enable  == TOIE))
 
 
-/*----------- @ref TIMER_TOCIE_DEFINE ----------------*/
-enum Timer_TOCIE{
-    Timer_TOCI_Disable,                                          /*!< Timer Output compare match interrupt disable */
-    Timer_TOCI_Enable = TIMER0_TIMSK_OCIE0_MASK,                 /*!< Timer Output compare match interrupt enable*/   
+/*----------- @ref TIMER0_TOCIE_DEFINE ----------------*/
+enum TIMER0_TOCIE{
+    TIMER0_TOCI_Disable,                                          /*!< TIMER0 Output compare match interrupt disable */
+    TIMER0_TOCI_Enable = TIMER0_TIMSK_OCIE0_MASK,                 /*!< TIMER0 Output compare match interrupt enable*/   
 };
 
-#define ASSERT_TIMER_TOCIE(TOCIE) ((Timer_TOCI_Disable == TOCIE)     || \
-                                  (Timer_TOCI_Enable  == TOCIE))
+#define ASSERT_TIMER0_TOCIE(TOCIE) ((TIMER0_TOCI_Disable == TOCIE)     || \
+                                  (TIMER0_TOCI_Enable  == TOCIE))
 
 /**************************************************************************************************************************
 *===============================================
@@ -133,42 +133,42 @@ enum Timer_TOCIE{
 */
 
 typedef struct{
-    enum Timer_CLK_SRC  Timer_CLK_SRC;        /*!<Specifies the input clock source of the timer
-                                            This parameter must be a value of @ref TIMER_CLK_DEFINE*/
+    enum TIMER0_CLK_SRC  TIMER0_CLK_SRC;        /*!<Specifies the input clock source of the TIMER0
+                                            This parameter must be a value of @ref TIMER0_CLK_DEFINE*/
 
-    enum Timer_Mode   Timer_Mode;             /*Specifies the operation mode of the timer peripheral
-                                            This parameter must be a value of @ref TIMER_DEFINE_MODE*/
+    enum TIMER0_Mode   TIMER0_Mode;             /*Specifies the operation mode of the TIMER0 peripheral
+                                            This parameter must be a value of @ref TIMER0_DEFINE_MODE*/
 
-    enum Timer_COM   Timer_COM;              /*Specifies the output compare pin (OC0) behavior
-                                            This parameter must be a value of @ref TIMER_COM_DEFINE*/   
+    enum TIMER0_COM   TIMER0_COM;              /*Specifies the output compare pin (OC0) behavior
+                                            This parameter must be a value of @ref TIMER0_COM_DEFINE*/   
 
-    enum Timer_TOIE  Timer_OIE;              /*Specifies if the overflow interrupt should be enabled
-                                            This parameter   must be a value of @ref TIMER_TOIE_DEFINE*/  
+    enum TIMER0_TOIE  TIMER0_OIE;              /*Specifies if the overflow interrupt should be enabled
+                                            This parameter   must be a value of @ref TIMER0_TOIE_DEFINE*/  
    
-    enum Timer_TOCIE Timer_OCIE;              /*Specifies if the output compare match interrupt should be enabled 
-                                            This parameter must be a value of @ref TIMER_TOCIE_DEFINE*/  
-}sTimer0_Config_t;
+    enum TIMER0_TOCIE TIMER0_OCIE;              /*Specifies if the output compare match interrupt should be enabled 
+                                            This parameter must be a value of @ref TIMER0_TOCIE_DEFINE*/  
+}sTIMER0_Config_t;
 
 /**************************************************************************************************************************
 ===============================================
-*       APIs Supported by "MCAL Timer0 DRIVER"
+*       APIs Supported by "MCAL TIMER0 DRIVER"
 *===============================================
 */
 
 /**
 ======================================================================================================================
 * @Func_name	:   MCAL_TIMER0_Init
-* @brief		  :   Intializes the timer peripheral with the specified parameters in the config struct.
-* @param [in]	:   timerCFG: Configuration structure.
+* @brief		  :   Intializes the TIMER0 peripheral with the specified parameters in the config struct.
+* @param [in]	:   TIMER0CFG: Configuration structure.
 * @return     :   eStatus_t: Status of the function call.
 ======================================================================================================================
 */
-eStatus_t MCAL_TIMER0_Init(sTimer0_Config_t* timerCFG);
+eStatus_t MCAL_TIMER0_Init(sTIMER0_Config_t* TIMER0CFG);
 
 /**
 ======================================================================================================================
 * @Func_name	:   MCAL_TIMER0_Stop
-* @brief		:   Stop the Timer peripheral from counting.
+* @brief		:   Stop the TIMER0 peripheral from counting.
 * @Note         :   This function doesn't reset the peripheral it only stops the counting process.
 ======================================================================================================================
 */
@@ -241,6 +241,33 @@ eStatus_t MCAL_TIMER0_GetOverflow(uint32_t* overflowVal);
 ======================================================================================================================
 */
 eStatus_t MCAL_TIMER0_SetOverflow(uint32_t overflowVal);
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER0_Delayms
+* @brief		  : Function to delay the TIMER0 for a certain amount of time.
+* @param [in]	: copy_Milliseconds number of milliseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_BusyWaitDelayms(uint32_t copy_Milliseconds);
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER0_SingleIntervalDelayms
+* @brief		  : Function to delay the TIMER0 for a certain amount of time without halting the CPU.
+* @param [in]	: copy_Milliseconds number of milliseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_SingleIntervalDelayms(uint32_t copy_Milliseconds, Ptr_Func func);
+
+/**
+======================================================================================================================
+* @Func_name	: MCAL_TIMER02_Delayus
+* @brief		  : Function to delay the TIMER0 for a certain amount of time.
+* @param [in]	: copy_Microseconds number of microseconds to delay.
+======================================================================================================================
+*/
+void MCAL_TIMER0_BusyWaitDelayus(uint32_t copy_Microseconds);
 
 /**
 ======================================================================================================================
