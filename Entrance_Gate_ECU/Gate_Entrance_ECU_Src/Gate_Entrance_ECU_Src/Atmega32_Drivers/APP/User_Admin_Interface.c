@@ -1,7 +1,9 @@
 /**
  * @file User_Admin_Interface.c
  * 
- * @brief this file implements 
+ * @brief This file contains the APIs and the states declarations for the main module of the entrance gate ECU,
+ * This module is responsible for the communication between this ECU and the main admin ECU, It's is also responsible
+ * for sending the signals to the Gate_Control and Alarm_Manager modules.
  * 
  * @author Hossam_Eid (eidhossam7@gmail.com)
  * 
@@ -26,6 +28,12 @@
 
 #define ADMIN_ECU_INTERRUPT_PORT        GPIOB
 #define ADMIN_ECU_INTERRUPT_PIN         GPIO_PIN3
+
+/**
+ * @brief Time delay in ms before considering the system to be stuck and reset it.
+ * 
+ */
+#define TIME_BEFORE_RESET_MS            1000u      
 
 /** @defgroup Module_States
   * @{
@@ -67,6 +75,17 @@ static const uint8_t Glob_u8GateAddress = ENTRANCE_GATE_ECU_ADDRESS;
 /** @defgroup ISR_CALLBACK_DEFINITIONS
   * @{
   */
+
+/**
+======================================================================================================================
+* @Func_name	:  Timer0_SingleIntervalDelaycallback
+* @brief		  :  This function is the callback function for the Timer0_SingleIntervalDelayms function.
+======================================================================================================================
+*/
+static void Timer0_SingleIntervalDelaycallback(void)
+{
+  fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
+}
 
 /**
 ======================================================================================================================
@@ -134,8 +153,7 @@ static void SPI_SendingID(void)
         Glob_u8ModuleCurrentState = UAI_WAITING_AUTHENTICATION_RESULT;
         
         /*Enable the timer to prevent getting stuck in this state forever*/
-        MCAL_TIMER0_SetCounter(0x00);
-        MCAL_TIMER0_Start();
+        MCAL_TIMER0_SingleIntervalDelayms(TIME_BEFORE_RESET_MS, Timer0_SingleIntervalDelaycallback);
 
         fptr_st_UserAdminInterface = st_UAI_Idle;
     }else{
@@ -154,12 +172,15 @@ void SPI_GetAuthenticationResult(void)
     static boolean LOC_boolDetectedGateAddress = FALSE;
     uint8_t LOC_u8RxBuffer = ENTRANCE_GATE_ECU_ADDRESS;
 
-    MCAL_SPI_ExchangeData(&LOC_u8RxBuffer);
+    MCAL_SPI_ReceiveData(&LOC_u8RxBuffer, PollingEnable);
 
     /*If we already received the gate ID from the last transmission 
       then check the authentication result*/
     if(LOC_boolDetectedGateAddress)
-    {
+    { 
+        /*Stop the timer as we are already done from this state*/
+        MCAL_TIMER0_Stop();
+
         LOC_boolDetectedGateAddress = FALSE;
 
         /*check if the data we got matches the successful authentication code*/
@@ -180,6 +201,7 @@ void SPI_GetAuthenticationResult(void)
         /*check if the received data matches the the gate address*/
         if(LOC_u8RxBuffer == Glob_u8GateAddress)
         {
+            MCAL_SPI_SendData(&LOC_u8RxBuffer , PollingEnable);
             LOC_boolDetectedGateAddress = TRUE;
         }else{
 
@@ -214,22 +236,6 @@ static void SPI_ISR_Callback(void)
     default:
         break;
     }   
-}
-
-static void Timer0_callback(void)
-{
-    static uint32_t counter;
-
-	if(counter == 4000)
-    {
-        counter = 0;
-
-        fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
-
-        MCAL_TIMER0_Stop();
-    }
-
-    counter++;
 }
 /**
   * @}
@@ -279,19 +285,6 @@ static void SPI_Init()
 
 }
 
-static void Timer0_Init(void)
-{    
-    /*Set the callback function for the CTC mode*/
-	MCAL_TIMER0_CALLBACK_CompareMatch_INTERRUPT(Timer0_callback);
-    sTimer0_Config_t config = { Timer_Prescale_8, Timer_CTC_Mode, Timer_COM_Disconnected,
-                                Timer_TOI_Disable, Timer_TOCI_Enable};
-    
-    MCAL_TIMER0_SetCompare(250);
-    MCAL_TIMER0_Init(&config);
-
-    MCAL_TIMER0_Stop();
-}
-
 /**
   * @}
   */
@@ -316,9 +309,6 @@ void st_UAI_Init(void)
 
     /*Initialize the LCD module to print messages to the driver*/
     LCD_Init();
-
-    /*Initialize the Timer module to help us get out of any undesired state*/
-    Timer0_Init();
 
     /*Set the initial state*/
     fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
@@ -370,12 +360,10 @@ void st_UAI_SendIDToAdmin(void)
     /*Set the current state of the module*/
     Glob_u8ModuleCurrentState = UAI_SENDING_ID;
 
+    MCAL_TIMER0_SingleIntervalDelayms(TIME_BEFORE_RESET_MS, Timer0_SingleIntervalDelaycallback);
+
     /*Toggle the ADMIN_ECU_INTERRUPT_PIN to alert the admin that we need attention*/
     MCAL_GPIO_TogglePin(ADMIN_ECU_INTERRUPT_PORT, ADMIN_ECU_INTERRUPT_PIN);
-
-    /*Enable the timer to prevent getting stuck in this state forever*/
-    MCAL_TIMER0_SetCounter(0x00);
-    MCAL_TIMER0_Start();
 
     fptr_st_UserAdminInterface = st_UAI_Idle;
 }
@@ -392,16 +380,12 @@ void st_UAI_IDAuthenticationPassed(void)
     LCD_Cursor_XY(LCD_SECOND_LINE, 4);
     LCD_Send_String(stringfy("VALID ID!"));
 
-    /** @defgroup Testing to be deleted
-      * @{
-      */
-        MCAL_TIMER0_SetCounter(0x00);
-        MCAL_TIMER0_Start();
+    /*Send a signal to the gate controller to open the gate*/
+    UAI_GC_OpenGateReuest();
 
-        fptr_st_UserAdminInterface = st_UAI_Idle;
-    /**
-      * @}
-      */
+    /** TODO: Send a signal to the alarm manager*/
+
+    fptr_st_UserAdminInterface = st_UAI_Idle;
 }
 
 /**
@@ -416,8 +400,27 @@ void st_UAI_IDAuthenticationFailed(void)
     LCD_Cursor_XY(LCD_SECOND_LINE, 3);
     LCD_Send_String(stringfy("INVALID ID!"));
 
-    MCAL_TIMER0_SetCounter(0x00);
-    MCAL_TIMER0_Start();
+    MCAL_TIMER0_SingleIntervalDelayms(TIME_BEFORE_RESET_MS, Timer0_SingleIntervalDelaycallback);
 
     fptr_st_UserAdminInterface = st_UAI_Idle;
 }
+
+
+/** @defgroup Signals between the User_Admin_Interface and the Gate_Controller.
+  * @{
+  */
+
+/**
+ * @brief This is a signal from the Gate_Controller module to the User_Admin_Interface module to inform 
+ * it that the car passed the gate and we are ready to serve the next driver.
+ * 
+ */
+void GC_UAI_GateClosed(void)
+{
+  /*Return to the original state to serve the next customer*/
+  fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
+}
+
+/**
+  * @}
+  */

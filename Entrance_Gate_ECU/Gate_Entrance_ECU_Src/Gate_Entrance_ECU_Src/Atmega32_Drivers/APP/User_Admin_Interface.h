@@ -1,7 +1,9 @@
 /**
  * @file User_Admin_Interface.h
  * 
- * @brief this file implements 
+ * @brief This file contains the APIs and the states declarations for the main module of the entrance gate ECU,
+ * This module is responsible for the communication between this ECU and the main admin ECU, It's is also responsible
+ * for sending the signals to the Gate_Control and Alarm_Manager modules.
  * 
  * @author Hossam_Eid (eidhossam7@gmail.com)
  * 
@@ -21,6 +23,7 @@
 /** @defgroup APP
   * @{
   */
+#include "Interface.h"
 /**
   * @}
   */
