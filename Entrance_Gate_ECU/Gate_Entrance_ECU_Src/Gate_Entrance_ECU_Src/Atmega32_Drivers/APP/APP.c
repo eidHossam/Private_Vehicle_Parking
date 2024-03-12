@@ -36,6 +36,8 @@ void EntranceGate_ECU_APP_SETUP(void)
     st_UAI_Init();
 
     st_GateController_Init();
+
+    st_AlarmManager_Init();
 }
 
 /**
@@ -50,4 +52,6 @@ void EntranceGate_ECU_APP_Loop(void)
     fptr_st_UserAdminInterface();
 
     fptr_st_GateController();
+
+    fptr_st_AlarmManager();
 }

@@ -1,8 +1,13 @@
-/*
- * Admin_Interface.c
- *
- *  Created on: Feb 26, 2024
- *      Author: Hossam Eid
+/**
+ * @file Admin_Interface.c
+ * 
+ * @brief this file implements 
+ * 
+ * @author Hossam_Eid (eidhossam7@gmail.com)
+ * 
+ * @date 26-02-2024
+ * 
+ * @version 1.0
  */
 
 /*
@@ -408,10 +413,11 @@ void st_Admin_DashboardInit(void)
   /*Enable the required clocks*/
   Peripheral_Clock_Init();
  
+  /*Initialize the LCD module to print messages to the driver*/
   LCD_Init();
+  
   Keypad_Init();
 
- 
   /*Set the next state*/
   Admin_Dashboard_State = st_Admin_InitialMessage;
 }
@@ -425,6 +431,9 @@ void st_Admin_DashboardInit(void)
 */
 void st_Admin_InitialMessage(void)
 {
+    /*Turn off the cursor for a more clean feel*/
+    LCD_Send_Command(LCD_CURSOR_OFF);
+    
     /*Print the initial message*/
     LCD_Clear_Screen();
     
@@ -495,6 +504,7 @@ void st_Admin_LoginMessage(void)
 void st_Admin_GetUserID(void)
 {
     LCD_Cursor_XY(LCD_FIRST_LINE, 7 + userInputCount);
+    LCD_Send_Command(LCD_DISPLAY_ON_CURSOR_BLINK);
 
     pressedKey = Keypad_Get_Char();
 
@@ -614,7 +624,9 @@ void st_Admin_CheckLoginInfo(void)
 void st_Admin_LoginTimeout(void)
 {
    LCD_Clear_Screen();
-
+   /*Turn off the cursor for a more clean feel*/
+   LCD_Send_Command(LCD_CURSOR_OFF);
+   
    LCD_Cursor_XY(LCD_SECOND_LINE, 2);
    LCD_Send_String(stringfy("Try again in"));
    LCD_Cursor_XY(LCD_THIRD_LINE, 3);
@@ -648,6 +660,8 @@ void st_Admin_Idle(void)
 void st_Admin_ShowAdminOptions(void)
 {
     LCD_Clear_Screen();
+    /*Turn off the cursor for a more clean feel*/
+    LCD_Send_Command(LCD_CURSOR_OFF);
 
     LCD_Send_String(stringfy("1.Add new ID"));
     LCD_Cursor_XY(LCD_SECOND_LINE, 0);
@@ -670,6 +684,7 @@ void st_Admin_ShowAdminOptions(void)
 void st_Admin_GetAdminOption(void)
 {
   pressedKey = Keypad_Get_Char();
+  LCD_Send_Command(LCD_DISPLAY_ON_CURSOR_BLINK);
 
   switch (pressedKey)
   {

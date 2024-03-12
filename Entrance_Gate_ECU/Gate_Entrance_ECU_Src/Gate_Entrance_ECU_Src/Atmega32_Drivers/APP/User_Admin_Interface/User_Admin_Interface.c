@@ -22,12 +22,20 @@
 /** @defgroup Local Macros
   * @{
   */
+/*Unique address of this gate*/
 #define ENTRANCE_GATE_ECU_ADDRESS       0xE7u
 
+/*The size of the driver's ID*/
 #define DRIVER_ID_SIZE                  3
 
+/** @defgroup The configuration of the pin connected to the EXTI line of th admin ECU
+  * @{
+  */
 #define ADMIN_ECU_INTERRUPT_PORT        GPIOB
 #define ADMIN_ECU_INTERRUPT_PIN         GPIO_PIN3
+/**
+  * @}
+  */
 
 /**
  * @brief Time delay in ms before considering the system to be stuck and reset it.
@@ -309,7 +317,9 @@ void st_UAI_Init(void)
 
     /*Initialize the LCD module to print messages to the driver*/
     LCD_Init();
-
+    /*Turn off the cursor for a more clean feel*/
+    LCD_Send_Command(LCD_CURSOR_OFF);
+    
     /*Set the initial state*/
     fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
 }
@@ -375,15 +385,11 @@ void st_UAI_SendIDToAdmin(void)
  */
 void st_UAI_IDAuthenticationPassed(void)
 {
-    LCD_Clear_Screen();
-
-    LCD_Cursor_XY(LCD_SECOND_LINE, 4);
-    LCD_Send_String(stringfy("VALID ID!"));
+    /*Send a signal to the alarm manager*/
+    UAI_AM_ValidID();
 
     /*Send a signal to the gate controller to open the gate*/
     UAI_GC_OpenGateReuest();
-
-    /** TODO: Send a signal to the alarm manager*/
 
     fptr_st_UserAdminInterface = st_UAI_Idle;
 }
@@ -395,12 +401,8 @@ void st_UAI_IDAuthenticationPassed(void)
  */
 void st_UAI_IDAuthenticationFailed(void)
 {
-    LCD_Clear_Screen();
-
-    LCD_Cursor_XY(LCD_SECOND_LINE, 3);
-    LCD_Send_String(stringfy("INVALID ID!"));
-
-    MCAL_TIMER0_SingleIntervalDelayms(TIME_BEFORE_RESET_MS, Timer0_SingleIntervalDelaycallback);
+    /*Send a signal to the Alarm_Manager module.*/
+    UAI_AM_InvalidID();    
 
     fptr_st_UserAdminInterface = st_UAI_Idle;
 }
@@ -417,6 +419,9 @@ void st_UAI_IDAuthenticationFailed(void)
  */
 void GC_UAI_GateClosed(void)
 {
+  /*Send a signal to turn off the alarm*/
+  UAI_AM_TurnOffAlarmGateClosed();
+
   /*Return to the original state to serve the next customer*/
   fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
 }
@@ -424,3 +429,21 @@ void GC_UAI_GateClosed(void)
 /**
   * @}
   */
+
+ /** @defgroup Signals between the User_Admin_Interface and the Alarm_Manager modules.
+   * @{
+   */
+
+/**
+ * @brief  This is a signal from the Alarm_Manager module to the User_Admin_InterfaceA module to inform
+ * it that the alarm duration has ended.
+ * 
+ */
+void AM_UAI_AlarmOff()
+{
+ fptr_st_UserAdminInterface = st_UAI_ShowWelcomeMsg;
+}
+
+ /**
+   * @}
+   */

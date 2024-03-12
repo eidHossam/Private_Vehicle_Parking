@@ -1,7 +1,9 @@
 /**
  * @file Gates_Communication.h
  * 
- * @brief this file implements 
+ * @brief This file contains  the APIs for the module responsible for communicating with the entrance 
+ * and exit gates and its the bridge between the gates and the admin interface that is responsible for 
+ * authenticating the IDs.
  * 
  * @author Hossam_Eid (eidhossam7@gmail.com)
  * 
@@ -41,6 +43,7 @@
   * @{
   */
 #include "LCD_Driver/LCD_interface.h"
+#include "Seven_Segment_Display_Driver/Seven_Seg_Driver_Interface.h"
 /**
   * @}
   */

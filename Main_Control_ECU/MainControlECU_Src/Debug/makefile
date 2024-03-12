@@ -16,6 +16,7 @@ RM := rm -rf
 -include stm32f103x6_Drivers/MCAL/EXTI/subdir.mk
 -include stm32f103x6_Drivers/MCAL/AFIO/subdir.mk
 -include stm32f103x6_Drivers/LIB/FIFO_Buffer_Driver/subdir.mk
+-include stm32f103x6_Drivers/HAL/Seven_Segment_Display_Driver/subdir.mk
 -include stm32f103x6_Drivers/HAL/LCD_Driver/subdir.mk
 -include stm32f103x6_Drivers/HAL/Keypad_Driver/subdir.mk
 -include stm32f103x6_Drivers/APP/Gates_Communication/subdir.mk

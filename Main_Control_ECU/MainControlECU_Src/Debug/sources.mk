@@ -27,6 +27,7 @@ stm32f103x6_Drivers/APP/Admin_Interface \
 stm32f103x6_Drivers/APP/Gates_Communication \
 stm32f103x6_Drivers/HAL/Keypad_Driver \
 stm32f103x6_Drivers/HAL/LCD_Driver \
+stm32f103x6_Drivers/HAL/Seven_Segment_Display_Driver \
 stm32f103x6_Drivers/LIB/FIFO_Buffer_Driver \
 stm32f103x6_Drivers/MCAL/AFIO \
 stm32f103x6_Drivers/MCAL/EXTI \

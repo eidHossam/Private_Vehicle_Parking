@@ -40,6 +40,7 @@
   * @{
   */
 #include "../HAL/Servo_Motor_Driver/Servo_Motor_Interface.h"
+#include "../HAL/PIR_Sensor_Driver/PIR_Interface.h"
 /**
   * @}
   */
@@ -90,5 +91,12 @@ void st_GateController_OpenGate(void);
  * 
  */
 void st_GateController_CheckCarPassed(void);
+
+/**
+ * @brief This state closes the garage's entrance gate and 
+ * sends a GateClosed signal to the User_Admin_Interface moudle.
+ * 
+ */
+void st_GateController_CloseGate(void);
 
 #endif /* GATE_CONTROL_INTERFACE_H_ */

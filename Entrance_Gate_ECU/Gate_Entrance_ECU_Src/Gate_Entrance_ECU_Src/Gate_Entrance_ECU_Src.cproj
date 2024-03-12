@@ -126,31 +126,55 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Atmega32_Drivers\APP\Alarm_Manager\Alarm_Manager_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\APP\Alarm_Manager\Alarm_Manager_Program.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Atmega32_Drivers\APP\APP.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\APP\APP.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Atmega32_Drivers\APP\Gate_Controller_Interface.h">
+    <Compile Include="Atmega32_Drivers\APP\Gate_Controller\Gate_Controller_Interface.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Atmega32_Drivers\APP\Gate_Controller_Program.c">
+    <Compile Include="Atmega32_Drivers\APP\Gate_Controller\Gate_Controller_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\APP\Interface.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Atmega32_Drivers\APP\User_Admin_Interface.c">
+    <Compile Include="Atmega32_Drivers\APP\User_Admin_Interface\User_Admin_Interface.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Atmega32_Drivers\APP\User_Admin_Interface.h">
+    <Compile Include="Atmega32_Drivers\APP\User_Admin_Interface\User_Admin_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\Buzzer_Driver\Buzzer_Driver_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\Buzzer_Driver\Buzzer_Driver_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\HAL\LCD_Driver\LCD_interface.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\HAL\LCD_Driver\LCD_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\LED_Driver\LED_Driver_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\LED_Driver\LED_Driver_Program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\PIR_Sensor_Driver\PIR_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Atmega32_Drivers\HAL\PIR_Sensor_Driver\PIR_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Atmega32_Drivers\HAL\Servo_Motor_Driver\Servo_Motor_Interface.h">
@@ -205,8 +229,14 @@
   <ItemGroup>
     <Folder Include="Atmega32_Drivers\" />
     <Folder Include="Atmega32_Drivers\APP\" />
+    <Folder Include="Atmega32_Drivers\APP\Gate_Controller" />
+    <Folder Include="Atmega32_Drivers\APP\Alarm_Manager" />
+    <Folder Include="Atmega32_Drivers\APP\User_Admin_Interface" />
     <Folder Include="Atmega32_Drivers\HAL\" />
     <Folder Include="Atmega32_Drivers\HAL\LCD_Driver\" />
+    <Folder Include="Atmega32_Drivers\HAL\LED_Driver" />
+    <Folder Include="Atmega32_Drivers\HAL\Buzzer_Driver" />
+    <Folder Include="Atmega32_Drivers\HAL\PIR_Sensor_Driver\" />
     <Folder Include="Atmega32_Drivers\HAL\Servo_Motor_Driver\" />
     <Folder Include="Atmega32_Drivers\LIB\" />
     <Folder Include="Atmega32_Drivers\MCAL\" />

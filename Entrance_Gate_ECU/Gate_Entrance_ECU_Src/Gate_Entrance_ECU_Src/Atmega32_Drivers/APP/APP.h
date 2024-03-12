@@ -18,9 +18,9 @@
 *                   Includes
 *===============================================
 */
-#include "User_Admin_Interface.h"
-#include "Gate_Controller_Interface.h"
-
+#include "User_Admin_Interface//User_Admin_Interface.h"
+#include "Gate_Controller/Gate_Controller_Interface.h"
+#include "Alarm_Manager/Alarm_Manager_Interface.h"
 /**************************************************************************************************************************
 ===============================================
 *               APIs Declaration

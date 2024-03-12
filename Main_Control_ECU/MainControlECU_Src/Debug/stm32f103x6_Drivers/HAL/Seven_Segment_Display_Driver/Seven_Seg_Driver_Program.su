@@ -1,0 +1,4 @@
+Seven_Seg_Driver_Program.c:38:6:HAL_SevenSeg_Init	16	static
+Seven_Seg_Driver_Program.c:61:6:HAL_SevenSeg_DisplayNumber	16	static
+Seven_Seg_Driver_Program.c:75:6:HAL_SevenSeg_Increment	8	static
+Seven_Seg_Driver_Program.c:90:6:HAL_SevenSeg_Decrement	8	static

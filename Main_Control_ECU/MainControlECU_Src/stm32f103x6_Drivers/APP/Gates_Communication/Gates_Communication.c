@@ -1,7 +1,10 @@
 /**
  * @file Gates_Communication.c
  * 
- * @brief this file implements 
+ * @brief This file contains all the functions definitions and APIs implementation  
+ * for the module responsible for communicating with the entrance and exit gates
+ * and its the bridge between the gates and the admin interface that is responsible  
+ * for authenticating the IDs.
  * 
  * @author Hossam_Eid (eidhossam7@gmail.com)
  * 
@@ -22,6 +25,8 @@
   */
 #define MAX_NUMBER_OF_REQUESTS        2
 
+#define NUMBER_OF_GARAGE_SLOTS        3
+
 /** @defgroup AUTHENTICATION_RESULT
   * @{
   */
@@ -37,7 +42,7 @@
 #define ENTRANCE_GATE_ECU_ADDRESS       0xE7u
 #define ENTRANCE_GATE_ECU_SPI           SPI1
 
-#define EXIT_GATE_ECU_ADDRESS           0xFFu
+#define EXIT_GATE_ECU_ADDRESS           0x7Eu
 #define EXIT_GATE_ECU_SPI               SPI2
 /**
   * @}
@@ -60,12 +65,15 @@ static sFIFO_Buf_t Glob_sQueueBuffer;
 static sGateRequestInfo_t Glob_szGatesRequests[MAX_NUMBER_OF_REQUESTS];
 
 static sGateRequestInfo_t Glob_sEntranceGateRequest;
+static sGateRequestInfo_t Glob_sExitGateRequest;
 
 /**
  * @brief Holds the address of the gate which has a request currenlty being processed.
  * 
  */
 static uint8 Glob_u8ServedRequestGateAddress;
+
+static uint8 Glob_u8AvailableSlots = 3;
 /**
   * @}
   */
@@ -117,11 +125,70 @@ void ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback(void)
     }
 }
 
+void EXIT_GATE_ECU_SPI_TXEmpty_ISR_Callback(void)
+{
+    static uint8 LOC_u8TransmitCounter = 0;
+    static uint8 LOC_u8FailedTrasnsmissionCounter = 0;
+    
+    if(LOC_u8TransmitCounter == 0)
+    {
+        MCAL_SPI_ReceiveData(EXIT_GATE_ECU_SPI, (uint16 *)&Glob_sExitGateRequest.GateAddress, PollingDisable);
+        
+        /*Wait the acknowledge byte from the slave*/
+        if(Glob_sExitGateRequest.GateAddress != EXIT_GATE_ECU_ADDRESS)
+        {
+            LOC_u8FailedTrasnsmissionCounter++;
+            LOC_u8TransmitCounter--;
+        }
+
+    }else{
+        MCAL_SPI_ReceiveData(EXIT_GATE_ECU_SPI, 
+                            (uint16 *)&Glob_sExitGateRequest.szDriverID[LOC_u8TransmitCounter - 1], PollingDisable);
+    }
+
+    LOC_u8TransmitCounter++;
+
+    /*If we received all the required information add it to the queue*/
+    if(LOC_u8TransmitCounter == 4 || LOC_u8FailedTrasnsmissionCounter == 10)
+    {
+        if(LOC_u8FailedTrasnsmissionCounter != 10)
+        {
+            Glob_sExitGateRequest.szDriverID[LOC_u8TransmitCounter - 1] = '\0';
+            
+            FIFO_enqueue(&Glob_sQueueBuffer, Glob_sExitGateRequest);
+        }
+
+            LOC_u8TransmitCounter = 0;
+    }else{
+        /*Dummy data to receive the information from the slave*/
+        uint16 LOC_pu16TxBuffer = 0x0000u;
+
+        MCAL_SPI_SendData(EXIT_GATE_ECU_SPI, &LOC_pu16TxBuffer, PollingDisable);    
+    }
+}
+
+/**
+ * @brief The callback function for the external interrupt line connected to the 
+ * entrance gate ECU. 
+ * 
+ */
 void EXTI_Line4_ISR_Callback(void)
 {
     uint16 LOC_pu16TxBuffer = 0xFFFFu;
 
     MCAL_SPI_SendData(ENTRANCE_GATE_ECU_SPI, &LOC_pu16TxBuffer, PollingDisable);
+}
+
+/**
+ * @brief The callback function for the external interrupt line connected to the 
+ * exit gate ECU. 
+ * 
+ */
+void EXTI_Line12_ISR_Callback(void)
+{
+    uint16 LOC_pu16TxBuffer = 0xFFFFu;
+
+    MCAL_SPI_SendData(EXIT_GATE_ECU_SPI, &LOC_pu16TxBuffer, PollingDisable);
 }
 /**
   * @}
@@ -131,36 +198,53 @@ void EXTI_Line4_ISR_Callback(void)
 /** @defgroup Private Functions
   * @{
   */
-void ENTRANCE_GATE_ECU_SPI_Init(void)
+void SPI_Init(void)
 {
     SPI_Config_t config;
-	
-    config.SPI_Mode = SPI_MODE_MASTER;
-	config.SPI_Direction = SPI_DIRECTION_2LINES_FULL_DUPLEX;
-	config.SPI_DataSize = SPI_DATA_SIZE_8BIT;
-	config.SPI_BitOrder = SPI_FIRST_BIT_LSB;
-	config.SPI_ClockPolarity = SPI_IDLE_HIGH;
-	config.SPI_ClockPhase = SPI_SAMPLE_SECOND_EDGE;
-	config.SPI_NSS_Managment = SPI_NSS_SW_SET;
-	config.SPI_BR_Prescaler = SPI_BAUD_RATE_PRESCALER_8;
 
-	MCAL_SPI_Init(ENTRANCE_GATE_ECU_SPI, &config);
+    /*Entrance Gate SPI*/
+    config.SPI_Mode = SPI_MODE_MASTER;
+	  config.SPI_Direction = SPI_DIRECTION_2LINES_FULL_DUPLEX;
+	  config.SPI_DataSize = SPI_DATA_SIZE_8BIT;
+	  config.SPI_BitOrder = SPI_FIRST_BIT_LSB;
+	  config.SPI_ClockPolarity = SPI_IDLE_HIGH;
+	  config.SPI_ClockPhase = SPI_SAMPLE_SECOND_EDGE;
+	  config.SPI_NSS_Managment = SPI_NSS_SW_SET;
+	  config.SPI_BR_Prescaler = SPI_BAUD_RATE_PRESCALER_8;
+
+	  MCAL_SPI_Init(ENTRANCE_GATE_ECU_SPI, &config);
     
     MCAL_SPI_Interrupt_EN(ENTRANCE_GATE_ECU_SPI, SPI_IRQ_TXEIE, ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback);
 
     /*Give the SPI interrupt higher priority as it's more important*/
     MCAL_NVIC_SetPriority(NVIC_SPI1_IVT_INDEX, NVIC_PRIORITY_5);
+
+    /*Exit Gate SPI*/
+	  MCAL_SPI_Init(EXIT_GATE_ECU_SPI, &config);
+    
+    MCAL_SPI_Interrupt_EN(EXIT_GATE_ECU_SPI, SPI_IRQ_TXEIE, EXIT_GATE_ECU_SPI_TXEmpty_ISR_Callback);
+
+    /*Give the SPI interrupt higher priority as it's more important*/
+    MCAL_NVIC_SetPriority(NVIC_SPI1_IVT_INDEX, NVIC_PRIORITY_6);
 }
 
 void EXTI_Init(void)
 {
     EXTI_config_t config;
 
+    /*Entrance gate ECU EXTI*/
     config.PinConfig = EXTI_GPIOA_PIN4;
     config.EXTI_Trigger_Mode = EXTI_TRIGGER_BOTH_EDGES;
     config.EXTI_En = EXTI_ENABLE;
     config.EXTI_Priority = NVIC_PRIORITY_10;
     config.P_callback_func = EXTI_Line4_ISR_Callback;
+
+    MCAL_EXTI_Enable(&config);
+
+    /*Exit gate ECU EXTI*/
+    config.PinConfig = EXTI_GPIOB_PIN12;
+    config.EXTI_Priority = NVIC_PRIORITY_11;
+    config.P_callback_func = EXTI_Line12_ISR_Callback;
 
     MCAL_EXTI_Enable(&config);
 }
@@ -187,7 +271,7 @@ void FIFOBuff_Init(void)
 void st_GatesComm_Init(void)
 {
     /*Initialize the SPI module to communicate with the gates ECUs*/
-    ENTRANCE_GATE_ECU_SPI_Init();
+    SPI_Init();
 
     /*Initialize the EXTI module to communicate with the gates ECUs*/
     EXTI_Init();
@@ -195,6 +279,9 @@ void st_GatesComm_Init(void)
     /*Initialize the queue to store the gates requests*/
     FIFOBuff_Init();
 
+    HAL_SevenSeg_Init();
+
+    HAL_SevenSeg_DisplayNumber(NUMBER_OF_GARAGE_SLOTS);
     /*Set the initial state*/
     fptr_GateCommState = st_GatesComm_CheckPendingRequests;
 }
@@ -239,15 +326,32 @@ void st_GatesComm_SendIDApprovedSignal(void)
         SPIx = ENTRANCE_GATE_ECU_SPI;
         callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
 
-        /** TODO: Increase the car count on the 7-segment display*/
+        /* Decrease the number of slots available on the 7-segment display
+           note: if the number of available slots is 0 (garage full) the 
+           gate will open but the number of available slots won't change*/
+        if(Glob_u8AvailableSlots > 0)
+        {
+          HAL_SevenSeg_Decrement();
+          Glob_u8AvailableSlots--;
+        }else{
 
+        }
     }else{
         SPIx = EXIT_GATE_ECU_SPI;
-        /** TODO: Change to the ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback*/
-        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
 
-        /** TODO: Decrease the car count on the 7-segment display*/
+        callback = EXIT_GATE_ECU_SPI_TXEmpty_ISR_Callback;
 
+        /*Increase the number of slots available on the 7-segment display
+          note: if the number of available slots is 3 (garage empty) the 
+          gate will open but the number of available slots won't change*/
+        if(Glob_u8AvailableSlots < NUMBER_OF_GARAGE_SLOTS)
+        {
+          HAL_SevenSeg_Increment();
+          Glob_u8AvailableSlots++;
+
+        }else{
+
+        }
     }
         
     /*Disable the interrupts to send the signal using polling*/
@@ -302,8 +406,7 @@ void st_GatesComm_SendIDDisapprovedSignal(void)
     }else{
 
         SPIx = EXIT_GATE_ECU_SPI;
-        /** TODO: Change to the ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback*/
-        callback = ENTRANCE_GATE_ECU_SPI_TXEmpty_ISR_Callback;
+        callback = EXIT_GATE_ECU_SPI_TXEmpty_ISR_Callback;
     }
         
 

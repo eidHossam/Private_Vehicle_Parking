@@ -46,8 +46,8 @@
 *===============================================
 */
 
-#define LCD_RS_PIN      GPIO_PIN4         /*Select register PIN (INS, Data)*/
-#define LCD_EN_PIN      GPIO_PIN5
+#define LCD_RS_PIN      GPIO_PIN0         /*Select register PIN (INS, Data)*/
+#define LCD_EN_PIN      GPIO_PIN1
 
 
 #define LCD_D4          GPIO_PIN10

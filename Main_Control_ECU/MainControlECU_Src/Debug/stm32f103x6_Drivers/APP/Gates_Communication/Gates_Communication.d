@@ -11,6 +11,7 @@ stm32f103x6_Drivers/APP/Gates_Communication/Gates_Communication.o: \
  D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/MCAL/EXTI/stm32f103x6_EXTI.h \
  D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/MCAL/AFIO/stm32f103x6_AFIO.h \
  D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/HAL/LCD_Driver/LCD_interface.h \
+ D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/HAL/Seven_Segment_Display_Driver/Seven_Seg_Driver_Interface.h \
  D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/LIB/FIFO_Buffer_Driver/FIFO_Buff.h \
  d:\learn-in-depth\private_vechicle_parking\main_control_ecu\maincontrolecu_src\stm32f103x6_drivers\app\interface.h
 
@@ -35,6 +36,8 @@ D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/s
 D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/MCAL/AFIO/stm32f103x6_AFIO.h:
 
 D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/HAL/LCD_Driver/LCD_interface.h:
+
+D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/HAL/Seven_Segment_Display_Driver/Seven_Seg_Driver_Interface.h:
 
 D:/Learn-In-Depth/Private_Vechicle_Parking/Main_Control_ECU/MainControlECU_Src/stm32f103x6_Drivers/LIB/FIFO_Buffer_Driver/FIFO_Buff.h:
 

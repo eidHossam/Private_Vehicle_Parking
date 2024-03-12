@@ -16,11 +16,21 @@
   * @{
   */
 
+/** @defgroup PIR CONFIGURATION
+  * @{
+  */
+#define PIR_PORT        GPIOB
+#define PIR_PIN         GPIO_PIN2
+/**
+  * @}
+  */
+
 /**
  * @brief Specifies the time the gate should stay open for in milliseconds.
  * 
  */
-#define GATE_OPENED_TIME_MS             3000
+#define GATE_OPENED_TIME_MS             500
+
 /**
   * @}
   */
@@ -53,6 +63,9 @@ void st_GateController_Init(void)
     /*Initialize the gates servo motor to be on the 0 degree position*/
     HAL_ServoMotorInit();
     
+    /*Initialize the PIR sensor to detect when the car successfully passes the gate*/
+    HAL_PIR_Init(PIR_PORT, PIR_PIN);
+
     /*Set the initial state to be idle until there is a request to be processed*/
     fptr_st_GateController = st_GateController_Idle;
 }
@@ -94,13 +107,43 @@ void st_GateController_OpenGate(void)
  */
 void st_GateController_CheckCarPassed(void)
 {
-    /*Turns the servo motor to open the gate*/
-    HAL_ServoMotorTurn(ServoMotor_0Degree);
+    ePIRStatus_t LOC_ePIRStatus;
 
-    GC_UAI_GateClosed();
-    fptr_st_GateController = st_GateController_Idle;
+    LOC_ePIRStatus = HAL_PIR_ReadStatus(PIR_PORT, PIR_PIN);
+
+    /*If no motion is detected then the car passed so we should close the gate*/
+    if(PIR_NoMotionDetected == LOC_ePIRStatus)
+    {
+
+      fptr_st_GateController = st_GateController_CloseGate;
+
+    }else{ /*If the car didn't pass the gate yet then we should wait for another 
+             gate timer interval.*/
+
+      MCAL_TIMER0_SingleIntervalDelayms(GATE_OPENED_TIME_MS, Timer0_DelaycheckCar_Callback);
+
+      /*Return to the idle state*/
+      fptr_st_GateController = st_GateController_Idle;
+    }
+      
 }
 
+/**
+ * @brief This state closes the garage's entrance gate and 
+ * sends a GateClosed signal to the User_Admin_Interface moudle.
+ * 
+ */
+void st_GateController_CloseGate(void)
+{
+    /*Turns the servo motor to close the gate*/
+    HAL_ServoMotorTurn(ServoMotor_0Degree);
+
+    /*Sends a signal to the User_Admin_Interface to inform it that the gate closed*/
+    GC_UAI_GateClosed();
+
+    /*Go back to the idle state to wait for another request*/
+    fptr_st_GateController = st_GateController_Idle;
+}
 
 /** @defgroup Signals between the Gate_Controller and the User_Admin_Interface.
   * @{

@@ -1,7 +1,8 @@
 /**
  * @file Interface.h
  * 
- * @brief this file implements 
+ * @brief This file contains the incoming and outgoing signals between the Admin_Interface and 
+ * Gates_Communication modules.
  * 
  * @author Hossam_Eid (eidhossam7@gmail.com)
  * 
