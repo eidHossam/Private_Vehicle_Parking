@@ -146,7 +146,7 @@ By leveraging Jira Software in conjunction with Agile Scrum practices, I was abl
 ## Simulation
 ![image](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/23f13d4b-e6be-4d3d-8aa7-0cb87576cec2)
 
-[![Video](https://drive.google.com/uc?export=view&id=1SO0T1Hef1NU-NH1G6rBdmUiAmktraXXu)](https://drive.google.com/file/d/1SO0T1Hef1NU-NH1G6rBdmUiAmktraXXu/preview)
+<iframe src="https://drive.google.com/file/d/1SO0T1Hef1NU-NH1G6rBdmUiAmktraXXu/preview" width="640" height="480"></iframe>
 
 # 
 **Overall, this project outlines a well-structured design for a smart private vehicle parking system. The modular design with separate ECUs and clear communication protocols facilitates development and maintenance.**
