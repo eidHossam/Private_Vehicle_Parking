@@ -11,6 +11,9 @@
 * The system was modeled using a finite state machine approach to make it easier to design and implement the system.
 
 * The project was implemented using the Agile scurm model to help break the system into small tasks and prioritize them to be executed in the right order, Using this methodology was very helpful in implementing such a big project.
+
+  ![image](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/40b02213-826a-4d9f-adf5-f3bc9f840bbb)
+
 ## **System Components:**
 
 * **Three Microcontroller Units (ECUs):**
