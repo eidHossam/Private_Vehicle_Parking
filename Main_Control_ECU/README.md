@@ -8,9 +8,9 @@
 	* Seven-segment display to show available parking slots
 ## **System Functionality:**
  * Authorize the IDs of the drivers wanting to enter or exit the garage.
-* Authorized personnel can:
-        * Add new authorized IDs to the system.
-        * Remove existing IDs from the system.
+ * Authorized personnel can
+   	* Add new authorized IDs to the system.
+	* Remove existing IDs from the system.
         * View a list of all authorized IDs.
 ## System Design
 ![image](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/a93d0f53-9f91-4301-8824-458d6cb28733)
