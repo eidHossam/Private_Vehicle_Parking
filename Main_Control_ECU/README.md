@@ -10,7 +10,11 @@
  * Authorize the IDs of the drivers wanting to enter or exit the garage.
  * Authorized personnel can:
    	* Add new authorized IDs to the system.
+   		* Checks if we passed the maximum allowed number of authorized IDs.
+   	 	* Checks if the ID already exists in the system and reject it if it does.	  	
 	* Remove existing IDs from the system.
+ 		* Checks if the list is empty.
+   		* Checks if you entered a non-existent ID.  
 	* View a list of all authorized IDs.
           
 ## System Design
