@@ -90,7 +90,8 @@
 ## System Design
 
 ### Requirements Diagram
-![Requirements](https://drive.google.com/file/d/10ngO3YEeI6ZbMEMs84k4AXOXiB-LxUX3/view?usp=sharing)
+![Requirements_Diagram](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/add96337-5974-4d9c-b41e-f24f549cd37c)
+
 
 
 ### Project Management Approach
@@ -120,15 +121,18 @@ Jira Software served as the central hub for our Agile project management efforts
 
 By leveraging Jira Software in conjunction with Agile Scrum practices, I was able to effectively plan, execute, and deliver me project in a timely and efficient manner.
 
-![Timeline](https://drive.google.com/file/d/16wJ7yDtIDdm_RhTHCDPHClUh2nQCeo5Y/view?usp=drive_link)
+![Jira-Timeline](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/2827ea6f-d0d6-4636-b80c-6247f1bfcc95)
+
 
 [Jira_Project](https://hossameid.atlassian.net/jira/software/projects/PPST/boards/2/timeline?shared=&atlOrigin=eyJpIjoiOGI0YzZmYTMwMmYzNGYyMTk0M2Q2N2M2NmQ1YTJiMDQiLCJwIjoiaiJ9)
 
 ### System Paritioning
-![Partioning](https://drive.google.com/file/d/1xuUb5kEWTjWSHSzJfcdgPG-I9w1L9iom/view?usp=drive_link)
+![System_Partioning](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/c32a13a3-7a97-460e-8515-c51cdce2d513)
+
 
 ### System Block Diagram
-![Block](https://drive.google.com/file/d/12KL63gA-8pMLTmIVhXM6San3qnE3FZ7R/view?usp=drive_link)
+![Block_Diagram](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/80fa267f-b0c8-4019-958e-db9baa98644d)
+
 
 ### System Testing
 [Main_ECU_Testing](https://github.com/eidHossam/Private_Vehicle_Parking/tree/master/Main_Control_ECU/TestCases)
