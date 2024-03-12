@@ -127,7 +127,8 @@ By leveraging Jira Software in conjunction with Agile Scrum practices, I was abl
 [Jira_Project](https://hossameid.atlassian.net/jira/software/projects/PPST/boards/2/timeline?shared=&atlOrigin=eyJpIjoiOGI0YzZmYTMwMmYzNGYyMTk0M2Q2N2M2NmQ1YTJiMDQiLCJwIjoiaiJ9)
 
 ## System Paritioning
-![System_Partioning](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/c32a13a3-7a97-460e-8515-c51cdce2d513)
+![System_Partioning](https://github.com/eidHossam/Private_Vehicle_Parking/assets/106603484/19d9811d-15ef-417d-8547-4fa300441359)
+
 
 
 ## System Block Diagram
